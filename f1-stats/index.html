@@ -1,0 +1,741 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<script src="/nav.js" data-theme="light"></script>
+<title>F1 Record Watch</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:ital,wght@0,400;0,500;0,600;0,800;1,800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: pit-wall timing screen on a white grid — kerb-striped hero with live countdown, then a filterable wall of record cards, each carrying its team's livery colour. Single light look by design (user asked for white). */
+:root{
+  color-scheme: light;
+  --paper:#ffffff;
+  --ink:#0c0f16;
+  --ink-2:#4a5263;
+  --line:#e3e6ee;
+  --tarmac:#f3f4f8;
+  --kerb:#e10600;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  /* team liveries (tuned for legibility on white) */
+  --mercedes:#00a19c; --ferrari:#dc0000; --mclaren:#ff8000; --redbull:#2b4fb8;
+  --aston:#00665e; --alpine:#0093cc; --williams:#005aff; --rb:#6692ff;
+  --haas:#8c939b; --audi:#c8102e; --cadillac:#2a2a2a; --field:#0c0f16;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--kerb);outline-offset:2px}
+
+/* top bar */
+.bar{border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:900;font-size:24px;letter-spacing:.02em;text-transform:uppercase}
+.flag{width:28px;height:20px;background:conic-gradient(var(--ink) 25%,#fff 0 50%,var(--ink) 0 75%,#fff 0) 0 0/10px 10px;border:1.5px solid var(--ink);transform:skewX(-10deg)}
+.asof{font-family:var(--mono);font-size:12px;color:var(--ink-2);letter-spacing:.04em;text-transform:uppercase}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:32px;align-items:end;padding-block:40px 28px}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.eyebrow b{background:var(--ink);color:#fff;padding:2px 8px;font-weight:600;transform:skewX(-10deg);display:inline-block}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(56px,10vw,128px);line-height:.84;text-transform:uppercase;margin:16px 0 0;letter-spacing:-.005em;text-wrap:balance}
+h1 em{font-style:normal;color:var(--kerb)}
+.lede{max-width:60ch;color:var(--ink-2);font-size:17px;margin:18px 0 0}
+.clock{border:2px solid var(--ink);padding:18px 18px 16px;position:relative;background:var(--paper)}
+.clock::before{content:"";position:absolute;inset:-2px -2px auto auto;width:64px;height:10px;background:var(--kerb)}
+.clock-label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.digits{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+.digits div{display:flex;flex-direction:column;align-items:flex-start}
+.digits span{font-family:var(--display);font-weight:800;font-size:clamp(40px,6vw,60px);line-height:.9;font-variant-numeric:tabular-nums}
+.digits small{font-family:var(--mono);font-size:11px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.08em}
+.clock-when{margin:12px 0 0;font-size:14px;color:var(--ink-2)}
+.clock-when strong{color:var(--ink)}
+.kerb{height:12px;background:repeating-linear-gradient(90deg,var(--kerb) 0 28px,#fff 28px 56px);border-block:1px solid var(--line)}
+
+/* stat strip */
+.strip .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding-block:0}
+.stat{padding:18px 16px 16px;border-right:1px solid var(--line)}
+.stat:first-child{padding-left:0}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-family:var(--display);font-weight:900;font-size:44px;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--ink-2)}
+.strip{border-bottom:1px solid var(--line)}
+
+/* sections */
+section.block{padding-block:44px 8px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+h2{font-family:var(--display);font-weight:900;font-size:clamp(34px,5vw,52px);line-height:.9;text-transform:uppercase;margin:0}
+.sec-note{color:var(--ink-2);max-width:56ch;margin:6px 0 0;font-size:15px}
+
+/* controls */
+.controls{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
+.tabs,.chips{display:flex;gap:8px;flex-wrap:wrap}
+.tab{font:800 15px/1 var(--body);font-style:italic;text-transform:uppercase;letter-spacing:.02em;padding:11px 16px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;transform:skewX(-8deg)}
+.tab>span{display:inline-block;transform:skewX(8deg)}
+.tab[aria-pressed="true"]{background:var(--ink);color:#fff}
+.tab .n{font-family:var(--mono);font-style:normal;font-size:12px;margin-left:6px;opacity:.75}
+.chip{font:600 13px/1 var(--body);padding:8px 12px 8px 10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:8px;border-radius:999px}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.chip[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+
+/* record cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:16px}
+.rec{position:relative;border:1px solid var(--card-line,var(--line));background:var(--card,var(--paper));padding:0 18px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.rec::before{content:"";display:block;height:6px;margin:0 -18px;background:linear-gradient(90deg,var(--t1) 0 50%,var(--t2) 50% 100%)}
+.rec-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.code{font-family:var(--display);font-weight:900;font-size:22px;line-height:1;color:#fff;background:var(--t1);padding:5px 10px 4px;transform:skewX(-10deg);letter-spacing:.03em}
+.who{font-weight:600;font-size:14px;min-width:0}
+.who small{display:block;color:var(--ink-2);font-weight:500;font-size:12px}
+.odds{margin-left:auto;font:600 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;padding:6px 8px;border:1.5px solid var(--ink)}
+.odds.likely{background:var(--ink);color:#fff}
+.odds.inplay{background:var(--paper);color:var(--ink)}
+.odds.long{border-style:dashed;color:var(--ink-2);border-color:var(--ink-2)}
+.odds.certain{background:var(--kerb);border-color:var(--kerb);color:#fff}
+.rec h3{font-family:var(--display);font-weight:800;font-size:28px;line-height:.95;text-transform:uppercase;margin:0;text-wrap:balance}
+.score{display:flex;align-items:baseline;gap:10px;font-variant-numeric:tabular-nums}
+.score .now{font-family:var(--display);font-weight:900;font-size:46px;line-height:1}
+.score .arrow{font-family:var(--mono);color:var(--ink-2)}
+.score .tgt{font-family:var(--display);font-weight:900;font-size:46px;line-height:1;color:var(--t1)}
+.score .unit{font-size:13px;color:var(--ink-2);margin-left:2px}
+.meter{height:8px;background:var(--paper);position:relative;overflow:hidden}
+.meter i{position:absolute;inset:0 auto 0 0;background:var(--t1);width:var(--w)}
+.meter b{position:absolute;top:0;bottom:0;right:0;width:3px;background:var(--ink)}
+.need{margin:0;font-size:14px}
+.need b{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;background:var(--paper);padding:3px 6px;margin-right:6px;font-weight:600}
+.why{margin:0;color:var(--ink-2);font-size:14px;line-height:1.5}
+.rec.certain{--card:#d7dbe4;--card-line:#c3c8d3}
+.rec.likely{--card:#e1e4eb;--card-line:#cdd2dc}
+.rec.inplay{--card:#eceef3;--card-line:#dadde5}
+.rec.long{--card:#f6f7f9;--card-line:#c9cdd6;border-style:dashed}
+.empty{grid-column:1/-1;border:1px dashed var(--line);padding:28px;text-align:center;color:var(--ink-2)}
+
+/* points ladder */
+.ladder{border:2px solid var(--ink);padding:20px;display:grid;gap:8px}
+.lrow{display:grid;grid-template-columns:minmax(140px,220px) minmax(0,1fr) 64px;gap:12px;align-items:center;font-size:14px}
+.lrow .lab{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lrow .lab small{color:var(--ink-2)}
+.track{height:22px;background:var(--tarmac);position:relative}
+.track i{position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--c)}
+.track .ghost{position:absolute;top:0;bottom:0;left:var(--from);width:var(--len);background:repeating-linear-gradient(45deg,var(--mercedes) 0 4px,transparent 4px 9px);opacity:.55;border:1.5px solid var(--mercedes)}
+.lrow .val{font-family:var(--mono);font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.lrow.kimi .lab{font-weight:800}
+.ladder-foot{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);margin-top:8px}
+.key{display:inline-flex;align-items:center;gap:6px}
+.key i{width:16px;height:10px;display:inline-block;background:var(--c)}
+.key i.g{background:repeating-linear-gradient(45deg,var(--mercedes) 0 3px,transparent 3px 6px);border:1px solid var(--mercedes)}
+
+/* mini circuit in the clock card */
+.mini{display:flex;align-items:center;gap:14px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.mini svg{width:120px;height:auto;flex:none}
+.mini .trk-out{fill:none;stroke:var(--ink);stroke-width:16;stroke-linejoin:round;stroke-linecap:round}
+.mini .trk-in{fill:none;stroke:#fff;stroke-width:3;stroke-dasharray:10 12;stroke-linejoin:round}
+.mini .land{fill:var(--tarmac);stroke:var(--ink-2);stroke-width:3}
+.mini .car{fill:var(--kerb);stroke:#fff;stroke-width:3}
+.mini .sf{fill:url(#checker)}
+.mini-txt{min-width:0;font-size:13px;color:var(--ink-2);line-height:1.45}
+.mini-txt b{display:block;color:var(--ink);font-family:var(--display);font-weight:800;font-size:17px;text-transform:uppercase;line-height:1.05;margin-bottom:2px}
+/* run-in */
+.runin{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.race{border:1px solid var(--line);display:flex;flex-direction:column;min-width:0}
+.race-head{padding:16px 18px;background:var(--ink);color:#fff;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.race.next .race-head{background:var(--kerb)}
+.race-head h3{font-family:var(--display);font-weight:900;font-size:30px;line-height:.9;text-transform:uppercase;margin:0}
+.race-head span{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.race-meta{padding:10px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--ink-2);display:flex;gap:14px;flex-wrap:wrap}
+.race ul{list-style:none;margin:0;padding:6px 18px 16px;display:grid;gap:0}
+.race li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;display:grid;grid-template-columns:10px minmax(0,1fr);gap:10px}
+.race li:last-child{border-bottom:0}
+.race li::before{content:"";width:10px;height:10px;margin-top:6px;background:var(--c,var(--ink));transform:skewX(-10deg)}
+
+/* standings */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.table{width:100%;border-collapse:collapse;font-size:15px}
+.table caption{text-align:left;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);padding-bottom:8px}
+.table td{padding:9px 0;border-bottom:1px solid var(--line)}
+.table td:first-child{width:34px;font-family:var(--mono);color:var(--ink-2)}
+.table td:last-child{text-align:right;font-family:var(--mono);font-weight:600;font-variant-numeric:tabular-nums}
+.sw{display:inline-block;width:4px;height:16px;background:var(--c);margin-right:10px;vertical-align:-3px}
+
+/* fallen */
+.fallen{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:0;border-top:2px solid var(--ink)}
+.fallen div{padding:16px 16px 16px 0;border-bottom:1px solid var(--line);min-width:0}
+.fallen b{display:block;font-family:var(--display);font-weight:800;font-size:22px;text-transform:uppercase;line-height:1;margin-bottom:6px}
+.fallen span{font-size:14px;color:var(--ink-2)}
+.fallen em{font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--kerb);display:block;margin-bottom:6px}
+
+.bar-right{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.official{font:800 13px/1 var(--body);font-style:italic;text-transform:uppercase;letter-spacing:.03em;text-decoration:none;color:#fff;background:var(--kerb);padding:9px 12px;transform:skewX(-8deg);display:inline-block}
+.official:hover{background:var(--ink)}
+
+/* champions banner (off-season only) */
+.champs .wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding-block:28px}
+.champ{border:2px solid var(--ink);padding:18px 20px;position:relative;overflow:hidden;min-width:0;background:var(--paper)}
+.champ::after{content:"";position:absolute;right:-30px;top:0;bottom:0;width:120px;background:var(--c);transform:skewX(-14deg);opacity:.9}
+.champ small{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.champ b{display:block;font-family:var(--display);font-weight:900;font-size:clamp(34px,5vw,54px);line-height:.95;text-transform:uppercase;margin-top:6px;position:relative;z-index:1;max-width:calc(100% - 90px)}
+.champ span{display:block;font-size:14px;color:var(--ink-2);margin-top:8px;position:relative;z-index:1}
+.preview-flag{background:var(--ink);color:#fff;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:8px 16px}
+.preview-flag a{color:#fff}
+
+footer{margin-top:56px;border-top:2px solid var(--ink)}
+footer .legal{display:grid;gap:10px;max-width:80ch}
+footer .copy{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;padding-top:14px;border-top:1px solid var(--line);color:var(--ink)}
+footer .copy strong{font-family:var(--display);font-weight:900;font-size:20px;text-transform:uppercase;letter-spacing:.02em}
+@media (max-width:640px){.champs .wrap{grid-template-columns:minmax(0,1fr)}}
+footer .wrap{padding-block:24px 40px;display:grid;gap:12px;font-size:13px;color:var(--ink-2)}
+footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
+
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:minmax(0,1fr);gap:24px}
+  .runin,.two{grid-template-columns:minmax(0,1fr)}
+  .strip .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:nth-child(2){border-right:0}
+  .stat:nth-child(3){padding-left:0}
+  .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+@media (max-width:520px){
+  .lrow{grid-template-columns:minmax(0,1fr) 56px;row-gap:4px}
+  .lrow .lab{grid-column:1/-1}
+  .lrow .track{grid-column:1}
+  .stat b{font-size:36px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .meter i,.track i{transition:width .6s cubic-bezier(.2,.8,.2,1)}
+  .rec{transition:transform .15s ease,box-shadow .15s ease}
+  .rec:hover{transform:translateY(-2px);box-shadow:0 8px 0 -4px var(--t1)}
+}
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="brand"><span class="flag" aria-hidden="true"></span>F1 Record Watch</div>
+    <div class="bar-right"><div class="asof" id="asof"></div><a class="official" id="official" href="https://www.formula1.com/" target="_blank" rel="noopener">Official F1 site ↗</a></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow"><b id="round"></b><span id="circuit"></span></div>
+      <h1 id="headline">What falls<br>in <em>Vegas?</em></h1>
+      <p class="lede" id="lede"></p>
+    </div>
+    <div class="clock" aria-live="off">
+      <div class="clock-label" id="clock-label">Lights out in</div>
+      <div class="digits" id="digits">
+        <div><span id="dd">--</span><small>Days</small></div>
+        <div><span id="hh">--</span><small>Hrs</small></div>
+        <div><span id="mm">--</span><small>Min</small></div>
+        <div><span id="ss">--</span><small>Sec</small></div>
+      </div>
+      <p class="clock-when" id="when"></p>
+      <div class="mini" id="mini" hidden></div>
+    </div>
+  </div>
+</section>
+<div class="kerb" aria-hidden="true"></div>
+
+<section class="champs" id="champs" hidden>
+  <div class="wrap">
+    <div class="champ" id="champ-driver"><small>Drivers' champion</small><b></b><span></span></div>
+    <div class="champ" id="champ-team"><small>Constructors' champion</small><b></b><span></span></div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="stat"><b id="s-week">0</b><span id="s-week-l">records in play this weekend</span></div>
+    <div class="stat"><b id="s-likely">0</b><span id="s-likely-l">rated likely to fall</span></div>
+    <div class="stat"><b id="s-left">0</b><span id="s-left-l">Grands Prix left in 2026</span></div>
+    <div class="stat"><b id="s-pts">0</b><span id="s-pts-l">points still up for grabs per driver</span></div>
+  </div>
+</div>
+
+<main>
+<section class="block" id="records">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>The record board</h2>
+          <p class="sec-note">Each card shows where the driver or team stands today, the number that changes the record book, and what has to happen on track. The darker the card, the likelier the record falls: solid grey for likely, lighter for in play, pale and dashed for long shots. The rating is our read of the odds, not a betting line.</p>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="tabs" role="group" aria-label="When the record could fall" id="tabs"></div>
+        <div class="chips" role="group" aria-label="Filter by team" id="chips"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="block" id="ladder">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>Antonelli's points climb</h2>
+          <p class="sec-note" id="ladder-note"></p>
+        </div>
+      </div>
+      <div class="ladder" id="ladder-box"></div>
+    </div>
+  </section>
+
+  <section class="block" id="runin">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>The run-in, track by track</h2>
+          <p class="sec-note">Venue records each remaining circuit could see rewritten. No Sprints remain this season.</p>
+        </div>
+      </div>
+      <div class="runin" id="runin-box"></div>
+    </div>
+  </section>
+
+  <section class="block" id="fallen">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 id="fallen-title">Fallen in the last fortnight</h2>
+          <p class="sec-note" id="fallen-note"></p>
+        </div>
+      </div>
+      <div class="fallen" id="fallen-box"></div>
+    </div>
+  </section>
+
+  <section class="block" id="standings">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="stand-title">Standings</h2><p class="sec-note" id="stand-note"></p></div></div>
+      <div class="two">
+        <table class="table" id="t-drivers"><caption>Drivers</caption><tbody></tbody></table>
+        <table class="table" id="t-teams"><caption>Constructors</caption><tbody></tbody></table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="legal">
+      <p style="margin:0"><strong id="footnote">Figures correct after the 2026 São Paulo Grand Prix (8 November 2026).</strong> Career tallies count World Championship Grands Prix only, not Sprints.</p>
+      <p style="margin:0"><strong>Disclaimer.</strong> F1 Record Watch is an unofficial fan site and is not associated in any way with the Formula 1 companies or the FIA. F1, FORMULA ONE, FORMULA 1, FIA FORMULA ONE WORLD CHAMPIONSHIP, GRAND PRIX and related marks are trade marks of Formula One Licensing B.V. Team names and colours belong to their respective owners and are used here only to identify them. Figures are compiled from public race results and may contain errors. The likelihood ratings are opinion, not predictions or betting advice. For official information, visit <a href="https://www.formula1.com/" target="_blank" rel="noopener">formula1.com</a>.</p>
+      <p style="margin:0"><strong>Data.</strong> Race results, standings and calendar data courtesy of <a href="https://github.com/jolpica/jolpica-f1" target="_blank" rel="noopener">Jolpica-F1</a>, the free and open F1 data API.</p>
+      <p style="margin:0"><a href="#season-over" id="preview-link">Preview the end-of-season screen</a></p>
+    </div>
+    <div class="copy"><strong>F1 Record Watch</strong><span>© <span id="copy-year">2026</span> Lucio Puccio. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   EDIT HERE after each race. Everything on the page is drawn
+   from these four blocks: META, RECORDS, LADDER, RACES.
+   ============================================================ */
+const META = {
+  asOf: "Updated after Round 20 · São Paulo · 8 Nov 2026",
+  round: "Round 21 of 23",
+  circuit: "Las Vegas Strip Circuit · 50 laps",
+  raceName: "Las Vegas Grand Prix",
+  lightsOutUTC: "2026-11-22T04:00:00Z",   // Sat 21 Nov, 20:00 Las Vegas time
+  localLabel: "Sat 21 Nov, 20:00 Las Vegas time",
+  circuitId: "vegas",                  // Jolpica circuitId of the next race (see CIRCUITS)
+  racesLeft: 3,
+  pointsLeft: 75,
+  headline: "What falls in |Vegas?",          // text after | is shown in red
+  lede: "The 2026 titles are settled: Antonelli is the youngest champion in history and Mercedes have their ninth constructors' crown. With three rounds left, the record book is still open. Here is every all-time mark, milestone and venue record that could go this weekend and before the season ends.",
+  ladderNote: "The biggest single-season points hauls in F1 history, all scored under today's 25-point system. Antonelli sits on 390 with 75 points left. Every win moves him up the ladder; 65 more points would make 2026 the second-highest scoring season ever.",
+  ladderNextRung: "Next rung: 8 points passes Vettel's 397",
+  fallenTitle: "Fallen in the last fortnight",
+  fallenNote: "Records and milestones already ticked off in Mexico City and São Paulo.",
+  standingsNote: "After the São Paulo Grand Prix, round 20 of 23.",
+  footnote: "Figures correct after the 2026 São Paulo Grand Prix (8 November 2026).",
+
+  /* ---- END OF SEASON ----
+     Set seasonOver to true after the final race. The page then switches to
+     the off-season screen: champions banner, countdown to next season,
+     2027 records only, run-in hidden. Anyone can preview it now by adding
+     #season-over to the end of the page address. */
+  seasonOver: false,
+  final: {
+    year: 2026,
+    headline: "Chequered flag on |2026",
+    lede: "The 2026 season is over. Kimi Antonelli is the youngest world champion in history and Mercedes are constructors' champions for the ninth time. The record book now resets its sights on 2027: here is what could fall next year.",
+    driver: "Kimi Antonelli", driverTeam: "mercedes", driverLine: "Mercedes · youngest champion ever, aged 20",
+    constructor: "Mercedes", constructorTeam: "mercedes", constructorLine: "Ninth constructors' title, level with Williams",
+    championPts: null,     // final points total once known
+    championWins: null,    // final win total once known
+    ladderNote: "Where Antonelli's title-winning season ranks among the biggest points hauls in F1 history, all scored under today's 25-point system.",
+    fallenTitle: "How 2026 signed off",
+    fallenNote: "The records and milestones that fell in the final races of the season.",
+    standingsNote: "Final 2026 standings."
+  },
+  nextSeason: {
+    name: "2027 season opener",
+    lightsOutUTC: null,    // e.g. "2027-03-07T04:00:00Z" once the calendar is confirmed
+    localLabel: "Date to be confirmed"
+  }
+};
+
+const TEAMS = {
+  mercedes:{name:"Mercedes",c:"var(--mercedes)"}, ferrari:{name:"Ferrari",c:"var(--ferrari)"},
+  mclaren:{name:"McLaren",c:"var(--mclaren)"}, redbull:{name:"Red Bull",c:"var(--redbull)"},
+  aston:{name:"Aston Martin",c:"var(--aston)"}, williams:{name:"Williams",c:"var(--williams)"},
+  rb:{name:"Racing Bulls",c:"var(--rb)"}, cadillac:{name:"Cadillac",c:"var(--cadillac)"},
+  field:{name:"Whole grid",c:"var(--field)"}
+};
+
+/* scope: weekend | season | future     odds: certain | likely | inplay | long */
+const RECORDS = [
+  {scope:"weekend",code:"ANT",who:"Kimi Antonelli",teams:["mercedes"],title:"Youngest to ten wins",now:9,tgt:10,unit:"wins",odds:"likely",
+   need:"Win any of the last three races",
+   why:"At 20 he would be by far the youngest driver ever to reach ten Grand Prix wins; Vettel and Verstappen were both 23. It would also equal Valtteri Bottas for third on Mercedes' all-time win list."},
+  {scope:"weekend",code:"FER",who:"Ferrari",teams:["ferrari"],title:"300 third places",now:299,tgt:300,unit:"P3s",odds:"likely",
+   need:"Hamilton or Leclerc finishes third",
+   why:"Ferrari would become the first constructor in history to record 300 third-place finishes."},
+  {scope:"weekend",code:"NOR",who:"Lando Norris",teams:["mclaren"],title:"Clear of Button on podiums",now:50,tgt:51,unit:"podiums",odds:"likely",
+   need:"Top-three finish",
+   why:"His 50th in Brazil tied Jenson Button. Number 51 takes Norris outright 18th all-time and fourth among British drivers."},
+  {scope:"weekend",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Fifth on fastest laps",now:38,tgt:39,unit:"fastest laps",odds:"inplay",
+   need:"Set the race's fastest lap",
+   why:"He is level with Sebastian Vettel on 38. One more moves him clear into fifth place on the all-time list."},
+  {scope:"weekend",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Vegas hat-trick",now:2,tgt:3,unit:"wins",odds:"inplay",
+   need:"Win the Las Vegas GP",
+   why:"Already the only repeat winner on the Strip (2023, 2025), and he holds the race lap record of 1:33.365."},
+  {scope:"weekend",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Pole-to-win: catch Schumacher",now:39,tgt:40,unit:"wins from pole",odds:"inplay",
+   need:"Win from pole position",
+   why:"Schumacher converted 40 poles into wins. Only Lewis Hamilton, on 61, has more."},
+  {scope:"weekend",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Lights to flag, second all-time",now:19,tgt:20,unit:"races led throughout",odds:"inplay",
+   need:"Lead every lap of a race",
+   why:"Tied with Ayrton Senna on 19. Hamilton's 23 is the record."},
+  {scope:"weekend",code:"NOR",who:"Lando Norris",teams:["mclaren"],title:"Fifteen wins",now:14,tgt:15,unit:"wins",odds:"inplay",
+   need:"Win a race",
+   why:"Currently level with Graham Hill, Jack Brabham and Emerson Fittipaldi. A 15th win matches Jenson Button."},
+  {scope:"weekend",code:"LEC",who:"Charles Leclerc",teams:["ferrari"],title:"28 poles in red",now:27,tgt:28,unit:"Ferrari poles",odds:"inplay",
+   need:"Take pole position",
+   why:"Would equal Nigel Mansell's 28 with Williams, eighth on the list of most poles with a single team."},
+  {scope:"weekend",code:"HAM",who:"Lewis Hamilton",teams:["ferrari"],title:"Podium number 210",now:209,tgt:210,unit:"podiums",odds:"inplay",
+   need:"Top-three finish",
+   why:"Extends his own all-time record. Michael Schumacher is next best with 155. Vegas is also Hamilton's 401st start."},
+  {scope:"weekend",code:"FER",who:"Ferrari",teams:["ferrari"],title:"First Ferrari win on the Strip",now:0,tgt:1,unit:"wins",odds:"inplay",
+   need:"Hamilton or Leclerc wins",
+   why:"Ferrari have taken pole (Leclerc, 2023) and podiums here but never won the modern Las Vegas race."},
+  {scope:"weekend",code:"ALO",who:"Fernando Alonso",teams:["aston"],title:"Most starts, ever",now:445,tgt:446,unit:"starts",odds:"certain",
+   need:"Take the start",
+   why:"Every race extends his all-time record. He has signed for 2027, so it will keep growing; Hamilton is second on 400."},
+  {scope:"weekend",code:"10+",who:"Leclerc or Piastri",teams:["ferrari","mclaren"],title:"Ten wins, no crown",now:9,tgt:10,unit:"wins",odds:"long",
+   need:"Either driver wins",
+   why:"Both sit on nine. A tenth would add them to the eight drivers who have won ten or more Grands Prix without a title."},
+  {scope:"weekend",code:"GS",who:"Verstappen or Hamilton",teams:["redbull","ferrari"],title:"Grand Slam number seven",now:6,tgt:7,unit:"Grand Slams",odds:"long",
+   need:"Pole, win, lead every lap and fastest lap",
+   why:"Either would move outright second behind Jim Clark's eight."},
+  {scope:"weekend",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Winner from 12 grid slots",now:11,tgt:12,unit:"grid slots",odds:"long",
+   need:"Win from 8th, 11th to 13th, 15th, 16th or 18th to 22nd",
+   why:"He already holds the record for winning from the most different starting positions."},
+  {scope:"weekend",code:"ALO",who:"Fernando Alonso",teams:["aston"],title:"Pass Prost on podiums",now:106,tgt:107,unit:"podiums",odds:"long",
+   need:"Top-three finish",
+   why:"Would take him fifth all-time. A win would set a new record for the longest gap between victories; his last came in Spain 2013."},
+  {scope:"weekend",code:"P6",who:"Sainz or Alonso",teams:["williams","aston"],title:"Kings of sixth",now:26,tgt:27,unit:"sixth places",odds:"long",
+   need:"Finish sixth",
+   why:"Felipe Massa holds the record with 27 sixth-place finishes. Both Spaniards are on 26."},
+  {scope:"weekend",code:"NEW",who:"A first-time winner",teams:["field"],title:"14 winners on one grid",now:13,tgt:14,unit:"winners",odds:"long",
+   need:"Maiden win for Hadjar, Lawson, Bearman or another",
+   why:"The next race would then field 14 previous winners, the most since the 1980 British Grand Prix."},
+  {scope:"weekend",code:"CAD",who:"Cadillac",teams:["cadillac"],title:"First championship points",now:0,tgt:1,unit:"points",odds:"long",
+   need:"Bottas or Pérez in the top ten",
+   why:"The new team is still scoreless after 20 rounds. A milestone rather than a record, but the one the paddock is waiting for."},
+
+  {scope:"season",code:"ANT",who:"Kimi Antonelli",teams:["mercedes"],title:"Second-best season ever",now:390,tgt:455,unit:"points",odds:"inplay",
+   need:"65 of the last 75 points",
+   why:"Would beat Verstappen's 454 from 2022. Only Verstappen's 575 in 2023 would be higher. See the ladder below."},
+  {scope:"season",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Abu Dhabi outright king",now:5,tgt:6,unit:"wins",odds:"inplay",
+   need:"Win the finale on 6 December",
+   why:"He and Hamilton share the Yas Marina record on five wins each. A sixth breaks the tie."},
+  {scope:"season",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Lusail: four in a row",now:3,tgt:4,unit:"wins",odds:"inplay",
+   need:"Win in Qatar on 29 November",
+   why:"Extends his own circuit record. He has won every Qatar Grand Prix since 2023."},
+  {scope:"season",code:"HAM",who:"Lewis Hamilton",teams:["ferrari"],title:"Abu Dhabi record, his way",now:5,tgt:6,unit:"wins",odds:"long",
+   need:"Win at Yas Marina",
+   why:"His last Abu Dhabi win came in 2019. A sixth would take the venue record outright."},
+
+  {scope:"future",code:"ANT",who:"Kimi Antonelli",teams:["mercedes"],title:"Most wins by an Italian",now:9,tgt:14,unit:"wins",odds:"long",
+   need:"Five more wins (2027)",
+   why:"Alberto Ascari's 13 is the Italian record. Antonelli can reach at most 12 this year, so this one is a 2027 story."},
+  {scope:"future",code:"MER",who:"Mercedes",teams:["mercedes"],title:"Tenth constructors' title",now:9,tgt:10,unit:"titles",odds:"inplay",
+   need:"Defend the crown in 2027",
+   why:"Nine titles tie Williams. A tenth would match McLaren for second; Ferrari lead with 16."},
+  {scope:"future",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Most wins with one team",now:74,tgt:85,unit:"wins",odds:"long",
+   need:"Eleven more Red Bull wins",
+   why:"Hamilton won 84 times with Mercedes. Verstappen already passed Schumacher's 72 with Ferrari for second."},
+  {scope:"future",code:"ALO",who:"Fernando Alonso",teams:["aston"],title:"450 starts",now:445,tgt:450,unit:"starts",odds:"likely",
+   need:"Race into 2027",
+   why:"He will end 2026 on 448 and has signed for a 24th season, so 450 should come early next year."}
+];
+
+/* single-season points, current 25-point system (2010 onward) */
+/* Schematic circuit drawings (viewBox 0 0 420 300, north up, not to scale).
+   Keyed by the Jolpica circuitId of the race. Add a new entry for a new venue;
+   if META.circuitId has no entry, the circuit section is simply hidden. */
+const CIRCUITS = {
+  vegas: {
+    name:"Las Vegas Strip Circuit",
+    d:"M350 255 L350 205 Q350 192 337 192 L312 192 Q300 192 300 180 L300 122 Q300 100 318 95 C350 88 372 70 360 48 Q350 30 320 32 L120 32 Q85 32 85 60 L85 230 Q85 255 110 255 L230 255 Q250 255 258 268 Q266 280 290 280 L325 280 Q350 280 350 255 Z",
+    sf:{x:350,y:250,horizontal:true},
+    landmarks:[{type:"circle",x:334,y:62,r:11,label:"Sphere",lx:322,ly:118}],
+    labels:[{x:62,y:160,t:"LAS VEGAS BLVD · THE STRIP",rot:-90},{x:200,y:22,t:"SANDS AVE"},{x:170,y:272,t:"HARMON AVE"}],
+    turns:[{x:366,y:196,t:"1"},{x:376,y:44,t:"5"},{x:66,y:28,t:"12"},{x:66,y:270,t:"14"},{x:366,y:286,t:"17"}],
+    facts:{length:"6.201 km",laps:"50",corners:"17",direction:"Anticlockwise",lapRecord:"1:33.365 · Verstappen, 2025",first:"2023"},
+    note:"A Saturday-night street race. The 1.9 km run down the Strip is one of the fastest stretches on the calendar."
+  },
+  losail: {
+    name:"Lusail International Circuit",
+    d:"M330 250 L120 250 Q80 250 75 215 Q72 185 100 175 C130 165 110 135 85 120 Q60 105 80 85 Q100 65 140 70 C180 75 190 45 230 45 L290 45 Q330 45 340 70 C350 100 320 115 330 140 C340 165 372 170 370 200 Q368 250 330 250 Z",
+    sf:{x:300,y:250,horizontal:false},
+    landmarks:[],
+    labels:[{x:180,y:270,t:"1 KM MAIN STRAIGHT"}],
+    turns:[{x:56,y:224,t:"1"},{x:226,y:32,t:"6"},{x:352,y:62,t:"10"},{x:384,y:206,t:"14"}],
+    facts:{length:"5.419 km",laps:"57",corners:"16",direction:"Clockwise",lapRecord:"1:22.384 · Norris, 2024",first:"2021"},
+    note:"A floodlit desert track built for motorbikes: fast, flowing corners that are hard on tyres and necks."
+  },
+  yas_marina: {
+    name:"Yas Marina Circuit",
+    d:"M360 230 L360 140 Q360 120 340 118 Q320 116 318 100 Q316 85 335 80 Q360 75 365 55 Q368 32 345 30 L110 60 Q90 66 95 82 L100 92 Q105 104 90 108 L60 112 Q40 116 45 135 L50 200 Q52 222 75 222 L150 222 Q165 222 170 240 Q175 258 195 258 L300 258 Q360 258 360 230 Z",
+    sf:{x:360,y:200,horizontal:true},
+    landmarks:[{type:"rect",x:212,y:244,w:52,h:28,label:"Hotel",lx:238,ly:288}],
+    labels:[{x:215,y:30,t:"BACK STRAIGHT",rot:-7}],
+    turns:[{x:328,y:130,t:"1"},{x:380,y:44,t:"5"},{x:84,y:124,t:"9"},{x:378,y:270,t:"16"}],
+    facts:{length:"5.281 km",laps:"58",corners:"16",direction:"Anticlockwise",lapRecord:"1:25.637 · Magnussen, 2024",first:"2009"},
+    note:"The season finale, run from dusk into darkness. The track dives under the Yas hotel on the final sector."
+  }
+};
+
+const LADDER = [
+  {lab:"Max Verstappen",yr:2023,pts:575,team:"redbull"},
+  {lab:"Max Verstappen",yr:2022,pts:454,team:"redbull"},
+  {lab:"Max Verstappen",yr:2024,pts:437,team:"redbull"},
+  {lab:"Lando Norris",yr:2025,pts:423,team:"mclaren"},
+  {lab:"Max Verstappen",yr:2025,pts:421,team:"redbull"},
+  {lab:"Lewis Hamilton",yr:2019,pts:413,team:"mercedes"},
+  {lab:"Lewis Hamilton",yr:2018,pts:408,team:"mercedes"},
+  {lab:"Sebastian Vettel",yr:2013,pts:397,team:"redbull"}
+];
+const KIMI = {lab:"Kimi Antonelli",yr:2026,pts:390,max:465,wins:9};
+
+const RACES = [
+  {name:"Las Vegas",round:"R21",date:"Sat 21 Nov",laps:50,km:"6.201 km",next:true,items:[
+    {c:"var(--redbull)",t:"Verstappen has two of the three modern Las Vegas wins; a third extends his record."},
+    {c:"var(--ferrari)",t:"Ferrari are still chasing a first modern Las Vegas victory."},
+    {c:"var(--redbull)",t:"Race lap record: 1:33.365, Verstappen, 2025."},
+    {c:"var(--mercedes)",t:"Fastest qualifying lap: 1:32.312, Russell, 2024. Russell is the only other winner here."}
+  ]},
+  {name:"Qatar",round:"R22",date:"Sun 29 Nov",laps:57,km:"5.380 km",items:[
+    {c:"var(--redbull)",t:"Verstappen has won every Qatar GP since 2023; a fourth Lusail win extends his record."},
+    {c:"var(--ferrari)",t:"Hamilton won the first Qatar GP in 2021 and is the only other winner at the track."},
+    {c:"var(--field)",t:"Confirmed to go ahead as scheduled despite the regional conflict."}
+  ]},
+  {name:"Abu Dhabi",round:"R23",date:"Sun 6 Dec",laps:58,km:"5.281 km",items:[
+    {c:"var(--redbull)",t:"Verstappen and Hamilton share the most wins at Yas Marina with five; either can take it outright."},
+    {c:"var(--redbull)",t:"Red Bull hold the team record with eight Abu Dhabi wins."},
+    {c:"var(--aston)",t:"Alonso's 448th start would close his 23rd season."}
+  ]}
+];
+
+const FALLEN = [
+  {when:"Mexico City",t:"Youngest champion ever",d:"Antonelli clinched the title at 20 years and 68 days, nearly three years younger than Vettel in 2010. Italy's first champion since Ascari in 1953."},
+  {when:"São Paulo",t:"Mercedes title number nine",d:"Level with Williams for third on the all-time constructors' list. Toto Wolff joins Frank Williams as the only principals with nine."},
+  {when:"São Paulo",t:"Hamilton's 400th start",d:"Only the second driver to reach 400 Grands Prix, after Alonso."},
+  {when:"São Paulo",t:"Verstappen, 21st to 2nd",d:"Fourth driver ever to reach the podium from 21st on the grid, and his biggest climb: 19 places."},
+  {when:"São Paulo",t:"Norris hits 50 podiums",d:"Fourteenth win and 50th podium in one afternoon, from pole."},
+  {when:"São Paulo",t:"McLaren's tenth at Interlagos",d:"First team to win ten times at the São Paulo circuit."}
+];
+
+const DRIVERS = [["Kimi Antonelli","mercedes",390],["Max Verstappen","redbull",279],["George Russell","mercedes",262],["Lewis Hamilton","ferrari",261],["Charles Leclerc","ferrari",249],["Lando Norris","mclaren",246],["Oscar Piastri","mclaren",152],["Isack Hadjar","redbull",122]];
+const CONSTRUCTORS = [["Mercedes","mercedes",652],["Ferrari","ferrari",510],["Red Bull","redbull",415],["McLaren","mclaren",398],["Racing Bulls","rb",114]];
+
+/* ============================ RENDER ============================ */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const ODDS = {certain:"Certain",likely:"Likely",inplay:"In play",long:"Long shot"};
+const SCOPES = [["weekend","This weekend"],["season","Season run-in"],["future","2027 horizon"]];
+const TEAM_FILTERS = ["all","mercedes","ferrari","mclaren","redbull","aston","other"];
+const MAIN = ["mercedes","ferrari","mclaren","redbull","aston"];
+const PREVIEW = location.hash === "#season-over" && !META.seasonOver;
+const OFF = META.seasonOver || PREVIEW;
+let state = {scope:"weekend", team:"all"};
+try { const s = JSON.parse(localStorage.getItem("rw-state")||"null"); if (s && s.scope) state = s; } catch(e){}
+if (OFF) state.scope = "future";
+const ACTIVE_SCOPES = OFF ? SCOPES.filter(([k])=>k==="future") : SCOPES;
+if (!ACTIVE_SCOPES.some(([k])=>k===state.scope)) state.scope = ACTIVE_SCOPES[0][0];
+
+const F = META.final;
+const setHeadline = s => { const [a,b=""] = s.split("|"); $("#headline").innerHTML = `${esc(a.trim())}${b?` <em>${esc(b.trim())}</em>`:""}`; };
+$("#asof").textContent = META.asOf;
+$("#copy-year").textContent = OFF ? F.year : new Date(META.lightsOutUTC).getUTCFullYear();
+$("#footnote").textContent = META.footnote;
+
+if (!OFF){
+  $("#round").textContent = META.round;
+  $("#circuit").textContent = META.circuit;
+  setHeadline(META.headline);
+  $("#lede").textContent = META.lede;
+  $("#ladder-note").textContent = META.ladderNote;
+  $("#fallen-title").textContent = META.fallenTitle;
+  $("#fallen-note").textContent = META.fallenNote;
+  $("#stand-note").textContent = META.standingsNote;
+  $("#s-week").textContent = RECORDS.filter(r=>r.scope==="weekend").length;
+  $("#s-likely").textContent = RECORDS.filter(r=>r.odds==="likely"||r.odds==="certain").length;
+  $("#s-left").textContent = META.racesLeft;
+  $("#s-pts").textContent = META.pointsLeft;
+} else {
+  if (PREVIEW){
+    const flag = document.createElement("div");
+    flag.className = "preview-flag";
+    flag.innerHTML = `Preview of the end-of-season screen · <a href="#">back to the live page</a>`;
+    document.body.prepend(flag);
+    flag.querySelector("a").addEventListener("click", e=>{ e.preventDefault(); location.hash=""; location.reload(); });
+  }
+  $("#round").textContent = `${F.year} season complete`;
+  $("#circuit").textContent = `Next: ${META.nextSeason.name}`;
+  setHeadline(F.headline);
+  $("#lede").textContent = F.lede;
+  $("#champs").hidden = false;
+  const cd = $("#champ-driver"), ct = $("#champ-team");
+  cd.style.setProperty("--c", TEAMS[F.driverTeam].c); ct.style.setProperty("--c", TEAMS[F.constructorTeam].c);
+  cd.querySelector("b").textContent = F.driver; cd.querySelector("span").textContent = F.driverLine;
+  ct.querySelector("b").textContent = F.constructor; ct.querySelector("span").textContent = F.constructorLine;
+  $("#runin").hidden = true;
+  $("#ladder-note").textContent = F.ladderNote;
+  $("#fallen-title").textContent = F.fallenTitle;
+  $("#fallen-note").textContent = F.fallenNote;
+  $("#stand-title").textContent = `Final standings`;
+  $("#stand-note").textContent = F.standingsNote;
+  const future = RECORDS.filter(r=>r.scope==="future");
+  $("#s-week").textContent = future.length;            $("#s-week-l").textContent = `records to chase in ${F.year+1}`;
+  $("#s-likely").textContent = FALLEN.length;          $("#s-likely-l").textContent = "records fell in the final races";
+  $("#s-left").textContent = F.championPts ?? KIMI.pts; $("#s-left-l").textContent = "points for the champion";
+  $("#s-pts").textContent = F.championWins ?? KIMI.wins; $("#s-pts-l").textContent = "wins for the champion";
+}
+
+function teamMatch(r){
+  if (state.team==="all") return true;
+  if (state.team==="other") return r.teams.some(t=>!MAIN.includes(t));
+  return r.teams.includes(state.team);
+}
+function renderControls(){
+  $("#tabs").innerHTML = ACTIVE_SCOPES.map(([k,l])=>`<button class="tab" type="button" id="tab-${k}" data-scope="${k}" aria-pressed="${state.scope===k}"><span>${l}<span class="n">${RECORDS.filter(r=>r.scope===k).length}</span></span></button>`).join("");
+  $("#chips").innerHTML = TEAM_FILTERS.map(k=>{
+    const lab = k==="all"?"All teams":k==="other"?"Rest of grid":TEAMS[k].name;
+    const c = k==="all"||k==="other"?"var(--ink)":TEAMS[k].c;
+    return `<button class="chip" type="button" id="chip-${k}" data-team="${k}" aria-pressed="${state.team===k}" style="--c:${c}"><i></i>${lab}</button>`;
+  }).join("");
+}
+function renderGrid(){
+  const list = RECORDS.filter(r=>r.scope===state.scope && teamMatch(r));
+  if (!list.length){ $("#grid").innerHTML = `<div class="empty">No records for this team in this window. Try another team or tab.</div>`; return; }
+  $("#grid").innerHTML = list.map(r=>{
+    const t1 = TEAMS[r.teams[0]].c, t2 = TEAMS[r.teams[1]||r.teams[0]].c;
+    const w = Math.max(0, Math.min(100, r.tgt ? r.now/r.tgt*100 : 0));
+    const teamNames = r.teams.map(t=>TEAMS[t].name).join(" / ");
+    return `<article class="rec ${r.odds}" style="--t1:${t1};--t2:${t2}">
+      <div class="rec-top"><span class="code">${esc(r.code)}</span><span class="who">${esc(r.who)}<small>${esc(teamNames)}</small></span><span class="odds ${r.odds}">${ODDS[r.odds]}</span></div>
+      <h3>${esc(r.title)}</h3>
+      <div class="score"><span class="now">${r.now}</span><span class="arrow">→</span><span class="tgt">${r.tgt}</span><span class="unit">${esc(r.unit)}</span></div>
+      <div class="meter" role="img" aria-label="${r.now} of ${r.tgt} ${esc(r.unit)}"><i style="--w:${w}%"></i><b></b></div>
+      <p class="need"><b>Needs</b>${esc(r.need)}</p>
+      <p class="why">${esc(r.why)}</p>
+    </article>`;
+  }).join("");
+}
+window.addEventListener("hashchange", ()=>location.reload());
+function save(){ if (PREVIEW) return; try{ localStorage.setItem("rw-state", JSON.stringify(state)); }catch(e){} }
+document.addEventListener("click", e=>{
+  const tab = e.target.closest("[data-scope]"); const chip = e.target.closest("[data-team]");
+  if (tab){ state.scope = tab.dataset.scope; }
+  else if (chip){ state.team = chip.dataset.team; }
+  else return;
+  save(); renderControls(); renderGrid();
+});
+renderControls(); renderGrid();
+
+/* ladder */
+(function(){
+  const scaleMax = 600;
+  const rows = [...LADDER, {...KIMI, team:"mercedes", kimi:true}].sort((a,b)=>b.pts-a.pts);
+  const pct = v => (v/scaleMax*100).toFixed(2)+"%";
+  const box = $("#ladder-box");
+  box.innerHTML = rows.map(r=>{
+    const ghost = r.kimi && !OFF && r.max > r.pts ? `<span class="ghost" style="--from:${pct(r.pts)};--len:${pct(r.max-r.pts)}"></span>` : "";
+    return `<div class="lrow${r.kimi?" kimi":""}">
+      <div class="lab">${esc(r.lab)} <small>${r.yr}${r.kimi?(OFF?" · final":" · so far"):""}</small></div>
+      <div class="track" style="--c:${TEAMS[r.team].c}"><i style="--w:${pct(r.pts)}"></i>${ghost}</div>
+      <div class="val">${r.pts}</div>
+    </div>`;
+  }).join("") + `<div class="ladder-foot">
+      <span class="key"><i style="--c:var(--mercedes)"></i>Antonelli ${OFF?"final":"now"}: ${KIMI.pts}</span>
+      ${OFF?"":`<span class="key"><i class="g"></i>Still possible: up to ${KIMI.max}</span><span>${esc(META.ladderNextRung)}</span>`}</div>`;
+})();
+
+/* mini circuit in the clock card */
+(function(){
+  const c = CIRCUITS[META.circuitId];
+  if (OFF || !c) return;
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const land = c.landmarks.map(l => l.type==="circle"
+      ? `<circle class="land" cx="${l.x}" cy="${l.y}" r="${l.r}"/>`
+      : `<rect class="land" x="${l.x}" y="${l.y}" width="${l.w}" height="${l.h}"/>`).join("");
+  const sf = c.sf.horizontal
+      ? `<rect class="sf" x="${c.sf.x-16}" y="${c.sf.y-5}" width="32" height="10"/>`
+      : `<rect class="sf" x="${c.sf.x-5}" y="${c.sf.y-16}" width="10" height="32"/>`;
+  const car = reduce ? "" : `<circle class="car" r="11"><animateMotion dur="9s" repeatCount="indefinite"><mpath href="#trk"/></animateMotion></circle>`;
+  const m = $("#mini");
+  m.hidden = false;
+  m.innerHTML = `<svg viewBox="0 0 420 300" role="img" aria-label="Schematic map of ${esc(c.name)}">
+    <defs><pattern id="checker" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#fff"/><rect width="5" height="5" fill="#0c0f16"/><rect x="5" y="5" width="5" height="5" fill="#0c0f16"/></pattern></defs>
+    ${land}<path id="trk" class="trk-out" d="${c.d}"/><path class="trk-in" d="${c.d}"/>${sf}${car}
+  </svg>
+  <div class="mini-txt"><b>${esc(c.name)}</b>${esc(c.facts.length)} · ${esc(c.facts.laps)} laps · ${esc(c.facts.corners)} corners<br>Lap record ${esc(c.facts.lapRecord)}</div>`;
+})();
+
+/* run-in */
+$("#runin-box").innerHTML = RACES.map(r=>`<article class="race${r.next?" next":""}">
+  <div class="race-head"><h3>${esc(r.name)}</h3><span>${r.round} · ${esc(r.date)}</span></div>
+  <div class="race-meta"><span>${r.laps} laps</span><span>${r.km}</span>${r.next?"<span>Next up</span>":""}</div>
+  <ul>${r.items.map(i=>`<li style="--c:${i.c}"><span>${esc(i.t)}</span></li>`).join("")}</ul>
+</article>`).join("");
+
+/* fallen */
+$("#fallen-box").innerHTML = FALLEN.map(f=>`<div><em>${esc(f.when)}</em><b>${esc(f.t)}</b><span>${esc(f.d)}</span></div>`).join("");
+
+/* standings */
+const row = (r,i)=>`<tr><td>${i+1}</td><td><span class="sw" style="--c:${TEAMS[r[1]].c}"></span>${esc(r[0])}</td><td>${r[2]}</td></tr>`;
+$("#t-drivers tbody").innerHTML = DRIVERS.map(row).join("");
+$("#t-teams tbody").innerHTML = CONSTRUCTORS.map(row).join("");
+
+/* countdown */
+const CD = OFF ? {name:META.nextSeason.name, utc:META.nextSeason.lightsOutUTC, local:META.nextSeason.localLabel, label:`${F.year+1} season starts in`}
+               : {name:META.raceName, utc:META.lightsOutUTC, local:META.localLabel, label:"Lights out in"};
+const target = CD.utc ? new Date(CD.utc).getTime() : NaN;
+$("#clock-label").textContent = CD.label;
+let viewerTime = "";
+if (!isNaN(target)) { try { viewerTime = new Date(target).toLocaleString([], {weekday:"short", day:"numeric", month:"short", hour:"2-digit", minute:"2-digit", timeZoneName:"short"}); } catch(e){} }
+$("#when").innerHTML = `<strong>${esc(CD.name)}</strong> · ${esc(CD.local)}${viewerTime?`<br>Your time: ${esc(viewerTime)}`:""}`;
+const pad = n => String(n).padStart(2,"0");
+function tick(){
+  if (isNaN(target)) return;
+  const d = target - Date.now();
+  if (d <= 0){
+    ["dd","hh","mm","ss"].forEach(id=>$("#"+id).textContent="00");
+    $("#clock-label").textContent = OFF ? "The new season is under way" : "Lights out has passed · board updates after the race";
+    return;
+  }
+  $("#dd").textContent = pad(Math.floor(d/864e5));
+  $("#hh").textContent = pad(Math.floor(d/36e5)%24);
+  $("#mm").textContent = pad(Math.floor(d/6e4)%60);
+  $("#ss").textContent = pad(Math.floor(d/1e3)%60);
+}
+tick(); setInterval(tick, 1000);
+</script>
+
+</body></html>
