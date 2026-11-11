@@ -22,6 +22,7 @@
   --mercedes:#00a19c; --ferrari:#dc0000; --mclaren:#ff8000; --redbull:#2b4fb8;
   --aston:#00665e; --alpine:#0093cc; --williams:#005aff; --rb:#6692ff;
   --haas:#8c939b; --audi:#c8102e; --cadillac:#2a2a2a; --field:#0c0f16;
+  --alphatauri:#2b4562; --racingpoint:#d6007a;
 }
 *{box-sizing:border-box}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
@@ -179,6 +180,66 @@ h2{font-family:var(--display);font-weight:900;font-size:clamp(34px,5vw,52px);lin
 .preview-flag{background:var(--ink);color:#fff;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:8px 16px}
 .preview-flag a{color:#fff}
 
+/* view switcher */
+.views{display:flex;gap:6px;flex-wrap:wrap}
+.views a{font:800 13px/1 var(--body);font-style:italic;text-transform:uppercase;letter-spacing:.03em;text-decoration:none;padding:9px 12px;border:2px solid var(--ink);color:var(--ink);transform:skewX(-8deg);display:inline-block}
+.views a[aria-current="page"]{background:var(--ink);color:#fff}
+.view-history .live-only{display:none!important}
+body:not(.view-history) .history-only{display:none!important}
+
+/* record history calendar */
+.hist-head{padding-block:40px 8px}
+.hist-head h1{font-size:clamp(48px,8vw,104px)}
+.hist-tools{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:22px 0 8px}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--ink-2);align-items:center}
+.tag{font:600 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 6px;border:1.5px solid var(--ink);white-space:nowrap;flex:none}
+.tag.record{background:var(--kerb);border-color:var(--kerb);color:#fff}
+.tag.equal{background:var(--ink);color:#fff}
+.tag.first{background:var(--paper);color:var(--ink)}
+.tag.mile{background:var(--tarmac);border-color:var(--ink-2);color:var(--ink-2)}
+.tag.track{border-style:dashed;border-color:var(--ink-2);color:var(--ink-2);background:var(--paper)}
+.latest{border:2px solid var(--ink);margin-top:22px;display:grid;grid-template-columns:auto minmax(0,1fr);min-width:0;background:var(--paper)}
+.latest-flag{background:var(--c);color:#fff;padding:14px 16px;display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:118px}
+.latest-flag small{font:600 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.9}
+.latest-flag b{font-family:var(--display);font-weight:900;font-size:34px;line-height:.9;text-transform:uppercase}
+.latest-body{padding:14px 16px;display:grid;gap:10px;min-width:0}
+.latest-body h3{margin:0;font-family:var(--display);font-weight:800;font-size:26px;line-height:1;text-transform:uppercase}
+.latest-body h3 span{font-family:var(--mono);font-weight:600;font-size:12px;color:var(--ink-2);letter-spacing:.06em;margin-left:8px}
+.latest-body .next-link{font-weight:700;font-size:14px}
+.tl-tools{display:flex;gap:10px 16px;flex-wrap:wrap;align-items:center;margin:26px 0 10px}
+.toggle{display:inline-flex;border:2px solid var(--ink)}
+.toggle button{font:700 12px/1 var(--body);text-transform:uppercase;letter-spacing:.04em;padding:9px 12px;border:0;background:var(--paper);color:var(--ink);cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.linkbtn{font:600 13px/1 var(--body);background:none;border:0;padding:6px 0;color:var(--ink);text-decoration:underline;cursor:pointer}
+.tl-note{font-size:13px;color:var(--ink-2);margin:0 0 10px}
+.tl{border-top:2px solid var(--ink)}
+.tl details{border-bottom:1px solid var(--line)}
+.tl summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:52px minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:10px 0}
+.tl summary::-webkit-details-marker{display:none}
+.tl summary:hover .gp{text-decoration:underline}
+.rd-chip{background:var(--c);color:#fff;font:700 13px/1 var(--mono);text-align:center;padding:7px 0;transform:skewX(-10deg)}
+.gpw{min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px}
+.gpw .gp{font-family:var(--display);font-weight:800;font-size:21px;line-height:1.05;text-transform:uppercase}
+.gpw .meta{font-size:13px;color:var(--ink-2)}
+.count{font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 7px;border:1.5px solid var(--ink);white-space:nowrap}
+.count.zero{border-color:var(--line);color:var(--ink-2)}
+.chev{width:10px;height:10px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(45deg);margin:0 6px 4px 0;transition:transform .15s}
+.tl details[open] .chev{transform:rotate(225deg);margin:4px 6px 0 0}
+.tl ul{list-style:none;margin:0;padding:0 0 14px 64px;display:grid;gap:7px}
+.tl li,.latest li{display:flex;gap:8px;align-items:flex-start;font-size:14px;line-height:1.35;min-width:0}
+.latest ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.tl li .tag,.latest li .tag{margin-top:1px;min-width:66px;text-align:center}
+.tl li.none{color:var(--ink-2)}
+.tl-foot{font-size:13px;color:var(--ink-2);margin-top:14px;display:grid;gap:4px}
+@media (max-width:560px){
+  .latest{grid-template-columns:minmax(0,1fr)}
+  .latest-flag{flex-direction:row;align-items:baseline;gap:10px;min-width:0}
+  .tl summary{grid-template-columns:44px minmax(0,1fr) auto;gap:10px}
+  .tl summary .chev{display:none}
+  .tl ul{padding-left:0}
+}
+.year-sum{font-family:var(--mono);font-size:12px;color:var(--ink-2);letter-spacing:.04em;text-transform:uppercase}
+
 footer{margin-top:56px;border-top:2px solid var(--ink)}
 footer .legal{display:grid;gap:10px;max-width:80ch}
 footer .copy{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;padding-top:14px;border-top:1px solid var(--line);color:var(--ink)}
@@ -211,11 +272,12 @@ footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
 <header class="bar">
   <div class="wrap">
     <div class="brand"><span class="flag" aria-hidden="true"></span>F1 Record Watch</div>
+    <nav class="views" aria-label="Pages"><a href="#" id="nav-live">Next race</a><a href="#history" id="nav-history">Record history</a></nav>
     <div class="bar-right"><div class="asof" id="asof"></div><a class="official" id="official" href="https://www.formula1.com/" target="_blank" rel="noopener" title="Opens formula1.com, the official Formula 1 website">Go to the official F1 site ↗</a></div>
   </div>
 </header>
 
-<section class="hero">
+<section class="hero live-only">
   <div class="wrap">
     <div>
       <div class="eyebrow"><b id="round"></b><span id="circuit"></span></div>
@@ -237,14 +299,14 @@ footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
 </section>
 <div class="kerb" aria-hidden="true"></div>
 
-<section class="champs" id="champs" hidden>
+<section class="champs live-only" id="champs" hidden>
   <div class="wrap">
     <div class="champ" id="champ-driver"><small>Drivers' champion</small><b></b><span></span></div>
     <div class="champ" id="champ-team"><small>Constructors' champion</small><b></b><span></span></div>
   </div>
 </section>
 
-<div class="strip">
+<div class="strip live-only">
   <div class="wrap">
     <div class="stat"><b id="s-week">0</b><span id="s-week-l">records in play this weekend</span></div>
     <div class="stat"><b id="s-likely">0</b><span id="s-likely-l">rated likely to fall</span></div>
@@ -253,7 +315,7 @@ footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
   </div>
 </div>
 
-<main>
+<main class="live-only">
 <section class="block" id="records">
     <div class="wrap">
       <div class="sec-head">
@@ -316,6 +378,32 @@ footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
     </div>
   </section>
 </main>
+
+<section class="history-only" id="history" aria-labelledby="hist-title">
+  <div class="wrap hist-head">
+    <div class="eyebrow"><b>Record history</b><span>Race by race</span></div>
+    <h1 id="hist-title">What fell, <em>when</em></h1>
+    <p class="lede">Every Grand Prix and the records it broke, newest first. Tap a race to see what fell.</p>
+    <div id="latest"></div>
+    <div class="hist-tools">
+      <div class="tabs" role="group" aria-label="Season" id="year-tabs"></div>
+      <div class="year-sum" id="year-sum"></div>
+    </div>
+    <div class="tl-tools">
+      <div class="toggle" role="group" aria-label="Which records to show"><button type="button" id="f-key" data-filter="key">Records &amp; firsts</button><button type="button" id="f-all" data-filter="all">Show all</button></div>
+      <button type="button" class="linkbtn" id="open-all">Open all</button>
+    </div>
+    <div class="legend" aria-label="Key">
+      <span class="tag record">Record</span>all-time record set
+      <span class="tag equal">Equal</span>record equalled
+      <span class="tag first">First</span>first in F1 history
+      <span class="tag mile">Milestone</span>landmark number
+      <span class="tag track">Track</span>circuit record
+    </div>
+    <div class="tl" id="timeline"></div>
+    <div class="tl-foot" id="tl-foot"></div>
+  </div>
+</section>
 
 <footer>
   <div class="wrap">
@@ -384,6 +472,7 @@ const TEAMS = {
   mclaren:{name:"McLaren",c:"var(--mclaren)"}, redbull:{name:"Red Bull",c:"var(--redbull)"},
   aston:{name:"Aston Martin",c:"var(--aston)"}, williams:{name:"Williams",c:"var(--williams)"},
   rb:{name:"Racing Bulls",c:"var(--rb)"}, cadillac:{name:"Cadillac",c:"var(--cadillac)"},
+  alpine:{name:"Alpine",c:"var(--alpine)"}, alphatauri:{name:"AlphaTauri",c:"var(--alphatauri)"}, racingpoint:{name:"Racing Point",c:"var(--racingpoint)"},
   field:{name:"Whole grid",c:"var(--field)"}
 };
 
@@ -551,6 +640,507 @@ const FALLEN = [
   {when:"São Paulo",t:"McLaren's tenth at Interlagos",d:"First team to win ten times at the São Paulo circuit."}
 ];
 
+/* ============================================================
+   RECORD HISTORY (calendar page, opened with #history).
+   One entry per Grand Prix: r = round, d = race date (local, YYYY-MM-DD),
+   gp = race name, w = winner, team = TEAMS key of the winner,
+   recs = what was broken: [type, text]. Types:
+     record = all-time F1 record set or extended
+     equal  = all-time record equalled
+     first  = a first in F1 history (or the first in a long time)
+     mile   = landmark number (100th, 300th, ...)
+     track  = record at that circuit or event
+   Races still to run: recs:null and no winner. Cancelled races: cancelled:"note".
+   ============================================================ */
+const HISTORY = {
+  2026: [
+    {r:1,d:"2026-03-08",gp:"Australian GP",w:"George Russell",team:"mercedes",recs:[
+      ["first","Audi score points on their F1 debut"],
+      ["record","Hamilton: 20 years in a row leading a Grand Prix"],
+      ["record","Red Bull: most consecutive seasons with a fastest lap"],
+      ["first","First Mercedes 1-2 without Hamilton since 1955"]]},
+    {r:2,d:"2026-03-15",gp:"Chinese GP",w:"Kimi Antonelli",team:"mercedes",recs:[
+      ["mile","Antonelli becomes the second-youngest race winner ever"],
+      ["first","First Italian winner since Fisichella in 2006"],
+      ["track","Hamilton extends record: 10 Chinese GP podiums"]]},
+    {r:3,d:"2026-03-29",gp:"Japanese GP",w:"Kimi Antonelli",team:"mercedes",recs:[
+      ["record","Antonelli: youngest championship leader ever"],
+      ["first","Antonelli: first to win two Grands Prix as a teenager"],
+      ["mile","500th Grand Prix won from pole"],
+      ["equal","Mercedes equal Williams for third on all-time podiums"]]},
+    {cancelled:"Bahrain GP · moved to Sepang, 4 Oct",d:"2026-04-12"},
+    {cancelled:"Saudi Arabian GP · cancelled",d:"2026-04-19"},
+    {r:4,d:"2026-05-03",gp:"Miami GP",w:"Kimi Antonelli",team:"mercedes",recs:[
+      ["record","Mercedes pass Williams for third on all-time podiums"],
+      ["mile","Antonelli: third driver to win his first three races in a row"],
+      ["mile","Verstappen: 200 Grands Prix in the points"]]},
+    {r:5,d:"2026-05-24",gp:"Canadian GP",w:"Kimi Antonelli",team:"mercedes",recs:[
+      ["first","Antonelli: first to take his first four wins in a row"],
+      ["first","Britain: first nation to lead 20,000 Grand Prix laps"],
+      ["mile","Verstappen: podiums in 11 straight seasons"]]},
+    {r:6,d:"2026-06-07",gp:"Monaco GP",w:"Kimi Antonelli",team:"mercedes",recs:[
+      ["record","Antonelli: youngest Grand Slam ever"],
+      ["track","Antonelli: youngest Monaco winner ever"],
+      ["equal","Hamilton equals Senna's 8 Monaco podiums"]]},
+    {r:7,d:"2026-06-14",gp:"Barcelona GP",w:"Lewis Hamilton",team:"ferrari",recs:[
+      ["track","Hamilton: most wins in Barcelona, passing Schumacher"],
+      ["record","Hamilton extends record for straight seasons with a fastest lap"],
+      ["first","First all-British podium since 1968"]]},
+    {r:8,d:"2026-06-28",gp:"Austrian GP",w:"George Russell",team:"mercedes",recs:[
+      ["track","Mercedes extend record: 8 wins at the Red Bull Ring"],
+      ["track","Verstappen extends record: 7 Austrian GP podiums"],
+      ["equal","Hülkenberg equals Ricciardo for 10th on most starts"]]},
+    {r:9,d:"2026-07-05",gp:"British GP",w:"Charles Leclerc",team:"ferrari",recs:[
+      ["track","Ferrari: first team to 60 British GP podiums"],
+      ["track","Hamilton extends record: 16 Silverstone podiums"],
+      ["mile","Mercedes: 350th Grand Prix"]]},
+    {r:10,d:"2026-07-19",gp:"Belgian GP",w:"Kimi Antonelli",team:"mercedes",recs:[
+      ["equal","Antonelli equals Patrese for second on Italian wins"],
+      ["mile","Red Bull's 300th podium"],
+      ["mile","Verstappen's 130th podium"]]},
+    {r:11,d:"2026-07-26",gp:"Hungarian GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["equal","Norris equals Coulthard for sixth on McLaren wins"],
+      ["track","McLaren extend record: 28 Hungarian GP podiums"],
+      ["mile","200th Grand Prix led by a Mercedes driver"]]},
+    {r:12,d:"2026-08-23",gp:"Dutch GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["first","Alonso: first driver to score after turning 45"],
+      ["equal","British drivers score in 176 straight races, equalling Germany"],
+      ["record","Norris passes Coulthard for sixth on McLaren wins"]]},
+    {r:13,d:"2026-09-06",gp:"Italian GP",w:"Kimi Antonelli",team:"mercedes",recs:[
+      ["first","First Grand Prix ever won from 19th on the grid"],
+      ["record","Britain: most consecutive races in the points by a nation"],
+      ["track","First Italian to win at Monza since 1966"]]},
+    {r:14,d:"2026-09-13",gp:"Spanish GP",w:"Kimi Antonelli",team:"mercedes",recs:[
+      ["first","First winner at the new Madring circuit"],
+      ["first","Verstappen: a podium at every track on the calendar"],
+      ["mile","Leclerc: 20th driver to lead 1,000 laps"]]},
+    {r:15,d:"2026-09-26",gp:"Azerbaijan GP",w:"George Russell",team:"mercedes",recs:[
+      ["mile","Russell's Grand Slam, the 29th driver to score one"],
+      ["mile","Mercedes: third team to lead 8,000 laps"],
+      ["track","Hamilton: first driver to race 500 laps in Baku"]]},
+    {r:16,d:"2026-10-04",gp:"Bahrain GP (Sepang)",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Verstappen equals Schumacher: 72 wins with one team"],
+      ["record","Verstappen: longest gap between wins at one circuit"],
+      ["equal","Verstappen equals Vettel's 38 fastest laps"]]},
+    {r:17,d:"2026-10-11",gp:"Singapore GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Verstappen equals Senna: 19 lights-to-flag wins"],
+      ["record","Stroll: first driver with 12 retirements in a season"],
+      ["equal","Red Bull equal Mercedes for most Singapore wins"]]},
+    {r:18,d:"2026-10-25",gp:"United States GP",w:"Kimi Antonelli",team:"mercedes",recs:[
+      ["track","Mercedes: first team to six wins at COTA"],
+      ["mile","Antonelli: 40th driver to reach nine wins"],
+      ["track","Hamilton: first to race 700 laps at COTA"]]},
+    {r:19,d:"2026-11-01",gp:"Mexico City GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Antonelli: youngest World Champion ever (20 years, 68 days)"],
+      ["first","First Italian champion since Ascari in 1953"],
+      ["record","Verstappen extends record: wins from the most grid slots"],
+      ["mile","Verstappen: third driver to lead 4,000 laps"]]},
+    {r:20,d:"2026-11-08",gp:"São Paulo GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["equal","Mercedes' ninth constructors' title equals Williams"],
+      ["mile","Hamilton's 400th start, the second driver to get there"],
+      ["track","McLaren: first team to ten Interlagos wins"],
+      ["equal","Norris' 50th podium equals Button"]]},
+    {r:21,d:"2026-11-21",gp:"Las Vegas GP",recs:null},
+    {r:22,d:"2026-11-29",gp:"Qatar GP",recs:null},
+    {r:23,d:"2026-12-06",gp:"Abu Dhabi GP",recs:null}
+  ],
+  2025: [
+    {r:1,d:"2025-03-16",gp:"Australian GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["mile","Antonelli: second-youngest points scorer ever"],
+      ["mile","Hamilton: fourth driver to score in 19 seasons"],
+      ["mile","Germany: second nation to 8,000 points"]]},
+    {r:2,d:"2025-03-23",gp:"Chinese GP",w:"Oscar Piastri",team:"mclaren",recs:[
+      ["mile","McLaren's 50th 1-2, the third team to get there"],
+      ["mile","Mercedes' 300th podium, the fourth team to get there"],
+      ["first","Both Ferraris disqualified; only the fourth race with 3+ DSQs"]]},
+    {r:3,d:"2025-04-06",gp:"Japanese GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Antonelli: youngest driver ever to lead a lap"],
+      ["mile","Verstappen: fourth driver to win in 10 straight seasons"]]},
+    {r:4,d:"2025-04-13",gp:"Bahrain GP",w:"Oscar Piastri",team:"mclaren",recs:[
+      ["mile","Verstappen: 25 straight points finishes, fifth-longest ever"],
+      ["equal","Norris' 30th podium equals Montoya"]]},
+    {r:5,d:"2025-04-20",gp:"Saudi Arabian GP",w:"Oscar Piastri",team:"mclaren",recs:[
+      ["record","Verstappen passes Vettel for second on all-time points"],
+      ["first","Piastri: first Australian title leader since Webber in 2010"]]},
+    {r:6,d:"2025-05-04",gp:"Miami GP",w:"Oscar Piastri",team:"mclaren",recs:[
+      ["first","McLaren: first team to score maximum points on a Sprint weekend"],
+      ["first","Piastri: first McLaren driver to win three in a row since Häkkinen"]]},
+    {r:7,d:"2025-05-18",gp:"Emilia Romagna GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen passes Vettel for third on laps led"],
+      ["equal","Red Bull equal Ferrari: 17 straight seasons with a fastest lap"]]},
+    {r:8,d:"2025-05-25",gp:"Monaco GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["first","Piastri: first Australian to lead for four races since Alan Jones"],
+      ["record","Norris: most race laps for McLaren, passing Coulthard"]]},
+    {r:9,d:"2025-06-01",gp:"Spanish GP",w:"Oscar Piastri",team:"mclaren",recs:[
+      ["record","Alonso: first driver to score in 21 different seasons"],
+      ["mile","50th win for an Australian driver"]]},
+    {r:10,d:"2025-06-15",gp:"Canadian GP",w:"George Russell",team:"mercedes",recs:[
+      ["mile","Antonelli: third-youngest podium finisher ever"],
+      ["record","Verstappen: 117 Red Bull podiums, second-most with one team"]]},
+    {r:11,d:"2025-06-29",gp:"Austrian GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["mile","100th 1-2 for Mercedes-powered cars"],
+      ["mile","Norris: 44th driver to reach seven wins"]]},
+    {r:12,d:"2025-07-06",gp:"British GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["record","Hülkenberg: most starts before a first podium (239)"],
+      ["record","Hamilton: most fourth places, passing Vettel"],
+      ["first","Hamilton and Alonso: first to race 20 British GPs"]]},
+    {r:13,d:"2025-07-27",gp:"Belgian GP",w:"Oscar Piastri",team:"mclaren",recs:[
+      ["equal","Piastri equals the Australian record: 9 races leading the title"],
+      ["equal","Norris' 37th podium equals Patrese"]]},
+    {r:14,d:"2025-08-03",gp:"Hungarian GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["mile","McLaren's 200th win, second team after Ferrari"],
+      ["equal","McLaren equal their longest 1-2 streak (four)"]]},
+    {r:15,d:"2025-08-31",gp:"Dutch GP",w:"Oscar Piastri",team:"mclaren",recs:[
+      ["first","Piastri: first McLaren Grand Slam since 1998"],
+      ["equal","Piastri: 43 straight finishes, equal second-longest ever"]]},
+    {r:16,d:"2025-09-07",gp:"Italian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Fastest race in F1 history"],
+      ["mile","Red Bull's 125th win, the fourth team to get there"]]},
+    {r:17,d:"2025-09-21",gp:"Azerbaijan GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Verstappen equals Hamilton for second on Grand Slams"],
+      ["first","Lawson: first New Zealand top five since 1976"]]},
+    {r:18,d:"2025-10-05",gp:"Singapore GP",w:"George Russell",team:"mercedes",recs:[
+      ["record","Hamilton: record 18 seasons with a fastest lap"],
+      ["mile","McLaren seal their tenth constructors' title"],
+      ["equal","McLaren equal the record for most races to spare"]]},
+    {r:19,d:"2025-10-19",gp:"United States GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["first","Hamilton: first driver to 5,000 points"],
+      ["track","Verstappen: first to lead every lap at COTA"],
+      ["equal","Verstappen's 122nd podium equals Vettel"]]},
+    {r:20,d:"2025-10-26",gp:"Mexico City GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["record","Verstappen passes Vettel for third on all-time podiums"],
+      ["mile","Leclerc's 50th podium"],
+      ["equal","Bearman equals Haas' best-ever result (fourth)"]]},
+    {r:21,d:"2025-11-09",gp:"São Paulo GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["record","Norris: first 11 wins all at different circuits"],
+      ["mile","Red Bull: fourth team to lead 200 Grands Prix"]]},
+    {r:22,d:"2025-11-22",gp:"Las Vegas GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["first","Both McLarens disqualified, a first for the team"],
+      ["track","Verstappen: first driver to win twice in Las Vegas"]]},
+    {r:23,d:"2025-11-30",gp:"Qatar GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Verstappen's 70th win, the third driver to 70"],
+      ["track","Verstappen extends record: 3 Lusail wins"]]},
+    {r:24,d:"2025-12-07",gp:"Abu Dhabi GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Norris is Britain's 11th champion, extending the national record"],
+      ["equal","Verstappen equals Hamilton: 5 Abu Dhabi wins"],
+      ["mile","Title decided by 2 points or fewer for the 14th time"]]}
+  ],
+  2024: [
+    {r:1,d:"2024-03-02",gp:"Bahrain GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Verstappen's fifth Grand Slam"],
+      ["equal","Red Bull's 114th win equals Williams for fourth"]]},
+    {r:2,d:"2024-03-09",gp:"Saudi Arabian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen: first to win nine in a row twice"],
+      ["record","Verstappen: fastest ever from first podium to 100th"]]},
+    {r:3,d:"2024-03-24",gp:"Australian GP",w:"Carlos Sainz",team:"ferrari",recs:[
+      ["record","Norris: most podiums without a win"],
+      ["mile","Sainz: 67th driver to three wins"]]},
+    {r:4,d:"2024-04-07",gp:"Japanese GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen passes Senna for fourth on wins from pole"],
+      ["mile","Verstappen: fourth driver to lead 3,000 laps"]]},
+    {r:5,d:"2024-04-21",gp:"Chinese GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Verstappen equals Vettel on wins from pole"],
+      ["equal","Hülkenberg equals de Cesaris: most starts without a win"]]},
+    {r:6,d:"2024-05-05",gp:"Miami GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["equal","Norris equals record: most podiums before a first win"],
+      ["record","Hülkenberg: most starts without a win (209)"]]},
+    {r:7,d:"2024-05-19",gp:"Emilia Romagna GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen passes Vettel for third on wins from pole"],
+      ["record","Verstappen passes Räikkönen for sixth on podiums"]]},
+    {r:8,d:"2024-05-26",gp:"Monaco GP",w:"Charles Leclerc",team:"ferrari",recs:[
+      ["record","Hamilton: most fastest laps with one team"],
+      ["first","Top ten finish in grid order, a first in F1"]]},
+    {r:9,d:"2024-06-09",gp:"Canadian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Verstappen's 60th win, the third driver to 60"],
+      ["record","Alonso: longest span between first and latest points"]]},
+    {r:10,d:"2024-06-23",gp:"Spanish GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["first","Hamilton: first driver with podiums in 18 seasons"],
+      ["equal","Verstappen's 106th podium equals Prost and Alonso"]]},
+    {r:11,d:"2024-06-30",gp:"Austrian GP",w:"George Russell",team:"mercedes",recs:[
+      ["mile","Hamilton: 300th points finish"]]},
+    {r:12,d:"2024-07-07",gp:"British GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["record","Hamilton: record 9th British GP win"],
+      ["first","Hamilton: first to win after 300 starts"],
+      ["record","Hamilton: longest gap between first and latest win"]]},
+    {r:13,d:"2024-07-21",gp:"Hungarian GP",w:"Oscar Piastri",team:"mclaren",recs:[
+      ["first","Piastri: first winner born in the 21st century"],
+      ["mile","Piastri: 115th different race winner"]]},
+    {r:14,d:"2024-07-28",gp:"Belgian GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["first","Ferrari: first team to 10,000 points"],
+      ["mile","Hamilton's 105th win after Russell's disqualification"]]},
+    {r:15,d:"2024-08-25",gp:"Dutch GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["track","McLaren's first Dutch GP win in 39 years"],
+      ["track","Biggest winning margin at Zandvoort since 1969"]]},
+    {r:16,d:"2024-09-01",gp:"Italian GP",w:"Charles Leclerc",team:"ferrari",recs:[
+      ["first","Magnussen: first ban under the penalty points system"],
+      ["mile","Hamilton: second driver to race 100,000 km"]]},
+    {r:17,d:"2024-09-15",gp:"Azerbaijan GP",w:"Oscar Piastri",team:"mclaren",recs:[
+      ["first","First podium made up entirely of F2 champions"],
+      ["mile","Piastri: 81st driver with multiple wins"]]},
+    {r:18,d:"2024-09-22",gp:"Singapore GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["mile","Norris: 60th driver to lead every lap of a race"],
+      ["equal","Stroll equals Herbert: most starts without a fastest lap"]]},
+    {r:19,d:"2024-10-20",gp:"United States GP",w:"Charles Leclerc",team:"ferrari",recs:[
+      ["record","Stroll: most starts without a fastest lap"],
+      ["equal","Leclerc's eighth win equals Ickx, Hulme and Ricciardo"]]},
+    {r:20,d:"2024-10-27",gp:"Mexico City GP",w:"Carlos Sainz",team:"ferrari",recs:[
+      ["first","Ferrari: first team to lead 16,000 laps"],
+      ["mile","Hamilton: second driver to race 20,000 laps"]]},
+    {r:21,d:"2024-11-03",gp:"São Paulo GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["first","Verstappen: first to win from ten different grid slots"],
+      ["record","Verstappen: most days leading the title, passing Schumacher"]]},
+    {r:22,d:"2024-11-23",gp:"Las Vegas GP",w:"George Russell",team:"mercedes",recs:[
+      ["mile","Verstappen: sixth driver to win four titles"],
+      ["mile","Mercedes' 60th 1-2 finish"]]},
+    {r:23,d:"2024-12-01",gp:"Qatar GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Verstappen: third driver to 3,000 points"],
+      ["record","Verstappen passes Clark on lights-to-flag wins"]]},
+    {r:24,d:"2024-12-08",gp:"Abu Dhabi GP",w:"Lando Norris",team:"mclaren",recs:[
+      ["record","McLaren's first title in 26 years, the longest gap ever"]]}
+  ],
+  2023: [
+    {r:1,d:"2023-03-05",gp:"Bahrain GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Hamilton equals Button: most straight seasons scoring"],
+      ["equal","Verstappen equals Prost on circuits won at"]]},
+    {r:2,d:"2023-03-19",gp:"Saudi Arabian GP",w:"Sergio Pérez",team:"redbull",recs:[
+      ["mile","Alonso: sixth driver to 100 podiums"],
+      ["mile","Pérez: 55th driver to five wins"]]},
+    {r:3,d:"2023-04-02",gp:"Australian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["first","First race with three red flags"],
+      ["record","Hamilton: first to lead a lap in 17 seasons"]]},
+    {r:4,d:"2023-04-30",gp:"Azerbaijan GP",w:"Sergio Pérez",team:"redbull",recs:[
+      ["record","Verstappen passes Senna for seventh on podiums"],
+      ["mile","Red Bull: seventh team to win the first four races"]]},
+    {r:5,d:"2023-05-07",gp:"Miami GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["first","First win from ninth since Lauda in 1984"],
+      ["record","Red Bull: biggest constructors' lead after five rounds"]]},
+    {r:6,d:"2023-05-28",gp:"Monaco GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Verstappen: seventh driver to lead 2,000 laps"],
+      ["record","Verstappen passes Schumacher on straight points finishes"]]},
+    {r:7,d:"2023-06-04",gp:"Spanish GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Verstappen's 40th win"]]},
+    {r:8,d:"2023-06-18",gp:"Canadian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Verstappen equals Senna: 41 wins"],
+      ["record","Red Bull: 100 wins in the fewest races"]]},
+    {r:9,d:"2023-07-02",gp:"Austrian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen passes Senna: 42 wins"],
+      ["first","Ferrari: first team to 800 podiums"]]},
+    {r:10,d:"2023-07-09",gp:"British GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Red Bull equal McLaren's record: 11 wins in a row"],
+      ["mile","Verstappen: fifth driver with six wins in a row"]]},
+    {r:11,d:"2023-07-23",gp:"Hungarian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Red Bull: record 12 wins in a row, beating McLaren's 1988 run"],
+      ["mile","Red Bull's 250th podium"]]},
+    {r:12,d:"2023-07-30",gp:"Belgian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Verstappen: second driver to win eight in a row"],
+      ["first","Red Bull: first team to win the first 12 races"]]},
+    {r:13,d:"2023-08-27",gp:"Dutch GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Verstappen equals Vettel: 9 wins in a row"],
+      ["record","Alonso: longest gap between first and latest podium"]]},
+    {r:14,d:"2023-09-03",gp:"Italian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen: record 10 wins in a row"],
+      ["first","Alonso: first driver to 20,000 Grand Prix laps"]]},
+    {r:15,d:"2023-09-17",gp:"Singapore GP",w:"Carlos Sainz",team:"ferrari",recs:[
+      ["first","Alonso: first driver to race 100,000 km"],
+      ["mile","Sainz: 59th driver to lead every lap of a race"]]},
+    {r:16,d:"2023-09-24",gp:"Japanese GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen: biggest drivers' title lead ever"],
+      ["record","Red Bull: biggest constructors' lead ever"]]},
+    {r:17,d:"2023-10-08",gp:"Qatar GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen: most laps led in a season"],
+      ["mile","Verstappen's fourth Grand Slam"]]},
+    {r:18,d:"2023-10-22",gp:"United States GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Verstappen's 50th win, the fifth driver to 50"],
+      ["equal","Verstappen equals his own record: 15 wins in a season"],
+      ["first","Sargeant: first US points scorer since 1993"]]},
+    {r:19,d:"2023-10-29",gp:"Mexico City GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen: record 16 wins in a season"],
+      ["equal","Verstappen equals Prost: 51 wins"]]},
+    {r:20,d:"2023-11-05",gp:"São Paulo GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen passes Prost: 52 wins"],
+      ["equal","Red Bull equal Mercedes' record: 19 wins in a season"]]},
+    {r:21,d:"2023-11-18",gp:"Las Vegas GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Red Bull: record 20 wins in a season"],
+      ["equal","Verstappen equals Vettel: 53 wins"],
+      ["record","Verstappen: record run leading the championship"]]},
+    {r:22,d:"2023-11-26",gp:"Abu Dhabi GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen: best win rate in a season, beating Ascari's 1952"],
+      ["first","Verstappen: first to lead 1,000 laps in a season"],
+      ["record","Verstappen passes Vettel: 54 wins"]]}
+  ],
+  2022: [
+    {r:1,d:"2022-03-20",gp:"Bahrain GP",w:"Charles Leclerc",team:"ferrari",recs:[
+      ["first","Zhou: first Chinese driver to race in F1"],
+      ["first","Hamilton: first to score in 250 Grands Prix"]]},
+    {r:2,d:"2022-03-27",gp:"Saudi Arabian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["first","Britain: first nation to 10,000 points"],
+      ["equal","Verstappen equals Räikkönen on wins"]]},
+    {r:3,d:"2022-04-10",gp:"Australian GP",w:"Charles Leclerc",team:"ferrari",recs:[
+      ["mile","Leclerc's Grand Slam, the 26th driver with one"]]},
+    {r:4,d:"2022-04-24",gp:"Emilia Romagna GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["first","Grand Slams by different drivers at back-to-back races"],
+      ["equal","Verstappen equals Coulthard on podiums"]]},
+    {r:5,d:"2022-05-08",gp:"Miami GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Car number 1 passes 4,000 points"],
+      ["equal","Verstappen equals Piquet and Rosberg on wins"]]},
+    {r:6,d:"2022-05-22",gp:"Spanish GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["track","Alonso: first to score from 20th in Barcelona"]]},
+    {r:7,d:"2022-05-29",gp:"Monaco GP",w:"Sergio Pérez",team:"redbull",recs:[
+      ["mile","Red Bull's 80th win"],
+      ["record","Hamilton passes Schumacher for third on laps raced"]]},
+    {r:8,d:"2022-06-12",gp:"Azerbaijan GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Alonso: longest F1 career, passing Schumacher"],
+      ["record","Verstappen: most Red Bull podiums, passing Vettel"]]},
+    {r:9,d:"2022-06-19",gp:"Canadian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Hamilton equals Vettel for second on third places"]]},
+    {r:10,d:"2022-07-03",gp:"British GP",w:"Carlos Sainz",team:"ferrari",recs:[
+      ["mile","Sainz: 112th different race winner"],
+      ["record","Hamilton: first to 13 podiums at one circuit"]]},
+    {r:11,d:"2022-07-10",gp:"Austrian GP",w:"Charles Leclerc",team:"ferrari",recs:[
+      ["equal","Verstappen's 68th podium equals Barrichello"]]},
+    {r:12,d:"2022-07-24",gp:"French GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Alonso: most Grand Prix laps ever, passing Räikkönen"],
+      ["equal","Verstappen equals Stewart: 27 wins"]]},
+    {r:13,d:"2022-07-31",gp:"Hungarian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["first","Hamilton: first driver with 50 second places"]]},
+    {r:14,d:"2022-08-28",gp:"Belgian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Red Bull's 85th win, the fifth team to get there"]]},
+    {r:15,d:"2022-09-04",gp:"Dutch GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Verstappen: eighth driver to 30 wins"],
+      ["equal","Alonso equals Räikkönen: most race finishes"]]},
+    {r:16,d:"2022-09-11",gp:"Italian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Verstappen: ninth driver to win five in a row"],
+      ["equal","Verstappen equals Mansell: 31 wins"]]},
+    {r:17,d:"2022-10-02",gp:"Singapore GP",w:"Sergio Pérez",team:"redbull",recs:[
+      ["first","Ferrari engines: first to 800 podiums"]]},
+    {r:18,d:"2022-10-09",gp:"Japanese GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Alonso: most race finishes ever"],
+      ["mile","Verstappen seals his second title with four races left"]]},
+    {r:19,d:"2022-10-23",gp:"United States GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Verstappen equals the record: 13 wins in a season"]]},
+    {r:20,d:"2022-10-30",gp:"Mexico City GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen: record 14 wins in a season"],
+      ["record","Verstappen: record 416 points in a season"]]},
+    {r:21,d:"2022-11-13",gp:"São Paulo GP",w:"George Russell",team:"mercedes",recs:[
+      ["mile","Mercedes' 125th win"],
+      ["first","Russell: maiden pole and win on one weekend"]]},
+    {r:22,d:"2022-11-20",gp:"Abu Dhabi GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen: record 15 wins in a season"],
+      ["mile","Verstappen: sixth driver to 35 wins"]]}
+  ],
+  2021: [
+    {r:1,d:"2021-03-28",gp:"Bahrain GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["equal","Hamilton equals Schumacher: wins in 15 straight seasons"],
+      ["record","Hamilton passes Schumacher: most laps led"],
+      ["first","Britain: first nation to 300 wins"]]},
+    {r:2,d:"2021-04-18",gp:"Emilia Romagna GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["first","Britain: first nation to 700 podiums"],
+      ["equal","Hamilton equals Schumacher: most races leading the title"]]},
+    {r:3,d:"2021-05-02",gp:"Portuguese GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["record","Hamilton passes Schumacher: most races leading the title"],
+      ["mile","Hamilton's 97th win"]]},
+    {r:4,d:"2021-05-09",gp:"Spanish GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["equal","Hamilton: five straight wins at one track, matching Senna"],
+      ["mile","Hamilton's 98th win"]]},
+    {r:5,d:"2021-05-23",gp:"Monaco GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Verstappen leads the championship for the first time"]]},
+    {r:6,d:"2021-06-06",gp:"Azerbaijan GP",w:"Sergio Pérez",team:"redbull",recs:[
+      ["first","Aston Martin's first F1 podium (Vettel)"]]},
+    {r:7,d:"2021-06-20",gp:"French GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Verstappen equals Coulthard for second on wins without a title"]]},
+    {r:8,d:"2021-06-27",gp:"Styrian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Hamilton's 43rd second place equals Schumacher"],
+      ["first","Honda: four wins in a row, first since 1991"]]},
+    {r:9,d:"2021-07-04",gp:"Austrian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Verstappen equals Hamilton: most laps led in a row"]]},
+    {r:10,d:"2021-07-18",gp:"British GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["record","Hamilton: record 8th British GP win"],
+      ["first","Räikkönen: first to race 20 times at one circuit"]]},
+    {r:11,d:"2021-08-01",gp:"Hungarian GP",w:"Esteban Ocon",team:"alpine",recs:[
+      ["first","Alpine's first F1 win"],
+      ["mile","Ocon: 111th different race winner"]]},
+    {r:12,d:"2021-08-29",gp:"Belgian GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Shortest race in F1 history"],
+      ["equal","Verstappen equals Moss: most wins without a title"],
+      ["first","Russell's first F1 podium"]]},
+    {r:13,d:"2021-09-05",gp:"Dutch GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["record","Verstappen passes Moss: most wins without a title"],
+      ["first","First Dutch winner of the Dutch GP"]]},
+    {r:14,d:"2021-09-12",gp:"Italian GP",w:"Daniel Ricciardo",team:"mclaren",recs:[
+      ["mile","McLaren's first win since 2012"],
+      ["mile","Ricciardo: 50th driver to win with two teams"]]},
+    {r:15,d:"2021-09-26",gp:"Russian GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["first","Hamilton: first driver to 100 wins"],
+      ["first","Hamilton: first driver to 4,000 points"]]},
+    {r:16,d:"2021-10-10",gp:"Turkish GP",w:"Valtteri Bottas",team:"mercedes",recs:[
+      ["mile","Bottas: 35th driver to ten wins"]]},
+    {r:17,d:"2021-10-24",gp:"United States GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Red Bull: fifth team to 200 podiums"]]},
+    {r:18,d:"2021-11-07",gp:"Mexico City GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["first","Pérez: first Mexican on the home podium"]]},
+    {r:19,d:"2021-11-14",gp:"São Paulo GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["mile","Hamilton's 101st win, from tenth on the grid"]]},
+    {r:20,d:"2021-11-21",gp:"Qatar GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["first","Hamilton: first to win at 30 different circuits"],
+      ["record","Alonso: longest gap between podiums (146 races)"]]},
+    {r:21,d:"2021-12-05",gp:"Saudi Arabian GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["first","Hamilton: first to win at 31 circuits"],
+      ["equal","Verstappen equals the record: 17 podiums in a season"],
+      ["first","Title rivals level before the finale, first since 1974"]]},
+    {r:22,d:"2021-12-12",gp:"Abu Dhabi GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["first","Verstappen: first Dutch World Champion"],
+      ["record","Mercedes: record 8th straight constructors' title"]]}
+  ],
+  2020: [
+    {r:1,d:"2020-07-05",gp:"Austrian GP",w:"Valtteri Bottas",team:"mercedes",recs:[
+      ["track","First start-to-finish leader in Austria since 1981"]]},
+    {r:2,d:"2020-07-12",gp:"Styrian GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["record","Hamilton: only driver to win in every season he has raced"]]},
+    {r:3,d:"2020-07-19",gp:"Hungarian GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["equal","Hamilton equals Schumacher: 8 wins at one circuit"],
+      ["record","Hamilton: most Grands Prix led"]]},
+    {r:4,d:"2020-08-02",gp:"British GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["record","Hamilton: most lights-to-flag wins"],
+      ["mile","Verstappen: 12th driver to 1,000 points"]]},
+    {r:5,d:"2020-08-09",gp:"70th Anniversary GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["equal","Hamilton equals Schumacher: 155 podiums"],
+      ["record","Räikkönen: most racing laps in F1 history"]]},
+    {r:6,d:"2020-08-16",gp:"Spanish GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["record","Hamilton: most podiums ever (156)"],
+      ["mile","Vettel: second driver to 3,000 points"]]},
+    {r:7,d:"2020-08-30",gp:"Belgian GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["mile","1,000th race for a Ferrari-powered car"]]},
+    {r:8,d:"2020-09-06",gp:"Italian GP",w:"Pierre Gasly",team:"alphatauri",recs:[
+      ["first","Gasly: first French winner since 1996"],
+      ["equal","Hamilton equals Schumacher: most points finishes"],
+      ["mile","Gasly: 109th different race winner"]]},
+    {r:9,d:"2020-09-13",gp:"Tuscan GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["record","Hamilton: record 42 finishes in a row"],
+      ["mile","Hamilton's 90th win"]]},
+    {r:10,d:"2020-09-27",gp:"Russian GP",w:"Valtteri Bottas",team:"mercedes",recs:[
+      ["equal","Räikkönen equals Barrichello: most starts"],
+      ["record","Pérez: most starts without a win"]]},
+    {r:11,d:"2020-10-11",gp:"Eifel GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["equal","Hamilton equals Schumacher: 91 wins"]]},
+    {r:12,d:"2020-10-25",gp:"Portuguese GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["record","Hamilton: record 92nd win"]]},
+    {r:13,d:"2020-11-01",gp:"Emilia Romagna GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["record","Mercedes: record 7th straight constructors' title"]]},
+    {r:14,d:"2020-11-15",gp:"Turkish GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["equal","Hamilton equals Schumacher: 7 world titles"],
+      ["mile","Mercedes-powered cars: 200 wins"]]},
+    {r:15,d:"2020-11-29",gp:"Bahrain GP",w:"Lewis Hamilton",team:"mercedes",recs:[
+      ["mile","Mercedes' 115th win"]]},
+    {r:16,d:"2020-12-06",gp:"Sakhir GP",w:"Sergio Pérez",team:"racingpoint",recs:[
+      ["record","Pérez: most starts before a first win (190)"],
+      ["first","Pérez: first Mexican winner since 1970"],
+      ["record","Russell: shortest race lap ever (55.4s)"]]},
+    {r:17,d:"2020-12-13",gp:"Abu Dhabi GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["mile","Verstappen: 34th driver to ten wins"],
+      ["equal","Hamilton equals Schumacher: most podiums with one team"]]}
+  ]
+};
+
 const DRIVERS = [["Kimi Antonelli","mercedes",390],["Max Verstappen","redbull",279],["George Russell","mercedes",262],["Lewis Hamilton","ferrari",261],["Charles Leclerc","ferrari",249],["Lando Norris","mclaren",246],["Oscar Piastri","mclaren",152],["Isack Hadjar","redbull",122]];
 const CONSTRUCTORS = [["Mercedes","mercedes",652],["Ferrari","ferrari",510],["Red Bull","redbull",415],["McLaren","mclaren",398],["Racing Bulls","rb",114]];
 
@@ -717,6 +1307,65 @@ $("#fallen-box").innerHTML = FALLEN.map(f=>`<div><em>${esc(f.when)}</em><b>${esc
 const row = (r,i)=>`<tr><td>${i+1}</td><td><span class="sw" style="--c:${TEAMS[r[1]].c}"></span>${esc(r[0])}</td><td>${r[2]}</td></tr>`;
 $("#t-drivers tbody").innerHTML = DRIVERS.map(row).join("");
 $("#t-teams tbody").innerHTML = CONSTRUCTORS.map(row).join("");
+
+/* ===== view switch + record history calendar ===== */
+const VIEW_HISTORY = location.hash === "#history";
+document.body.classList.toggle("view-history", VIEW_HISTORY);
+$("#nav-live").setAttribute("aria-current", VIEW_HISTORY ? "false" : "page");
+$("#nav-history").setAttribute("aria-current", VIEW_HISTORY ? "page" : "false");
+if (VIEW_HISTORY) document.title = "Record History · F1 Record Watch";
+(function(){
+  const TAGS = {record:"Record",equal:"Equal",first:"First",mile:"Milestone",track:"Track"};
+  const KEY = ["record","equal","first"];
+  const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const years = Object.keys(HISTORY).sort((a,b)=>b-a);
+  let year = years[0], filter = "key", allOpen = false;
+  try { const y = localStorage.getItem("rw-year"); if (y && HISTORY[y]) year = y; const f = localStorage.getItem("rw-filter"); if (f==="all"||f==="key") filter = f; } catch(e){}
+  const fmt = d => { const [y,m,dd] = d.split("-").map(Number); const wd = new Date(Date.UTC(y,m-1,dd)).toLocaleDateString("en-GB",{weekday:"short",timeZone:"UTC"}); return `${wd} ${dd} ${MON[m-1]}`; };
+  const shown = recs => filter==="all" ? recs : recs.filter(([t])=>KEY.includes(t));
+  const lis = recs => recs.map(([t,txt])=>`<li><span class="tag ${t}">${TAGS[t]}</span><span>${esc(txt)}</span></li>`).join("");
+
+  /* latest race, across all seasons */
+  const latest = years.map(y=>HISTORY[y].filter(x=>x.recs).map(x=>({...x,y}))).flat().sort((a,b)=>b.d.localeCompare(a.d))[0];
+  if (latest) {
+    const c = TEAMS[latest.team].c;
+    $("#latest").innerHTML = `<div class="latest" style="--c:${c}">
+      <div class="latest-flag"><small>Latest</small><b>R${latest.r}</b><small>${latest.y}</small></div>
+      <div class="latest-body"><h3>${esc(latest.gp)}<span>${fmt(latest.d)} · won by ${esc(latest.w)}</span></h3>
+      <ul>${lis(latest.recs) || "<li>No records broken.</li>"}</ul>
+      <a class="next-link" href="#">What could fall at the next race →</a></div></div>`;
+  }
+
+  function draw(){
+    $("#year-tabs").innerHTML = years.map(y=>`<button class="tab" type="button" id="year-${y}" data-year="${y}" aria-pressed="${y===year}"><span>${y}</span></button>`).join("");
+    $("#f-key").setAttribute("aria-pressed", filter==="key"); $("#f-all").setAttribute("aria-pressed", filter==="all");
+    $("#open-all").textContent = allOpen ? "Close all" : "Open all";
+    const list = HISTORY[year];
+    const run = list.filter(x=>x.recs).sort((a,b)=>b.d.localeCompare(a.d));
+    const total = run.reduce((n,x)=>n+shown(x.recs).length,0);
+    $("#year-sum").textContent = `${run.length} races · ${total} ${filter==="key"?"records and firsts":"records and milestones"}`;
+    $("#timeline").innerHTML = run.map(x=>{
+      const r = shown(x.recs), all = x.recs.length;
+      const label = r.length ? `${r.length} ${filter==="key" ? (r.length===1?"record":"records") : (r.length===1?"item":"items")}` : (filter==="key" && all ? "Milestones" : "None");
+      const body = r.length ? lis(r) : (filter==="key" && all ? `<li class="none">No all-time records here, only milestones. Choose Show all to see them.</li>` : `<li class="none">No records broken.</li>`);
+      return `<details${allOpen?" open":""}><summary><span class="rd-chip" style="--c:${TEAMS[x.team].c}">R${x.r}</span>
+        <span class="gpw"><span class="gp">${esc(x.gp)}</span><span class="meta">${fmt(x.d)} · ${esc(x.w)}</span></span>
+        <span class="count${r.length?"":" zero"}">${label}</span><span class="chev" aria-hidden="true"></span></summary><ul>${body}</ul></details>`;
+    }).join("");
+    const todo = list.filter(x=>!x.cancelled && !x.recs), off = list.filter(x=>x.cancelled);
+    $("#tl-foot").innerHTML = (todo.length ? `<div><strong>Still to run:</strong> ${todo.map(x=>`${esc(x.gp)} (${fmt(x.d)})`).join(" · ")}</div>` : "")
+      + (off.length ? `<div><strong>Cancelled or moved:</strong> ${off.map(x=>esc(x.cancelled)).join(" · ")}</div>` : "");
+  }
+  document.addEventListener("click", e=>{
+    const y = e.target.closest("[data-year]"), f = e.target.closest("[data-filter]"), o = e.target.closest("#open-all");
+    if (y) { year = y.dataset.year; try{ localStorage.setItem("rw-year", year); }catch(err){} }
+    else if (f) { filter = f.dataset.filter; try{ localStorage.setItem("rw-filter", filter); }catch(err){} }
+    else if (o) { allOpen = !allOpen; }
+    else return;
+    draw();
+  });
+  draw();
+})();
 
 /* countdown */
 const CD = OFF ? {name:META.nextSeason.name, utc:META.nextSeason.lightsOutUTC, local:META.nextSeason.localLabel, label:`${F.year+1} season starts in`}
