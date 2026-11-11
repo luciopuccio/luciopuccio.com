@@ -204,21 +204,25 @@ h2 { font-family: var(--f-display); font-weight: 800; letter-spacing: -0.03em; l
 .card.next h3 { font-size: 24px; margin: 10px 0 6px; }
 .empty { padding: 40px 0; color: var(--dim); text-align: center; }
 
-/* Elsewhere */
-.elsewhere { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 22px; }
+/* Elsewhere — logo-only tiles */
+.socials { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 22px; }
 .social {
-  position: relative; display: flex; align-items: center; gap: 18px; padding: 24px; text-decoration: none;
-  border-radius: var(--radius); color: #fff; overflow: hidden; box-shadow: var(--shadow);
-  background: linear-gradient(120deg, #ff8a1a, #e8435f 55%, #a73cc8);
-  transition: transform .35s cubic-bezier(.3,1.6,.5,1);
+  width: 84px; height: 84px; border-radius: 24px; display: grid; place-items: center;
+  color: #fff; background: var(--sbg); box-shadow: var(--shadow); text-decoration: none;
+  transition: transform .35s cubic-bezier(.3,1.6,.5,1), box-shadow .3s;
 }
-.social:hover { transform: translateY(-4px) rotate(-1deg); }
-.social .ico { width: 64px; height: 64px; border-radius: 20px; display: grid; place-items: center; background: rgba(255,255,255,.18); flex: none; }
-.social .ico svg { width: 34px; height: 34px; }
-.social strong { display: block; font: 800 26px/1.1 var(--f-display); letter-spacing: -0.02em; }
-.social span { opacity: .85; }
-.social .arrow { margin-left: auto; width: 26px; height: 26px; transition: transform .3s; }
-.social:hover .arrow { transform: translate(4px,-4px); }
+.social svg { width: 40px; height: 40px; }
+.social:hover { transform: translateY(-5px) rotate(-6deg) scale(1.05); }
+.social:nth-child(even):hover { transform: translateY(-5px) rotate(6deg) scale(1.05); }
+.social:active { transform: scale(.94); }
+.social.ig { --sbg: radial-gradient(circle at 30% 107%, #ffd65a 0 12%, #ff8a1a 30%, #e8435f 55%, #a73cc8 85%); }
+.social.yt { --sbg: #ff0033; }
+.social.as { --sbg: linear-gradient(135deg, #18b7f2, #0c7fc0); }
+@media (max-width: 600px) {
+  .socials { gap: 10px; }
+  .social { width: 64px; height: 64px; border-radius: 18px; }
+  .social svg { width: 32px; height: 32px; }
+}
 .about {
   padding: 24px; border-radius: var(--radius); background: var(--bg-2); border: 1px solid var(--line);
   display: flex; flex-direction: column; justify-content: center; gap: 6px;
@@ -307,16 +311,20 @@ footer button { background: none; border: 0; padding: 0; color: inherit; font: i
         <h2 id="elsewhere-title">Art &amp; links</h2>
       </div>
     </div>
-    <div class="elsewhere reveal">
-      <a class="social" href="https://www.instagram.com/luxx_pa_3d/" target="_blank" rel="noopener">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
-        <span><strong>Instagram</strong><span>@luxx_pa_3d · 3D renders &amp; art</span></span>
-        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+    <div class="socials reveal">
+      <a class="social ig" href="https://www.instagram.com/luxx_pa_3d/" target="_blank" rel="noopener" aria-label="Instagram: luxx_pa_3d" title="Instagram · @luxx_pa_3d">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
       </a>
-      <div class="about">
-        <strong>About this place</strong>
-        <p>A personal archive and playground. Everything here is something I built for fun — have a poke around.</p>
-      </div>
+      <a class="social yt" href="https://www.youtube.com/@luxx_pa_3d" target="_blank" rel="noopener" aria-label="YouTube: luxx_pa_3d" title="YouTube · @luxx_pa_3d">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1.5" y="5" width="21" height="14" rx="4.2" fill="currentColor"/><path d="M10 8.7v6.6l5.6-3.3z" fill="#ff0033"/></svg>
+      </a>
+      <a class="social as" href="https://www.artstation.com/luxx_pa" target="_blank" rel="noopener" aria-label="ArtStation: luxx_pa" title="ArtStation · luxx_pa">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 17.723l2.027 3.505a2.424 2.424 0 0 0 2.164 1.333h13.457l-2.792-4.838H0zm24 .025c0-.484-.143-.935-.388-1.314L15.728 2.728a2.424 2.424 0 0 0-2.142-1.289H9.419L21.598 22.54l1.92-3.325c.378-.637.482-.919.482-1.467zm-11.129-3.462L7.428 4.858l-5.444 9.428h10.887z"/></svg>
+      </a>
+    </div>
+    <div class="about reveal">
+      <strong>About this place</strong>
+      <p>A personal archive and playground. Everything here is something I built for fun — have a poke around.</p>
     </div>
     <footer>
       <span>© <span id="year">2026</span> Lucio Puccio</span>
