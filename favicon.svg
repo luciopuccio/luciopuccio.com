@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <g transform="rotate(-10 32 34)" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="36" text-anchor="middle" letter-spacing="-2" stroke-linejoin="round">
+    <text x="32" y="45" fill="#2b1a10" stroke="#2b1a10" stroke-width="12">LP</text>
+    <text x="32" y="45" fill="#fa960a" stroke="#ffffff" stroke-width="7" paint-order="stroke">LP</text>
+  </g>
+</svg>

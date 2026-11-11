@@ -10,7 +10,7 @@
 <meta property="og:title" content="Lucio Puccio">
 <meta property="og:description" content="Games, maths experiments and 3D art — a playground I keep adding to.">
 <meta property="og:url" content="https://luciopuccio.com/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23ff6a1a'/%3E%3Ctext x='32' y='45' font-family='Arial Black,Arial' font-weight='900' font-size='34' text-anchor='middle' fill='%23fff4e8'%3ELP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Sans:opsz,wght@9..40,400..700&display=swap">
@@ -22,8 +22,9 @@
   --ink: #2b1a10;
   --dim: #7a5f4e;
   --line: #f1d9c2;
-  --orange: #ff6a1a;
-  --tangerine: #ff9b3d;
+  --orange: #fa960a;
+  --orange-ink: #a35d00; /* deeper shade for small orange text on light backgrounds */
+  --tangerine: #ffb84d;
   --sun: #ffc53d;
   --berry: #e8435f;
   --peach: #ffcfa8;
@@ -36,7 +37,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #1b120c; --bg-2: #24170f; --card: #2a1b12; --ink: #fbeee2; --dim: #c2a28c;
-    --line: #3d2a1d; --peach: #6b3a1c;
+    --line: #3d2a1d; --peach: #6b3a1c; --orange-ink: #fa960a;
     --shadow: 0 1px 0 rgba(0,0,0,.3), 0 22px 44px -20px rgba(0,0,0,.7);
     color-scheme: dark;
   }
@@ -50,7 +51,7 @@ body {
   overflow-x: hidden;
 }
 a { color: inherit; }
-::selection { background: var(--orange); color: #fff; }
+::selection { background: var(--orange); color: #2b1a10; }
 :focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; border-radius: 10px; }
 .wrap { width: min(1120px, 100%); margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-left)); }
 
@@ -63,12 +64,12 @@ a { color: inherit; }
 }
 .top > * { pointer-events: auto; }
 .mark {
-  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px;
-  background: var(--orange); color: #fff4e8; font: 800 17px var(--f-display); text-decoration: none;
-  box-shadow: 0 8px 18px -8px rgba(255,106,26,.8);
+  display: block; width: 54px; height: 54px; text-decoration: none;
+  filter: drop-shadow(0 6px 8px rgba(43,26,16,.22));
   transition: transform .3s cubic-bezier(.3,1.6,.5,1);
 }
-.mark:hover { transform: rotate(-10deg) scale(1.08); }
+.mark svg { width: 100%; height: 100%; overflow: visible; }
+.mark:hover { transform: rotate(-8deg) scale(1.1); }
 .top nav { display: flex; gap: 6px; padding: 5px; border-radius: 999px; background: color-mix(in srgb, var(--card) 75%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--line); }
 .top nav a { text-decoration: none; font-weight: 600; font-size: 15px; padding: 7px 14px; border-radius: 999px; transition: background .2s; }
 .top nav a:hover { background: var(--bg-2); }
@@ -122,7 +123,7 @@ h1 .row:last-child .ch:hover { color: var(--berry); }
 /* ---------- Sections ---------- */
 section.block { padding-block: 96px 40px; scroll-margin-top: 20px; }
 .head { display: flex; align-items: end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 26px; }
-.eyebrow { font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); margin: 0 0 8px; }
+.eyebrow { font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--orange-ink); margin: 0 0 8px; }
 h2 { font-family: var(--f-display); font-weight: 800; letter-spacing: -0.03em; line-height: 1; font-size: clamp(38px, 6vw, 64px); margin: 0; }
 
 /* Filter chips */
@@ -135,8 +136,8 @@ h2 { font-family: var(--f-display); font-weight: 800; letter-spacing: -0.03em; l
 }
 .chip:hover { transform: translateY(-2px); border-color: var(--tangerine); }
 .chip .n { font-size: 12px; min-width: 22px; padding: 1px 7px; border-radius: 999px; background: var(--bg-2); color: var(--dim); }
-.chip[aria-pressed="true"] { background: var(--orange); border-color: var(--orange); color: #fff; }
-.chip[aria-pressed="true"] .n { background: rgba(255,255,255,.25); color: #fff; }
+.chip[aria-pressed="true"] { background: var(--orange); border-color: var(--orange); color: #2b1a10; }
+.chip[aria-pressed="true"] .n { background: rgba(255,255,255,.4); color: #2b1a10; }
 
 /* Cards grid */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 22px; perspective: 1200px; }
@@ -187,7 +188,7 @@ h2 { font-family: var(--f-display); font-weight: 800; letter-spacing: -0.03em; l
 .cover .status.soon i { background: var(--sun); box-shadow: 0 0 0 3px rgba(255,197,61,.3); }
 .body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; transform: translateZ(20px); }
 .tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.tag { font-size: 12px; font-weight: 700; color: var(--orange); background: color-mix(in srgb, var(--orange) 12%, transparent); padding: 3px 9px; border-radius: 999px; }
+.tag { font-size: 12px; font-weight: 700; color: var(--orange-ink); background: color-mix(in srgb, var(--orange) 12%, transparent); padding: 3px 9px; border-radius: 999px; }
 .card h3 { font: 800 28px/1.05 var(--f-display); letter-spacing: -0.02em; margin: 4px 0 0; }
 .card p { margin: 0; color: var(--dim); }
 .go { margin-top: auto; padding-top: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
@@ -269,7 +270,7 @@ footer button { background: none; border: 0; padding: 0; color: inherit; font: i
 <body>
 
 <header class="top">
-  <a class="mark" href="#top" aria-label="Back to top">LP</a>
+  <a class="mark" href="#top" aria-label="Lucio Puccio, back to top"><svg viewBox="0 0 200 200" aria-hidden="true"><text x="100" y="134" text-anchor="middle" transform="rotate(-10 100 104)" font-family="Bricolage Grotesque, Arial Black, sans-serif" font-weight="800" font-size="108" letter-spacing="-4" fill="#fa960a" stroke="#ffffff" stroke-width="20" stroke-linejoin="round" paint-order="stroke">LP</text></svg></a>
   <nav aria-label="Sections">
     <a href="#projects">Projects</a>
     <a href="#elsewhere">Elsewhere</a>
@@ -348,7 +349,7 @@ const PROJECTS = [
     topics: ["Games", "Maths"],
     status: "live",
     cta: "Play",
-    cover: { glyph: "π", c1: "#ff6a1a", c2: "#e8435f", tape: "3.14159265358979323846264338327950288419716939937510" }
+    cover: { glyph: "π", c1: "#fa960a", c2: "#e8435f", tape: "3.14159265358979323846264338327950288419716939937510" }
   },
   {
     title: "F1 Record Watch",
@@ -455,7 +456,7 @@ document.querySelectorAll('[data-split]').forEach(row => {
   const cv = document.getElementById('field');
   const ctx = cv.getContext('2d');
   const hero = cv.parentElement;
-  const COLORS = ['#ff6a1a', '#ff9b3d', '#ffc53d', '#e8435f', '#ffcfa8'];
+  const COLORS = ['#fa960a', '#ffb84d', '#ffc53d', '#e8435f', '#ffcfa8'];
   const KINDS = ['dot', 'ring', 'tri', 'squig', 'plus', 'pi'];
   let W = 0, H = 0, dpr = 1, shapes = [];
   const mouse = { x: -9999, y: -9999, active: false };
