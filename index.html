@@ -120,7 +120,7 @@ h1 .row:last-child .ch:hover { color: var(--berry); }
 @keyframes pulse { 50% { transform: scale(1.8); opacity: .3 } }
 
 /* ---------- Sections ---------- */
-section.block { padding: 96px 0 40px; }
+section.block { padding-block: 96px 40px; scroll-margin-top: 20px; }
 .head { display: flex; align-items: end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 26px; }
 .eyebrow { font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); margin: 0 0 8px; }
 h2 { font-family: var(--f-display); font-weight: 800; letter-spacing: -0.03em; line-height: 1; font-size: clamp(38px, 6vw, 64px); margin: 0; }
@@ -236,7 +236,25 @@ footer button { background: none; border: 0; padding: 0; color: inherit; font: i
 @media (max-width: 560px) {
   .top nav a { padding: 7px 11px; font-size: 14px; }
   section.block { padding-top: 72px; }
+  .head { margin-bottom: 18px; }
   .card h3 { font-size: 25px; }
+}
+/* Phones: compact 3-per-row tiles — cover + title only */
+@media (max-width: 600px) {
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .card { border-radius: 18px; }
+  .cover { aspect-ratio: 1 / 1; transform: none; }
+  .cover .glyph { font-size: clamp(48px, 17vw, 72px); right: 9%; bottom: -4%; }
+  .cover .tape { top: 8px; font-size: 10px; }
+  .cover .tape span { padding-left: 8px; }
+  .cover .status { left: 7px; bottom: 7px; padding: 4px; font-size: 0; gap: 0; }
+  .cover .status i { width: 8px; height: 8px; }
+  .body { padding: 9px 10px 11px; gap: 0; transform: none; }
+  .tags, .card p, .go { display: none; }
+  .card h3 { font-size: 14px; line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+  .card.next { min-height: 0; padding: 10px; border-radius: 18px; }
+  .card.next .pot { font-size: 28px; }
+  .card.next h3 { font-size: 13px; margin: 6px 0 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
