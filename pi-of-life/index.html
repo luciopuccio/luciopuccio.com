@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pi of Life</title>
+<meta name="description" content="Not Life of Pi. Pi of Life: the story of π, from Babylonian clay tablets to the satellites guiding your phone, with a mini arcade to test your memory.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&amp;family=DM+Sans:wght@400;500;700&amp;family=Space+Mono:wght@400;700&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap">
+<style>
+body{margin:0;background:#FFFBF2}
+a{color:#17123A}a:hover{color:#E0401C}
+*{box-sizing:border-box}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes roll{0%{transform:translateX(0) rotate(0deg)}100%{transform:translateX(377px) rotate(360deg)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14px) rotate(4deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(48px)}to{opacity:1;transform:none}}
+.motion .ticker{animation:slide 70s linear infinite}
+.motion .spin{animation:spin 30s linear infinite}
+.motion .roll{animation:roll 4.5s ease-in-out infinite alternate}
+.motion .bob{animation:bob 6s ease-in-out infinite}
+@supports (animation-timeline: view()){
+.motion .reveal{animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 22%}
+}
+@media (prefers-reduced-motion: reduce){.motion *{animation:none !important}}
+.navlinks a{color:#FFFBF2;text-decoration:none}
+.navlinks a:hover{color:#FFD23F}
+[hidden]{display:none!important}
+body .lp-bar[data-theme=dark]{--lpb-bg:#0e0a26;--lpb-line:#2e2763}
+html{scroll-behavior:smooth}
+section[id]{scroll-margin-top:12px}
+#pa button:focus-visible{outline:3px solid #FFC23D;outline-offset:3px}
+</style>
+</head>
+<body>
+<script src="/nav.js" data-theme="dark"></script>
+<div class="motion" style="width: 100%; font-family: 'DM Sans', system-ui, sans-serif; color: #17123A; background: #FFFBF2; overflow-x: hidden">
+
+<!-- NAV -->
+<header style="background: #17123A; color: #FFFBF2">
+<nav style="max-width: 1280px; margin: 0 auto; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#top" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; color: #FFD23F; text-decoration: none; letter-spacing: -0.02em">π of Life</a>
+<div class="navlinks" style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 15px; font-weight: 500">
+<a href="#what">What is π</a>
+<a href="#history">History</a>
+<a href="#build">Building</a>
+<a href="#nature">Nature</a>
+<a href="#culture">Culture</a>
+<a href="#play" style="color: #FFD23F; font-weight: 700">Play ▸</a>
+</div>
+</nav>
+</header>
+
+<!-- HERO -->
+<section id="top" style="background: #17123A; color: #FFFBF2; position: relative; overflow: hidden; padding: 72px 24px 0">
+<div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 48px">
+<div style="flex: 999 1 560px; min-width: 0">
+<p style="margin: 0 0 20px; font-family: 'Space Mono', monospace; font-size: 15px; letter-spacing: 0.18em; text-transform: uppercase; color: #3EC1F3">Not Life of Pi. Pi of Life.</p>
+<h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(64px, 11vw, 168px); line-height: 0.88; letter-spacing: -0.04em">One number.<br><span style="color: #FFD23F">Every circle.</span><br>Your whole life.</h1>
+<p style="margin: 32px 0 0; max-width: 560px; font-size: 20px; line-height: 1.55; color: #E6E2F5">It starts with a wheel and ends in the stars. π is the ratio that quietly runs through the buildings you walk past, the satellites guiding your phone and the ripples on a pond. Scroll on — it never ends, and neither do the stories.</p>
+<div style="margin-top: 40px; display: flex; flex-wrap: wrap; gap: 16px">
+<a href="#what" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; border-radius: 999px; background: #FFD23F; color: #17123A; font-weight: 700; font-size: 17px; text-decoration: none">Start the journey ↓</a>
+<a href="#culture" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; border-radius: 999px; border: 2px solid #FFFBF2; color: #FFFBF2; font-weight: 700; font-size: 17px; text-decoration: none">Jump to the fun stuff</a>
+</div>
+</div>
+<div style="flex: 1 1 360px; display: flex; justify-content: center; align-items: center; min-height: 420px; position: relative">
+<svg class="spin" aria-hidden="true" width="400" height="400" viewBox="0 0 400 400" style="position: absolute; max-width: 100%">
+<circle cx="200" cy="200" r="190" fill="none" stroke="#3EC1F3" stroke-width="3" stroke-dasharray="4 14" stroke-linecap="round"></circle>
+<circle cx="200" cy="200" r="150" fill="none" stroke="#FF5A36" stroke-width="2" stroke-dasharray="60 20"></circle>
+</svg>
+<div class="bob" style="position: relative; width: 280px; height: 280px; border-radius: 50%; background: #FFD23F; display: flex; align-items: center; justify-content: center; box-shadow: 16px 16px 0 #FF5A36">
+<span style="font-family: 'Bricolage Grotesque', serif; font-weight: 800; font-size: 210px; line-height: 1; color: #17123A; margin-top: -24px">π</span>
+</div>
+</div>
+</div>
+<!-- digit ticker -->
+<div aria-hidden="true" style="margin-top: 72px; border-top: 2px solid #2E2763; padding: 18px 0; overflow: hidden; white-space: nowrap">
+<div class="ticker" style="display: inline-block; font-family: 'Space Mono', monospace; font-size: 22px; letter-spacing: 0.12em; color: #8C85B8">3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798 · 3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798 · </div>
+</div>
+</section>
+
+<!-- 3 · WHAT IS PI -->
+<section id="what" style="padding: 120px 24px; background: #FFFBF2">
+<div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 64px; align-items: center">
+<div class="reveal" style="flex: 999 1 520px; min-width: 0">
+<div style="display: flex; align-items: baseline; gap: 16px">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 120px; line-height: 0.8; color: #FF5A36">3.</span>
+<span style="font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase">Chapter three · the idea</span>
+</div>
+<h2 style="margin: 28px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(40px, 5.5vw, 72px); line-height: 0.98; letter-spacing: -0.03em">Wrap any circle in string. It's always a bit more than three.</h2>
+<p style="margin: 28px 0 0; max-width: 620px; font-size: 19px; line-height: 1.65">Take a coin, a bike wheel or the Moon: measure around the edge, divide by the distance across, and you get the same answer every time — 3.14159… That ratio is π. Its decimals never end and never settle into a repeating pattern (Johann Lambert proved it irrational in 1761). In 1882 Ferdinand von Lindemann went further and showed it's <strong>transcendental</strong> — which finally proved the ancient puzzle of "squaring the circle" with ruler and compass is impossible.</p>
+<div style="margin-top: 36px; display: flex; flex-wrap: wrap; gap: 16px">
+<div style="padding: 18px 24px; border-radius: 20px; background: #17123A; color: #FFFBF2; font-family: 'Space Mono', monospace; font-size: 18px">C = π × d</div>
+<div style="padding: 18px 24px; border-radius: 20px; background: #3EC1F3; color: #17123A; font-family: 'Space Mono', monospace; font-size: 18px; font-weight: 700">A = π × r²</div>
+<div style="padding: 18px 24px; border-radius: 20px; background: #FFD23F; color: #17123A; font-family: 'Space Mono', monospace; font-size: 18px; font-weight: 700">V = ⁴⁄₃ π r³</div>
+</div>
+</div>
+<!-- rolling wheel demo -->
+<figure class="reveal" style="flex: 1 1 520px; margin: 0; padding: 40px 32px 32px; border-radius: 32px; background: #FFE9A8; min-width: 0">
+<div style="width: 100%; overflow-x: auto">
+<div style="position: relative; width: 500px; height: 210px; margin: 0 auto">
+<svg class="roll" aria-hidden="true" width="120" height="120" viewBox="0 0 120 120" style="position: absolute; left: 0; top: 40px">
+<circle cx="60" cy="60" r="57" fill="#FFFBF2" stroke="#17123A" stroke-width="5"></circle>
+<line x1="3" y1="60" x2="117" y2="60" stroke="#FF5A36" stroke-width="5"></line>
+<circle cx="60" cy="117" r="7" fill="#FF5A36"></circle>
+</svg>
+<div style="position: absolute; left: 60px; top: 160px; width: 377px; height: 6px; background: #17123A; border-radius: 3px"></div>
+<div style="position: absolute; left: 60px; top: 174px; width: 377px; display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700">
+<span>0</span><span>1d</span><span>2d</span><span>3d</span><span style="color: #E0401C">π</span>
+</div>
+</div>
+</div>
+<figcaption style="margin-top: 20px; font-size: 16px; line-height: 1.5">Roll a wheel exactly once and the line it draws is π of its diameters long — just over three, and never a neat number.</figcaption>
+</figure>
+</div>
+</section>
+
+<!-- BIG NUMBERS STRIP -->
+<section style="background: #FF5A36; color: #17123A; padding: 72px 24px">
+<div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 24px">
+<div class="reveal" style="flex: 1 1 260px; padding: 32px; border-radius: 28px; background: #FFFBF2">
+<div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 64px; line-height: 1; letter-spacing: -0.03em">314 trillion</div>
+<p style="margin: 12px 0 0; font-size: 16px; line-height: 1.5">digits of π: the Guinness-certified record, computed by StorageReview and Micron on a single server running for about 110 days.</p>
+</div>
+<div class="reveal" style="flex: 1 1 260px; padding: 32px; border-radius: 28px; background: #17123A; color: #FFFBF2">
+<div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 64px; line-height: 1; letter-spacing: -0.03em; color: #FFD23F">15</div>
+<p style="margin: 12px 0 0; font-size: 16px; line-height: 1.5">decimal places are all NASA's engineers need to steer spacecraft across the Solar System. Around 40 would measure the visible universe to the width of an atom.</p>
+</div>
+<div class="reveal" style="flex: 1 1 260px; padding: 32px; border-radius: 28px; background: #FFD23F">
+<div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 64px; line-height: 1; letter-spacing: -0.03em">70,000</div>
+<p style="margin: 12px 0 0; font-size: 16px; line-height: 1.5">digits recited from memory by Rajveer Meena in 2015 — a Guinness World Record for the human brain.</p>
+</div>
+</div>
+</section>
+
+<!-- 1 · HISTORY -->
+<section id="history" style="padding: 120px 24px; background: #FFFBF2">
+<div style="max-width: 1280px; margin: 0 auto">
+<div class="reveal" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+<div style="flex: 999 1 560px; min-width: 0">
+<div style="display: flex; align-items: baseline; gap: 16px">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 120px; line-height: 0.8; color: #3EC1F3">1</span>
+<span style="font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase">Chapter one · the chase</span>
+</div>
+<h2 style="margin: 28px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(40px, 5.5vw, 72px); line-height: 0.98; letter-spacing: -0.03em">Four thousand years of chasing a never-ending number.</h2>
+</div>
+<p style="flex: 1 1 320px; margin: 0; font-size: 18px; line-height: 1.6">Every civilisation that built with circles wanted π. Here's how the hunt unfolded — from clay tablets to supercomputers.</p>
+</div>
+<div style="margin-top: 64px; display: flex; flex-wrap: wrap; gap: 20px">
+<article class="reveal" style="flex: 1 1 280px; padding: 28px; border-radius: 24px; background: #FFFFFF; border: 2px solid #17123A">
+<div style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #B8321A">c. 1900 BC</div>
+<h3 style="margin: 10px 0 8px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; line-height: 1.1">Babylon: 3.125</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">A clay tablet from Susa uses 25⁄8 for the circle ratio — already within half a percent.</p>
+</article>
+<article class="reveal" style="flex: 1 1 280px; padding: 28px; border-radius: 24px; background: #FFFFFF; border: 2px solid #17123A">
+<div style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #B8321A">c. 1650 BC</div>
+<h3 style="margin: 10px 0 8px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; line-height: 1.1">Egypt: 3.16</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">The Rhind Papyrus finds a circle's area by squaring 8⁄9 of its diameter — π of about 3.16.</p>
+</article>
+<article class="reveal" style="flex: 1 1 280px; padding: 28px; border-radius: 24px; background: #17123A; color: #FFFBF2">
+<div style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #FFD23F">c. 250 BC</div>
+<h3 style="margin: 10px 0 8px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; line-height: 1.1">Archimedes traps π</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">Squeezing the circle between two 96-sided polygons, he proves π lies between 223⁄71 and 22⁄7.</p>
+</article>
+<article class="reveal" style="flex: 1 1 280px; padding: 28px; border-radius: 24px; background: #FFFFFF; border: 2px solid #17123A">
+<div style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #B8321A">AD 263 – 480</div>
+<h3 style="margin: 10px 0 8px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; line-height: 1.1">China: 355⁄113</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">Liu Hui refines polygons; Zu Chongzhi then finds 355⁄113 — correct to six decimals and unbeaten for around 900 years.</p>
+</article>
+<article class="reveal" style="flex: 1 1 280px; padding: 28px; border-radius: 24px; background: #FFFFFF; border: 2px solid #17123A">
+<div style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #B8321A">c. 1400</div>
+<h3 style="margin: 10px 0 8px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; line-height: 1.1">India: infinite series</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">Madhava of the Kerala school writes π as an endless sum — centuries before Europe discovers the same idea.</p>
+</article>
+<article class="reveal" style="flex: 1 1 280px; padding: 28px; border-radius: 24px; background: #3EC1F3">
+<div style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700">1706 – 1737</div>
+<h3 style="margin: 10px 0 8px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; line-height: 1.1">π gets its name</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">Welsh mathematician William Jones first uses the Greek letter; Leonhard Euler makes it famous.</p>
+</article>
+<article class="reveal" style="flex: 1 1 280px; padding: 28px; border-radius: 24px; background: #FFFFFF; border: 2px solid #17123A">
+<div style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #B8321A">1949</div>
+<h3 style="margin: 10px 0 8px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; line-height: 1.1">Enter the computer</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">ENIAC crunches 2,037 digits in about 70 hours — the first record set by an electronic machine.</p>
+</article>
+<article class="reveal" style="flex: 1 1 280px; padding: 28px; border-radius: 24px; background: #FFD23F">
+<div style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700">2025 – 2026</div>
+<h3 style="margin: 10px 0 8px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; line-height: 1.1">314 trillion digits</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">A single server finishes the run in November 2025; Guinness certifies it in June 2026. The chase continues.</p>
+</article>
+</div>
+</div>
+</section>
+
+<!-- 4 · BUILDING & MEASURING -->
+<section id="build" style="padding: 120px 24px; background: #17123A; color: #FFFBF2">
+<div style="max-width: 1280px; margin: 0 auto">
+<div class="reveal" style="display: flex; align-items: baseline; gap: 16px">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 120px; line-height: 0.8; color: #FFD23F">4</span>
+<span style="font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: #3EC1F3">Chapter four · building &amp; measuring</span>
+</div>
+<h2 class="reveal" style="margin: 28px 0 0; max-width: 900px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(40px, 5.5vw, 72px); line-height: 0.98; letter-spacing: -0.03em">Anything that turns, curves or circles was built with π.</h2>
+<div style="margin-top: 64px; display: flex; flex-wrap: wrap; gap: 20px">
+<article class="reveal" style="flex: 2 1 520px; padding: 40px; border-radius: 32px; background: #FFD23F; color: #17123A; display: flex; flex-wrap: wrap; gap: 32px; align-items: center">
+<div style="flex: 0 0 160px; height: 160px; border-radius: 80px 80px 8px 8px; background: #17123A; position: relative">
+<div style="position: absolute; left: 66px; top: 0; width: 28px; height: 14px; border-radius: 0 0 14px 14px; background: #FFD23F"></div>
+</div>
+<div style="flex: 1 1 260px">
+<h3 style="margin: 0 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; line-height: 1.05">The Pantheon's perfect sphere</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">Rome's great dome is 43.3 m across and exactly as high — a whole sphere would fit inside. Nearly 1,900 years on it's still the largest unreinforced concrete dome on Earth, and every curve of it is geometry built on π.</p>
+</div>
+</article>
+<article class="reveal" style="flex: 1 1 300px; padding: 32px; border-radius: 32px; background: #2E2763">
+<h3 style="margin: 0 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1; color: #3EC1F3">Wheels, gears &amp; engines</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">Each turn of a wheel moves you π × its diameter. Your car's speedometer, a bike computer and every gearbox count on that simple fact.</p>
+</article>
+<article class="reveal" style="flex: 1 1 300px; padding: 32px; border-radius: 32px; background: #2E2763">
+<h3 style="margin: 0 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1; color: #FFD23F">The surveyor's wheel</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">Roll a measuring wheel along a road and it clicks once per circumference. Distance, measured by π, one click at a time.</p>
+</article>
+<article class="reveal" style="flex: 1 1 300px; padding: 32px; border-radius: 32px; background: #2E2763">
+<h3 style="margin: 0 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1; color: #FF8A6E">Arches, tunnels &amp; pipes</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">How much brick for an arch, steel for a tunnel ring or water through a pipe — engineers reach for π first.</p>
+</article>
+<article class="reveal" style="flex: 1 1 300px; padding: 32px; border-radius: 32px; background: #FF5A36; color: #17123A">
+<h3 style="margin: 0 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1">GPS &amp; satellites</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">Orbits are ellipses and circles. Plotting where a satellite is — and so where your phone is — runs on π.</p>
+</article>
+</div>
+</div>
+</section>
+
+<!-- 1 · NATURE & SCIENCE -->
+<section id="nature" style="padding: 120px 24px; background: #DDF4FC">
+<div style="max-width: 1280px; margin: 0 auto">
+<div class="reveal" style="display: flex; align-items: baseline; gap: 16px">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 120px; line-height: 0.8; color: #FF5A36">1</span>
+<span style="font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase">Chapter one (again) · nature &amp; science</span>
+</div>
+<h2 class="reveal" style="margin: 28px 0 0; max-width: 900px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(40px, 5.5vw, 72px); line-height: 0.98; letter-spacing: -0.03em">π turns up in places that have nothing to do with circles.</h2>
+<!-- wave decor -->
+<svg aria-hidden="true" viewBox="0 0 1280 80" preserveAspectRatio="none" style="display: block; width: 100%; height: 80px; margin: 48px 0 0">
+<path d="M0 40 Q 80 0 160 40 T 320 40 T 480 40 T 640 40 T 800 40 T 960 40 T 1120 40 T 1280 40" fill="none" stroke="#17123A" stroke-width="4"></path>
+</svg>
+<div style="margin-top: 40px; display: flex; flex-wrap: wrap; gap: 20px">
+<article class="reveal" style="flex: 1 1 380px; padding: 32px; border-radius: 28px; background: #FFFBF2">
+<div style="font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; color: #B8321A">Waves</div>
+<h3 style="margin: 8px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1">Sound, light &amp; the sea</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">Every wave repeats in cycles of 2π. Music, radio, Wi-Fi and ocean swell are all described with it.</p>
+</article>
+<article class="reveal" style="flex: 1 1 380px; padding: 32px; border-radius: 28px; background: #FFFBF2">
+<div style="font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; color: #B8321A">Rivers</div>
+<h3 style="margin: 8px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1">The meandering π</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">In 1996 geologist Hans-Henrik Stølum suggested winding rivers average about π times longer than their straight-line distance. Lovely idea — still hotly debated.</p>
+</article>
+<article class="reveal" style="flex: 1 1 380px; padding: 32px; border-radius: 28px; background: #FFFBF2">
+<div style="font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; color: #B8321A">Chance</div>
+<h3 style="margin: 8px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1">The bell curve</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">Heights, exam scores, measurement errors — the normal distribution that describes them has √(2π) baked into its formula.</p>
+</article>
+<article class="reveal" style="flex: 1 1 380px; padding: 32px; border-radius: 28px; background: #FFFBF2">
+<div style="font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; color: #B8321A">Needles</div>
+<h3 style="margin: 8px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1">Buffon's needle</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">Drop needles on striped floorboards and count how many cross a line: the odds slowly reveal π. Pure randomness, circular answer.</p>
+</article>
+<article class="reveal" style="flex: 1 1 380px; padding: 32px; border-radius: 28px; background: #FFFBF2">
+<div style="font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; color: #B8321A">The cosmos</div>
+<h3 style="margin: 8px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1">Einstein &amp; quantum</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">Gravity in general relativity carries an 8π; quantum physics divides Planck's constant by 2π. The universe's rulebook is full of it.</p>
+</article>
+<article class="reveal" style="flex: 1 1 380px; padding: 32px; border-radius: 28px; background: #17123A; color: #FFFBF2">
+<div style="font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; color: #FFD23F">The most beautiful equation</div>
+<p style="margin: 14px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 52px; line-height: 1">e<sup style="font-size: 28px">iπ</sup> + 1 = 0</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">Euler's identity ties together five of maths' most important numbers in one tiny line.</p>
+</article>
+</div>
+</div>
+</section>
+
+<!-- 5 · CULTURE & FUN -->
+<section id="culture" style="padding: 120px 24px; background: #FFD23F">
+<div style="max-width: 1280px; margin: 0 auto">
+<div class="reveal" style="display: flex; align-items: baseline; gap: 16px">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 120px; line-height: 0.8; color: #17123A">5</span>
+<span style="font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase">Chapter five · culture &amp; fun</span>
+</div>
+<h2 class="reveal" style="margin: 28px 0 0; max-width: 900px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(40px, 5.5vw, 72px); line-height: 0.98; letter-spacing: -0.03em">The only number with its own holiday (and a law that nearly broke it).</h2>
+<div style="margin-top: 64px; display: flex; flex-wrap: wrap; gap: 20px">
+<article class="reveal" style="flex: 2 1 520px; padding: 40px; border-radius: 32px; background: #17123A; color: #FFFBF2; display: flex; flex-wrap: wrap; gap: 32px; align-items: center">
+<div style="flex: 0 0 auto; text-align: center">
+<div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 96px; line-height: 0.9; color: #FFD23F">3/14</div>
+<div style="font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.14em; margin-top: 8px">14 MARCH</div>
+</div>
+<div style="flex: 1 1 280px">
+<h3 style="margin: 0 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; line-height: 1.05">Pi Day</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">Physicist Larry Shaw threw the first Pi Day party at San Francisco's Exploratorium in 1988. Today UNESCO marks 14 March as the International Day of Mathematics. Bonus: it's Einstein's birthday. And 22 July (22⁄7) is Pi Approximation Day.</p>
+</div>
+</article>
+<article class="reveal" style="flex: 1 1 300px; padding: 32px; border-radius: 32px; background: #FFFBF2">
+<h3 style="margin: 0 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1">The Indiana Pi Bill</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">In 1897 Indiana's lawmakers almost voted a flawed circle-squaring "proof" into law, implying π = 3.2. A visiting maths professor talked the Senate out of it just in time.</p>
+</article>
+<article class="reveal" style="flex: 1 1 300px; padding: 32px; border-radius: 32px; background: #FFFBF2">
+<h3 style="margin: 0 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1">The Feynman point</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">At the 762nd decimal, π suddenly shows six 9s in a row. Physicist Richard Feynman joked he'd memorise up to there and finish with "…nine, nine, and so on".</p>
+</article>
+<article class="reveal" style="flex: 1 1 300px; padding: 32px; border-radius: 32px; background: #FF5A36">
+<h3 style="margin: 0 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1">Piphilology</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">The art of remembering π with words whose letter counts spell its digits. A classic opener: "How I want a drink…" — 3, 1, 4, 1, 5.</p>
+</article>
+<article class="reveal" style="flex: 1 1 300px; padding: 32px; border-radius: 32px; background: #3EC1F3">
+<h3 style="margin: 0 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1">And yes — Life of Pi</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.55">Yann Martel's hero, Piscine Patel, renames himself after the number and chalks 3.14 on the board so nobody can mock him again. It's where this page began.</p>
+</article>
+</div>
+</div>
+</section>
+
+<!-- 9 · PLAY: PI ARCADE -->
+<section id="play" style="padding: 120px 24px; background: #130B2C; color: #ECE7FF">
+<div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 64px; align-items: center">
+<div class="reveal" style="flex: 999 1 480px; min-width: 0">
+<div style="display: flex; align-items: baseline; gap: 16px">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 120px; line-height: 0.8; color: #FF4FA3">9</span>
+<span style="font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: #3EE6FF">Chapter nine · your turn</span>
+</div>
+<h2 style="margin: 28px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(40px, 5.5vw, 72px); line-height: 0.98; letter-spacing: -0.03em">Pi Arcade: how many digits can you hold?</h2>
+<p style="margin: 28px 0 0; max-width: 560px; font-size: 19px; line-height: 1.65; color: #D4CCF5">Rajveer Meena managed 70,000. Let's see your number. The screen starts at <strong style="color: #FFC23D">3.</strong> — tap the next digit, then the next. One slip and you'll see the right digit, then it's back to the start.</p>
+<ol style="margin: 28px 0 0; padding-left: 1.2em; display: grid; gap: 10px; font-size: 17px; line-height: 1.5; color: #D4CCF5">
+<li>Learn π in groups of five — the tape spaces them for you.</li>
+<li>Your best run is saved in this browser only.</li>
+<li>Reach digit 762 and you'll hit the Feynman point: six 9s in a row.</li>
+</ol>
+<a href="/pi/" style="margin-top: 32px; display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border: 2px solid #3EE6FF; color: #3EE6FF; font-family: 'Press Start 2P', monospace; font-size: 11px; text-decoration: none">OPEN FULL ARCADE ▸</a>
+</div>
+
+<div id="pa" style="flex: 1 1 360px; max-width: 460px; width: 100%; margin: 0 auto; background: #1E1243; border: 3px solid #FF4FA3; box-shadow: 10px 10px 0 #0B0620; padding: 20px; display: flex; flex-direction: column; gap: 14px; font-family: 'VT323', monospace">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<span style="font-family: 'Press Start 2P', monospace; font-size: 14px; color: #3EE6FF">π ARCADE</span>
+<div style="display: flex; gap: 16px; text-align: right">
+<div><div style="font-family: 'Press Start 2P', monospace; font-size: 8px; color: #9D92D4">DIGITS</div><div style="font-family: 'Press Start 2P', monospace; font-size: 16px; color: #3EE6FF" id="pa-score">000</div></div>
+<div><div style="font-family: 'Press Start 2P', monospace; font-size: 8px; color: #9D92D4">HI</div><div style="font-family: 'Press Start 2P', monospace; font-size: 16px; color: #FFC23D" id="pa-best">000</div></div>
+</div>
+</div>
+<div aria-live="polite" style="height: 150px; overflow: hidden; background: #0D0720; border: 3px solid #3B2A7A; padding: 12px; font-size: 34px; line-height: 1.2; word-break: break-all; color: #ECE7FF">
+<span id="pa-lead" style="color: #FFC23D">3.</span><span id="pa-digits"></span><span id="pa-miss" hidden><span id="pa-typed" style="color: #FF5D5D; text-decoration: line-through"></span><span id="pa-correct" style="color: #1A0730; background: #6DFF9A; padding: 0 4px"></span></span><span id="pa-cursor" style="display: inline-block; width: 14px; height: 28px; background: #3EE6FF; vertical-align: -4px"></span>
+</div>
+<div style="min-height: 22px; text-align: center; font-family: 'Press Start 2P', monospace; font-size: 10px; line-height: 1.6; color: #9D92D4" id="pa-banner">TAP THE DIGIT AFTER 3.</div>
+<button type="button" id="pa-again" hidden style="min-height: 56px; border: 0; background: #FF4FA3; color: #1A0730; font-family: 'Press Start 2P', monospace; font-size: 14px; box-shadow: 0 6px 0 #A1246A; cursor: pointer">PLAY AGAIN</button>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<button type="button" data-k="1" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">1</button>
+<button type="button" data-k="2" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">2</button>
+<button type="button" data-k="3" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">3</button>
+<button type="button" data-k="4" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">4</button>
+<button type="button" data-k="5" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">5</button>
+<button type="button" data-k="6" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">6</button>
+<button type="button" data-k="7" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">7</button>
+<button type="button" data-k="8" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">8</button>
+<button type="button" data-k="9" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">9</button>
+<button type="button" id="pa-restart" style="min-height: 56px; border: 0; background: #1E1243; color: #9D92D4; font-family: 'Press Start 2P', monospace; font-size: 9px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">RESTART</button>
+<button type="button" data-k="0" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">0</button>
+<div style="display: flex; align-items: center; justify-content: center; font-size: 18px; color: #9D92D4; text-align: center">games: <span id="pa-games">0</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CLOSING CTA -->
+<section style="background: #17123A; color: #FFFBF2; padding: 120px 24px; text-align: center; position: relative; overflow: hidden">
+<div class="reveal" style="max-width: 900px; margin: 0 auto">
+<p style="margin: 0; font-family: 'Space Mono', monospace; font-size: 15px; letter-spacing: 0.18em; text-transform: uppercase; color: #3EC1F3">3.14159… and counting</p>
+<h2 style="margin: 24px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(48px, 7vw, 104px); line-height: 0.92; letter-spacing: -0.04em">Look around.<br><span style="color: #FFD23F">π is already there.</span></h2>
+<p style="margin: 32px auto 0; max-width: 620px; font-size: 19px; line-height: 1.6; color: #E6E2F5">In the wheel that brings you to work, the dome above you, the orbit that finds you on a map. The next 14 March, grab a slice of pie and raise it to the number that never ends.</p>
+<div style="margin-top: 40px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center">
+<a href="#top" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; border-radius: 999px; background: #FFD23F; color: #17123A; font-weight: 700; font-size: 17px; text-decoration: none">Back to the beginning ↑</a>
+</div>
+</div>
+</section>
+
+<footer style="background: #0E0A26; color: #B9B3DA; padding: 40px 24px">
+<div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; font-size: 14px; line-height: 1.6">
+<p style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px; color: #FFD23F">π of Life</p>
+<p style="margin: 0; max-width: 720px">Sources include Guinness World Records (2026 record certification), NASA JPL Edu ("How many decimals of pi do we really need?"), the Exploratorium (Pi Day history) and standard histories of mathematics.</p>
+</div>
+</footer>
+
+</div>
+<script>
+(() => {
+  const PI = (() => {
+    const n = 1000, unit = 10n ** BigInt(n + 12);
+    const at = (x) => { x = BigInt(x); const x2 = x * x; let t = unit / x, s = 0n, k = 1n, g = 1n;
+      while (t !== 0n) { s += g * (t / k); t /= x2; k += 2n; g = -g; } return s; };
+    return (4n * (4n * at(5) - at(239))).toString().slice(1, n + 1);
+  })();
+  const $ = (id) => document.getElementById(id);
+  const KEY = 'pi-of-life-arcade';
+  let st = { pos: 0, over: false, typed: '', best: 0, startBest: 0, games: 0 };
+  try { const s = JSON.parse(localStorage.getItem(KEY) || '{}'); st.best = st.startBest = Number(s.best) || 0; st.games = Number(s.games) || 0; } catch (e) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify({ best: st.best, games: st.games })); } catch (e) {} };
+  const pad = (n) => String(n).padStart(3, '0');
+  function render() {
+    let g = PI.slice(0, st.pos).replace(/(\d{5})/g, '$1 '), lead = '3.';
+    if (g.length > 66) { g = g.slice(-66); lead = '…'; }
+    const correct = PI[st.pos] || '';
+    const rec = st.startBest > 0 && st.pos > st.startBest;
+    let banner, color = '#9D92D4';
+    if (st.over && st.typed) {
+      banner = 'Digit #' + (st.pos + 1) + ' is ' + correct + '. You typed ' + st.typed + '. ' + (rec ? 'New hi-score: ' + st.pos + '!' : 'You reached ' + st.pos + '.');
+      color = rec ? '#FFC23D' : '#FF5D5D';
+    } else if (st.over) { banner = 'Every digit this arcade knows. Respect.'; color = '#6DFF9A'; }
+    else if (st.pos === 0) banner = 'TAP THE DIGIT AFTER 3.';
+    else if (rec) { banner = 'NEW HI-SCORE!'; color = '#FFC23D'; }
+    else if (st.pos % 10 === 0) banner = st.pos + ' DIGITS. KEEP GOING!';
+    else banner = 'DIGIT #' + (st.pos + 1) + ' NEXT';
+    $('pa-score').textContent = pad(st.pos); $('pa-best').textContent = pad(st.best);
+    $('pa-lead').textContent = lead; $('pa-digits').textContent = g;
+    $('pa-miss').hidden = !(st.over && st.typed);
+    $('pa-typed').textContent = st.typed; $('pa-correct').textContent = st.typed ? correct : '';
+    $('pa-cursor').hidden = st.over; $('pa-again').hidden = !st.over;
+    const b = $('pa-banner'); b.textContent = banner; b.style.color = color;
+    $('pa-games').textContent = st.games;
+  }
+  function press(d) {
+    if (st.over) return;
+    if (d === PI[st.pos]) {
+      st.pos++; const best = Math.max(st.best, st.pos);
+      if (st.pos >= PI.length) { st.best = best; st.games++; st.over = true; st.typed = ''; save(); return render(); }
+      if (best !== st.best) { st.best = best; save(); }
+    } else { st.games++; st.over = true; st.typed = d; save(); }
+    render();
+  }
+  function restart() { st.pos = 0; st.over = false; st.typed = ''; st.startBest = st.best; render(); }
+  document.querySelectorAll('#pa [data-k]').forEach((b) => b.addEventListener('click', () => press(b.dataset.k)));
+  $('pa-restart').addEventListener('click', restart);
+  $('pa-again').addEventListener('click', restart);
+  render();
+})();
+</script>
+</body>
+</html>
