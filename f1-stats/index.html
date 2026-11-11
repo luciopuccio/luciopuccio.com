@@ -211,7 +211,7 @@ footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
 <header class="bar">
   <div class="wrap">
     <div class="brand"><span class="flag" aria-hidden="true"></span>F1 Record Watch</div>
-    <div class="bar-right"><div class="asof" id="asof"></div><a class="official" id="official" href="https://www.formula1.com/" target="_blank" rel="noopener">Official F1 site ↗</a></div>
+    <div class="bar-right"><div class="asof" id="asof"></div><a class="official" id="official" href="https://www.formula1.com/" target="_blank" rel="noopener" title="Opens formula1.com, the official Formula 1 website">Go to the official F1 site ↗</a></div>
   </div>
 </header>
 
@@ -321,7 +321,7 @@ footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
   <div class="wrap">
     <div class="legal">
       <p style="margin:0"><strong id="footnote">Figures correct after the 2026 São Paulo Grand Prix (8 November 2026).</strong> Career tallies count World Championship Grands Prix only, not Sprints.</p>
-      <p style="margin:0"><strong>Disclaimer.</strong> F1 Record Watch is an unofficial fan site and is not associated in any way with the Formula 1 companies or the FIA. F1, FORMULA ONE, FORMULA 1, FIA FORMULA ONE WORLD CHAMPIONSHIP, GRAND PRIX and related marks are trade marks of Formula One Licensing B.V. Team names and colours belong to their respective owners and are used here only to identify them. Figures are compiled from public race results and may contain errors. The likelihood ratings are opinion, not predictions or betting advice. For official information, visit <a href="https://www.formula1.com/" target="_blank" rel="noopener">formula1.com</a>.</p>
+      <p style="margin:0"><strong>Disclaimer.</strong> F1 Record Watch is an unofficial fan site and is not associated in any way with the Formula 1 companies or the FIA. F1, FORMULA ONE, FORMULA 1, FIA FORMULA ONE WORLD CHAMPIONSHIP, GRAND PRIX and related marks are trade marks of Formula One Licensing B.V. Team names and colours belong to their respective owners and are used here only to identify them. Figures are compiled from public race results and may contain errors. The likelihood ratings are opinion, not predictions or betting advice. <span id="refreshed"></span> For official information, visit <a href="https://www.formula1.com/" target="_blank" rel="noopener">formula1.com</a>.</p>
       <p style="margin:0"><strong>Data.</strong> Race results, standings and calendar data courtesy of <a href="https://github.com/jolpica/jolpica-f1" target="_blank" rel="noopener">Jolpica-F1</a>, the free and open F1 data API.</p>
       <p style="margin:0"><a href="#season-over" id="preview-link">Preview the end-of-season screen</a></p>
     </div>
@@ -336,6 +336,7 @@ footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
    ============================================================ */
 const META = {
   asOf: "Updated after Round 20 · São Paulo · 8 Nov 2026",
+  refreshedUTC: "2026-11-09T17:18:00Z",   // when results and standings were last checked against the data source
   round: "Round 21 of 23",
   circuit: "Las Vegas Strip Circuit · 50 laps",
   raceName: "Las Vegas Grand Prix",
@@ -574,6 +575,11 @@ const setHeadline = s => { const [a,b=""] = s.split("|"); $("#headline").innerHT
 $("#asof").textContent = META.asOf;
 $("#copy-year").textContent = OFF ? F.year : new Date(META.lightsOutUTC).getUTCFullYear();
 $("#footnote").textContent = META.footnote;
+(function(){
+  let when = META.refreshedUTC;
+  try { when = new Date(META.refreshedUTC).toLocaleString("en-GB", {timeZone:"Europe/London", weekday:"short", day:"numeric", month:"short", year:"numeric", hour:"2-digit", minute:"2-digit"}) + " UK time"; } catch(e){}
+  $("#refreshed").innerHTML = `<strong>Information last refreshed ${esc(when)}.</strong> Results and points can change after a race because of penalties, points deductions or appeals. The page re-checks them every Monday and Thursday, so a recent change may not show yet.`;
+})();
 
 if (!OFF){
   $("#round").textContent = META.round;
