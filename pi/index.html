@@ -146,6 +146,12 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 .key:active, .key.hit { transform: translateY(4px); box-shadow: 0 1px 0 #0b0620; background: var(--line); }
 .key.ok { background: #1f5c43; }
 .key.side { font-size: 10px; color: var(--dim); background: var(--panel); }
+/* Calculator layout: same buttons, reordered so 7 8 9 sit on top */
+.pad.calc [data-k="7"], .pad.calc [data-k="8"], .pad.calc [data-k="9"] { order: 1; }
+.pad.calc [data-k="4"], .pad.calc [data-k="5"], .pad.calc [data-k="6"] { order: 2; }
+.pad.calc [data-k="1"], .pad.calc [data-k="2"], .pad.calc [data-k="3"] { order: 3; }
+.pad.calc .side, .pad.calc [data-k="0"] { order: 4; }
+.hud-left { display: flex; gap: 8px; }
 .shake { animation: shake .35s; }
 @keyframes shake { 0%,100%{transform:none} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
 
@@ -225,14 +231,20 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 
     <footer class="foot">
       <span>Record saved on this device</span>
-      <button class="chip" id="soundBtn" aria-pressed="true">SOUND ON</button>
+      <span class="foot-btns" style="display:flex;gap:8px">
+        <button class="chip" id="layoutBtn">KEYPAD: PHONE</button>
+        <button class="chip" id="soundBtn" aria-pressed="true">SOUND ON</button>
+      </span>
     </footer>
   </section>
 
   <!-- GAME -->
   <section class="screen game" id="game" hidden>
     <div class="hud">
-      <button class="back" id="backBtn">◂ MENU</button>
+      <div class="hud-left">
+        <button class="back" id="backBtn">◂ MENU</button>
+        <button class="back" id="layoutBtn2" title="Switch keypad layout">123 ⇅</button>
+      </div>
       <div class="hud-stats">
         <div class="hud-stat"><small>DIGITS</small><span id="hudScore">000</span></div>
         <div class="hud-stat"><small>HI</small><span id="hudBest">000</span></div>
@@ -284,7 +296,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 
   // ---- storage (per device) ----
   const KEY = "pi-arcade-v1";
-  const stats = { best: 0, bestDate: null, last: null, games: 0, sound: true };
+  const stats = { best: 0, bestDate: null, last: null, games: 0, sound: true, calc: false };
   try { Object.assign(stats, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
   function save() { try { localStorage.setItem(KEY, JSON.stringify(stats)); } catch (e) {} }
 
@@ -310,6 +322,13 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     $("soundBtn").textContent = stats.sound ? "SOUND ON" : "SOUND OFF";
     $("soundBtn2").textContent = stats.sound ? "SOUND ON" : "SOUND OFF";
   }
+  function renderLayout() {
+    $("pad").classList.toggle("calc", !!stats.calc);
+    $("layoutBtn").textContent = stats.calc ? "KEYPAD: CALC" : "KEYPAD: PHONE";
+    $("layoutBtn2").textContent = stats.calc ? "789 ⇅" : "123 ⇅";
+    $("layoutBtn2").setAttribute("aria-label", "Keypad layout: " + (stats.calc ? "calculator" : "phone") + ". Tap to switch.");
+  }
+  function toggleLayout() { stats.calc = !stats.calc; save(); renderLayout(); beep(520, 0.06); }
   function toggleSound() { stats.sound = !stats.sound; save(); renderSound(); beep(660, 0.08); }
 
   // ---- home ----
@@ -489,6 +508,9 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
   $("restartBtn").addEventListener("click", () => { if (playing) startGame(); });
   $("soundBtn").addEventListener("click", toggleSound);
   $("soundBtn2").addEventListener("click", toggleSound);
+  $("layoutBtn").addEventListener("click", toggleLayout);
+  $("layoutBtn2").addEventListener("click", toggleLayout);
+  renderLayout();
 
   measureCh();
   try { document.fonts && document.fonts.ready.then(() => { measureCh(); fitTape(); }); } catch (e) {}
