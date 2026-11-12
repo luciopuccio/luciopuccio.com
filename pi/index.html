@@ -123,17 +123,19 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 #hudBest { color: var(--amber); }
 .tape {
   flex: 1; min-height: 120px; overflow-y: auto; background: #0d0720; border: 3px solid var(--line);
-  padding: 14px; font-size: 40px; line-height: 1.2; word-break: break-all; position: relative;
+  padding: 14px; font-size: 40px; line-height: 1.2; position: relative;
   font-variant-numeric: tabular-nums;
 }
 .tape .lead { color: var(--amber); }
 .tape .d { color: var(--text); }
-.tape .d.g5 { margin-right: .35em; }
+.tape .lead { display: block; margin-bottom: .1em; }
+.digits { display: grid; grid-template-columns: repeat(auto-fill, 5ch); justify-content: center; column-gap: .8ch; row-gap: .1em; }
+.grp { white-space: nowrap; }
 .tape .d.new { animation: pop .18s ease-out; color: var(--cyan); }
 @keyframes pop { from { transform: translateY(-6px); opacity: .3; } to { transform: none; opacity: 1; } }
 .tape .wrong { color: var(--bad); text-decoration: line-through; }
 .tape .right { color: #1a0730; background: var(--good); padding: 0 .1em; }
-.cursor { display: inline-block; width: .5em; height: .9em; background: var(--cyan); vertical-align: -0.1em; animation: blink 1s steps(1) infinite; }
+.cursor { display: inline-block; width: 1ch; height: .9em; background: var(--cyan); vertical-align: -0.1em; animation: blink 1s steps(1) infinite; }
 .banner { min-height: 22px; text-align: center; font-family: var(--f-display); font-size: 10px; color: var(--dim); }
 .banner.rec { color: var(--amber); animation: blink .6s steps(1) 4; }
 .pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -337,12 +339,40 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
   }
   function digitSpan(i, cls) {
     const s = document.createElement("span");
-    s.className = "d" + ((i + 1) % 5 === 0 ? " g5" : "") + (cls ? " " + cls : "");
+    s.className = "d" + (cls ? " " + cls : "");
     s.textContent = PI[i];
     return s;
   }
+  let curGroup = null;
+  function newGroup() {
+    curGroup = document.createElement("span");
+    curGroup.className = "grp";
+    $("digits").appendChild(curGroup);
+  }
   function resetTape() {
-    tape.innerHTML = '<span class="lead">3.</span><span class="cursor" id="cursor"></span>';
+    tape.innerHTML = '<div class="lead">3.</div><div class="digits" id="digits"></div>';
+    newGroup();
+    const c = document.createElement("span");
+    c.className = "cursor"; c.id = "cursor";
+    curGroup.appendChild(c);
+  }
+  // Size the tape font so at least five groups of five digits fit on every row.
+  let chRatio = 0.5;
+  function measureCh() {
+    const s = document.createElement("span");
+    s.style.cssText = "position:absolute;visibility:hidden;white-space:pre;font-size:100px;font-family:" + getComputedStyle(tape).fontFamily;
+    s.textContent = "0000000000";
+    document.body.appendChild(s);
+    const w = s.getBoundingClientRect().width;
+    s.remove();
+    if (w > 0) chRatio = w / 1000;
+  }
+  function fitTape() {
+    const avail = tape.clientWidth - 28 - 6;
+    if (avail <= 0) return;
+    const need = (25 + 4 * 0.8) * chRatio;
+    const fs = Math.max(14, Math.min(40, Math.floor(avail / need)));
+    tape.style.fontSize = fs + "px";
   }
   function startGame() {
     pos = 0; playing = true; celebrated = false;
@@ -353,6 +383,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     $("banner").textContent = "TAP THE DIGIT AFTER 3.";
     $("over").hidden = true;
     show("game");
+    fitTape();
     jingle([523, 659, 784]);
   }
   function flashKey(d, cls) {
@@ -363,9 +394,9 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
   function press(d) {
     if (!playing) return;
     if (d === PI[pos]) {
-      const cur = $("cursor");
-      tape.insertBefore(digitSpan(pos, "new"), cur);
+      $("cursor").before(digitSpan(pos, "new"));
       pos++;
+      if (pos % 5 === 0) { newGroup(); curGroup.appendChild($("cursor")); }
       $("hudScore").textContent = pad3(pos);
       flashKey(d, "ok");
       beep(440 + (Number(d) * 40), 0.06);
@@ -390,7 +421,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
       const cur = $("cursor");
       const w = document.createElement("span"); w.className = "wrong"; w.textContent = typed;
       const r = document.createElement("span"); r.className = "right"; r.textContent = correct;
-      tape.insertBefore(w, cur); tape.insertBefore(r, cur); cur.remove();
+      cur.before(w, r); cur.remove();
       tape.scrollTop = tape.scrollHeight;
       $("game").classList.remove("shake"); void $("game").offsetWidth; $("game").classList.add("shake");
       try { navigator.vibrate && navigator.vibrate(120); } catch (e) {}
@@ -458,6 +489,10 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
   $("restartBtn").addEventListener("click", () => { if (playing) startGame(); });
   $("soundBtn").addEventListener("click", toggleSound);
   $("soundBtn2").addEventListener("click", toggleSound);
+
+  measureCh();
+  try { document.fonts && document.fonts.ready.then(() => { measureCh(); fitTape(); }); } catch (e) {}
+  window.addEventListener("resize", fitTape);
 
   renderSound();
   renderHome();
