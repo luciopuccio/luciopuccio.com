@@ -24,3 +24,11 @@ Lucio's playground — live at https://luciopuccio.com
   cover: { glyph: "x²", c1: "#ff9b3d", c2: "#ffc53d" }
 }
 ```
+
+## Private section (/private)
+
+- `/private/*` is locked with **Cloudflare Access** (Zero Trust → Access controls → Applications → "My space"; policy "Only me").
+- `worker.js` serves the site's static files and answers `/private/api/*`. It re-checks the Access login token before doing anything.
+- `/private/cycling/` reads and writes the **Cycling** Google Sheet through an Apps Script web app (`tools/cycling-apps-script.gs`).
+- The Apps Script URL is stored only as the Worker secret **`SHEET_API_URL`** (Workers & Pages → luciopuccio-com → Settings → Variables and Secrets). Nothing private lives in this repo.
+- `.assetsignore` keeps `worker.js`, `wrangler.jsonc` and `tools/` from being served as pages.

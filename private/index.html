@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>My space</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Sans:opsz,wght@9..40,400..700&display=swap">
+<style>
+:root {
+  --bg: #fff4e8; --bg-2: #ffe9d4; --card: #fffaf4; --ink: #2b1a10; --dim: #7a5f4e; --line: #f1d9c2;
+  --orange: #fa960a; --orange-ink: #a35d00; --sun: #ffc53d; --berry: #e8435f;
+  --shadow: 0 1px 0 rgba(120,60,20,.06), 0 18px 40px -18px rgba(150,70,20,.35);
+  --f-display: "Bricolage Grotesque", ui-rounded, system-ui, sans-serif;
+  --f-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #1b120c; --bg-2: #24170f; --card: #2a1b12; --ink: #fbeee2; --dim: #c2a28c; --line: #3d2a1d; --orange-ink: #fa960a;
+    --shadow: 0 1px 0 rgba(0,0,0,.3), 0 22px 44px -20px rgba(0,0,0,.7); color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; background:
+    radial-gradient(50% 40% at 85% 0%, color-mix(in srgb, var(--sun) 30%, transparent), transparent 70%),
+    radial-gradient(45% 45% at 0% 100%, color-mix(in srgb, var(--berry) 14%, transparent), transparent 70%), var(--bg);
+  color: var(--ink); font: 17px/1.55 var(--f-body); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; border-radius: 10px; }
+.wrap { width: min(980px, 100%); margin: 0 auto; padding: 40px 16px 64px; }
+.kicker { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; color: var(--dim);
+  padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); }
+.kicker svg { width: 15px; height: 15px; }
+h1 { font-family: var(--f-display); font-weight: 800; letter-spacing: -0.04em; line-height: .95; font-size: clamp(44px, 9vw, 84px); margin: 18px 0 8px; }
+h1 em { font-style: normal; color: var(--orange); }
+.lead { color: var(--dim); margin: 0 0 32px; max-width: 46ch; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.tile { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 22px; min-height: 190px; border-radius: 24px;
+  background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); text-decoration: none; transition: transform .25s cubic-bezier(.3,1.5,.5,1); }
+a.tile:hover { transform: translateY(-4px) rotate(-.6deg); }
+.tile .ico { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; background: color-mix(in srgb, var(--orange) 18%, var(--card)); }
+.tile .ico svg { width: 30px; height: 30px; stroke: var(--orange-ink); }
+.tile h2 { font-family: var(--f-display); font-size: 24px; margin: 4px 0 0; letter-spacing: -0.02em; }
+.tile p { margin: 0; color: var(--dim); font-size: 15px; }
+.tile .go { margin-top: auto; font-weight: 700; color: var(--orange-ink); font-size: 15px; }
+.tile.soon { border-style: dashed; box-shadow: none; background: transparent; }
+.tile.soon .ico { background: var(--bg-2); }
+.tile.soon .ico svg { stroke: var(--dim); }
+.foot { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 12px 20px; color: var(--dim); font-size: 14px; }
+.foot a { font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { .tile { transition: none; } }
+</style>
+</head>
+<body>
+<script src="/nav.js"></script>
+<main class="wrap">
+  <span class="kicker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Only you can see this</span>
+  <h1>My <em>space</em></h1>
+  <p class="lead">Your private corner of luciopuccio.com. Dashboards and bits that aren't for the public pages.</p>
+
+  <div class="grid">
+    <a class="tile" href="/private/cycling/">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="16.5" r="3.5"/><circle cx="18.5" cy="16.5" r="3.5"/><path d="M5.5 16.5 9 9h6l3.5 7.5M9 9l3 7.5h-6.5M15 9l-1.5-3H11"/></svg></span>
+      <h2>Cycling</h2>
+      <p>Every ride from your log: totals, records, trends and routes. Log a new ride straight into the sheet.</p>
+      <span class="go">Open dashboard →</span>
+    </a>
+    <div class="tile soon">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      <h2>More to come</h2>
+      <p>Room for the next private project.</p>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Signed in with Cloudflare Access.</span>
+    <a href="/cdn-cgi/access/logout">Sign out</a>
+  </div>
+</main>
+</body>
+</html>

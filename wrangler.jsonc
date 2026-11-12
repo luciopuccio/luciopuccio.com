@@ -1,0 +1,21 @@
+{
+  // Cloudflare Worker config for luciopuccio.com (deployed automatically from GitHub).
+  "name": "luciopuccio-com",
+  "main": "worker.js",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    // Only the private data API runs code; every other page is a plain static file.
+    "run_worker_first": ["/private/api/*"]
+  },
+  "workers_dev": true,
+  // Preview links would skip the Cloudflare Access lock, so they're off.
+  "preview_urls": false,
+  "vars": {
+    // Public identifiers of the Cloudflare Access app "My space" (not secrets).
+    "ACCESS_TEAM": "jolly-dawn-4a0b.cloudflareaccess.com",
+    "ACCESS_AUD": "e911867835d1de4bd574def70c85c6ebb28178713c8d40e2547944f93865c73c"
+  }
+  // Secret (set in the dashboard, not here): SHEET_API_URL
+}
