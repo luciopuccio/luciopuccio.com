@@ -172,7 +172,9 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 .record .over-title { color: var(--amber); }
 .over-score { font-size: 24px; }
 .over-score b { font-family: var(--f-display); font-size: 22px; color: var(--cyan); font-weight: normal; }
-.miss { background: #0d0720; border: 2px solid var(--line); padding: 10px; font-size: 30px; word-break: break-all; }
+.miss { background: #0d0720; border: 2px solid var(--line); padding: 12px 10px; font-size: 28px; display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: .8em; row-gap: .2em; }
+.miss .grp { white-space: nowrap; letter-spacing: .1em; }
+.miss .grp > span { display: inline-block; }
 .miss .ctx { color: var(--dim); }
 .miss .right { color: #1a0730; background: var(--good); padding: 0 .12em; }
 .miss .next { color: var(--dim); }
@@ -456,30 +458,29 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     $("overScore").textContent = pos;
     $("overBox").classList.toggle("record", isRecord && pos > 0);
     $("overTitle").textContent = typed === null ? "YOU WIN!" : (isRecord && pos > 0 ? "NEW HI-SCORE!" : "GAME OVER");
-    // Lead-in: the previous five digits, building up from 20% to 100%
-    const from = Math.max(0, pos - 5);
+    // Row around the miss: 5 digits fading in, the correct digit, 5 digits fading out,
+    // laid out in pi's own groups of five (the same groups as the game tape)
     const miss = $("miss");
     miss.innerHTML = "";
-    if (from === 0) {
-      const lead = document.createElement("span"); lead.className = "ctx"; lead.textContent = "3.";
+    const items = [];
+    for (let i = Math.max(0, pos - 5); i < pos; i++) items.push({ i, cls: "ctx", op: 1 - (pos - 1 - i) * 0.2 });
+    if (typed !== null) {
+      items.push({ i: pos, cls: "right", op: 1 });
+      [1, 0.8, 0.6, 0.4, 0.2].forEach((op, k) => { if (pos + 1 + k < PI.length) items.push({ i: pos + 1 + k, cls: "next", op }); });
+    }
+    if (pos < 5) {
+      const lead = document.createElement("span"); lead.className = "ctx grp"; lead.textContent = "3.";
       miss.appendChild(lead);
     }
-    for (let i = from; i < pos; i++) {
-      const c = document.createElement("span"); c.className = "ctx";
-      c.style.opacity = 1 - (pos - 1 - i) * 0.2; c.textContent = PI[i];
-      miss.appendChild(c);
-    }
+    let grp = null, grpNo = -1;
+    items.forEach((it) => {
+      const g = Math.floor(it.i / 5);
+      if (g !== grpNo) { grp = document.createElement("span"); grp.className = "grp"; miss.appendChild(grp); grpNo = g; }
+      const sp = document.createElement("span"); sp.className = it.cls;
+      sp.style.opacity = it.op; sp.textContent = PI[it.i];
+      grp.appendChild(sp);
+    });
     if (typed !== null) {
-      const tail = document.createElement("span"); tail.style.whiteSpace = "nowrap";
-      const r = document.createElement("span"); r.className = "right"; r.textContent = correct;
-      tail.appendChild(r); miss.appendChild(tail);
-      // Hint: the next five digits, fading out (100% to 20%), mirroring the lead-in
-      [1, 0.8, 0.6, 0.4, 0.2].forEach((op, i) => {
-        if (pos + 1 + i >= PI.length) return;
-        const nx = document.createElement("span"); nx.className = "next";
-        nx.style.opacity = op; nx.textContent = PI[pos + 1 + i];
-        tail.appendChild(nx);
-      });
       $("missNote").innerHTML = "Digit #" + (pos + 1) + " is <b>" + correct + "</b>. You typed <s>" + typed + "</s>.";
     } else {
       $("missNote").textContent = "That is every digit this arcade knows. Respect.";
