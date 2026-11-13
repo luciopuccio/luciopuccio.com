@@ -89,7 +89,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 .card.train { grid-column: 1 / -1; gap: 8px; }
 .ticker .t3 { color: var(--pink); font-weight: normal; }
 .ticker .known { color: var(--cyan); }
-.ticker .gap { display: inline-block; width: 2.5em; }
+.ticker .gap { display: inline-block; width: 1.2em; }
 .ticker.static { text-align: center; cursor: default; mask-image: none; -webkit-mask-image: none; }
 /* Phone: [# number][TRAIN] on one row, AFTER MY RECORD full width below. Wider: all on one row. */
 .train-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; align-items: stretch; }
@@ -415,6 +415,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
       html += '</span>';
     }
     const el = $("ticker"), box = el.parentNode;
+    if (!box.clientWidth) { tickerFor = -1; return; } // hidden: rebuild when the home screen shows
     el.innerHTML = html;
     tickerStatic = el.scrollWidth <= box.clientWidth - 24;
     box.classList.toggle("static", tickerStatic);
@@ -433,6 +434,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     function frame(t) {
       const dt = Math.min(50, t - (lastT || t)); lastT = t;
       if (tickerStatic) { el.style.transform = "none"; x = 0; requestAnimationFrame(frame); return; }
+      if (!half) measure(); // re-measure if the text changed while the bar was hidden
       if (!dragging) {
         if (Math.abs(vel) > 0.02) { x += vel * dt; vel *= Math.pow(0.996, dt); }
         else if (!reduce) x += AUTO * dt;
@@ -619,7 +621,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     }, typed === null ? 0 : 650);
   }
   function toMenu() {
-    playing = false; $("over").hidden = true; $("hudMode").hidden = true; renderHome(); show("home");
+    playing = false; $("over").hidden = true; $("hudMode").hidden = true; show("home"); renderHome();
   }
 
   // ---- input ----
