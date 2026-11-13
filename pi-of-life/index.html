@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pi of Life</title>
-<meta name="description" content="Not Life of Pi. Pi of Life: the story of π, from Babylonian clay tablets to the satellites guiding your phone, with a mini arcade to test your memory.">
+<meta name="description" content="Not Life of Pi. Pi of Life: the story of π, from Babylonian clay tablets to the satellites guiding your phone, with the first 762 digits to explore and an arcade to test your memory.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&amp;family=DM+Sans:wght@400;500;700&amp;family=Space+Mono:wght@400;700&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap">
@@ -31,7 +31,7 @@ a{color:#17123A}a:hover{color:#E0401C}
 body .lp-bar[data-theme=dark]{--lpb-bg:#0e0a26;--lpb-line:#2e2763}
 html{scroll-behavior:smooth}
 section[id]{scroll-margin-top:12px}
-#pa button:focus-visible{outline:3px solid #FFC23D;outline-offset:3px}
+#play a:focus-visible,#digitSearch:focus-visible{outline:3px solid #FFC23D;outline-offset:3px}
 </style>
 </head>
 <body>
@@ -48,7 +48,8 @@ section[id]{scroll-margin-top:12px}
 <a href="#build">Building</a>
 <a href="#nature">Nature</a>
 <a href="#culture">Culture</a>
-<a href="#play" style="color: #FFD23F; font-weight: 700">Play ▸</a>
+<a href="#digits">762 digits</a>
+<a href="/pi/" style="color: #FFD23F; font-weight: 700">Play ▸</a>
 </div>
 </nav>
 </header>
@@ -317,52 +318,61 @@ section[id]{scroll-margin-top:12px}
 </div>
 </section>
 
-<!-- 9 · PLAY: PI ARCADE -->
-<section id="play" style="padding: 120px 24px; background: #130B2C; color: #ECE7FF">
-<div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 64px; align-items: center">
-<div class="reveal" style="flex: 999 1 480px; min-width: 0">
+<!-- 9 · THE FIRST 762 DIGITS -->
+<section id="digits" style="padding: 120px 24px; background: #FFFBF2">
+<div style="max-width: 1280px; margin: 0 auto">
+<div class="reveal" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+<div style="flex: 999 1 560px; min-width: 0">
 <div style="display: flex; align-items: baseline; gap: 16px">
-<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 120px; line-height: 0.8; color: #FF4FA3">9</span>
-<span style="font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: #3EE6FF">Chapter nine · your turn</span>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 120px; line-height: 0.8; color: #FF5A36">9</span>
+<span style="font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase">Chapter nine · the first 762</span>
 </div>
-<h2 style="margin: 28px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(40px, 5.5vw, 72px); line-height: 0.98; letter-spacing: -0.03em">Pi Arcade: how many digits can you hold?</h2>
-<p style="margin: 28px 0 0; max-width: 560px; font-size: 19px; line-height: 1.65; color: #D4CCF5">Rajveer Meena managed 70,000. Let's see your number. The screen starts at <strong style="color: #FFC23D">3.</strong> — tap the next digit, then the next. One slip and you'll see the right digit, then it's back to the start.</p>
-<ol style="margin: 28px 0 0; padding-left: 1.2em; display: grid; gap: 10px; font-size: 17px; line-height: 1.5; color: #D4CCF5">
-<li>Learn π in groups of five — the tape spaces them for you.</li>
-<li>Your best run is saved in this browser only.</li>
-<li>Reach digit 762 and you'll hit the Feynman point: six 9s in a row.</li>
-</ol>
-<a href="/pi/" style="margin-top: 32px; display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border: 2px solid #3EE6FF; color: #3EE6FF; font-family: 'Press Start 2P', monospace; font-size: 11px; text-decoration: none">OPEN FULL ARCADE ▸</a>
+<h2 style="margin: 28px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(40px, 5.5vw, 72px); line-height: 0.98; letter-spacing: -0.03em">Walk the digits all the way to the Feynman point.</h2>
+</div>
+<p style="flex: 1 1 340px; margin: 0; font-size: 18px; line-height: 1.6">Here are the first 761 decimals of π, then something strange: from the <strong>762nd</strong> decimal, six 9s in a row. That's the Feynman point — Richard Feynman joked he'd learn π up to there and finish with "…nine, nine, nine, nine, nine, nine, and so on", as if π were rational.</p>
 </div>
 
-<div id="pa" style="flex: 1 1 360px; max-width: 460px; width: 100%; margin: 0 auto; background: #1E1243; border: 3px solid #FF4FA3; box-shadow: 10px 10px 0 #0B0620; padding: 20px; display: flex; flex-direction: column; gap: 14px; font-family: 'VT323', monospace">
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
-<span style="font-family: 'Press Start 2P', monospace; font-size: 14px; color: #3EE6FF">π ARCADE</span>
-<div style="display: flex; gap: 16px; text-align: right">
-<div><div style="font-family: 'Press Start 2P', monospace; font-size: 8px; color: #9D92D4">DIGITS</div><div style="font-family: 'Press Start 2P', monospace; font-size: 16px; color: #3EE6FF" id="pa-score">000</div></div>
-<div><div style="font-family: 'Press Start 2P', monospace; font-size: 8px; color: #9D92D4">HI</div><div style="font-family: 'Press Start 2P', monospace; font-size: 16px; color: #FFC23D" id="pa-best">000</div></div>
+<div class="reveal" style="margin-top: 48px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 24px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="digitSearch" style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase">Find a sequence — a birthday, a year, a lucky number</label>
+<input id="digitSearch" type="text" inputmode="numeric" maxlength="8" placeholder="e.g. 1403" style="width: 260px; max-width: 100%; min-height: 52px; padding: 0 18px; border: 2px solid #17123A; border-radius: 14px; background: #FFFFFF; color: #17123A; font-family: 'Space Mono', monospace; font-size: 20px; letter-spacing: 0.12em">
+</div>
+<p id="digitResult" aria-live="polite" style="margin: 0 0 14px; font-size: 17px; line-height: 1.5; max-width: 620px">Type a few digits to see where they first appear in these 767 decimals.</p>
+</div>
+
+<div class="reveal" style="margin-top: 32px; padding: 28px; border-radius: 28px; background: #17123A; color: #E6E2F5">
+<p style="margin: 0 0 16px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 40px; line-height: 1; color: #FFD23F">3.</p>
+<div id="digitGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px 20px; font-family: 'Space Mono', monospace">
+<!-- rows built by the script below -->
+</div>
+<p style="margin: 20px 0 0; font-family: 'Space Mono', monospace; font-size: 15px; color: #FFD23F">…and so on, for ever.</p>
+</div>
+<div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 20px; font-size: 14px">
+<span style="display: inline-flex; align-items: center; gap: 8px"><span style="display: inline-block; width: 18px; height: 18px; border-radius: 4px; background: #FFD23F"></span>The Feynman point, decimals 762–767</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span style="display: inline-block; width: 18px; height: 18px; border-radius: 4px; background: #3EC1F3"></span>Your search</span>
 </div>
 </div>
-<div aria-live="polite" style="height: 150px; overflow: hidden; background: #0D0720; border: 3px solid #3B2A7A; padding: 12px; font-size: 34px; line-height: 1.2; word-break: break-all; color: #ECE7FF">
-<span id="pa-lead" style="color: #FFC23D">3.</span><span id="pa-digits"></span><span id="pa-miss" hidden><span id="pa-typed" style="color: #FF5D5D; text-decoration: line-through"></span><span id="pa-correct" style="color: #1A0730; background: #6DFF9A; padding: 0 4px"></span></span><span id="pa-cursor" style="display: inline-block; width: 14px; height: 28px; background: #3EE6FF; vertical-align: -4px"></span>
+</section>
+
+<!-- 2 · PLAY: PI ARCADE -->
+<section id="play" style="padding: 120px 24px; background: #130B2C; color: #ECE7FF">
+<div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 64px; align-items: center">
+<div class="reveal" style="flex: 999 1 520px; min-width: 0">
+<div style="display: flex; align-items: baseline; gap: 16px">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 120px; line-height: 0.8; color: #FF4FA3">2</span>
+<span style="font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: #3EE6FF">Chapter two · your turn</span>
 </div>
-<div style="min-height: 22px; text-align: center; font-family: 'Press Start 2P', monospace; font-size: 10px; line-height: 1.6; color: #9D92D4" id="pa-banner">TAP THE DIGIT AFTER 3.</div>
-<button type="button" id="pa-again" hidden style="min-height: 56px; border: 0; background: #FF4FA3; color: #1A0730; font-family: 'Press Start 2P', monospace; font-size: 14px; box-shadow: 0 6px 0 #A1246A; cursor: pointer">PLAY AGAIN</button>
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
-<button type="button" data-k="1" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">1</button>
-<button type="button" data-k="2" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">2</button>
-<button type="button" data-k="3" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">3</button>
-<button type="button" data-k="4" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">4</button>
-<button type="button" data-k="5" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">5</button>
-<button type="button" data-k="6" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">6</button>
-<button type="button" data-k="7" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">7</button>
-<button type="button" data-k="8" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">8</button>
-<button type="button" data-k="9" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">9</button>
-<button type="button" id="pa-restart" style="min-height: 56px; border: 0; background: #1E1243; color: #9D92D4; font-family: 'Press Start 2P', monospace; font-size: 9px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">RESTART</button>
-<button type="button" data-k="0" style="min-height: 56px; border: 0; background: #281A57; color: #ECE7FF; font-family: 'Press Start 2P', monospace; font-size: 22px; box-shadow: 0 5px 0 #0B0620; cursor: pointer">0</button>
-<div style="display: flex; align-items: center; justify-content: center; font-size: 18px; color: #9D92D4; text-align: center">games: <span id="pa-games">0</span></div>
+<h2 style="margin: 28px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(40px, 5.5vw, 72px); line-height: 0.98; letter-spacing: -0.03em">Pi Arcade: how many digits can you hold?</h2>
+<p style="margin: 28px 0 0; max-width: 560px; font-size: 19px; line-height: 1.65; color: #D4CCF5">Rajveer Meena managed 70,000. Let's see your number. The screen starts at <strong style="color: #FFC23D">3.</strong> — tap the next digit, then the next. One slip shows you the right digit and sends you back to the start. Can you make it to the Feynman point?</p>
+<a href="/pi/" style="margin-top: 36px; display: inline-flex; align-items: center; min-height: 60px; padding: 0 32px; background: #FF4FA3; color: #1A0730; font-family: 'Press Start 2P', monospace; font-size: 15px; text-decoration: none; box-shadow: 0 6px 0 #A1246A">PRESS START ↗</a>
+<p style="margin: 18px 0 0; font-family: 'Space Mono', monospace; font-size: 14px; color: #9D92D4">Plays at luciopuccio.com/pi · phone-friendly · your hi-score stays on your device</p>
 </div>
-</div>
+<a href="/pi/" aria-label="Play Pi Arcade at luciopuccio.com/pi" style="flex: 1 1 340px; max-width: 420px; width: 100%; margin: 0 auto; text-decoration: none; color: #ECE7FF; background: #1E1243; border: 3px solid #FF4FA3; box-shadow: 10px 10px 0 #0B0620; padding: 28px; display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center">
+<span class="bob" style="font-family: 'Press Start 2P', monospace; font-size: 72px; line-height: 1; color: #FFC23D; text-shadow: 5px 5px 0 #FF4FA3">π</span>
+<span style="font-family: 'Press Start 2P', monospace; font-size: 22px; line-height: 1.4; color: #3EE6FF">PI<br>ARCADE</span>
+<span style="width: 100%; padding: 14px; background: #0D0720; border: 3px solid #3B2A7A; font-family: 'VT323', monospace; font-size: 30px; letter-spacing: 0.04em; color: #ECE7FF">3.14159 26535 89<span style="color: #3EE6FF">_</span></span>
+<span style="font-family: 'Press Start 2P', monospace; font-size: 11px; color: #FFC23D">INSERT COIN</span>
+</a>
 </div>
 </section>
 
@@ -389,53 +399,58 @@ section[id]{scroll-margin-top:12px}
 <script>
 (() => {
   const PI = (() => {
-    const n = 1000, unit = 10n ** BigInt(n + 12);
+    const n = 780, unit = 10n ** BigInt(n + 12);
     const at = (x) => { x = BigInt(x); const x2 = x * x; let t = unit / x, s = 0n, k = 1n, g = 1n;
       while (t !== 0n) { s += g * (t / k); t /= x2; k += 2n; g = -g; } return s; };
-    return (4n * (4n * at(5) - at(239))).toString().slice(1, n + 1);
+    return (4n * (4n * at(5) - at(239))).toString().slice(1, 768);
   })();
-  const $ = (id) => document.getElementById(id);
-  const KEY = 'pi-of-life-arcade';
-  let st = { pos: 0, over: false, typed: '', best: 0, startBest: 0, games: 0 };
-  try { const s = JSON.parse(localStorage.getItem(KEY) || '{}'); st.best = st.startBest = Number(s.best) || 0; st.games = Number(s.games) || 0; } catch (e) {}
-  const save = () => { try { localStorage.setItem(KEY, JSON.stringify({ best: st.best, games: st.games })); } catch (e) {} };
-  const pad = (n) => String(n).padStart(3, '0');
-  function render() {
-    let g = PI.slice(0, st.pos).replace(/(\d{5})/g, '$1 '), lead = '3.';
-    if (g.length > 66) { g = g.slice(-66); lead = '…'; }
-    const correct = PI[st.pos] || '';
-    const rec = st.startBest > 0 && st.pos > st.startBest;
-    let banner, color = '#9D92D4';
-    if (st.over && st.typed) {
-      banner = 'Digit #' + (st.pos + 1) + ' is ' + correct + '. You typed ' + st.typed + '. ' + (rec ? 'New hi-score: ' + st.pos + '!' : 'You reached ' + st.pos + '.');
-      color = rec ? '#FFC23D' : '#FF5D5D';
-    } else if (st.over) { banner = 'Every digit this arcade knows. Respect.'; color = '#6DFF9A'; }
-    else if (st.pos === 0) banner = 'TAP THE DIGIT AFTER 3.';
-    else if (rec) { banner = 'NEW HI-SCORE!'; color = '#FFC23D'; }
-    else if (st.pos % 10 === 0) banner = st.pos + ' DIGITS. KEEP GOING!';
-    else banner = 'DIGIT #' + (st.pos + 1) + ' NEXT';
-    $('pa-score').textContent = pad(st.pos); $('pa-best').textContent = pad(st.best);
-    $('pa-lead').textContent = lead; $('pa-digits').textContent = g;
-    $('pa-miss').hidden = !(st.over && st.typed);
-    $('pa-typed').textContent = st.typed; $('pa-correct').textContent = st.typed ? correct : '';
-    $('pa-cursor').hidden = st.over; $('pa-again').hidden = !st.over;
-    const b = $('pa-banner'); b.textContent = banner; b.style.color = color;
-    $('pa-games').textContent = st.games;
+  const grid = document.getElementById('digitGrid');
+  const input = document.getElementById('digitSearch');
+  const result = document.getElementById('digitResult');
+  const cells = [];
+  for (let r = 0; r < PI.length; r += 10) {
+    const end = Math.min(r + 10, PI.length);
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;flex-direction:column;gap:2px';
+    const label = document.createElement('span');
+    label.style.cssText = 'font-size:10px;letter-spacing:0.08em;color:#8C85B8';
+    label.textContent = (r + 1) + '–' + end;
+    const line = document.createElement('span');
+    line.style.cssText = 'font-size:17px;letter-spacing:0.06em;white-space:nowrap';
+    for (let i = r; i < end; i++) {
+      const d = document.createElement('span');
+      d.textContent = PI[i];
+      d.style.cssText = 'padding:1px 0;border-radius:3px';
+      cells.push(d); line.appendChild(d);
+    }
+    row.append(label, line); grid.appendChild(row);
   }
-  function press(d) {
-    if (st.over) return;
-    if (d === PI[st.pos]) {
-      st.pos++; const best = Math.max(st.best, st.pos);
-      if (st.pos >= PI.length) { st.best = best; st.games++; st.over = true; st.typed = ''; save(); return render(); }
-      if (best !== st.best) { st.best = best; save(); }
-    } else { st.games++; st.over = true; st.typed = d; save(); }
-    render();
+  function paint(hits) {
+    cells.forEach((c, i) => {
+      if (hits[i]) { c.style.background = '#3EC1F3'; c.style.color = '#17123A'; c.style.fontWeight = '700'; }
+      else if (i >= 761) { c.style.background = '#FFD23F'; c.style.color = '#17123A'; c.style.fontWeight = '700'; }
+      else { c.style.background = ''; c.style.color = ''; c.style.fontWeight = ''; }
+    });
   }
-  function restart() { st.pos = 0; st.over = false; st.typed = ''; st.startBest = st.best; render(); }
-  document.querySelectorAll('#pa [data-k]').forEach((b) => b.addEventListener('click', () => press(b.dataset.k)));
-  $('pa-restart').addEventListener('click', restart);
-  $('pa-again').addEventListener('click', restart);
-  render();
+  function search() {
+    const q = input.value.replace(/[^0-9]/g, '').slice(0, 8);
+    if (input.value !== q) input.value = q;
+    const hits = new Array(PI.length).fill(false);
+    let first = -1, count = 0;
+    if (q) {
+      for (let i = PI.indexOf(q); i !== -1; i = PI.indexOf(q, i + 1)) {
+        if (first === -1) first = i;
+        count++;
+        for (let j = i; j < i + q.length; j++) hits[j] = true;
+      }
+    }
+    if (!q) result.textContent = 'Type a few digits to see where they first appear in these 767 decimals.';
+    else if (!count) result.textContent = '"' + q + '" doesn\'t appear in the first 767 decimals. It\'s in there somewhere further on — π is thought to contain every sequence eventually.';
+    else result.textContent = '"' + q + '" first appears at decimal ' + (first + 1) + (count > 1 ? ', and ' + count + ' times in all' : '') + '. Highlighted below.';
+    paint(hits);
+  }
+  input.addEventListener('input', search);
+  search();
 })();
 </script>
 </body>
