@@ -107,8 +107,9 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 .chip { background: transparent; border: 2px solid var(--line); padding: 6px 10px; font-size: 18px; color: var(--dim); }
 .chip[aria-pressed="true"] { color: var(--good); border-color: var(--good); }
 .feedback { margin: 0; text-align: center; color: var(--dim); font-size: 18px; opacity: .8; }
-.feedback a { color: var(--cyan); text-decoration: none; border-bottom: 1px dashed currentColor; }
-.feedback a:hover, .feedback a:focus-visible { border-bottom-style: solid; }
+.feedback .mail { background: none; border: 0; padding: 0; font: inherit; color: var(--cyan); border-bottom: 1px dashed currentColor; cursor: copy; }
+.feedback .mail:hover, .feedback .mail:focus-visible { border-bottom-style: solid; }
+.feedback .copied { display: block; min-height: 1.1em; color: var(--good); font-size: 16px; }
 @media (max-width: 500px) {
   .dash { grid-template-columns: 1fr; }
   .logo .pi { font-size: 52px; }
@@ -242,7 +243,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
         <button class="chip" id="soundBtn" aria-pressed="true">SOUND ON</button>
       </span>
     </footer>
-    <p class="feedback">Ideas or feedback? Write to <a href="mailto:hello@luciopuccio.com?subject=Pi%20Arcade%20feedback">hello@luciopuccio.com</a></p>
+    <p class="feedback">Ideas or feedback? Write to <button type="button" class="mail" id="mailBtn" aria-label="Copy email address hello@luciopuccio.com">hello@luciopuccio.com</button> <span class="copied" id="mailCopied" aria-live="polite"></span></p>
   </section>
 
   <!-- GAME -->
@@ -532,6 +533,21 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
   $("layoutBtn").addEventListener("click", toggleLayout);
   $("layoutBtn2").addEventListener("click", toggleLayout);
   renderLayout();
+  // Tap the address to copy it (no email app is opened)
+  $("mailBtn").addEventListener("click", () => {
+    const addr = "hello@luciopuccio.com";
+    const done = (msg) => { $("mailCopied").textContent = msg; clearTimeout(done.t); done.t = setTimeout(() => { $("mailCopied").textContent = ""; }, 2500); };
+    const fallback = () => {
+      try {
+        const r = document.createRange(); r.selectNodeContents($("mailBtn"));
+        const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        done(document.execCommand("copy") ? "Address copied" : "Address selected. Copy it from here");
+      } catch (e) { done("Address selected. Copy it from here"); }
+    };
+    try {
+      navigator.clipboard.writeText(addr).then(() => done("Address copied"), fallback);
+    } catch (e) { fallback(); }
+  });
 
   measureCh();
   try { document.fonts && document.fonts.ready.then(() => { measureCh(); fitTape(); }); } catch (e) {}
