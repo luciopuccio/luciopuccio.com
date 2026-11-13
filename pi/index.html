@@ -413,7 +413,8 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     {
       // Known digits in cyan, then a fading preview: the rest of the current
       // group of five plus one more group, in pi's own groups of five.
-      const hint = Math.min(MAX - known, (5 - known % 5) % 5 + 5);
+      // (a record ending on the 5th digit of a group gets the next two groups)
+      const hint = Math.min(MAX - known, known % 5 === 0 ? (known > 0 ? 10 : 5) : (5 - known % 5) + 5);
       html += '.';
       for (let i = 0; i < known + hint; i++) {
         if (i > 0 && i % 5 === 0) html += ' ';
