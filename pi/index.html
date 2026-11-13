@@ -87,12 +87,19 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 .card h2 { margin: 0; font-family: var(--f-display); font-size: 11px; color: var(--dim); letter-spacing: .1em; }
 .card.play { grid-column: 1 / -1; border-color: var(--pink); align-items: center; text-align: center; gap: 12px; }
 .card.train { grid-column: 1 / -1; gap: 8px; }
-.train-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.ticker .t3 { color: var(--amber); font-weight: normal; }
+/* Phone: [# number][TRAIN] on one row, AFTER MY RECORD full width below. Wider: all on one row. */
+.train-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; align-items: stretch; }
+.train-rec { grid-column: 1 / -1; }
+@media (min-width: 520px) {
+  .train-row { grid-template-columns: auto minmax(0, 1fr) auto auto; }
+  .train-rec { grid-column: auto; }
+}
 .train-row .hash { align-self: center; font-family: var(--f-display); font-size: 12px; color: var(--dim); }
-.train-row input { flex: 1 1 90px; min-width: 0; background: #0d0720; border: 2px solid var(--line); color: var(--text); font-family: var(--f-display); font-size: 13px; padding: 8px; font-variant-numeric: tabular-nums; }
+.train-row input { min-height: 44px; background: #0d0720; border: 2px solid var(--line); color: var(--text); font-family: var(--f-display); font-size: 16px; padding: 8px 10px; font-variant-numeric: tabular-nums; }
 .train-row input::placeholder { color: var(--dim); opacity: .6; }
 .train-row input:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
-.train-go, .train-rec { background: transparent; border: 2px solid var(--line); color: var(--cyan); font-family: var(--f-display); font-size: 10px; padding: 8px 10px; }
+.train-go, .train-rec { min-height: 44px; background: transparent; border: 2px solid var(--line); color: var(--cyan); font-family: var(--f-display); font-size: 11px; padding: 8px 14px; white-space: nowrap; }
 .train-go:hover, .train-rec:hover { border-color: var(--cyan); }
 .train-note { margin: 0; font-size: 17px; color: var(--dim); }
 .train-note.err { color: var(--bad); }
@@ -379,8 +386,8 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
       ? "Beat your record of " + stats.best + " digit" + (stats.best === 1 ? "" : "s")
       : "No record yet. Your first run sets one.";
   }
-  const tick = "3." + PI.slice(0, 120).replace(/(\d{5})/g, "$1 ");
-  $("ticker").textContent = tick + "   " + tick + "   ";
+  const tick = '<b class="t3">3.</b>' + PI.slice(0, 120).replace(/(\d{5})/g, "$1 ");
+  $("ticker").innerHTML = tick + " " + tick + " ";
   // Ticker: drifts left on its own; drag or swipe it either way, with a little momentum
   (function () {
     const box = document.querySelector(".ticker"), el = $("ticker");
