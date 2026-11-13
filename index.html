@@ -232,6 +232,11 @@ h2 { font-family: var(--f-display); font-weight: 800; letter-spacing: -0.03em; l
 .about p { margin: 0; color: var(--dim); }
 
 footer { padding: 70px 0 calc(40px + env(safe-area-inset-bottom)); color: var(--dim); font-size: 15px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer .dot { margin: 0 8px; opacity: .5; }
+footer .mail { position: relative; text-decoration: none; color: var(--ink); font-weight: 600; }
+@media (hover: hover) { footer .mail:hover { color: var(--orange-ink); } }
+footer .mail .done { position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translate(-50%, 4px); background: var(--ink); color: var(--bg); font-size: 13px; font-weight: 600; padding: 5px 10px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
+footer .mail.copied .done { opacity: 1; transform: translate(-50%, 0); }
 footer button { background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 
 /* Reveal on scroll */
@@ -328,7 +333,7 @@ footer button { background: none; border: 0; padding: 0; color: inherit; font: i
       <p>A personal archive and playground. The projects here start in my imagination and are built with the help of AI. My art and 3D modelling are a different story: every piece is made entirely by me, with no AI involved at all.</p>
     </div>
     <footer>
-      <span>© <span id="year">2026</span> Lucio Puccio</span>
+      <span>© <span id="year">2026</span> Lucio Puccio<span class="dot" aria-hidden="true">·</span><button type="button" class="mail" id="mail" title="Copy email address">hello@luciopuccio.com<span class="done" role="status" aria-live="polite"></span></button></span>
       <button type="button" id="totop">Back to the top ↑</button>
     </footer>
   </section>
@@ -567,6 +572,16 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 grid.querySelectorAll('.card').forEach((c, i) => { c.style.animationDelay = (i * 60) + 'ms'; });
 
 document.getElementById('year').textContent = new Date().getFullYear();
+(() => {
+  const btn = document.getElementById('mail'), done = btn.querySelector('.done'), addr = 'hello@luciopuccio.com';
+  const fallback = () => { const t = document.createElement('textarea'); t.value = addr; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(t); t.select(); let ok = false; try { ok = document.execCommand('copy'); } catch (e) {} t.remove(); return ok; };
+  btn.addEventListener('click', async () => {
+    let ok = false;
+    try { await navigator.clipboard.writeText(addr); ok = true; } catch (e) { ok = fallback(); }
+    done.textContent = ok ? 'Copied!' : 'Press and hold to copy';
+    btn.classList.add('copied'); clearTimeout(btn._t); btn._t = setTimeout(() => btn.classList.remove('copied'), 1800);
+  });
+})();
 document.getElementById('totop').addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
 </body>
