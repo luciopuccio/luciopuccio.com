@@ -89,6 +89,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 .card.train { grid-column: 1 / -1; gap: 8px; }
 .ticker .t3 { color: var(--pink); font-weight: normal; }
 .ticker .known { color: var(--cyan); }
+.ticker .peek { color: var(--dim); }
 .ticker .gap { display: inline-block; width: 1.2em; }
 .ticker.static { text-align: center; cursor: default; mask-image: none; -webkit-mask-image: none; }
 /* Phone: [# number][TRAIN] on one row, AFTER MY RECORD full width below. Wider: all on one row. */
@@ -409,10 +410,19 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     if (known === tickerFor && !force) return;
     tickerFor = known;
     let html = '<b class="t3">3</b>';
-    if (known > 0) {
-      html += '.<span class="known">';
-      for (let g = 0; g < known; g += 5) html += PI.slice(g, Math.min(g + 5, known)) + (g + 5 < known ? ' ' : '');
-      html += '</span>';
+    {
+      // Known digits in cyan, then a fading preview: the rest of the current
+      // group of five plus one more group, in pi's own groups of five.
+      const hint = Math.min(MAX - known, (5 - known % 5) % 5 + 5);
+      html += '.';
+      for (let i = 0; i < known + hint; i++) {
+        if (i > 0 && i % 5 === 0) html += ' ';
+        if (i < known) html += '<span class="known">' + PI[i] + '</span>';
+        else {
+          const j = i - known, op = (0.8 - 0.7 * j / Math.max(1, hint - 1)).toFixed(2);
+          html += '<span class="peek" style="opacity:' + op + '">' + PI[i] + '</span>';
+        }
+      }
     }
     const el = $("ticker"), box = el.parentNode;
     if (!box.clientWidth) { tickerFor = -1; return; } // hidden: rebuild when the home screen shows
