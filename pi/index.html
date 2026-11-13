@@ -89,6 +89,8 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 .card.train { grid-column: 1 / -1; gap: 8px; }
 .ticker .t3 { color: var(--pink); font-weight: normal; }
 .ticker .known { color: var(--cyan); }
+.ticker .gap { display: inline-block; width: 2.5em; }
+.ticker.static { text-align: center; cursor: default; mask-image: none; -webkit-mask-image: none; }
 /* Phone: [# number][TRAIN] on one row, AFTER MY RECORD full width below. Wider: all on one row. */
 .train-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; align-items: stretch; }
 .train-rec { grid-column: 1 / -1; }
@@ -104,6 +106,9 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 .train-go:hover, .train-rec:hover { border-color: var(--cyan); }
 .train-note { margin: 0; font-size: 17px; color: var(--dim); }
 .train-note.err { color: var(--bad); }
+.card.train.locked h2, .card.train.locked .train-row { opacity: .4; }
+.card.train.locked input, .card.train.locked button { cursor: not-allowed; }
+.card.train.locked .train-go:hover, .card.train.locked .train-rec:hover { border-color: var(--line); }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .tape .d.pre { color: var(--dim); opacity: .55; }
 .hud-mode { font-family: var(--f-display); font-size: 8px; color: #0b1a2a; background: var(--cyan); padding: 3px 5px; align-self: center; }
@@ -256,13 +261,13 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
         <p class="tip">Tip: learn π in groups of five. At digit 762 you meet the <b>Feynman point</b>, six 9s in a row.</p>
       </article>
 
-      <article class="card train" aria-labelledby="trainTitle">
+      <article class="card train" id="trainCard" aria-labelledby="trainTitle">
         <h2 id="trainTitle">TRAIN FROM DIGIT</h2>
         <form class="train-row" id="trainForm" novalidate>
           <label for="trainFrom" class="sr">Digits you already know, 1 to 1999. You start at the next one.</label>
           <span class="hash" aria-hidden="true">#</span>
           <input id="trainFrom" type="number" inputmode="numeric" min="1" max="1999" placeholder="1–1999">
-          <button class="train-go" type="submit">TRAIN</button>
+          <button class="train-go" id="trainGo" type="submit">TRAIN</button>
           <button class="train-rec" type="button" id="trainRec">AFTER MY RECORD</button>
         </form>
         <p class="train-note" id="trainErr" aria-live="polite">Doesn't affect your hi-score.</p>
@@ -380,6 +385,13 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
   }
   function renderHome() {
     if (typeof buildTicker === "function") buildTicker();
+    // Training unlocks after the first scored run
+    const locked = stats.best < 1;
+    $("trainCard").classList.toggle("locked", locked);
+    ["trainFrom", "trainGo", "trainRec"].forEach((id) => { $(id).disabled = locked; });
+    const note = $("trainErr");
+    note.classList.remove("err");
+    note.textContent = locked ? "Play a round first to unlock training." : "Doesn't affect your hi-score.";
     $("hiNum").textContent = pad3(stats.best);
     $("stDate").textContent = fmtDate(stats.bestDate);
     $("stLast").textContent = stats.last == null ? "—" : stats.last + " digits";
@@ -388,20 +400,25 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
       ? "Beat your record of " + stats.best + " digit" + (stats.best === 1 ? "" : "s")
       : "No record yet. Your first run sets one.";
   }
-  // Ticker text: digits you already know (up to your record) are highlighted
-  let tickerMeasure = () => {}, tickerFor = -1;
-  function buildTicker() {
+  // Ticker text: only the digits you've unlocked (up to your record).
+  // Starts as a lone 3; while it fits it sits still and centred, and once it's
+  // wider than the bar it starts scrolling (and can be swiped).
+  let tickerMeasure = () => {}, tickerFor = -1, tickerStatic = true;
+  function buildTicker(force) {
     const known = Math.min(stats.best, MAX);
-    if (known === tickerFor) return;
+    if (known === tickerFor && !force) return;
     tickerFor = known;
-    const len = Math.min(MAX, Math.max(120, Math.ceil((known + 30) / 5) * 5));
-    let html = '<b class="t3">3</b>.';
-    for (let g = 0; g < len; g += 5) {
-      const grp = PI.slice(g, g + 5);
-      const k = Math.max(0, Math.min(5, known - g));
-      html += (k ? '<span class="known">' + grp.slice(0, k) + '</span>' : '') + grp.slice(k) + ' ';
+    let html = '<b class="t3">3</b>';
+    if (known > 0) {
+      html += '.<span class="known">';
+      for (let g = 0; g < known; g += 5) html += PI.slice(g, Math.min(g + 5, known)) + (g + 5 < known ? ' ' : '');
+      html += '</span>';
     }
-    $("ticker").innerHTML = html + html;
+    const el = $("ticker"), box = el.parentNode;
+    el.innerHTML = html;
+    tickerStatic = el.scrollWidth <= box.clientWidth - 24;
+    box.classList.toggle("static", tickerStatic);
+    if (!tickerStatic) el.innerHTML = html + '<span class="gap"></span>' + html + '<span class="gap"></span>';
     tickerMeasure();
   }
   buildTicker();
@@ -415,6 +432,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     tickerMeasure = measure;
     function frame(t) {
       const dt = Math.min(50, t - (lastT || t)); lastT = t;
+      if (tickerStatic) { el.style.transform = "none"; x = 0; requestAnimationFrame(frame); return; }
       if (!dragging) {
         if (Math.abs(vel) > 0.02) { x += vel * dt; vel *= Math.pow(0.996, dt); }
         else if (!reduce) x += AUTO * dt;
@@ -424,6 +442,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
       requestAnimationFrame(frame);
     }
     box.addEventListener("pointerdown", (e) => {
+      if (tickerStatic) return;
       dragging = true; lastX = e.clientX; lastMove = performance.now(); vel = 0;
       try { box.setPointerCapture(e.pointerId); } catch (err) {}
     });
@@ -437,8 +456,8 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     box.addEventListener("pointerup", release);
     box.addEventListener("pointercancel", release);
     measure();
-    try { document.fonts && document.fonts.ready.then(measure); } catch (e) {}
-    window.addEventListener("resize", measure);
+    try { document.fonts && document.fonts.ready.then(() => buildTicker(true)); } catch (e) {}
+    window.addEventListener("resize", () => buildTicker(true));
     requestAnimationFrame(frame);
   })();
 
@@ -640,7 +659,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     startGame(n); // n digits are filled in; play starts at digit #(n + 1)
   }
   if (stats.trainFrom) $("trainFrom").value = stats.trainFrom;
-  $("trainForm").addEventListener("submit", (ev) => { ev.preventDefault(); trainAt($("trainFrom").value); });
+  $("trainForm").addEventListener("submit", (ev) => { ev.preventDefault(); if (stats.best >= 1) trainAt($("trainFrom").value); });
   $("trainRec").addEventListener("click", () => {
     if (stats.best < 1) { startGame(0); return; } // no record yet: train from the first digit
     trainAt(Math.min(MAX - 1, stats.best));
