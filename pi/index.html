@@ -106,6 +106,9 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 .foot { display: flex; justify-content: space-between; align-items: center; color: var(--dim); font-size: 18px; gap: 10px; }
 .chip { background: transparent; border: 2px solid var(--line); padding: 6px 10px; font-size: 18px; color: var(--dim); }
 .chip[aria-pressed="true"] { color: var(--good); border-color: var(--good); }
+.feedback { margin: 0; text-align: center; color: var(--dim); font-size: 18px; opacity: .8; }
+.feedback a { color: var(--cyan); text-decoration: none; border-bottom: 1px dashed currentColor; }
+.feedback a:hover, .feedback a:focus-visible { border-bottom-style: solid; }
 @media (max-width: 500px) {
   .dash { grid-template-columns: 1fr; }
   .logo .pi { font-size: 52px; }
@@ -239,6 +242,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
         <button class="chip" id="soundBtn" aria-pressed="true">SOUND ON</button>
       </span>
     </footer>
+    <p class="feedback">Ideas or feedback? Write to <a href="mailto:hello@luciopuccio.com?subject=Pi%20Arcade%20feedback">hello@luciopuccio.com</a></p>
   </section>
 
   <!-- GAME -->
