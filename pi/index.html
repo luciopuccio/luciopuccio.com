@@ -87,7 +87,8 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 .card h2 { margin: 0; font-family: var(--f-display); font-size: 11px; color: var(--dim); letter-spacing: .1em; }
 .card.play { grid-column: 1 / -1; border-color: var(--pink); align-items: center; text-align: center; gap: 12px; }
 .card.train { grid-column: 1 / -1; gap: 8px; }
-.ticker .t3 { color: var(--amber); font-weight: normal; }
+.ticker .t3 { color: var(--pink); font-weight: normal; }
+.ticker .known { color: var(--cyan); }
 /* Phone: [# number][TRAIN] on one row, AFTER MY RECORD full width below. Wider: all on one row. */
 .train-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; align-items: stretch; }
 .train-rec { grid-column: 1 / -1; }
@@ -378,6 +379,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     try { return new Date(iso).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" }); } catch (e) { return "—"; }
   }
   function renderHome() {
+    if (typeof buildTicker === "function") buildTicker();
     $("hiNum").textContent = pad3(stats.best);
     $("stDate").textContent = fmtDate(stats.bestDate);
     $("stLast").textContent = stats.last == null ? "—" : stats.last + " digits";
@@ -386,8 +388,23 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
       ? "Beat your record of " + stats.best + " digit" + (stats.best === 1 ? "" : "s")
       : "No record yet. Your first run sets one.";
   }
-  const tick = '<b class="t3">3.</b>' + PI.slice(0, 120).replace(/(\d{5})/g, "$1 ");
-  $("ticker").innerHTML = tick + " " + tick + " ";
+  // Ticker text: digits you already know (up to your record) are highlighted
+  let tickerMeasure = () => {}, tickerFor = -1;
+  function buildTicker() {
+    const known = Math.min(stats.best, MAX);
+    if (known === tickerFor) return;
+    tickerFor = known;
+    const len = Math.min(MAX, Math.max(120, Math.ceil((known + 30) / 5) * 5));
+    let html = '<b class="t3">3</b>.';
+    for (let g = 0; g < len; g += 5) {
+      const grp = PI.slice(g, g + 5);
+      const k = Math.max(0, Math.min(5, known - g));
+      html += (k ? '<span class="known">' + grp.slice(0, k) + '</span>' : '') + grp.slice(k) + ' ';
+    }
+    $("ticker").innerHTML = html + html;
+    tickerMeasure();
+  }
+  buildTicker();
   // Ticker: drifts left on its own; drag or swipe it either way, with a little momentum
   (function () {
     const box = document.querySelector(".ticker"), el = $("ticker");
@@ -395,6 +412,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     const AUTO = -0.025; // px per ms
     let x = 0, half = 0, dragging = false, lastX = 0, lastMove = 0, vel = 0, lastT = 0;
     const measure = () => { half = el.scrollWidth / 2; };
+    tickerMeasure = measure;
     function frame(t) {
       const dt = Math.min(50, t - (lastT || t)); lastT = t;
       if (!dragging) {
