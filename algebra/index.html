@@ -120,7 +120,7 @@ main{min-width:0;padding-block:28px 64px;padding-left:40px;padding-right:max(16p
 .tgrid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:24px;align-items:start}
 .learn{display:flex;flex-direction:column;gap:14px}
 .learn .sum{font-size:16px;margin:0;max-width:62ch}
-.key{background:var(--accent-soft);border-radius:10px;padding:12px 14px;overflow-x:auto}
+.key{background:var(--accent-soft);border-radius:10px;padding:12px 14px;overflow-x:auto;overflow-y:hidden}
 .key .eyebrow{display:block;margin-bottom:4px;color:var(--accent)}
 details.fold{border:1px solid var(--line);border-radius:10px;background:var(--sheet)}
 details.fold>summary{cursor:pointer;padding:10px 14px;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center}
@@ -129,7 +129,7 @@ details.fold>summary::after{content:"+";font-family:var(--mono);color:var(--mute
 details.fold[open]>summary::after{content:"–"}
 details.fold>div{padding:0 14px 14px;font-size:15px}
 .steps{margin:0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:8px}
-.steps li{counter-increment:s;display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px;overflow-x:auto}
+.steps li{counter-increment:s;display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px;overflow-x:auto;overflow-y:hidden}
 .steps li::before{content:counter(s);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:6px;height:22px;display:grid;place-items:center;margin-top:2px}
 .exq{margin:0 0 10px;font-weight:500}
 .fig{display:block;width:340px;max-width:100%;height:auto;margin:12px 0 2px}
@@ -150,7 +150,7 @@ details.fold>div{padding:0 14px 14px;font-size:15px}
 .qlabel .tag{background:var(--mark);color:#1d1600;padding:1px 8px;border-radius:4px;font-weight:600}
 .qlabel .lv{border:1px solid var(--line);background:var(--sheet);padding:0 7px;border-radius:4px}
 .qlabel a{color:var(--muted)}
-.q{font-size:20px;line-height:1.6;overflow-x:auto;background:var(--sheet);display:inline-block;max-width:100%;padding:2px 4px}
+.q{font-size:20px;line-height:1.6;overflow-x:auto;overflow-y:hidden;background:var(--sheet);display:inline-block;max-width:100%;padding:2px 4px}
 .q.word{font-size:18px}
 .answer{padding:16px;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line)}
 .arow{display:flex;gap:10px;flex-wrap:wrap}
@@ -172,7 +172,7 @@ details.fold>div{padding:0 14px 14px;font-size:15px}
 .actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .sol{border-top:1px solid var(--line);padding:16px}
 .sol h4{margin:0 0 10px;font-family:var(--display);font-size:16px}
-.final{margin-top:12px;padding:10px 12px;border:1px dashed var(--accent);border-radius:9px;overflow-x:auto}
+.final{margin-top:12px;padding:10px 12px;border:1px dashed var(--accent);border-radius:9px;overflow-x:auto;overflow-y:hidden}
 .method{margin-top:10px;font-size:14px;color:var(--muted)}
 .method b{color:var(--ink)}
 .ai{border-top:1px solid var(--line);padding:0}
@@ -192,6 +192,12 @@ details.fold>div{padding:0 14px 14px;font-size:15px}
 .rlist li{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}
 .rlist .y{color:var(--good);font-weight:600}.rlist .n{color:var(--bad);font-weight:600}
 .empty{padding:30px}
+.multi{display:flex;gap:10px 14px;flex-wrap:wrap;flex:1 1 220px;min-width:0}.multi[hidden]{display:none}
+.mf{display:flex;align-items:center;gap:8px;flex:1 1 130px;min-width:0}.mf span{font-family:var(--mono);font-size:17px;white-space:nowrap}
+.arow .mf input{flex:1 1 60px;min-width:0}
+.arow .apre{font-family:var(--mono);font-size:17px;align-self:center;white-space:nowrap;color:var(--ink)}
+.arow .apre[hidden]{display:none}
+.fc{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}.fcr{display:grid;grid-template-columns:76px minmax(0,1fr) 22px;gap:8px;align-items:center;font-size:13px}.fcr i{display:block;height:10px;border-radius:5px;background:var(--accent)}.fcr i.z{background:var(--grid)}.fcr.now i{background:var(--mark)}.fcr.now i.z{background:var(--grid)}.fcr b{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
 .lk{width:11px;height:13px;flex:none;fill:var(--muted);stroke:var(--muted);stroke-width:1.5}.lk path{fill:none}
 .tlink.locked,.prow.locked{color:var(--muted)}
 .prow.locked .pt{color:var(--muted)}
@@ -421,10 +427,11 @@ function clean(s){return String(s).replace(/[−–]/g,'-').replace(/[×·]/g,'*
 function tokenize(s){const re=/\s*(\d*\.\d+|\d+|sqrt|sin|cos|tan|ln|log|pi|[a-zA-Z]|[-+*/^()])/y;const out=[];let m;re.lastIndex=0;
   while(re.lastIndex<s.length){const i=re.lastIndex;m=re.exec(s);if(!m){if(/^\s*$/.test(s.slice(i)))break;throw Error('bad')}out.push(m[1])}
   const t=[];const isVal=x=>/^[\d.]/.test(x)||/^[a-zA-Z]$/.test(x)||x==='pi'||x===')';const isStart=x=>/^[\d.]/.test(x)||/^[a-zA-Z]+$/.test(x)||x==='(';
-  for(let i=0;i<out.length;i++){const skip=i>=3&&out[i-2]==='^'&&FUNCS.includes(out[i-3]);if(i&&!skip&&isVal(out[i-1])&&isStart(out[i])&&!(/^[\d.]/.test(out[i-1])&&/^[\d.]/.test(out[i])))t.push('*');t.push(out[i])}return t}
+  for(let i=0;i<out.length;i++){const skip=i>=3&&out[i-2]==='^'&&FUNCS.includes(out[i-3]);if(i&&!skip&&isVal(out[i-1])&&isStart(out[i])&&!(/^[\d.]/.test(out[i-1])&&/^[\d.]/.test(out[i])))t.push('&');t.push(out[i])}return t}
 function compile(src,opt={}){const t=tokenize(clean(src));let i=0;const peek=()=>t[i],next=()=>t[i++];
   function expr(){let l=term();while(peek()==='+'||peek()==='-'){const o=next(),r=term(),L=l;l=o==='+'?e=>L(e)+r(e):e=>L(e)-r(e)}return l}
-  function term(){let l=unary();while(peek()==='*'||peek()==='/'){const o=next(),r=unary(),L=l;l=o==='*'?e=>L(e)*r(e):e=>L(e)/r(e)}return l}
+  function imp(){let l=unary();while(peek()==='&'){next();const r=power(),L=l;l=e=>L(e)*r(e)}return l}
+  function term(){let l=imp();while(peek()==='*'||peek()==='/'){const o=next(),r=imp(),L=l;l=o==='*'?e=>L(e)*r(e):e=>L(e)/r(e)}return l}
   function unary(){if(peek()==='-'){next();const u=unary();return e=>-u(e)}if(peek()==='+'){next();return unary()}return power()}
   function power(){const b=atom();if(peek()==='^'){next();const x=unary();return e=>Math.pow(b(e),x(e))}return b}
   function atom(){const k=next();if(k===undefined)throw Error('end');
@@ -461,7 +468,7 @@ function compare(ex,u,t){
     case 'range':{const p=parseRange(u);if(!p)return null;return p.in===t.in&&near(p.a,t.a,ex)&&near(p.b,t.b,ex)&&p.ia===t.ia&&p.ib===t.ib}
     default:{let uf,tf;try{uf=compile(rhs(u),{deg:!!ex.deg})}catch(e){return null}try{tf=compile(t,{deg:!!ex.deg})}catch(e){return false}
       const vars=ex.vars||['x'],[lo,hi]=ex.dom||[-3,3];let ok=0;
-      for(let k=0;k<80&&ok<7;k++){const env={};for(const v of vars)env[v]=lo+Math.random()*(hi-lo);const tv=tf(env);if(!isFinite(tv)||Math.abs(tv)>1e6)continue;
+      for(let k=0;k<80&&ok<7;k++){const env={};for(const v of vars){const[l2,h2]=(ex.doms&&ex.doms[v])||[lo,hi];env[v]=l2+Math.random()*(h2-l2)}const tv=tf(env);if(!isFinite(tv)||Math.abs(tv)>1e6)continue;
         const uv=uf(env);if(!isFinite(uv)||Math.abs(uv-tv)>1e-6*(1+Math.abs(tv)))return false;ok++}return ok>0}
   }}
 function check(ex,u){u=String(u||'').trim();if(!u)return{empty:1};
@@ -921,7 +928,7 @@ G.line=(R,W)=>{
       mistakes:[{a:poly([[m,'x'],[y1+m*x1,'']]),msg:T`\(c = y_1 - mx_1 = ${y1} - (${m*x1})\) (step 2).`,rev:'neg'},{a:poly([[-m,'x'],[c,'']]),msg:'Check the sign of the gradient (step 1).'}].filter(z=>z.a!==ans)}}
   const[mn,md]=R.pick([[1,1],[-1,1],[2,1],[-2,1],[3,1],[-3,1],[1,2],[-1,2],[2,3],[-3,2]]);const pn2=-md,pd2=mn;const[pN,pD]=fr(pn2,pd2);const px=pD*R.nz(-3,3),py=R.nz(-6,6),c0=R.nz(-5,5);const cc=py-pN*px/pD;
   const mT=ftex(mn,md),pTex=ftex(pN,pD),mTex=mT==='1'?'':mT==='-1'?'-':mT;
-  return{lv:3,q:T`Find the equation of the line perpendicular to \(y = ${mTex}x${sg(c0)}\) that passes through \((${px},\ ${py})\).`,kind:'expr',ans:`(${pN}/${pD})*x+(${cc})`,gr:{fns:[{e:`(${mn}/${md})*x+(${c0})`,l:'given line'},{e:`(${pN}/${pD})*x+(${cc})`,l:'perpendicular line'}],pts:[[px,py]],eq:true,xr:[px-7,px+7],grid:[1,1]},show:T`y = ${pTex==='1'?'':pTex==='-1'?'-':pTex}x${sg(cc)}`,fmt:'<code>y = -1/2x + 5</code> or <code>y = -x/2 + 5</code>',
+  return{lv:3,q:T`Find the equation of the line perpendicular to \(y = ${mTex}x${sg(c0)}\) that passes through \((${px},\ ${py})\).`,kind:'expr',ans:`(${pN}/${pD})*x+(${cc})`,gr:{fns:[{e:`(${mn}/${md})*x+(${c0})`,l:'given line'},{e:`(${pN}/${pD})*x+(${cc})`,l:'perpendicular line'}],pts:[[px,py]],eq:true,xr:[px-7,px+7],grid:[1,1]},show:T`y = ${pTex==='1'?'':pTex==='-1'?'-':pTex}x${sg(cc)}`,fmt:'<code>y = -x/2 + 5</code> or <code>y = (-1/2)x + 5</code>',
     steps:[T`Perpendicular gradients multiply to −1: \(m_2 = -1 \div ${mTex} = ${pTex}\)`,T`Substitute \((${px},\ ${py})\): \(${py} = ${pTex}(${px}) + c\), so \(c = ${cc}\)`,T`\(y = ${pTex==='1'?'':pTex==='-1'?'-':pTex}x${sg(cc)}\)`],
     mistakes:[{a:`(${mn}/${md})*x+(${py-mn*px/md})`,msg:'That’s a parallel line. Perpendicular means the negative reciprocal gradient (step 1).'},{a:`(${-pN}/${pD})*x+(${py+pN*px/pD})`,msg:'Negative reciprocal: flip the fraction and change the sign (step 1).'}]}};
 G.func=(R,W)=>{
@@ -1315,7 +1322,7 @@ G.gread=(R,W)=>{const v=R.f();const Q=sp=>plotSVG({grid:[1,1],...sp});const YR=(
       gr:{fns:[{e},{e:''+K,l:'y = '+K,dash:1}],pts:[[r1_,K],[r2_,K]],xr,yr,grid:[1,1]},
       steps:[T`Draw the horizontal line \(y = ${K}\) across the graph`,T`It meets the curve at \(x = ${r1_}\) and \(x = ${r2_}\)`,T`Check: \(${r1_}^2 ${sg(-(r1_+r2_)).trim()}\times${pn(r1_)} ${sg(r1_*r2_+K).trim()} = ${K}\) ✓`],mistakes:[]}}
   if(v<.78){const[p,q]=R.pick([[1,2],[-1,2],[2,3],[-2,3],[3,2],[-3,2],[1,3],[-1,3]]),c=R.int(-3,3);const e=`(${p}/${q})x${sgc(c)}`;const show=T`y = ${ftex(p,q)}x${c?sg(c):''}`;
-    return{lv:2,alt:`a straight line through (0, ${c}) and (${q}, ${c+p})`,q:T`The graph shows a straight line. Find its equation.`+Q({fns:[{e,l:''}],xr:[-6,6],yr:[-7,7]}),kind:'expr',ans:e,show,fmt:'<code>y = 2/3x + 1</code> or <code>y = 2x/3 + 1</code>',
+    return{lv:2,alt:`a straight line through (0, ${c}) and (${q}, ${c+p})`,q:T`The graph shows a straight line. Find its equation.`+Q({fns:[{e,l:''}],xr:[-6,6],yr:[-7,7]}),kind:'expr',ans:e,show,fmt:'<code>y = 2x/3 + 1</code> or <code>y = (2/3)x + 1</code>',
       gr:{fns:[{e,l:'line'}],pts:[[0,c],[q,c+p]],tri:[[0,c],[q,c+p]],xr:[-6,6],yr:[-7,7],grid:[1,1]},
       steps:[T`y-intercept: \(c = ${c}\)`,T`Find two points exactly on grid corners: \((0,\ ${c})\) and \((${q},\ ${c+p})\)`,T`Gradient = rise ÷ run = \(\dfrac{${p}}{${q}}\)`,T`\(${show}\)`],
       mistakes:[{a:`(${q}/${p})x${sgc(c)}`,msg:'Gradient is rise over run: the vertical change goes on top (step 3).'},{a:`(${-p}/${q})x${sgc(c)}`,msg:'Check the direction the line slopes from left to right (step 3).'}]}}
@@ -1333,6 +1340,99 @@ G.gread=(R,W)=>{const v=R.f();const Q=sp=>plotSVG({grid:[1,1],...sp});const YR=(
   return{lv:3,alt:`the exponential curve y = ${k}^x`,q:T`The graph of \(y = ${k}^x\) is shown. Use it to solve \(${k}^x = ${yv}\).`+Q({fns:[{e,l:`y = ${k}ˣ`}],xr:[-3,4],yr:[-1.5,yv+3.5]}),kind:'num',ans:b0,fmt:'e.g. <code>x = 2</code>',
     gr:{fns:[{e,l:`y = ${k}ˣ`},{e:''+yv,dash:1}],pts:[[b0,yv]],xr:[-3,4],yr:[-1.5,yv+3.5]},
     steps:[T`Draw the line \(y = ${yv}\) and read down to the x-axis where it meets the curve`,T`\(x = ${b0}\). Check: \(${k}^{${b0}} = ${yv}\) ✓`],mistakes:[{a:yv/k,msg:`Read the x-value where y = ${yv}, don’t divide (step 1).`}].filter(z=>z.a!==b0)}};
+
+
+/* ---------- rearranging formulae: generated ---------- */
+G.rearr=(R,W)=>{
+  const fmt='an expression, e.g. <code>h = 2(k - 3)/5</code> (capital letters matter; use √ for roots)';
+  const out=(lv,f,s,ans,show,vars,steps,mistakes,o={})=>({lv,q:T`Make \(${s}\) the subject of \(${f}\)`,kind:'expr',vars,dom:o.dom||[1,5],doms:o.doms,ans,show:T`${s}=${show}`,fmt,steps,mistakes:(mistakes||[]).filter(m=>m.a!==ans),method:o.method,syms:o.syms});
+  const pair=()=>R.pick([['x','y'],['p','q'],['a','b'],['t','s'],['m','n'],['r','w'],['u','v'],['c','d']]);
+  const pick=R.f();
+  /* ---- level 1 ---- */
+  const L1=[
+    ()=>{const[x,y]=pair(),a=R.int(2,9),b=R.nz(-12,12);
+      return out(1,T`${y} = ${a}${x}${sg(b)}`,x,`(${y}${sgc(-b)})/${a}`,T`\dfrac{${y}${sg(-b)}}{${a}}`,[y],
+        [T`${b>0?'Subtract':'Add'} ${Math.abs(b)} ${b>0?'from':'to'} both sides: \(${y}${sg(-b)} = ${a}${x}\)`,T`Divide by ${a}: \(${x} = \dfrac{${y}${sg(-b)}}{${a}}\)`],
+        [{a:`(${y}${sgc(b)})/${a}`,msg:`To undo ${b>0?'+':'−'}${Math.abs(b)}, do the opposite to both sides (step 1).`},{a:`${y}/${a}${sgc(-b)}`,msg:`Divide the whole of ${y} ${b>0?'−':'+'} ${Math.abs(b)} by ${a}, not just ${y}. Use a bracket (step 2).`}])},
+    ()=>{const[x,y]=pair(),a=R.int(2,9),b=R.nz(-9,9);
+      return out(1,T`${y} = \dfrac{${x}${sg(b)}}{${a}}`,x,`${a}${y}${sgc(-b)}`,T`${a}${y}${sg(-b)}`,[y],
+        [T`Multiply both sides by ${a}: \(${a}${y} = ${x}${sg(b)}\)`,T`${b>0?'Subtract':'Add'} ${Math.abs(b)}: \(${x} = ${a}${y}${sg(-b)}\)`],
+        [{a:`${a}${y}${sgc(b)}`,msg:`Moving ${b>0?'+':'−'}${Math.abs(b)} to the other side changes its sign (step 2).`},{a:`${a}*(${y}${sgc(-b)})`,msg:`Multiply by ${a} first; the ${Math.abs(b)} is only subtracted after (step 1).`}])},
+    ()=>{const[X,Y,Z]=R.pick([['P','I','V'],['V','I','R'],['F','m','a'],['D','S','T'],['A','l','w'],['W','F','d'],['M','k','g']]);const sub=R.f()<.5?Y:Z,oth=sub===Y?Z:Y;
+      return out(1,T`${X} = ${Y}${Z}`,sub,`${X}/${oth}`,T`\dfrac{${X}}{${oth}}`,[X,oth],
+        [T`\(${sub}\) is multiplied by \(${oth}\), so divide both sides by \(${oth}\)`,T`\(${sub} = \dfrac{${X}}{${oth}}\)`],
+        [{a:`${X}*${oth}`,msg:`To undo multiplying by ${oth}, divide by ${oth} (step 1).`},{a:`${oth}/${X}`,msg:`Check by substituting numbers: the result should be ${X} ÷ ${oth} (step 2).`}])},
+    ()=>{const[X,Y,Z]=R.pick([['s','d','t'],['d','m','V'],['P','F','A'],['I','V','R'],['v','D','T']]);
+      return out(1,T`${X} = \dfrac{${Y}}{${Z}}`,Y,`${X}*${Z}`,T`${X}${Z}`,[X,Z],
+        [T`\(${Y}\) is divided by \(${Z}\), so multiply both sides by \(${Z}\)`,T`\(${Y} = ${X}${Z}\)`],
+        [{a:`${X}/${Z}`,msg:`To undo dividing by ${Z}, multiply by ${Z} (step 1).`}])},
+    ()=>{const[X,Y,Z]=R.pick([['v','u','a'],['T','A','B'],['C','F','k'],['y','c','m']]);const sub=R.f()<.5?Y:Z,oth=sub===Y?Z:Y;
+      return out(1,T`${X} = ${Y} + ${Z}t`,sub,sub===Y?`${X}-${Z}*t`:`(${X}-${Y})/t`,sub===Y?T`${X} - ${Z}t`:T`\dfrac{${X} - ${Y}}{t}`,[X,oth,'t'],
+        sub===Y?[T`Subtract \(${Z}t\) from both sides: \(${Y} = ${X} - ${Z}t\)`]:[T`Subtract \(${Y}\): \(${X} - ${Y} = ${Z}t\)`,T`Divide by \(t\): \(${Z} = \dfrac{${X} - ${Y}}{t}\)`],
+        sub===Y?[{a:`${X}+${Z}*t`,msg:`To undo + ${Z}t, subtract it (step 1).`}]:[{a:`${X}-${Y}/t`,msg:`Divide the whole of ${X} − ${Y} by t. Use a bracket (step 2).`},{a:`(${X}+${Y})/t`,msg:`To undo + ${Y}, subtract it (step 1).`}])},
+  ];
+  /* ---- level 2 ---- */
+  const L2=[
+    ()=>{const[x,y]=pair(),a=R.int(2,7),b=R.nz(-8,8),c=R.nz(-9,9);
+      return out(2,T`${y} = ${a}(${x}${sg(-b)})${sg(c)}`,x,`(${y}${sgc(-c)})/${a}${sgc(b)}`,T`\dfrac{${y}${sg(-c)}}{${a}}${sg(b)}`,[y],
+        [T`${c>0?'Subtract':'Add'} ${Math.abs(c)}: \(${y}${sg(-c)} = ${a}(${x}${sg(-b)})\)`,T`Divide by ${a}: \(\dfrac{${y}${sg(-c)}}{${a}} = ${x}${sg(-b)}\)`,T`${b>0?'Add':'Subtract'} ${Math.abs(b)}: \(${x} = \dfrac{${y}${sg(-c)}}{${a}}${sg(b)}\)`],
+        [{a:`(${y}${sgc(-c)})/${a}${sgc(-b)}`,msg:`Inside the bracket ${x} has ${Math.abs(b)} ${b>0?'subtracted':'added'}, so ${b>0?'add':'subtract'} it back (step 3).`},{a:`(${y}${sgc(c)})/${a}${sgc(b)}`,msg:`To undo ${c>0?'+':'−'}${Math.abs(c)}, do the opposite (step 1).`}],
+        {method:'Undo the outside first: the constant, then the multiplier, then whatever is inside the bracket.'})},
+    ()=>{const[x,y]=pair(),a=R.int(2,6),b=R.nz(-9,9),c=R.int(2,6);
+      return out(2,T`${y} = \dfrac{${a}${x}${sg(b)}}{${c}}`,x,`(${c}${y}${sgc(-b)})/${a}`,T`\dfrac{${c}${y}${sg(-b)}}{${a}}`,[y],
+        [T`Multiply by ${c}: \(${c}${y} = ${a}${x}${sg(b)}\)`,T`${b>0?'Subtract':'Add'} ${Math.abs(b)}: \(${c}${y}${sg(-b)} = ${a}${x}\)`,T`Divide by ${a}: \(${x} = \dfrac{${c}${y}${sg(-b)}}{${a}}\)`],
+        [{a:`(${y}${sgc(-b)})/${a}`,msg:`Multiply both sides by ${c} first to clear the fraction (step 1).`},{a:`(${c}${y}${sgc(b)})/${a}`,msg:`To undo ${b>0?'+':'−'}${Math.abs(b)}, do the opposite (step 2).`}])},
+    ()=>{const[x,y]=pair(),k=R.pick([6,8,10,12,15,18,20,24,30,36]);
+      return out(2,T`${y} = \dfrac{${k}}{${x}}`,x,`${k}/${y}`,T`\dfrac{${k}}{${y}}`,[y],
+        [T`Multiply both sides by \(${x}\): \(${x}${y} = ${k}\)`,T`Divide by \(${y}\): \(${x} = \dfrac{${k}}{${y}}\)`],
+        [{a:`${k}*${y}`,msg:`Multiply both sides by ${x} first, then divide by ${y} (step 1).`},{a:`${y}/${k}`,msg:`Check with numbers: if ${y} = 2 then ${x} must be ${k/2} (step 2).`}])},
+    ()=>{const v=R.pick([['A','b','h'],['A','h','b']]);const[A,s,o]=v;
+      return out(2,T`A = \tfrac12 bh`,s,`2*A/${o}`,T`\dfrac{2A}{${o}}`,['A',o],[T`Multiply by 2: \(2A = bh\)`,T`Divide by \(${o}\): \(${s} = \dfrac{2A}{${o}}\)`],[{a:`A/(2*${o})`,msg:'To undo × ½, multiply by 2 (step 1).'}])},
+    ()=>{const s=R.pick(['l','w']),o=s==='l'?'w':'l';
+      return out(2,T`P = 2l + 2w`,s,`(P-2*${o})/2`,T`\dfrac{P - 2${o}}{2}`,['P',o],[T`Subtract \(2${o}\): \(P - 2${o} = 2${s}\)`,T`Divide by 2: \(${s} = \dfrac{P - 2${o}}{2}\), which also equals \(\dfrac P2 - ${o}\)`],
+        [{a:`P/2-2*${o}`,msg:`Dividing by 2 halves every term, including 2${o} (step 2).`},{a:`P-2*${o}/2`,msg:`Divide the whole of P − 2${o} by 2 (step 2).`}])},
+    ()=>out(2,T`F = \tfrac95 C + 32`,'C','5*(F-32)/9',T`\dfrac{5(F - 32)}{9}`,['F'],[T`Subtract 32: \(F - 32 = \tfrac95 C\)`,T`Multiply by \(\tfrac59\): \(C = \dfrac{5(F - 32)}{9}\)`],
+        [{a:'5*F/9-32',msg:'Undo the + 32 first, then the × 9/5 (step 1).'},{a:'9*(F-32)/5',msg:'To undo × 9/5, multiply by 5/9 (step 2).'}],{dom:[40,200]}),
+    ()=>{const s=R.pick(['R','T','P']),o=['P','R','T'].filter(z=>z!==s);
+      return out(2,T`I = \dfrac{PRT}{100}`,s,`100*I/(${o[0]}*${o[1]})`,T`\dfrac{100I}{${o[0]}${o[1]}}`,['I',...o],[T`Multiply by 100: \(100I = PRT\)`,T`Divide by \(${o[0]}${o[1]}\): \(${s} = \dfrac{100I}{${o[0]}${o[1]}}\)`],
+        [{a:`100*I/${o[0]}*${o[1]}`,msg:`Divide by the product ${o[0]}${o[1]}, so both go on the bottom (step 2).`},{a:`I/(100*${o[0]}*${o[1]})`,msg:'To undo ÷ 100, multiply by 100 (step 1).'}])},
+    ()=>{const s=R.pick(['m','x']),o=s==='m'?'x':'m';
+      return out(2,T`y = mx + c`,s,`(y-c)/${o}`,T`\dfrac{y - c}{${o}}`,['y','c',o],[T`Subtract \(c\): \(y - c = mx\)`,T`Divide by \(${o}\): \(${s} = \dfrac{y - c}{${o}}\)`],[{a:`y/${o}-c`,msg:`Subtract c before dividing by ${o} (step 1).`},{a:`(y+c)/${o}`,msg:'To undo + c, subtract c (step 1).'}])},
+    ()=>out(2,T`V = \tfrac13\pi r^2 h`,'h','3*V/(pi*r^2)',T`\dfrac{3V}{\pi r^2}`,['V','r'],[T`Multiply by 3: \(3V = \pi r^2 h\)`,T`Divide by \(\pi r^2\): \(h = \dfrac{3V}{\pi r^2}\)`],[{a:'V/(3*pi*r^2)',msg:'To undo × ⅓, multiply by 3 (step 1).'}],{syms:['π','²']}),
+    ()=>out(2,T`v^2 = u^2 + 2as`,R.pick(['a','s'])==='a'?'a':'s',null,null,null,null,null),
+  ];
+  /* ---- level 3 ---- */
+  const L3=[
+    ()=>out(3,T`E = \tfrac12 mv^2`,'v','sqrt(2*E/m)',T`\sqrt{\dfrac{2E}{m}}`,['E','m'],[T`Multiply by 2: \(2E = mv^2\)`,T`Divide by \(m\): \(v^2 = \dfrac{2E}{m}\)`,T`Square-root: \(v = \sqrt{\dfrac{2E}{m}}\)`],
+      [{a:'2*E/m',msg:T`That’s \(v^2\). The last step is a square root (step 3).`},{a:'sqrt(E/(2*m))',msg:'To undo × ½, multiply by 2 (step 1).'}],{syms:['√']}),
+    ()=>out(3,T`A = \pi r^2`,'r','sqrt(A/pi)',T`\sqrt{\dfrac{A}{\pi}}`,['A'],[T`Divide by \(\pi\): \(r^2 = \dfrac{A}{\pi}\)`,T`Square-root: \(r = \sqrt{\dfrac{A}{\pi}}\)`],[{a:'A/pi',msg:T`That’s \(r^2\). Square-root it (step 2).`},{a:'sqrt(A)/pi',msg:'Divide by π before square-rooting, so π goes under the root (step 2).'}],{syms:['√','π']}),
+    ()=>out(3,T`v^2 = u^2 + 2as`,'u','sqrt(v^2-2*a*s)',T`\sqrt{v^2 - 2as}`,['v','a','s'],[T`Subtract \(2as\): \(u^2 = v^2 - 2as\)`,T`Square-root: \(u = \sqrt{v^2 - 2as}\)`],[{a:'v-sqrt(2*a*s)',msg:T`\(\sqrt{v^2 - 2as}\) is not \(v - \sqrt{2as}\): you can’t square-root term by term (step 2).`},{a:'v^2-2*a*s',msg:T`That’s \(u^2\). Square-root it (step 2).`}],{doms:{v:[8,12],a:[.5,2],s:[.5,2]},syms:['√','²']}),
+    ()=>out(3,T`V = \tfrac13\pi r^2 h`,'r','sqrt(3*V/(pi*h))',T`\sqrt{\dfrac{3V}{\pi h}}`,['V','h'],[T`Multiply by 3: \(3V = \pi r^2 h\)`,T`Divide by \(\pi h\): \(r^2 = \dfrac{3V}{\pi h}\)`,T`Square-root: \(r = \sqrt{\dfrac{3V}{\pi h}}\)`],[{a:'3*V/(pi*h)',msg:T`That’s \(r^2\). Square-root it (step 3).`}],{syms:['√','π']}),
+    ()=>{const s=R.pick(['l','g']);return s==='l'?out(3,T`T = 2\pi\sqrt{\dfrac{l}{g}}`,'l','g*T^2/(4*pi^2)',T`\dfrac{gT^2}{4\pi^2}`,['T','g'],[T`Divide by \(2\pi\): \(\dfrac{T}{2\pi} = \sqrt{\dfrac lg}\)`,T`Square both sides: \(\dfrac{T^2}{4\pi^2} = \dfrac lg\)`,T`Multiply by \(g\): \(l = \dfrac{gT^2}{4\pi^2}\)`],[{a:'g*T/(2*pi)',msg:'To undo the square root, square both sides, including the 2π (step 2).'},{a:'g*T^2/(2*pi)',msg:T`Squaring \(2\pi\) gives \(4\pi^2\) (step 2).`}],{syms:['π','²']})
+      :out(3,T`T = 2\pi\sqrt{\dfrac{l}{g}}`,'g','4*pi^2*l/T^2',T`\dfrac{4\pi^2 l}{T^2}`,['T','l'],[T`Divide by \(2\pi\) and square: \(\dfrac{T^2}{4\pi^2} = \dfrac lg\)`,T`Flip both sides: \(\dfrac{4\pi^2}{T^2} = \dfrac gl\)`,T`Multiply by \(l\): \(g = \dfrac{4\pi^2 l}{T^2}\)`],[{a:'T^2*l/(4*pi^2)',msg:'g is on the bottom, so the fraction flips (step 2).'}],{syms:['π','²']})},
+    ()=>{const[x,y]=pair(),a=R.int(2,5),b=R.nz(-9,9);
+      return out(3,T`${y} = ${a}${x}^2${sg(b)}`,x,`sqrt((${y}${sgc(-b)})/${a})`,T`\sqrt{\dfrac{${y}${sg(-b)}}{${a}}}`,[y],[T`${b>0?'Subtract':'Add'} ${Math.abs(b)}: \(${y}${sg(-b)} = ${a}${x}^2\)`,T`Divide by ${a}: \(${x}^2 = \dfrac{${y}${sg(-b)}}{${a}}\)`,T`Square-root (taking the positive root): \(${x} = \sqrt{\dfrac{${y}${sg(-b)}}{${a}}}\)`],
+        [{a:`(${y}${sgc(-b)})/${a}`,msg:T`That’s \(${x}^2\). Square-root it (step 3).`},{a:`sqrt(${y}${sgc(-b)})/${a}`,msg:`Divide by ${a} before square-rooting (step 2).`}],{dom:[12,30],syms:['√']})},
+    ()=>{const[x,y]=pair(),a=R.nz(-9,9);
+      return out(3,T`${y} = \sqrt{${x}${sg(a)}}`,x,`${y}^2${sgc(-a)}`,T`${y}^2${sg(-a)}`,[y],[T`Square both sides: \(${y}^2 = ${x}${sg(a)}\)`,T`${a>0?'Subtract':'Add'} ${Math.abs(a)}: \(${x} = ${y}^2${sg(-a)}\)`],[{a:`(${y}${sgc(-a)})^2`,msg:'Square first, then deal with the number (step 1).'},{a:`${y}^2${sgc(a)}`,msg:`Moving ${a>0?'+':'−'}${Math.abs(a)} across changes its sign (step 2).`}],{syms:['²']})},
+    ()=>{const[x,y]=pair(),a=R.nz(-6,6),b=R.int(2,7);let c;do c=R.nz(-9,9);while(c===a);
+      return out(3,T`${x}${y}${sg(a)} = ${b}${x}${sg(c)}`,x,`(${c}${sgc(-a)})/(${y}-${b})`,T`\dfrac{${c-a}}{${y} - ${b}}`,[y],
+        [T`Collect the \(${x}\) terms on one side: \(${x}${y} - ${b}${x} = ${c}${sg(-a)}\)`,T`Factorise out \(${x}\): \(${x}(${y} - ${b}) = ${c-a}\)`,T`Divide: \(${x} = \dfrac{${c-a}}{${y} - ${b}}\)`],
+        [{a:`(${c-a})/(${y}+${b})`,msg:`Subtracting ${b}${x} gives ${x}(${y} − ${b}) (step 2).`},{a:`(${c+a})/(${y}-${b})`,msg:`Moving ${a>0?'+':'−'}${Math.abs(a)} across changes its sign (step 1).`}],
+        {method:T`When the subject appears twice, collect both terms on one side and factorise it out.`,dom:[b+1,b+6]})},
+    ()=>{const[x,y]=pair(),a=R.int(1,8),b=R.int(1,8);
+      return out(3,T`${y} = \dfrac{${x} + ${a}}{${x} - ${b}}`,x,`(${a}+${b}*${y})/(${y}-1)`,T`\dfrac{${b}${y} + ${a}}{${y} - 1}`,[y],
+        [T`Multiply by \(${x} - ${b}\): \(${y}(${x} - ${b}) = ${x} + ${a}\)`,T`Expand: \(${x}${y} - ${b}${y} = ${x} + ${a}\)`,T`Collect \(${x}\) terms: \(${x}${y} - ${x} = ${b}${y} + ${a}\)`,T`Factorise: \(${x}(${y} - 1) = ${b}${y} + ${a}\), so \(${x} = \dfrac{${b}${y} + ${a}}{${y} - 1}\)`],
+        [{a:`(${a}-${b}*${y})/(${y}-1)`,msg:`Moving −${b}${y} across makes it +${b}${y} (step 3).`},{a:`(${a}+${b}*${y})/(${y}+1)`,msg:`Subtracting ${x} from ${x}${y} leaves ${x}(${y} − 1) (step 4).`}],
+        {method:'Clear the fraction, then collect every term containing the subject on one side and factorise.',dom:[2,6]})},
+    ()=>out(3,T`s = \tfrac12(u + v)t`,R.pick(['u','v'])==='u'?'u':'v',null,null,null,null,null),
+  ];
+  let f=(pick<.36?R.pick(L1):pick<.7?R.pick(L2):R.pick(L3))();
+  if(f.ans===null){const s=f.q.match(/subject of/)&&f.q;const sub=f.q.match(/Make \\\((\w)\\\)/)[1];
+    if(f.q.includes('v^2 = u^2 + 2as')){f=sub==='a'?out(2,T`v^2 = u^2 + 2as`,'a','(v^2-u^2)/(2*s)',T`\dfrac{v^2 - u^2}{2s}`,['v','u','s'],[T`Subtract \(u^2\): \(v^2 - u^2 = 2as\)`,T`Divide by \(2s\): \(a = \dfrac{v^2 - u^2}{2s}\)`],[{a:'(v-u)^2/(2*s)',msg:T`\(v^2 - u^2\) is not \((v - u)^2\) (step 1).`},{a:'(v^2-u^2)/2*s',msg:'Divide by the whole of 2s: it goes on the bottom (step 2).'}],{syms:['²']})
+      :out(2,T`v^2 = u^2 + 2as`,'s','(v^2-u^2)/(2*a)',T`\dfrac{v^2 - u^2}{2a}`,['v','u','a'],[T`Subtract \(u^2\): \(v^2 - u^2 = 2as\)`,T`Divide by \(2a\): \(s = \dfrac{v^2 - u^2}{2a}\)`],[{a:'(v-u)^2/(2*a)',msg:T`\(v^2 - u^2\) is not \((v - u)^2\) (step 1).`}],{syms:['²']})}
+    else{const o=sub==='u'?'v':'u';f=out(3,T`s = \tfrac12(u + v)t`,sub,`2*s/t-${o}`,T`\dfrac{2s}{t} - ${o}`,['s','t',o],[T`Multiply by 2: \(2s = (u + v)t\)`,T`Divide by \(t\): \(\dfrac{2s}{t} = u + v\)`,T`Subtract \(${o}\): \(${sub} = \dfrac{2s}{t} - ${o}\)`],[{a:`(2*s-${o})/t`,msg:`Divide by t before subtracting ${o}: ${o} isn’t multiplied by t on its own (step 2).`},{a:`s/(2*t)-${o}`,msg:'To undo × ½, multiply by 2 (step 1).'}])}}
+  return f};
 
 /* ---------- curriculum ---------- */
 const UNITS=['Number foundations','Expressions','Linear equations','Inequalities','Simultaneous equations','Quadratics','Indices & surds','Sequences & graphs','Functions & polynomials','Exponentials & logs','Trigonometry'];
@@ -1393,8 +1493,19 @@ const $=(s,r=document)=>r.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const DAY=864e5,IV=[1,3,7,21,60],CP_N=8,CP_PASS=6;
 let store={topics:{},cp:{},last:null,updated:0},dbRef=null,saveT=null,saving=false,dirty=false,syncState='local';
-function norm(){store.topics=store.topics||{};store.cp=store.cp||{};for(const t of Object.values(store.topics))if(t&&t.sr&&t.sr.due)t.sr.due=dayStart(t.sr.due)}
-function loadLocal(){try{const s=JSON.parse(localStorage.getItem('algebra-path')||'null');if(s&&s.topics)store=s}catch(e){}norm()}
+function norm(){store.topics=store.topics||{};store.cp=store.cp||{};let ch=false;
+  for(const t of Object.values(store.topics))if(t&&t.sr&&t.sr.due){const d=dayStart(t.sr.due);if(d!==t.sr.due){t.sr.due=d;ch=true}}
+  if((store.rvV||0)<2){for(const t of Object.values(store.topics)){if(!t||!t.rv||!t.sr)continue;
+      if(t.rv.c>=1){t.sr.lvl=Math.min(t.sr.lvl+1,IV.length-1);t.sr.due=dayStart(Date.now()+IV[t.sr.lvl]*DAY);t.rv=null}
+      else if(t.rv.n>=2){t.sr.lvl=0;t.sr.due=dayStart(Date.now()+DAY);t.rv=null}else t.rv={n:Math.min(t.rv.n,1),c:0}}
+    const fut=Object.entries(store.topics).filter(([k,t])=>t&&t.sr&&t.sr.due>Date.now()).sort((a,b)=>a[1].sr.due-b[1].sr.due);
+    for(const[k,t]of fut)t.sr.due=schedule(k,IV[t.sr.lvl]||1,t.sr.due);store.rvV=2;ch=true}
+  return ch}
+const WIN=d=>{if(d<=1)return[0,1];if(d<=3)return[-1,1];const w=Math.max(1,Math.round(d*.15));return[-w,w]};
+function dueLoad(skip){const m={};for(const[k,t]of Object.entries(store.topics))if(k!==skip&&t&&t.sr&&t.sr.due>Date.now())m[t.sr.due]=(m[t.sr.due]||0)+1;return m}
+function schedule(id,days,target){const load=dueLoad(id),tgt=dayStart(target??(Date.now()+days*DAY)),first=dayStart(Date.now()+DAY),[a,b]=WIN(days);let best=null,bl=1e9,bd=1e9;
+  for(let k=a;k<=b;k++){const d=dayStart(tgt+k*DAY+6*3600e3);if(d<first)continue;const l=load[d]||0;if(l<bl||(l===bl&&Math.abs(k)<bd)){best=d;bl=l;bd=Math.abs(k)}}return best??Math.max(tgt,first)}
+function loadLocal(){try{const s=JSON.parse(localStorage.getItem('algebra-path')||'null');if(s&&s.topics)store=s}catch(e){}if(norm())saveLocal()}
 function saveLocal(){try{localStorage.setItem('algebra-path',JSON.stringify(store))}catch(e){}}
 function setSync(s){syncState=s;$('#sync').textContent=s==='cloud'?'Progress saved to your account':s==='error'?'Couldn’t reach your account; saved in this browser':'Progress saved in this browser'}
 function persist(){store.updated=Date.now();saveLocal();if(dbRef){clearTimeout(saveT);saveT=setTimeout(flush,1200)}}
@@ -1402,7 +1513,7 @@ async function flush(){if(!dbRef)return;if(saving){dirty=true;return}saving=true
 async function initDb(){if(!window.claude||!window.claude.use)return setSync('local');
   try{const[db,user]=await Promise.all([claude.use('db'),claude.use('user')]);if(!db||!user)return setSync('local');const id=await user.id();if(!id)return setSync('local');
     const ref=db.doc('data/users/'+id+'/progress');const snap=await Promise.race([ref.get(),new Promise((_,j)=>setTimeout(()=>j(Error('timeout')),10000))]);dbRef=ref;
-    if(snap.exists){const d=snap.data();if(d&&d.topics&&(d.updated||0)>=(store.updated||0)){store=JSON.parse(JSON.stringify(d));norm();saveLocal();if(!boardActive)route();else renderRail()}else if(store.updated)flush()}else if(store.updated)flush();setSync('cloud')}
+    if(snap.exists){const d=snap.data();if(d&&d.topics&&(d.updated||0)>=(store.updated||0)){store=JSON.parse(JSON.stringify(d));const ch=norm();saveLocal();if(ch)flush();if(!boardActive)route();else renderRail()}else if(store.updated)flush()}else if(store.updated)flush();setSync('cloud')}
   catch(e){dbRef=null;setSync('local')}}
 
 /* ---------- progress model ---------- */
@@ -1418,9 +1529,9 @@ function record(id,ok,lv,auto){const s=store.topics[id]||(store.topics[id]={a:0,
   if(auto&&lv===(s.lv||1)){if(ok){s.str=(s.str||0)+1;s.mis=0;if(s.str>=3&&(s.lv||1)<3){s.lv=(s.lv||1)+1;s.str=0;msg=`Level up: you’re now on level ${s.lv} of 3.`}}
     else{s.mis=(s.mis||0)+1;s.str=0;if(s.mis>=2&&(s.lv||1)>1){s.lv--;s.mis=0;msg=`Back to level ${s.lv} to firm things up.`}}}
   if(wasDue){s.rv=s.rv||{n:0,c:0};s.rv.n++;if(ok)s.rv.c++;
-    if(s.rv.n>=3){const pass=s.rv.c>=2;s.sr.lvl=pass?Math.min(s.sr.lvl+1,IV.length-1):0;s.sr.due=dayStart(Date.now()+IV[s.sr.lvl]*DAY);s.rv=null;msg=pass?`Review passed. Next review in ${IV[s.sr.lvl]} days.`:'Review missed. This topic comes back tomorrow.'}
-    else msg=`Scheduled review: ${s.rv.n} of 3 answered.`}
-  else if(!s.sr&&status(s)==='mastered'){s.sr={lvl:0,due:dayStart(Date.now()+DAY)};const t=byId[id],ts=unitTopics(t.u),nx=ts[ts.indexOf(t)+1];msg='Mastered. Your first review is due tomorrow. '+(nx?`${nx.t} is now unlocked.`:`The ${UNITS[t.u]} checkpoint is now unlocked.`)}
+    if(ok||s.rv.n>=2){s.sr.lvl=ok?Math.min(s.sr.lvl+1,IV.length-1):0;s.sr.due=schedule(id,IV[s.sr.lvl]);s.rv=null;msg=ok?`Review passed. Next review ${daysTxt(s.sr.due)}.`:`Review missed. This topic comes back ${daysTxt(s.sr.due)}.`}
+    else msg='Not quite. You get one more problem on this topic to pass the review.'}
+  else if(!s.sr&&status(s)==='mastered'){s.sr={lvl:0,due:schedule(id,1)};const t=byId[id],ts=unitTopics(t.u),nx=ts[ts.indexOf(t)+1];msg=`Mastered. Your first review is due ${daysTxt(s.sr.due)}. `+(nx?`${nx.t} is now unlocked.`:`The ${UNITS[t.u]} checkpoint is now unlocked.`)}
   persist();renderRail();return msg}
 function nextTopic(){return TOPICS.find(t=>!isLocked(t)&&!isMast(t.id))||null}
 const unitTopics=u=>TOPICS.filter(t=>t.u===u);
@@ -1442,14 +1553,14 @@ function icsText(){const by={};for(const t of TOPICS){const s=S(t.id);if(s&&s.sr
   const fold=l=>{let o='';while(l.length>73){o+=l.slice(0,73)+'\r\n ';l=l.slice(73)}return o+l};
   const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//luciopuccio.com//Algebra Path//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH'];
   for(const d of ds){const n=by[d].length;L.push('BEGIN:VEVENT','UID:algebra-path-'+day(d)+'@luciopuccio.com','DTSTAMP:'+stamp,'DTSTART;VALUE=DATE:'+day(d),'DTEND;VALUE=DATE:'+day(d+DAY+36e5),
-    'SUMMARY:'+ie('Algebra Path: '+n+' review'+(n>1?'s':'')+' due'),'DESCRIPTION:'+ie(by[d].join(', ')+'. Three problems each: https://luciopuccio.com/algebra/#review'),'URL:https://luciopuccio.com/algebra/#review',
+    'SUMMARY:'+ie('Algebra Path: '+n+' review'+(n>1?'s':'')+' due'),'DESCRIPTION:'+ie(by[d].join(', ')+'. One problem per topic, with a second try if you miss: https://luciopuccio.com/algebra/#review'),'URL:https://luciopuccio.com/algebra/#review',
     'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+ie('Algebra Path reviews due today'),'TRIGGER:PT9H','END:VALARM','END:VEVENT')}
   L.push('END:VCALENDAR');return L.map(fold).join('\r\n')+'\r\n'}
 function reviewDays(){const by={};for(const t of TOPICS){const s=S(t.id);if(s&&s.sr){const d=dayStart(s.sr.due);(by[d]=by[d]||[]).push(t.t)}}return Object.keys(by).map(Number).sort((a,b)=>a-b).map(d=>({d,ts:by[d]}))}
 function gcalUrl(){const r=reviewDays().find(x=>dayStart(x.d)>=dayStart(Date.now()))||reviewDays()[0];if(!r)return null;
   const dt=new Date(r.d),p=n=>String(n).padStart(2,'0'),ymd=dt.getFullYear()+p(dt.getMonth()+1)+p(dt.getDate()),n=r.ts.length;
   let tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
-  const q=new URLSearchParams({action:'TEMPLATE',text:`Algebra Path: ${n} review${n>1?'s':''} due`,dates:`${ymd}T090000/${ymd}T091500`,details:`${r.ts.join(', ')}. Three problems each, get two right to pass.\nhttps://luciopuccio.com/algebra/#review`,location:'https://luciopuccio.com/algebra/#review'});if(tz)q.set('ctz',tz);
+  const q=new URLSearchParams({action:'TEMPLATE',text:`Algebra Path: ${n} review${n>1?'s':''} due`,dates:`${ymd}T090000/${ymd}T091500`,details:`${r.ts.join(', ')}. One problem per topic, with a second try if you miss.\nhttps://luciopuccio.com/algebra/#review`,location:'https://luciopuccio.com/algebra/#review'});if(tz)q.set('ctz',tz);
   return 'https://calendar.google.com/calendar/render?'+q.toString()}
 function openGcal(){const u=gcalUrl();if(u)window.open(u,'_blank','noopener')}
 function saveFile(name,text,type){try{const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)}catch(e){}}
@@ -1476,6 +1587,10 @@ function renderRail(){const cur=location.hash.slice(1)||'home';const due=dueTopi
   $('#units').innerHTML=h}
 
 /* ---------- home ---------- */
+function forecastHtml(){const t0=dayStart(Date.now()),days=[...Array(7)].map((_,i)=>dayStart(t0+i*DAY+6*3600e3));const subs=Object.values(store.topics).filter(t=>t&&t.sr);
+  const n=days.map((d,i)=>subs.filter(t=>i===0?t.sr.due<days[1]:t.sr.due===d).length),mx=Math.max(1,...n);
+  const lab=(d,i)=>i===0?'Today':i===1?'Tomorrow':new Date(d).toLocaleDateString('en-GB',{weekday:'short',day:'numeric'});
+  return`<div class="panel"><h3>Reviews this week</h3><div class="fc">${days.map((d,i)=>`<div class="fcr${i===0?' now':''}"><span>${lab(d,i)}</span><i class="${n[i]?'':'z'}" style="width:${n[i]?Math.max(6,n[i]/mx*100):100}%"></i><b>${n[i]}</b></div>`).join('')}</div><p>Due dates shift by a day or so to keep busy days light. Each review is one problem per topic.</p></div>`}
 function home(){const v=$('#view');const all=TOPICS.map(t=>[t,S(t.id)]);const solved=all.reduce((a,[,s])=>a+(s?s.c:0),0),att=all.reduce((a,[,s])=>a+(s?s.a:0),0);
   const mastered=all.filter(([,s])=>['mastered','due'].includes(status(s))).length;const due=dueTopics();const next=nextTopic();
   const weak=all.filter(([,s])=>status(s)==='shaky').sort((a,b)=>a[1].c/a[1].a-b[1].c/b[1].a);
@@ -1483,7 +1598,7 @@ function home(){const v=$('#view');const all=TOPICS.map(t=>[t,S(t.id)]);const so
   const upcoming=all.filter(([,s])=>s&&s.sr&&!isDue(s)).sort((a,b)=>a[1].sr.due-b[1].sr.due).slice(0,4);
   let h=`<section class="hero"><div><div class="eyebrow">Your plan for today</div><h1>${att?'Pick up where you left off':'Start from the ground up'}</h1><p>Work each problem in your notebook, type the final answer, and get it checked. Reviews come first, then new learning, then a checkpoint when a unit is ready.</p></div></section>
   <div class="today">
-   ${due.length?`<a class="tcard hot" href="#review"><span class="eyebrow">1 · Reviews due</span><b>${due.length} topic${due.length>1?'s':''} to review</b><span>${esc(due.slice(0,3).map(t=>t.t).join(', '))}${due.length>3?'…':''}. Three problems each.</span></a>`:`<div class="tcard"><span class="eyebrow">1 · Reviews</span><b>Nothing due</b><span>${upcoming.length?`Next: ${esc(upcoming[0][0].t)} ${daysTxt(upcoming[0][1].sr.due)}.`:'Mastered topics come back for review after 1, 3, 7, 21 and 60 days.'}</span></div>`}
+   ${due.length?`<a class="tcard hot" href="#review"><span class="eyebrow">1 · Reviews due</span><b>${due.length} topic${due.length>1?'s':''} to review</b><span>${esc(due.slice(0,3).map(t=>t.t).join(', '))}${due.length>3?'…':''}. One problem each, mixed together.</span></a>`:`<div class="tcard"><span class="eyebrow">1 · Reviews</span><b>Nothing due</b><span>${upcoming.length?`Next: ${esc(upcoming[0][0].t)} ${daysTxt(upcoming[0][1].sr.due)}.`:'Mastered topics come back for review after 1, 3, 7, 21 and 60 days.'}</span></div>`}
    ${next?`<a class="tcard" href="#t-${next.id}"><span class="eyebrow">2 · ${S(next.id)&&S(next.id).a?'Continue':'Next topic'}</span><b>${esc(next.t)}</b><span>${S(next.id)&&S(next.id).a?`Level ${lvOf(next.id)} of 3 · ${LABEL[status(S(next.id))]}`:esc(UNITS[next.u])}</span></a>`:cpU!==undefined?`<div class="tcard"><span class="eyebrow">2 · Topics</span><b>Unit complete</b><span>Pass the checkpoint to unlock the next unit.</span></div>`:`<div class="tcard"><span class="eyebrow">2 · Topics</span><b>Everything mastered</b><span>Keep up with the scheduled reviews.</span></div>`}
    ${cpU!==undefined?`<a class="tcard" href="#cp-${cpU}"><span class="eyebrow">3 · Checkpoint ready</span><b>${esc(UNITS[cpU])}</b><span>${CP_N} mixed problems; pass with ${CP_PASS}.</span></a>`:`<div class="tcard"><span class="eyebrow">3 · Checkpoint</span><b>Not ready yet</b><span>A unit’s checkpoint opens once you’ve mastered every topic in it. Passing it unlocks the next unit.</span></div>`}
   </div>
@@ -1494,7 +1609,7 @@ function home(){const v=$('#view');const all=TOPICS.map(t=>[t,S(t.id)]);const so
     ts.forEach(t=>{n++;const s=S(t.id),st=status(s),lk=isLocked(t);h+=`<a class="prow${lk?' locked':''}" href="#t-${t.id}"><span class="pn">${n}</span>${lk?LOCK:`<span class="dot ${st}"></span>`}<span class="pt">${esc(t.t)}</span><span class="pmeta">${s&&s.a?`L${lvOf(t.id)} · ${Math.round(s.c/s.a*100)}%${s.sr&&!isDue(s)?' · review '+daysTxt(s.sr.due):''}`:lk?'locked':'—'}</span></a>`});
     const cp=store.cp[i],clk=!cpReady(i)&&!cpPassed(i);h+=`<a class="prow cpr${clk?' locked':''}" href="#cp-${i}"><span class="pn"></span>${clk?LOCK:`<span class="dot flag ${cpPassed(i)?'pass':''}"></span>`}<span class="pt">Unit checkpoint</span><span class="pmeta">${cp?`best ${cp.best}/${CP_N}${cpPassed(i)?' · passed':''}`:clk?'locked':'ready'}</span></a></section>`});
   const nextRv=all.filter(([,s])=>s&&s.sr).sort((a,b)=>a[1].sr.due-b[1].sr.due)[0];
-  h+=`</div><div class="side"><div class="panel remind"><h3>Reminders &amp; backup</h3>
+  h+=`</div><div class="side">${forecastHtml()}<div class="panel remind"><h3>Reminders &amp; backup</h3>
    <p>${nextRv?`Your next review is <b>${esc(nextRv[0].t)}</b> ${isDue(nextRv[1])?'today':daysTxt(nextRv[1].sr.due)}. Add it to your calendar so your phone reminds you on the day.`:'Once you master a topic it gets review dates. Add them to your calendar here and your phone will remind you on the day.'}</p>
    <div class="actions"><button class="btn" id="gcalBtn"${nextRv?'':' disabled'}>Add to Google Calendar</button><button class="btn" id="icsBtn"${nextRv?'':' disabled'}>Apple / Outlook calendar</button></div>
    <p class="note">Google Calendar adds your next review day, at 9am; add the following one after each review. Apple / Outlook downloads every scheduled review day at once, with a 9am reminder.</p>
@@ -1506,7 +1621,7 @@ function home(){const v=$('#view');const all=TOPICS.map(t=>[t,S(t.id)]);const so
    <li><b>Order.</b> Topics unlock one at a time: master a topic to open the next. Each unit unlocks when you pass the previous unit’s checkpoint.</li>
    <li><b>Levels.</b> Every topic has three levels. Three right in a row moves you up; two misses in a row moves you down. You can also pick a level yourself.</li>
    <li><b>Mastery.</b> Reach level 3, get 8 right in total, and at least 4 of your last 5 right first time.</li>
-   <li><b>Reviews.</b> Mastered topics return after 1, 3, 7, 21 and 60 days, unlocking at 00:01 on the day they’re due. Get 2 of 3 right to push the next review further out; miss and it comes back tomorrow. Use the calendar buttons on the overview to get a reminder on the day.</li>
+   <li><b>Reviews.</b> Mastered topics return after 1, 3, 7, 21 and 60 days, unlocking at 00:01 on the day they’re due. Each review is one problem per topic, mixed together; miss it and you get a second try. Pass to push the next review further out, fail and it comes back in a day or two. Due dates shift by a day or so to keep each day light. Use the calendar buttons on the overview to get a reminder on the day.</li>
    <li><b>Checkpoints.</b> Open once every topic in the unit is mastered: ${CP_N} mixed problems at levels 2–3, without the notes beside them. Pass with ${CP_PASS}.</li>
    <li><b>Graphs.</b> After you answer, worked solutions show a graph where it helps; open it in the Graph lab to experiment.</li>
    <li><b>Misses.</b> Revealing the solution before answering counts as a miss.</li></ul></div></div></div>
@@ -1515,7 +1630,10 @@ function home(){const v=$('#view');const all=TOPICS.map(t=>[t,S(t.id)]);const so
 
 /* ---------- topic page ---------- */
 const stepsHtml=st=>`<ol class="steps">${st.map(s=>`<li><div>${s}</div></li>`).join('')}</ol>`;
-function learnHtml(t){const ex=gen(t,2,false,TOPICS.indexOf(t)*97+13);
+let RECENT={};try{RECENT=JSON.parse(localStorage.getItem('algebra-path-recent')||'{}')||{}}catch(e){}
+const recentQ=id=>RECENT[id]||(RECENT[id]=[]);
+function rememberQ(id,q){const a=recentQ(id);if(!a.includes(q))a.push(q);if(a.length>40)a.splice(0,a.length-40);try{localStorage.setItem('algebra-path-recent',JSON.stringify(RECENT))}catch(e){}}
+function learnHtml(t){const ex=gen(t,2,false,TOPICS.indexOf(t)*97+13);if(!recentQ(t.id).includes(ex.q))recentQ(t.id).push(ex.q);
   return`<div class="learn" id="learn"><p class="sum">${t.s}</p><div class="key"><span class="eyebrow">Core rule</span>\\[${t.k}\\]</div>
   <details class="fold" open><summary>Worked example</summary><div><p class="exq">${ex.q}</p>${stepsHtml(ex.steps)}<div class="final">Answer: \\(${showAns(ex)}\\)</div>${ex.method?`<p class="method"><b>Efficient route.</b> ${ex.method}</p>`:''}${graphBlock(ex.gr)}</div></details>
   <details class="fold" id="whyFold"><summary>Why it works</summary><div><p style="margin:0">${t.w}</p></div></details></div>`}
@@ -1525,6 +1643,7 @@ function topicPage(t){const v=$('#view');const L=lockInfo(t);if(L){const head=`$
     else lockedPage(head,t.t,`<p>Pass the <b>${esc(UNITS[L.unit])}</b> checkpoint to unlock the ${esc(UNITS[t.u])} unit.</p><p class="sum">${t.s}</p>`,`<div><a class="btn primary" href="#cp-${L.unit}">Go to the ${esc(UNITS[L.unit])} checkpoint →</a></div>`);return}const pre=(t.pre||[]).map(p=>byId[p]).filter(Boolean);const notStarted=pre.filter(p=>status(S(p.id))==='new');
   v.innerHTML=`<header class="thead"><div><div class="eyebrow">${String(t.u+1).padStart(2,'0')} · ${esc(UNITS[t.u])} · topic ${TOPICS.indexOf(t)+1} of ${TOPICS.length}</div><h1>${esc(t.t)}</h1></div><div class="tmeta" id="tmeta"></div></header>
    ${pre.length?`<div class="pre"><span>Builds on:</span>${pre.map(p=>`<a class="chip" href="#t-${p.id}"><span class="dot ${status(S(p.id))}"></span>${esc(p.t)}</a>`).join('')}${notStarted.length?`<span class="prewarn">You haven’t started ${esc(notStarted.map(p=>p.t).join(' or '))} yet. It’s worth a quick look first.</span>`:''}</div>`:''}
+   ${isDue(S(t.id))?(()=>{const o=dueTopics().length-1;return`<div class="pre"><span class="prewarn">This topic is due for review${o?`, along with ${o} other${o>1?'s':''}`:''}. Your next answer here counts as its review.</span>${o?'<a class="btn" href="#review">Do all reviews back to back →</a>':''}</div>`})():''}
    <div class="tgrid">${learnHtml(t)}<div id="boardSlot"></div></div>`;
   renderMeta(t);mountBoard($('#boardSlot'),{pick:()=>t,mode:'topic'});typeset($('#learn'))}
 function renderMeta(t){const el=$('#tmeta');if(!el)return;const s=S(t.id),st=status(s),r=(s&&s.r)||[];
@@ -1534,8 +1653,14 @@ function renderMeta(t){const el=$('#tmeta');if(!el)return;const s=S(t.id),st=sta
 function reviewPage(){const v=$('#view');const due=dueTopics();const pool=TOPICS.filter(t=>S(t.id)&&S(t.id).a);
   if(!due.length&&!pool.length){v.innerHTML=`<header class="thead"><div><div class="eyebrow">Review</div><h1>Nothing to review yet</h1></div></header><div class="panel empty"><p>Reviews draw on topics you’ve started. Try a few problems in any topic first.</p><a class="btn primary" href="#t-${(nextTopic()||TOPICS[0]).id}">Start with ${esc((nextTopic()||TOPICS[0]).t)} →</a></div>`;return}
   const weighted=pool.flatMap(t=>status(S(t.id))==='shaky'?[t,t,t]:status(S(t.id))==='mastered'?[t]:[t,t]);
-  v.innerHTML=`<header class="thead"><div><div class="eyebrow">${due.length?'Scheduled reviews':'Mixed review'}</div><h1>${due.length?`${due.length} topic${due.length>1?'s':''} due`:'Mixed review'}</h1></div><div class="tmeta">${due.length?'Three problems per topic. Get two right to pass.':'Random problems from topics you’ve started; weak topics come up more often.'}</div></header><div style="max-width:780px" id="boardSlot"></div>`;
-  mountBoard($('#boardSlot'),{pick:()=>{const d=dueTopics();return d.length?d[0]:weighted[Math.floor(Math.random()*weighted.length)]},mode:'review'})}
+  v.innerHTML=`<header class="thead"><div><div class="eyebrow">${due.length?'Scheduled reviews':'Mixed review'}</div><h1>${due.length?`${due.length} topic${due.length>1?'s':''} due`:'Mixed review'}</h1></div><div class="tmeta">${due.length?'One problem per topic, mixed together. Miss one and you get a second try at that topic.':'Random problems from topics you’ve started; weak topics come up more often.'}</div></header><div style="max-width:780px" id="boardSlot"></div>`;
+  const sess=due.length?{ids:due.map(t=>t.id),done:{}}:null;
+  mountBoard($('#boardSlot'),{pick:()=>{const d=dueTopics();if(d.length){const again=d.find(t=>S(t.id).rv&&S(t.id).rv.n>=1);return again||d[Math.floor(Math.random()*d.length)]}return weighted[Math.floor(Math.random()*weighted.length)]},mode:'review',sess,onDone:()=>reviewSummary(sess)})}
+function reviewSummary(sess){const ids=sess.ids,pass=ids.filter(id=>sess.done[id]).length,nx=nextTopic();const h=$('h1');if(h)h.textContent='All reviews done';const tm=$('.tmeta');if(tm)tm.textContent='';
+  $('#boardSlot').innerHTML=`<section class="board"><div class="result"><div class="eyebrow">Reviews complete</div><h2>${pass} of ${ids.length} passed</h2><p class="note">${pass===ids.length?'All done for today. Each topic’s next review has been spread out to keep future days light.':'Missed topics come back in a day or two; the rest are spread out over the coming days.'}</p>
+    <ul class="rlist">${ids.map(id=>{const t=byId[id],s=S(id),ok=!!sess.done[id];return`<li><span><a href="#t-${id}">${esc(t.t)}</a></span><span class="${ok?'y':'n'}">${ok?'Passed':'Missed'} · next review ${s&&s.sr?daysTxt(s.sr.due):'soon'}</span></li>`}).join('')}</ul>
+    <div class="actions">${nx?`<a class="btn primary" href="#t-${nx.id}">Continue with ${esc(nx.t)} →</a>`:''}<button class="btn" id="moreMix">Mixed practice</button><a class="btn" href="#home">Back to overview</a></div></div></section>`;
+  $('#moreMix').onclick=()=>{reviewPage();addBack()}}
 function cpPage(u){const v=$('#view');const ts=unitTopics(u);const cp=store.cp[u];const CL=cpPassed(u)?null:cpLock(u);
   if(CL){const head=`${String(u+1).padStart(2,'0')} · ${esc(UNITS[u])}`;if(CL.unit!==undefined)lockedPage(head,'Unit checkpoint',`<p>Pass the <b>${esc(UNITS[CL.unit])}</b> checkpoint to unlock this unit first.</p>`,`<div><a class="btn primary" href="#cp-${CL.unit}">Go to the ${esc(UNITS[CL.unit])} checkpoint →</a></div>`);
     else{const nx=CL.left.find(t=>!isLocked(t))||CL.left[0];lockedPage(head,'Unit checkpoint',`<p>Master every topic in this unit to unlock its checkpoint. Still to master:</p><ul>${CL.left.map(t=>`<li><a href="#t-${t.id}">${esc(t.t)}</a></li>`).join('')}</ul>`,`<div><a class="btn primary" href="#t-${nx.id}">Go to ${esc(nx.t)} →</a></div>`)}return}
@@ -1557,11 +1682,15 @@ function symsFor(ex){const a=typeof ex.ans==='string'?ex.ans:'',t=(ex.typed||'')
   for(const s of ex.syms||[])add(s,{'π':'pi','θ':'theta','²':'squared','^':'to the power of','√':'square root'}[s]||s);
   if(/\^\(/.test(a)||/\^/.test(a)&&!/\^2/.test(a))add('^','to the power of');
   return out}
+function prefixFor(ex){if(ex.pre!==undefined)return ex.pre;if(!['num','set','expr'].includes(ex.kind))return'';
+  const m=String(ex.show||'').match(/^\s*(f\^\{-1\}\(x\)|[A-Za-z])\s*=/);if(m)return m[1].replace('f^{-1}(x)','f⁻¹(x)');
+  const f=String(ex.fmt||'').match(/<code>\s*([A-Za-z])\s*=/);return f?f[1]:''}
+const stripPre=f=>String(f).replace(/<code>(.*?)<\/code>/g,(m,c)=>'<code>'+c.replace(/(^|,\s*)(?:[A-Za-z]|f⁻¹\(x\))\s*=\s*/g,'$1')+'</code>');
 function mountBoard(slot,opt){const mode=opt.mode;let n=0,ex=null,topic=null,lv=1,auto=true,done=false,counted=false;const res=[];boardActive=true;
   slot.innerHTML=`<section class="board" aria-label="Practice"><div class="btop"><div class="eyebrow">${mode==='cp'?'Checkpoint':mode==='review'?'Review':'Practice'}</div>
-   ${mode==='cp'?`<div class="progress" aria-hidden="true"><i id="prog" style="width:0"></i></div>`:`<div class="ctrls">${mode==='topic'?`<div class="seg" role="group" aria-label="Level" id="lvSeg"><button data-l="auto">Auto</button><button data-l="1">L1</button><button data-l="2">L2</button><button data-l="3">L3</button></div>`:''}<div class="seg" role="group" aria-label="Problem style" id="wSeg"><button data-m="mix">Mixed</button><button data-m="sym">Symbols</button><button data-m="words">Words</button></div></div>`}</div>
+   ${mode==='cp'||opt.sess?`<div class="progress" aria-hidden="true"><i id="prog" style="width:0"></i></div>`:`<div class="ctrls">${mode==='topic'?`<div class="seg" role="group" aria-label="Level" id="lvSeg"><button data-l="auto">Auto</button><button data-l="1">L1</button><button data-l="2">L2</button><button data-l="3">L3</button></div>`:''}<div class="seg" role="group" aria-label="Problem style" id="wSeg"><button data-m="mix">Mixed</button><button data-m="sym">Symbols</button><button data-m="words">Words</button></div></div>`}</div>
    <div class="sheet"><div class="qlabel" id="qlabel"></div><div class="q" id="q"></div></div>
-   <div class="answer"><label class="fmt" for="ans" id="fmt"></label><div class="arow"><input id="ans" autocomplete="off" spellcheck="false" placeholder="Type your final answer"><button class="btn primary" id="checkBtn">Check</button></div>
+   <div class="answer"><label class="fmt" for="ans" id="fmt"></label><div class="arow"><label class="apre" id="apre" for="ans" hidden></label><div class="multi" id="multi" role="group" aria-label="Answer fields" hidden></div><input id="ans" autocomplete="off" spellcheck="false" placeholder="Type your final answer"><button class="btn primary" id="checkBtn">Check</button></div>
    <div class="syms" id="syms" role="group" aria-label="Insert a symbol" hidden></div>
    <div id="fb"></div><div id="toast"></div><div class="actions"><button class="btn" id="solBtn">Show worked solution</button><button class="btn" id="nextBtn">Next problem →</button><span class="note" id="note"></span></div></div>
    <div class="sol" id="sol" hidden></div>
@@ -1574,23 +1703,37 @@ function mountBoard(slot,opt){const mode=opt.mode;let n=0,ex=null,topic=null,lv=
   segW.forEach(b=>b.onclick=()=>{wordMode=b.dataset.m;try{localStorage.setItem('algebra-path-words',wordMode)}catch(e){}sync();if(!counted)next(true)});
   segL.forEach(b=>b.onclick=()=>{lvMode=b.dataset.l;try{localStorage.setItem('algebra-path-level',lvMode)}catch(e){}sync();if(!counted)next(true)});
   symBar.addEventListener('mousedown',e=>{if(e.target.closest('.sym'))e.preventDefault()});
-  symBar.onclick=e=>{const b=e.target.closest('.sym');if(!b)return;const i=input.selectionStart??input.value.length,j=input.selectionEnd??i;input.setRangeText(b.dataset.s,i,j,'end');input.focus()};
+  let mfKeys=null,curIn=input;$('#multi',slot).addEventListener('focusin',e=>{if(e.target.matches('input'))curIn=e.target});input.addEventListener('focus',()=>{curIn=input});
+  symBar.onclick=e=>{const b=e.target.closest('.sym');if(!b)return;const f=curIn||input,i=f.selectionStart??f.value.length,j=f.selectionEnd??i;f.setRangeText(b.dataset.s,i,j,'end');f.focus()};
   function next(same){if(mode==='cp'&&n>=opt.total){opt.onDone(res);return}
+    if(opt.sess&&!dueTopics().some(t=>opt.sess.ids.includes(t.id))){opt.onDone();return}
     if(!same||!topic)topic=opt.pick();
     if(mode==='cp'){lv=Math.random()<.5?2:3;auto=false}else if(mode==='review'){lv=isDue(S(topic.id))?Math.max(2,lvOf(topic.id)):lvOf(topic.id);auto=!isDue(S(topic.id))}else{auto=lvMode==='auto';lv=auto?lvOf(topic.id):+lvMode}
-    const W=mode==='cp'?false:wordMode==='mix'?undefined:wordMode==='words';ex=gen(topic,lv,W);if(!same||n===0)n++;done=false;counted=false;
-    $('#qlabel',slot).innerHTML=`<span class="tag">Problem ${n}${mode==='cp'?' of '+opt.total:''}</span><span class="lv">Level ${ex.lv}</span>${mode!=='topic'?`<a href="#t-${topic.id}">${esc(topic.t)}</a>`:''}${mode==='review'&&isDue(S(topic.id))?'<span>· scheduled review</span>':''}${ex.word?'<span>· word problem</span>':''}`;
-    const q=$('#q',slot);q.innerHTML=ex.q;q.classList.toggle('word',!!ex.word);$('#fmt',slot).innerHTML='Answer format: '+ex.fmt;
+    const W=mode==='cp'?false:wordMode==='mix'?undefined:wordMode==='words';{const R0=recentQ(topic.id);for(let k=0;k<30;k++){ex=gen(topic,lv,W);if(!R0.includes(ex.q))break}rememberQ(topic.id,ex.q)}if(!same||n===0)n++;done=false;counted=false;
+    $('#qlabel',slot).innerHTML=`<span class="tag">${opt.sess?`Review ${Math.min(Object.keys(opt.sess.done).length+1,opt.sess.ids.length)} of ${opt.sess.ids.length}`:`Problem ${n}${mode==='cp'?' of '+opt.total:''}`}</span><span class="lv">Level ${ex.lv}</span>${mode!=='topic'?`<a href="#t-${topic.id}">${esc(topic.t)}</a>`:''}${mode==='review'&&isDue(S(topic.id))?`<span>· ${S(topic.id).rv&&S(topic.id).rv.n>=1?'second try':'scheduled review'}</span>`:''}${ex.word?'<span>· word problem</span>':''}`;
+    const q=$('#q',slot);q.innerHTML=ex.q;q.classList.toggle('word',!!ex.word);const pf=prefixFor(ex),ap=$('#apre',slot);ap.textContent=pf?pf+' =':'';ap.hidden=!pf;input.placeholder=pf?(ex.kind==='set'?'All values, separated by commas':'Type just the value or expression'):'Type your final answer';$('#fmt',slot).innerHTML='Answer format: '+(pf?stripPre(ex.fmt):ex.fmt);
+    mfKeys=ex.kind==='pair'?Object.keys(ex.ans):(ex.kind==='pts'&&ex.ans.length===1)?['x','y']:null;const mf=$('#multi',slot);
+    if(mfKeys){mf.innerHTML=mfKeys.map(k=>`<label class="mf"><span>${esc(k)} =</span><input data-k="${esc(k)}" autocomplete="off" spellcheck="false" aria-label="Value of ${esc(k)}"></label>`).join('');mf.hidden=false;input.hidden=true;ap.hidden=true;
+      $('#fmt',slot).innerHTML='Answer format: '+(ex.kind==='pts'?'the coordinates of the point, one in each box (fractions like 3/2 are fine)':'a value in each box (fractions like 3/2 are fine)');
+      mf.querySelectorAll('input').forEach(f=>{f.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();doCheck()}}})}
+    else{mf.hidden=true;mf.innerHTML='';input.hidden=false}curIn=mfKeys?mf.querySelector('input'):input;
     const sy=symsFor(ex);symBar.innerHTML=sy.length?'<span class="fmt">Insert:</span>'+sy.map(([s,l])=>`<button type="button" class="sym" data-s="${esc(s)}" title="Insert ${esc(l)}" aria-label="Insert ${esc(l)}">${esc(s)}</button>`).join(''):'';symBar.hidden=!sy.length;
     note.textContent=wordMode==='words'&&mode!=='cp'&&!ex.word?'No word problem at this level; here’s a symbolic one.':'';
     input.value='';fb.innerHTML='';toast.innerHTML='';sol.hidden=true;sol.innerHTML='';$('#solBtn',slot).textContent='Show worked solution';$('#solBtn',slot).hidden=false;$('#work',slot).value='';$('#aiout',slot).innerHTML='';$('#aiNote',slot).textContent='';
-    nextBtn.textContent=mode==='cp'?'Skip →':'Next problem →';if(mode==='cp'){const p=$('#prog',slot);if(p)p.style.width=((n-1)/opt.total*100)+'%'}
-    typeset(slot.querySelector('.sheet'));if(n>1)input.focus({preventScroll:true})}
+    nextBtn.textContent=mode==='cp'?'Skip →':'Next problem →';if(mode==='cp'){const p=$('#prog',slot);if(p)p.style.width=((n-1)/opt.total*100)+'%'}if(opt.sess){const p=$('#prog',slot);if(p)p.style.width=(Object.keys(opt.sess.done).length/opt.sess.ids.length*100)+'%'}
+    typeset(slot.querySelector('.sheet'));if(n>1)curIn.focus({preventScroll:true})}
   function showSol(){sol.innerHTML=`<h4>Worked solution</h4>${stepsHtml(ex.steps)}<div class="final">Answer: \\(${showAns(ex)}\\)</div>${ex.method?`<p class="method"><b>Efficient route.</b> ${ex.method}</p>`:''}${graphBlock(ex.gr)}`;sol.hidden=false;$('#solBtn',slot).textContent='Hide worked solution';typeset(sol)}
   function revLink(id){const t=byId[id]||topic;return t.id===topic.id&&mode==='topic'?`<a href="#learn" data-rev>Revise the core rule for ${esc(t.t)}</a>`:`<a href="#t-${t.id}">Revise ${esc(t.t)}</a>`}
   function count(ok){if(counted)return;counted=true;const msg=record(topic.id,ok,ex.lv,auto);if(mode==='topic')renderMeta(topic);if(mode==='cp'){res.push({t:topic,ok});nextBtn.textContent=n>=opt.total?'See results →':'Next problem →'}
-    if(msg)toast.innerHTML=`<div class="toast">${esc(msg)}${/review/i.test(msg)&&!/answered/.test(msg)?' <a href="#" data-gcal>Add to Google Calendar</a> · <a href="#" data-ics>Apple / Outlook</a>':''}</div>`}
-  function doCheck(){if(done){next();return}const r=check(ex,input.value);
+    const fin=msg&&/^Review (passed|missed)/.test(msg);let extra='';
+    if(fin&&opt.sess&&opt.sess.ids.includes(topic.id)){opt.sess.done[topic.id]=/^Review passed/.test(msg);const left=opt.sess.ids.filter(id=>isDue(S(id))).length;const p=$('#prog',slot);if(p)p.style.width=(Object.keys(opt.sess.done).length/opt.sess.ids.length*100)+'%';
+      const h=$('h1');if(h)h.textContent=left?`${left} review${left>1?'s':''} left`:'All reviews done';if(!left){nextBtn.textContent='See summary →';extra=' That was the last one.'}else extra=` ${left} to go: press Enter for the next.`}
+    else if(fin&&mode==='topic'){const left=dueTopics().length;if(left)extra=` <a href="#review">${left} more review${left>1?'s':''} due: do them back to back →</a>`}
+    if(msg)toast.innerHTML=`<div class="toast">${esc(msg)}${extra}${fin||/^Mastered/.test(msg)?' <a href="#" data-gcal>Add to Google Calendar</a> · <a href="#" data-ics>Apple / Outlook</a>':''}</div>`}
+  function doCheck(){if(done){next();return}
+    if(mfKeys){const vals=[...$('#multi',slot).querySelectorAll('input')].map(f=>f.value.trim().replace(/^[A-Za-z]\s*=\s*/,''));if(vals.some(v=>!v)){if(vals.every(v=>!v)){input.value=''}else{fb.innerHTML=`<div class="fb warn"><b>Fill in every box.</b>Each one needs a value.</div>`;return}}
+      else input.value=ex.kind==='pts'?`(${vals[0]}, ${vals[1]})`:mfKeys.map((k,i)=>k+'='+vals[i]).join(', ')}
+    const r=check(ex,input.value);
     if(r.empty){fb.innerHTML=`<div class="fb warn"><b>Type an answer first.</b>Format: ${ex.fmt}</div>`;return}
     if(r.parseErr){fb.innerHTML=`<div class="fb warn"><b>I couldn’t read that answer.</b>Try the format shown: ${ex.fmt}. Use <code>^</code> for powers and the buttons for special symbols.</div>`;return}
     if(r.form&&!counted){fb.innerHTML=`<div class="fb warn"><b>Nearly.</b>${r.form} This doesn’t count against you; try again.</div>`;typeset(fb);return}
@@ -1716,5 +1859,3 @@ if(window.claude&&window.claude.use)claude.use('sample').then(s=>{if(s){sampleFn
 }
 
 </script>
-
-</body></html>
