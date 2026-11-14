@@ -200,6 +200,8 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
   box-shadow: 8px 8px 0 #0b0620; padding: 18px; display: grid; gap: 14px; text-align: center;
 }
 .over-box.record { border-color: var(--amber); }
+.over-box.quit-box { border-color: var(--cyan); }
+.quit-box .over-title { color: var(--cyan); }
 .over-title { margin: 0; font-family: var(--f-display); font-size: 20px; color: var(--bad); line-height: 1.4; }
 .record .over-title { color: var(--amber); }
 .over-score { font-size: 24px; }
@@ -321,6 +323,20 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
       <button class="start" id="againBtn">PLAY AGAIN</button>
     </div>
     <p class="hint">Keyboard: Enter to play again, Esc for menu</p>
+  </div>
+</div>
+
+<!-- LEAVE A RUN? -->
+<div class="over" id="quit" hidden>
+  <div class="over-box quit-box" role="dialog" aria-modal="true" aria-labelledby="quitTitle">
+    <h2 class="over-title" id="quitTitle">LEAVE THIS RUN?</h2>
+    <div class="over-score" id="quitScore">You're on <b>0</b> digits</div>
+    <p class="miss-note">Leaving ends the run and it won't count.</p>
+    <div class="over-actions">
+      <button class="btn2" id="quitExit">EXIT</button>
+      <button class="start" id="quitStay">CONTINUE</button>
+    </div>
+    <p class="hint">Keyboard: Enter to continue, Esc to exit</p>
   </div>
 </div>
 
@@ -631,7 +647,21 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
       if (isRecord && pos > 0) jingle([523, 659, 784, 1047]);
     }, typed === null ? 0 : 650);
   }
+  // Leaving mid-streak asks first: CONTINUE resumes, EXIT abandons the run
+  function inStreak() { return playing && pos > trainFrom; }
+  function askMenu() {
+    if (!inStreak()) { toMenu(); return; }
+    const n = pos - trainFrom;
+    $("quitScore").innerHTML = training
+      ? "You're on <b>" + n + "</b> right from digit #" + (trainFrom + 1)
+      : "You're on <b>" + n + "</b> digit" + (n === 1 ? "" : "s");
+    $("quit").hidden = false;
+    $("quitStay").focus();
+  }
+  function closeQuit() { $("quit").hidden = true; }
+  window.addEventListener("beforeunload", (e) => { if (inStreak()) { e.preventDefault(); e.returnValue = ""; } });
   function toMenu() {
+    closeQuit();
     playing = false; $("over").hidden = true; $("hudMode").hidden = true; show("home"); renderHome();
   }
 
@@ -646,6 +676,11 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     if (k && e.detail === 0) press(k.dataset.k);
   });
   document.addEventListener("keydown", (e) => {
+    if (!$("quit").hidden) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); closeQuit(); }
+      else if (e.key === "Escape") toMenu();
+      return;
+    }
     if (!$("over").hidden) {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); restartSame(); }
       else if (e.key === "Escape") toMenu();
@@ -653,7 +688,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     }
     if (!$("game").hidden) {
       if (/^[0-9]$/.test(e.key)) { e.preventDefault(); flashKey(e.key, "hit"); press(e.key); }
-      else if (e.key === "Escape") toMenu();
+      else if (e.key === "Escape") askMenu();
     } else if (e.key === "Enter" && document.activeElement === document.body) {
       startGame();
     }
@@ -678,7 +713,9 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
     trainAt(Math.min(MAX - 1, stats.best));
   });
   $("menuBtn").addEventListener("click", toMenu);
-  $("backBtn").addEventListener("click", toMenu);
+  $("backBtn").addEventListener("click", askMenu);
+  $("quitStay").addEventListener("click", closeQuit);
+  $("quitExit").addEventListener("click", toMenu);
   $("restartBtn").addEventListener("click", () => { if (playing) restartSame(); });
   $("soundBtn").addEventListener("click", toggleSound);
   $("soundBtn2").addEventListener("click", toggleSound);
