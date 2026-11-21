@@ -192,6 +192,70 @@ details.fold>div{padding:0 14px 14px;font-size:15px}
 .rlist li{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}
 .rlist .y{color:var(--good);font-weight:600}.rlist .n{color:var(--bad);font-weight:600}
 .empty{padding:30px}
+.lessoncard{display:grid;grid-template-columns:1fr auto;gap:2px 16px;align-items:center;padding:16px 18px;border:1px solid var(--accent);border-radius:12px;background:var(--accent-soft);text-decoration:none;color:var(--ink);margin-top:14px}
+.lessoncard b{font-family:var(--display);font-size:19px;grid-column:1}.lessoncard .eyebrow,.lessoncard .note{grid-column:1}.lcgo{grid-column:2;grid-row:1/4;font-weight:700;color:var(--accent);font-size:16px}
+.lessoncard:hover{box-shadow:0 0 0 3px var(--accent-soft);border-color:var(--ink)}
+.lp{display:flex;flex-direction:column;gap:16px;max-width:980px}
+.stages{display:flex;gap:6px;flex-wrap:wrap}
+.stg{display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 8px;border:1px solid var(--line);border-radius:99px;background:var(--sheet);cursor:pointer;font-weight:600;font-size:14px;color:var(--muted)}
+.stg span{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--grid);font-family:var(--mono);font-size:12px;color:var(--ink)}
+.stg.past{color:var(--ink)}.stg.past span{background:var(--accent-soft);color:var(--accent)}
+.stg.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}.stg.on span{background:var(--accent-ink);color:var(--accent)}
+.lpcard{font-size:17px;line-height:1.65;display:flex;flex-direction:column;gap:12px;padding:22px 24px}.lpcard p{margin:0;max-width:64ch}
+.bigf{font-size:24px;padding:14px 10px;border:2px solid var(--accent);border-radius:12px;background:var(--accent-soft);text-align:center;overflow-x:auto;overflow-y:hidden;max-width:520px}
+.wgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;align-items:start}
+.nb{background-color:var(--sheet);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:22px 22px;padding:18px 20px;display:flex;flex-direction:column;gap:6px;min-height:280px}
+.nbq{margin:0 0 6px;font-size:17px}.nbq .eyebrow{display:block;margin-bottom:2px}
+.nbl{display:flex;gap:12px;align-items:center;padding:8px 10px;border-radius:9px;font-size:18px;opacity:.6;transition:opacity .2s,background .2s}
+.nbl.cur{opacity:1;background:var(--mark-soft);box-shadow:inset 3px 0 0 var(--mark)}
+.nbn{font-family:var(--mono);font-size:12px;color:var(--muted);width:18px;flex:none}
+.nbm{overflow-x:auto;overflow-y:hidden;min-width:0;font-size:18px;padding:4px 0}
+.nbhide{font-family:var(--mono);color:var(--muted);letter-spacing:.2em}
+.stepcard{display:flex;flex-direction:column;gap:12px;padding:20px 22px;position:sticky;top:16px}
+.stepcard h3{font-size:22px}.stepcard p{margin:0;font-size:16.5px;line-height:1.6}
+.think{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:16px}.think .note{margin:6px 0 0}
+.warnbox{background:var(--warn-soft);border-radius:10px;padding:12px 14px;font-size:15.5px}.warnbox b{color:var(--warn)}
+.dots{display:flex;gap:6px;margin-top:4px}.dots i{width:22px;height:5px;border-radius:9px;background:var(--grid)}.dots i.d{background:var(--accent)}.dots i.c{background:var(--mark)}
+.fp{padding:10px 12px;border-radius:10px;border-left:3px solid var(--line)}.fp.cur{border-left-color:var(--mark);background:var(--mark-soft)}.fp .note{margin:0 0 4px}
+.blanks{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.blank{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:17px}
+.blank input{width:96px;font-family:var(--mono);font-size:17px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--sheet);color:var(--ink)}
+.blank input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
+.blank b{color:var(--good);font-size:18px}
+.ffb:not(:empty),.ofb:not(:empty){margin-top:10px}
+.flow{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.fbox{border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:var(--sheet);max-width:340px;font-size:15.5px}
+.fbox.start{background:var(--grid);font-weight:600}
+.fq{display:flex;flex-direction:column;gap:2px;border-width:2px}.fq .note{font-size:13.5px}
+.fa{background:var(--paper)}.fa.hl{border:2px solid var(--accent);background:var(--accent-soft);font-weight:600}
+.frow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.fyes{display:flex;align-items:center;gap:10px}
+.fy{font-weight:700;color:var(--good);font-size:14px;white-space:nowrap}
+.farrow{padding-left:26px;color:var(--muted);font-size:18px;line-height:1}
+.fno{padding-left:16px;font-weight:700;color:var(--bad);font-size:13px}
+.faside{font-size:15px;margin-top:10px}
+#lpbody{display:flex;flex-direction:column;gap:16px}
+.blank input.wide{width:200px}
+.spot{display:grid;grid-template-columns:1fr 1fr;gap:14px}.spot>div{border-radius:10px;padding:14px 16px}.spot h3{font-size:16px;margin-bottom:6px}.spot ul{margin:0;padding-left:20px}.spot li{margin:6px 0}
+.spy{background:var(--good-soft)}.spy h3{color:var(--good)}.spn{background:var(--bad-soft)}.spn h3{color:var(--bad)}
+@media (max-width:700px){.spot{grid-template-columns:1fr}}
+.lfig{max-width:440px;background:var(--sheet);border-radius:10px}.lfig svg{width:100%;height:auto;display:block}
+.lpnav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media (max-width:860px){.wgrid{grid-template-columns:minmax(0,1fr)}.stepcard{position:static}.nb{min-height:0}}
+@media (max-width:600px){.lpcard{padding:16px;font-size:16px}.stg{padding:6px 10px 6px 6px;font-size:13px}.bigf{font-size:19px}.nbl,.nbm{font-size:16px}}
+
+.lesson{display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line);padding-top:16px}
+.lhead{display:flex;align-items:baseline;justify-content:space-between;gap:10px}.lhead h2{font-size:22px}
+.lsec h3{font-family:var(--display);font-size:17px;margin:0 0 6px}.lsec p{margin:0 0 8px;max-width:66ch}.lsec ul{margin:0;padding-left:20px;max-width:66ch}.lsec li{margin:5px 0}
+.wex{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:12px;background:var(--sheet)}.wq{margin:0 0 8px}
+.wrow{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:12px;padding:6px 0;border-top:1px dashed var(--line);align-items:center}
+.wm{overflow-x:auto;overflow-y:hidden;min-width:0}.wn{font-size:13px;color:var(--muted)}.wa{margin:10px 0 0;font-size:14px;color:var(--muted)}
+.mlist{margin:0;padding-left:20px}.mlist li{margin:6px 0}
+.qc{border-top:1px solid var(--line);padding-top:10px;margin-top:10px;display:flex;flex-direction:column;gap:8px}.qcq{margin:0}.qc .fmt{margin:0}
+.guide{display:flex;flex-direction:column;gap:24px;max-width:860px}
+.tablewrap{overflow-x:auto}.gtable{border-collapse:collapse;width:100%;font-size:14px;margin-bottom:6px}.gtable th,.gtable td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:left;vertical-align:top}.gtable th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.gico{width:15px;height:15px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);font-size:10px;font-weight:700;display:inline-grid;place-items:center;flex:none;line-height:1}
+.guidechip{align-self:flex-start;gap:8px}
+@media (max-width:600px){.wrow{grid-template-columns:minmax(0,1fr);gap:2px}}
 .multi{display:flex;gap:10px 14px;flex-wrap:wrap;flex:1 1 220px;min-width:0}.multi[hidden]{display:none}
 .mf{display:flex;align-items:center;gap:8px;flex:1 1 130px;min-width:0}.mf span{font-family:var(--mono);font-size:17px;white-space:nowrap}
 .arow .mf input{flex:1 1 60px;min-width:0}
@@ -1488,6 +1552,1040 @@ if(typeof module!=='undefined')module.exports={plotSVG,numLine,graphHTML,keyPts,
 
 </script>
 <script>
+/* ---------- lessons (teaching content) ---------- */
+const LESSONS={
+exp2:{
+ what:T`<p>Expanding turns a product of brackets into a sum of separate terms: \((x+3)(x+5)\) becomes \(x^2+8x+15\). Nothing about the value changes, only how it is written.</p>
+<p>You need it whenever brackets get in the way: to collect like terms, to get an equation into the form \(ax^2+bx+c=0\) before solving it, or to compare two expressions. It is also the reverse of factorising, so once you see how the numbers combine here, factorising stops feeling like guesswork.</p>
+<p>A useful picture: \((x+3)(x+5)\) is the area of a rectangle with sides \(x+3\) and \(x+5\). Split it into four pieces: \(x\times x\), \(x\times 5\), \(3\times x\) and \(3\times 5\). The area is the sum of all four.</p>`,
+ when:T`<ul><li>The question says <b>expand</b>, <b>multiply out</b> or <b>simplify</b>, and you see two brackets side by side or a bracket squared.</li>
+<li>You are solving an equation and the brackets stop you collecting everything on one side.</li>
+<li><b>Don’t</b> expand when the question asks you to factorise, or when an equation is already in the form \((x-2)(x+5)=0\): that form is the one you want for solving.</li></ul>`,
+ steps:[T`Multiply <b>every</b> term in the first bracket by <b>every</b> term in the second. Two terms times two terms gives four products.`,T`Keep each sign with the term after it: in \((x-5)\) the second term is \(-5\).`,T`Collect like terms. Usually the two middle products are both \(x\)-terms and combine into one.`,T`For a squared bracket, write it out twice first: \((2x-3)^2=(2x-3)(2x-3)\).`],
+ examples:[
+  {q:T`Expand \((x+4)(x+2)\)`,rows:[[T`x\cdot x=x^2`,'first × first'],[T`x\cdot 2=2x`,'first × last'],[T`4\cdot x=4x`,'second × first'],[T`4\cdot 2=8`,'second × last'],[T`x^2+6x+8`,'collect: 2x + 4x = 6x']],a:T`Notice the pattern: the middle number is \(4+2\) and the last is \(4\times 2\). Factorising runs this backwards.`},
+  {q:T`Expand \((x-5)(x+3)\)`,rows:[[T`x^2+3x-5x-15`,'four products, signs kept: −5 × 3 = −15'],[T`x^2-2x-15`,'3x − 5x = −2x']]},
+  {q:T`Expand \((2x-3)^2\)`,rows:[[T`(2x-3)(2x-3)`,'write it out twice'],[T`4x^2-6x-6x+9`,'(−3)×(−3) = +9'],[T`4x^2-12x+9`,'collect the middle terms']],a:T`A common slip is writing \(4x^2+9\): squaring a bracket always gives a middle term.`}],
+ mistakes:[T`\((a+b)^2\) is <b>not</b> \(a^2+b^2\). Write both brackets out and you get the \(2ab\) middle term.`,T`Sign slips: negative × negative is positive, so \((-3)(-3)=+9\).`,T`Square the number as well as the letter: \((2x)^2=4x^2\), not \(2x^2\).`],
+ checks:[{q:T`Expand \((x+6)(x-2)\)`,kind:'expr',ans:'x^2+4x-12',show:T`x^2+4x-12`,fmt:'e.g. <code>x^2 + 3x - 10</code>'},{q:T`Expand \((x-4)^2\)`,kind:'expr',ans:'x^2-8x+16',show:T`x^2-8x+16`,fmt:'e.g. <code>x^2 - 6x + 9</code>'},{q:T`Expand \((3x+1)(x-2)\)`,kind:'expr',ans:'3x^2-5x-2',show:T`3x^2-5x-2`,fmt:'e.g. <code>2x^2 + x - 6</code>'}]},
+fac2:{
+ what:T`<p>Factorising a quadratic means writing it as a product of brackets: \(x^2+5x+6=(x+2)(x+3)\). It is expanding in reverse.</p>
+<p>Why bother? A product is easy to make zero: if \((x+2)(x+3)=0\), one of the brackets must be zero, so \(x=-2\) or \(x=-3\). That makes factorising the quickest way to solve many quadratics. The brackets also tell you where the graph crosses the \(x\)-axis, and they are what you cancel when simplifying algebraic fractions.</p>`,
+ when:T`<ul><li>The question says <b>factorise</b>, or you need to solve \(ax^2+bx+c=0\) and the numbers look friendly (small whole numbers).</li>
+<li>You want to cancel something in an algebraic fraction.</li>
+<li><b>Quick test:</b> work out \(b^2-4ac\). If it is a perfect square (0, 1, 4, 9, 16…), the quadratic factorises with whole numbers or simple fractions. If not, don’t waste time: use the quadratic formula or complete the square instead.</li></ul>`,
+ steps:[T`<b>Common factor first.</b> \(2x^2+10x+12=2(x^2+5x+6)\). It makes everything after this easier.`,T`<b>Difference of two squares?</b> Two square terms with a minus between them: \(a^2-b^2=(a-b)(a+b)\).`,T`<b>\(x^2+bx+c\):</b> find two numbers that <b>multiply to \(c\)</b> and <b>add to \(b\)</b>. Sign shortcut: if \(c\) is positive both numbers have the sign of \(b\); if \(c\) is negative they have opposite signs.`,T`<b>\(ax^2+bx+c\) with \(a\neq1\):</b> find two numbers that multiply to \(ac\) and add to \(b\), split the middle term with them, then factorise in pairs.`,T`<b>Check</b> by expanding your answer. It takes ten seconds and catches sign errors.`],
+ examples:[
+  {q:T`Factorise \(x^2+7x+12\)`,rows:[[T`12=1\times12=2\times6=3\times4`,'pairs that multiply to 12'],[T`3+4=7`,'the pair that adds to 7'],[T`(x+3)(x+4)`,'check: x² + 4x + 3x + 12 ✓']]},
+  {q:T`Factorise \(x^2-2x-15\)`,rows:[[T`-15:\ 3\times(-5)`,'c negative, so opposite signs'],[T`3+(-5)=-2`,'adds to b'],[T`(x+3)(x-5)`,'']]},
+  {q:T`Factorise \(2x^2+7x+3\)`,rows:[[T`ac=6,\ 6\times1,\ 6+1=7`,'multiply to ac, add to b'],[T`2x^2+6x+x+3`,'split the middle term'],[T`2x(x+3)+1(x+3)`,'factorise each pair'],[T`(2x+1)(x+3)`,'the common bracket comes out']]},
+  {q:T`Factorise \(9x^2-25\)`,rows:[[T`(3x)^2-5^2`,'both terms are squares, minus between'],[T`(3x-5)(3x+5)`,'difference of two squares']]}],
+ mistakes:[T`Skipping the common factor: \(2x^2+10x+12\) factorised as \((2x+4)(x+3)\) still has a 2 hiding in the first bracket.`,T`Mixing up the roles: the numbers <b>multiply</b> to \(c\) and <b>add</b> to \(b\), not the other way round.`,T`Sign slips. Expand to check: the middle term will tell you straight away.`],
+ checks:[{q:T`Factorise \(x^2+9x+20\)`,kind:'factor',ans:'(x+4)(x+5)',show:T`(x+4)(x+5)`,fmt:'e.g. <code>(x + 2)(x - 7)</code>',form:'brackets'},{q:T`Factorise \(x^2-x-12\)`,kind:'factor',ans:'(x-4)(x+3)',show:T`(x-4)(x+3)`,fmt:'e.g. <code>(x + 2)(x - 7)</code>',form:'brackets'},{q:T`Factorise \(x^2-49\)`,kind:'factor',ans:'(x-7)(x+7)',show:T`(x-7)(x+7)`,fmt:'e.g. <code>(x - 1)(x + 1)</code>',form:'brackets'}]},
+solveq:{
+ what:T`<p>Solving a quadratic equation means finding every value of \(x\) that makes it true. A quadratic can have <b>two</b>, <b>one</b> or <b>no</b> real solutions, matching the graph crossing the \(x\)-axis twice, touching it once, or missing it.</p>
+<p>Factorising is the fastest exact method when it works. It rests on one fact: <b>if two things multiply to zero, at least one of them is zero</b>. So once you have \((x-2)(x-3)=0\), the answers are \(x=2\) and \(x=3\).</p>
+<p>Many real problems turn into quadratics: areas (length × width), falling objects, profit curves. Solving the quadratic answers the question.</p>`,
+ when:T`<ul><li>The equation has an \(x^2\) term and it <b>factorises</b> (friendly numbers, or \(b^2-4ac\) is a perfect square).</li>
+<li><b>No constant term</b> (\(3x^2-12x=0\)): always factorise by taking out \(x\).</li>
+<li><b>No \(x\) term</b> (\(x^2=9\)): just square-root both sides and remember \(\pm\).</li>
+<li>If it won’t factorise, or the question asks for decimals, use the <a href="#t-qf">quadratic formula</a> instead.</li></ul>`,
+ steps:[T`<b>Rearrange</b> so one side is zero: \(ax^2+bx+c=0\). The zero rule only works with zero on one side.`,T`<b>Factorise</b> the left-hand side.`,T`Set <b>each bracket equal to zero</b>.`,T`Solve each little equation. The sign flips: \(x+7=0\) gives \(x=-7\).`,T`<b>Check</b> in context: a length or a time can’t be negative, so reject those.`],
+ examples:[
+  {q:T`Solve \(x^2-5x+6=0\)`,rows:[[T`(x-2)(x-3)=0`,'factorise'],[T`x-2=0\ \text{or}\ x-3=0`,'each bracket = 0'],[T`x=2\ \text{or}\ x=3`,'']]},
+  {q:T`Solve \(x^2+4x=21\)`,rows:[[T`x^2+4x-21=0`,'zero on one side first'],[T`(x+7)(x-3)=0`,'−21: 7 × (−3), sum 4'],[T`x=-7\ \text{or}\ x=3`,'']],a:T`Writing \(x(x+4)=21\) and saying \(x=21\) is a classic trap: the zero rule needs a zero.`},
+  {q:T`Solve \(3x^2=12x\)`,rows:[[T`3x^2-12x=0`,'rearrange'],[T`3x(x-4)=0`,'take out 3x'],[T`x=0\ \text{or}\ x=4`,'']],a:T`Dividing both sides by \(x\) would lose the answer \(x=0\).`},
+  {q:T`A rectangle is 3 m longer than it is wide and has area 40 m². Find its width.`,rows:[[T`w(w+3)=40`,'width × length'],[T`w^2+3w-40=0`,'rearrange'],[T`(w+8)(w-5)=0`,''],[T`w=5\ \text{m}`,'reject w = −8: a width can’t be negative']]}],
+ mistakes:[T`Trying to solve before getting zero on one side.`,T`Dividing by \(x\): it throws away the solution \(x=0\). Factorise instead.`,T`Forgetting the sign flip when solving each bracket.`,T`\(x^2=9\) has two solutions, \(3\) and \(-3\).`],
+ checks:[{q:T`Solve \(x^2+x-20=0\)`,kind:'set',ans:[4,-5],show:T`x=4,\ x=-5`,fmt:'all solutions, e.g. <code>2, -3</code>'},{q:T`Solve \(x^2=6x\)`,kind:'set',ans:[0,6],show:T`x=0,\ x=6`,fmt:'all solutions, e.g. <code>2, -3</code>'},{q:T`Solve \(2x^2-x-3=0\)`,kind:'set',ans:[-1,1.5],tol:5e-4,show:T`x=-1,\ x=\tfrac32`,fmt:'all solutions, e.g. <code>2, -1/3</code>'}]},
+cts:{
+ what:T`<p>Completing the square rewrites \(x^2+bx+c\) as \((x+p)^2+q\). For example \(x^2+6x+5=(x+3)^2-4\).</p>
+<p>This form is useful for three reasons:</p>
+<ul><li><b>It shows the turning point.</b> \((x+3)^2\) is never negative, so \((x+3)^2-4\) is smallest when the bracket is zero, at \(x=-3\). The minimum value is \(-4\), and the graph’s turning point is \((-3,\,-4)\).</li>
+<li><b>It solves any quadratic exactly</b>, even ones that don’t factorise, giving answers like \(-2\pm\sqrt5\).</li>
+<li><b>It is where the quadratic formula comes from.</b> The formula is just this method done once with letters.</li></ul>`,
+ when:T`<ul><li>The question says “in the form \((x+p)^2+q\)” or “complete the square”.</li>
+<li>You are asked for the <b>turning point</b>, <b>minimum</b> or <b>maximum value</b> of a quadratic.</li>
+<li>You need <b>exact</b> (surd) solutions and \(a=1\) with an even \(b\): it is often quicker than the formula then.</li>
+<li>For decimals, or messy coefficients, the <a href="#t-qf">formula</a> is usually faster.</li></ul>`,
+ steps:[T`<b>Halve</b> the coefficient of \(x\): that is \(p\).`,T`Write \((x+p)^2\). Expanded, it gives \(x^2+bx+p^2\): the right \(x\)-terms but an extra \(p^2\).`,T`<b>Subtract \(p^2\)</b> to cancel the extra, then add the original \(c\): \((x+p)^2-p^2+c\).`,T`To <b>solve</b> \(=0\): move the number across, square-root both sides (\(\pm\)!), then rearrange.`,T`If \(a\neq1\), take \(a\) out of the first two terms first and complete the square inside.`],
+ examples:[
+  {q:T`Write \(x^2+6x+5\) in the form \((x+p)^2+q\)`,rows:[[T`6\div2=3`,'halve the x-coefficient'],[T`(x+3)^2=x^2+6x+9`,'9 too many'],[T`(x+3)^2-9+5`,'take the 9 away, keep the +5'],[T`(x+3)^2-4`,'turning point (−3, −4)']]},
+  {q:T`Write \(x^2-10x+18\) in completed-square form`,rows:[[T`(x-5)^2-25+18`,'half of −10 is −5'],[T`(x-5)^2-7`,'minimum value −7 at x = 5']]},
+  {q:T`Solve \(x^2+4x-1=0\), giving exact answers`,rows:[[T`(x+2)^2-4-1=0`,'complete the square'],[T`(x+2)^2=5`,'move the number across'],[T`x+2=\pm\sqrt5`,'square root: two signs'],[T`x=-2\pm\sqrt5`,'']]},
+  {q:T`Write \(2x^2+12x+7\) in the form \(a(x+p)^2+q\)`,rows:[[T`2(x^2+6x)+7`,'take 2 out of the x-terms'],[T`2[(x+3)^2-9]+7`,'complete the square inside'],[T`2(x+3)^2-18+7`,'the −9 is multiplied by 2'],[T`2(x+3)^2-11`,'']]}],
+ mistakes:[T`Forgetting to subtract \(p^2\), or adding it instead.`,T`Not halving: \(x^2+6x\) becomes \((x+3)^2\), not \((x+6)^2\).`,T`Losing the \(\pm\) when square-rooting.`,T`Turning point signs: \((x+3)^2\) is smallest at \(x=-3\), not \(+3\).`,T`With \(a\neq1\), forgetting to multiply the \(-p^2\) by \(a\).`],
+ checks:[{q:T`Write \(x^2+8x+3\) in the form \((x+p)^2+q\)`,kind:'cts',ans:'(x+4)^2-13',show:T`(x+4)^2-13`,fmt:'e.g. <code>(x - 2)^2 + 5</code>',form:'square'},{q:T`What is the minimum value of \(x^2-6x+11\)?`,kind:'num',ans:2,show:'2',fmt:'a number'},{q:T`Solve \(x^2-2x-4=0\), giving exact answers`,kind:'set',ans:[1+Math.sqrt(5),1-Math.sqrt(5)],tol:1e-4,typed:'1+sqrt(5), 1-sqrt(5)',show:T`x=1\pm\sqrt5`,fmt:'both, e.g. <code>3+√2, 3-√2</code>',form:'surd'}]},
+qf:{
+ what:T`<p>The quadratic formula solves <b>any</b> equation \(ax^2+bx+c=0\):</p><p>\[x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\]</p>
+<p>It always works, even when factorising is impossible. The \(\pm\) gives the two solutions, and the part under the square root, \(b^2-4ac\), tells you how many solutions there are before you finish (see <a href="#t-disc">the discriminant</a>).</p>`,
+ when:T`<ul><li>The quadratic <b>won’t factorise</b>, or you can’t spot the factors within half a minute.</li>
+<li>The question asks for answers to <b>decimal places</b> or <b>significant figures</b>. That is a strong hint: factorising only ever gives whole numbers or simple fractions.</li>
+<li>The coefficients are messy (large numbers, decimals).</li>
+<li>For exact answers it gives surds; completing the square is an equally good route.</li></ul>`,
+ steps:[T`Rearrange to \(ax^2+bx+c=0\).`,T`Write down \(a\), \(b\) and \(c\) <b>with their signs</b>.`,T`Work out the discriminant \(b^2-4ac\) on its own first. It keeps the arithmetic tidy.`,T`Substitute: \(x=\dfrac{-b\pm\sqrt{\text{discriminant}}}{2a}\). Do the \(+\) and the \(-\) separately.`,T`Round only at the very end.`],
+ examples:[
+  {q:T`Solve \(x^2+3x-5=0\) to 2 d.p.`,rows:[[T`a=1,\ b=3,\ c=-5`,''],[T`b^2-4ac=9-4(1)(-5)=29`,'−4 × −5 = +20'],[T`x=\dfrac{-3\pm\sqrt{29}}{2}`,''],[T`x\approx1.19\ \text{or}\ -4.19`,'']]},
+  {q:T`Solve \(2x^2-7x+4=0\) to 2 d.p.`,rows:[[T`a=2,\ b=-7,\ c=4`,''],[T`49-32=17`,'b² = (−7)² = 49'],[T`x=\dfrac{7\pm\sqrt{17}}{4}`,'−b = +7; 2a = 4'],[T`x\approx2.78\ \text{or}\ 0.72`,'']]},
+  {q:T`Solve \(3x^2=5x+1\) to 2 d.p.`,rows:[[T`3x^2-5x-1=0`,'rearrange first'],[T`25-4(3)(-1)=37`,''],[T`x=\dfrac{5\pm\sqrt{37}}{6}\approx1.85\ \text{or}\ -0.18`,'']]}],
+ mistakes:[T`When \(b\) is negative, \(-b\) is positive: \(b=-7\) gives \(-b=7\).`,T`With a negative \(c\), \(-4ac\) becomes positive: \(-4(1)(-5)=+20\).`,T`Divide the <b>whole</b> top by \(2a\), not just the square root.`,T`It is \(2a\) on the bottom, not 2.`,T`Rounding \(\sqrt{b^2-4ac}\) before dividing: keep full accuracy until the end.`],
+ checks:[{q:T`Solve \(x^2+5x+2=0\), to 2 decimal places`,kind:'set',ans:[-0.44,-4.56],tol:.006,show:T`x\approx-0.44,\ x\approx-4.56`,fmt:'both, e.g. <code>1.27, -3.94</code>'},{q:T`Solve \(2x^2-3x-4=0\), to 2 decimal places`,kind:'set',ans:[2.35,-0.85],tol:.006,show:T`x\approx2.35,\ x\approx-0.85`,fmt:'both, e.g. <code>1.27, -3.94</code>'}]},
+disc:{
+ what:T`<p>The discriminant is the part of the quadratic formula under the square root: \(D=b^2-4ac\). It tells you how many real solutions \(ax^2+bx+c=0\) has, <b>without solving it</b>:</p>
+<ul><li>\(D>0\): two different solutions. The graph crosses the \(x\)-axis twice.</li><li>\(D=0\): one repeated solution. The graph just touches the axis.</li><li>\(D<0\): no real solutions. The graph misses the axis (you can’t square-root a negative).</li></ul>
+<p>It also tells you whether a quadratic factorises nicely: a perfect-square \(D\) means yes.</p>`,
+ when:T`<ul><li>The question asks <b>how many</b> solutions or roots there are, or whether there are any <b>real</b> roots.</li>
+<li>You see “<b>equal roots</b>”, “<b>repeated root</b>”, “<b>distinct roots</b>” or “<b>no real roots</b>”, usually with an unknown constant \(k\) to find.</li>
+<li>You need to know whether a line <b>touches</b>, <b>crosses</b> or <b>misses</b> a curve: substitute, rearrange to a quadratic, and look at \(D\).</li></ul>`,
+ steps:[T`Rearrange to \(ax^2+bx+c=0\) and read off \(a\), \(b\), \(c\) with signs.`,T`Work out \(D=b^2-4ac\).`,T`Compare with zero.`,T`With an unknown \(k\): write the condition (\(D=0\) for equal roots, \(D>0\) for two distinct roots, \(D<0\) for none) and solve it for \(k\).`],
+ examples:[
+  {q:T`How many real solutions does \(x^2-6x+9=0\) have?`,rows:[[T`D=36-4(1)(9)=0`,''],[T`\text{one repeated root}`,'it is (x − 3)², touching the axis at 3']]},
+  {q:T`How many real solutions does \(2x^2+3x+5=0\) have?`,rows:[[T`D=9-40=-31`,''],[T`\text{none}`,'D < 0: the graph is entirely above the axis']]},
+  {q:T`Find \(k\) so that \(x^2+kx+16=0\) has equal roots.`,rows:[[T`k^2-4(1)(16)=0`,'equal roots: D = 0'],[T`k^2=64`,''],[T`k=\pm8`,'both signs work']]},
+  {q:T`For which \(k\) does \(x^2+4x+k=0\) have two distinct roots?`,rows:[[T`16-4k>0`,'distinct: D > 0'],[T`k<4`,'']]}],
+ mistakes:[T`The sign of \(-4ac\): with \(c\) negative it becomes \(+\).`,T`Forgetting the negative answer when solving \(k^2=64\).`,T`Getting the inequality the wrong way round. Check with a value: \(k=0\) should satisfy \(16-4k>0\).`,T`“Real roots” allows \(D\ge0\); “distinct” means \(D>0\).`],
+ checks:[{q:T`How many real solutions does \(3x^2-2x+1=0\) have?`,kind:'num',ans:0,show:'0',fmt:'<code>0</code>, <code>1</code> or <code>2</code>'},{q:T`Find the positive value of \(k\) for which \(x^2+kx+25=0\) has equal roots.`,kind:'num',ans:10,show:'k = 10',fmt:'a number'},{q:T`For which values of \(k\) does \(x^2-6x+k=0\) have no real solutions?`,kind:'ineq',ans:{v:'k',op:'>',k:9},show:T`k\gt9`,fmt:'e.g. <code>k &lt; 4</code>'}]},
+qineq:{
+ what:T`<p>A quadratic inequality like \(x^2-5x+6<0\) asks for a <b>range</b> of \(x\) values, not single answers. You find it by asking: where is the graph <b>below</b> (or <b>above</b>) the \(x\)-axis?</p>
+<p>This comes up whenever you want to know when a quantity is positive, negative, or above a level: for example, the times when a ball is higher than 10 m.</p>`,
+ when:T`<ul><li>A quadratic with \(<\), \(>\), \(\le\) or \(\ge\) instead of \(=\).</li>
+<li>Never square-root both sides of something like \(x^2>25\): you would lose half the answer. Sketch instead.</li></ul>`,
+ steps:[T`Rearrange so one side is zero.`,T`Solve the equation \(=0\). These <b>critical values</b> are where the graph crosses the axis.`,T`Sketch the parabola through them. With a positive \(x^2\) it is U-shaped.`,T`For \(<0\) take the part <b>below</b> the axis: <b>between</b> the critical values. For \(>0\) take the parts <b>above</b>: <b>outside</b> them, giving two separate pieces.`,T`Use \(\le\)/\(\ge\) only if the question includes “or equal to”.`],
+ examples:[
+  {q:T`Solve \(x^2-x-12<0\)`,rows:[[T`(x-4)(x+3)=0`,'critical values −3 and 4'],[T`-3<x<4`,'U-shape is below the axis between the roots']]},
+  {q:T`Solve \(x^2+2x-8\ge0\)`,rows:[[T`(x+4)(x-2)=0`,'critical values −4 and 2'],[T`x\le-4\ \text{or}\ x\ge2`,'above the axis: outside the roots']]},
+  {q:T`Solve \(x^2>25\)`,rows:[[T`x^2-25>0`,''],[T`(x-5)(x+5)>0`,'critical values ±5'],[T`x<-5\ \text{or}\ x>5`,'not just x > 5: (−6)² = 36 is bigger than 25 too']]}],
+ mistakes:[T`Square-rooting both sides and losing the negative side.`,T`Writing two separate regions as one, like \(-3>x>4\): it isn’t possible. Use “or”.`,T`Picking between vs outside the wrong way round. Test a value: \(x=0\) in \(x^2-x-12<0\) gives \(-12<0\), true, so 0 is in the answer.`],
+ checks:[{q:T`Solve \(x^2-7x+10<0\)`,kind:'range',ans:{in:true,v:'x',a:2,b:5,ia:false,ib:false},show:T`2\lt x\lt5`,fmt:'e.g. <code>-1 &lt; x &lt; 3</code>'},{q:T`Solve \(x^2-9\ge0\)`,kind:'range',ans:{in:false,v:'x',a:-3,b:3,ia:true,ib:true},show:T`x\le-3\ \text{or}\ x\ge3`,fmt:'e.g. <code>x ≤ -1 or x ≥ 3</code>'}]},
+simq:{
+ what:T`<p>Here one equation is a straight line and the other is a curve (with \(x^2\), \(y^2\) or \(xy\)). Solving them together finds the <b>points where the line meets the curve</b>.</p>
+<p>A line can cross a curve twice, touch it once, or miss it. That is exactly the 2, 1 or 0 solutions of a quadratic, which is why this method always leads to one.</p>`,
+ when:T`<ul><li>Two equations, one linear and one with a squared or multiplied term.</li>
+<li>Elimination doesn’t work here; use <b>substitution</b>.</li>
+<li>To ask only whether they meet (not where), use the <a href="#t-disc">discriminant</a> of the quadratic you get in step 3.</li></ul>`,
+ steps:[T`Rearrange the <b>linear</b> equation to get \(y=\dots\) (or \(x=\dots\)).`,T`Substitute it into the curve’s equation.`,T`Expand, rearrange to \(=0\), and solve the quadratic.`,T`Put each \(x\) back into the <b>linear</b> equation to get its \(y\).`,T`Write the answers as pairs \((x,\,y)\).`],
+ examples:[
+  {q:T`Solve \(y=x+1\) and \(y=x^2-5\)`,rows:[[T`x^2-5=x+1`,'both equal y'],[T`x^2-x-6=0`,''],[T`(x-3)(x+2)=0`,'x = 3 or −2'],[T`(3,\,4),\ (-2,\,-1)`,'y from y = x + 1']]},
+  {q:T`Where does \(y=x+1\) meet the circle \(x^2+y^2=25\)?`,rows:[[T`x^2+(x+1)^2=25`,'substitute'],[T`2x^2+2x-24=0`,'(x + 1)² = x² + 2x + 1'],[T`x^2+x-12=0\Rightarrow x=3\ \text{or}\ -4`,''],[T`(3,\,4),\ (-4,\,-3)`,'']]}],
+ mistakes:[T`\((x+1)^2\) is \(x^2+2x+1\), not \(x^2+1\).`,T`Substituting back into the curve can produce extra wrong pairs; use the line.`,T`Mixing up pairs: keep each \(y\) with its own \(x\).`],
+ checks:[{q:T`Solve \(y=2x+1\) and \(y=x^2-2\)`,kind:'pts',ans:[[3,7],[-1,-1]],show:T`(3,\,7),\ (-1,\,-1)`,fmt:'both points, e.g. <code>(1, 3), (-2, 0)</code>'},{q:T`Solve \(x^2+y^2=10\) and \(y=x+2\)`,kind:'pts',ans:[[1,3],[-3,-1]],show:T`(1,\,3),\ (-3,\,-1)`,fmt:'both points, e.g. <code>(1, 3), (-2, 0)</code>'}]},
+afrac:{
+ what:T`<p>Algebraic fractions are fractions with letters in them, like \(\dfrac{x+3}{x-2}\). They follow exactly the same rules as number fractions. The main new skill is <b>factorising first</b>, because you can only cancel things that multiply the whole top and the whole bottom.</p>
+<p>They appear when simplifying expressions and in equations with \(x\) on the bottom (rates, “work together” problems), and they are everywhere in later maths.</p>`,
+ when:T`<ul><li><b>Simplify:</b> factorise top and bottom, then cancel matching brackets.</li><li><b>Add or subtract:</b> find a common denominator, as with \(\tfrac12+\tfrac13\).</li><li><b>Solve an equation:</b> clear the fractions by multiplying through (or cross-multiply when there is one fraction on each side).</li></ul>`,
+ steps:[T`<b>Simplifying:</b> factorise the top and bottom fully, then cancel brackets that appear in both.`,T`<b>Adding:</b> multiply each fraction top and bottom to get the same denominator, then add the tops and simplify.`,T`<b>Solving:</b> multiply both sides by every denominator (or cross-multiply), expand, and solve. Check your answer doesn’t make a denominator zero.`],
+ examples:[
+  {q:T`Simplify \(\dfrac{x^2+5x+6}{x^2-4}\)`,rows:[[T`\dfrac{(x+2)(x+3)}{(x-2)(x+2)}`,'factorise both'],[T`\dfrac{x+3}{x-2}`,'cancel (x + 2)']]},
+  {q:T`Write \(\dfrac{2}{x+1}+\dfrac{3}{x-2}\) as one fraction`,rows:[[T`\dfrac{2(x-2)+3(x+1)}{(x+1)(x-2)}`,'common denominator'],[T`\dfrac{5x-1}{(x+1)(x-2)}`,'expand the top: 2x − 4 + 3x + 3']]},
+  {q:T`Solve \(\dfrac{4}{x-1}=\dfrac{3}{x+2}\)`,rows:[[T`4(x+2)=3(x-1)`,'cross-multiply'],[T`4x+8=3x-3`,''],[T`x=-11`,'']]}],
+ mistakes:[T`Cancelling terms instead of factors: \(\dfrac{x+3}{x+5}\) does <b>not</b> simplify to \(\dfrac35\).`,T`Adding tops and bottoms separately.`,T`Forgetting brackets when subtracting a fraction: \(-(x-2)\) is \(-x+2\).`],
+ checks:[{q:T`Simplify \(\dfrac{x^2-9}{x^2+x-6}\)`,kind:'expr',ans:'(x-3)/(x-2)',show:T`\dfrac{x-3}{x-2}`,fmt:'e.g. <code>(x + 1)/(x - 4)</code>',form:'cancel'},{q:T`Solve \(\dfrac{5}{x+1}=\dfrac{2}{x-2}\)`,kind:'num',ans:4,show:'x = 4',fmt:'e.g. <code>3</code>'}]},
+};
+const UNIT_GUIDES={
+5:{title:'Quadratics: which method when',
+ intro:T`<p>A quadratic is anything of the form \(ax^2+bx+c\). Its graph is a parabola: U-shaped when \(a>0\), upside-down when \(a<0\). Almost every question in this unit asks one of three things about it: <b>where does it cross the \(x\)-axis</b> (the roots), <b>where is its turning point</b>, or <b>how many times does it cross</b>?</p>
+<p>The reason there are so many methods is that the same quadratic can be written in three forms, and <b>each form makes a different feature obvious</b>.</p>`,
+ forms:[[T`y=x^2+6x+8`,'Expanded','The y-intercept (8). The form you get after rearranging an equation.','Expanding gets you here.'],[T`y=(x+2)(x+4)`,'Factorised','The roots: x = −2 and x = −4.','Factorising gets you here (when the numbers allow).'],[T`y=(x+3)^2-1`,'Completed square','The turning point (−3, −1), and the minimum value −1.','Completing the square gets you here (always).']],
+ decide:[
+  [T`Rearrange to \(ax^2+bx+c=0\).`,'Every method starts here.'],
+  [T`No constant term? Take out \(x\). No \(x\) term? Square-root both sides, with \(\pm\).`,'The two shortcuts.'],
+  [T`Does it factorise? Try for half a minute, or check whether \(b^2-4ac\) is a perfect square.`,'If yes, factorise: it is the quickest.'],
+  [T`Asked for decimals (“to 2 d.p.”, “3 s.f.”) or the numbers are messy?`,'Use the quadratic formula.'],
+  [T`Asked for exact answers with surds?`,T`Use the formula, or complete the square when \(a=1\) and \(b\) is even.`],
+  [T`Asked for a turning point, minimum or maximum?`,'Complete the square.'],
+  [T`Asked how many solutions, or for values of \(k\)?`,'Use the discriminant: no need to solve.'],
+  [T`An inequality, or a line meeting a curve?`,'Solve the related equation first with the steps above, then interpret it.']],
+ compare:T`<p>Take \(x^2+6x+8=0\). All three methods give the same answer:</p>
+<ul><li><b>Factorising:</b> \((x+2)(x+4)=0\), so \(x=-2\) or \(x=-4\). Quickest here.</li><li><b>Completing the square:</b> \((x+3)^2-1=0\), so \(x+3=\pm1\), giving the same two answers.</li><li><b>Formula:</b> \(b^2-4ac=36-32=4\), so \(x=\dfrac{-6\pm2}{2}\), again \(-2\) and \(-4\).</li></ul>
+<p>Now change one number: \(x^2+6x+7=0\). Here \(b^2-4ac=8\), not a perfect square, so it won’t factorise. Completing the square gives \((x+3)^2=2\), so \(x=-3\pm\sqrt2\) exactly; the formula gives the same, or \(-1.59\) and \(-4.41\) as decimals.</p>`,
+ graph:{fns:[{e:'x^2+6x+8',l:'y = x² + 6x + 8 = (x + 2)(x + 4) = (x + 3)² − 1'}],pts:[[-4,0,false],[-2,0,false],[-3,-1,'turning point'],[0,8,'y-intercept']],xr:[-7,2],yr:[-3,10],grid:[1,1]},
+ map:T`<ul><li><a href="#t-exp2">Expanding</a> and <a href="#t-fac2">factorising</a> move between the expanded and factorised forms.</li><li><a href="#t-solveq">Solving by factorising</a>, <a href="#t-cts">completing the square</a> and <a href="#t-qf">the formula</a> are three routes to the roots.</li><li><a href="#t-disc">The discriminant</a> counts the roots without finding them.</li><li><a href="#t-qineq">Inequalities</a>, <a href="#t-simq">line–curve problems</a> and <a href="#t-afrac">algebraic fractions</a> are where you use these skills.</li></ul>`}};
+const LEARN={
+qf:{
+ mins:5,
+ intro:T`<p>The quadratic formula solves <b>any</b> equation of the form \(ax^2+bx+c=0\):</p><div class="bigf">\[x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\]</div>
+<p>It always works, even when the quadratic won’t factorise. The \(\pm\) (“plus or minus”) gives the two solutions: work it out once with \(+\) and once with \(-\).</p>
+<p>The part under the square root, \(b^2-4ac\), is called the <b>discriminant</b>. It tells you how many solutions to expect before you finish: positive means two, zero means one, negative means none.</p>
+<p>In this lesson you’ll watch one example worked step by step, fill in the gaps of a second, try one on your own, and finish with when to use the formula rather than another method.</p>`,
+ walk:{q:T`Solve \(2x^2-7x+4=0\), giving your answers to 2 decimal places.`,steps:[
+  {do:'Make sure one side is zero',line:T`2x^2-7x+4=0`,why:T`The formula works on \(ax^2+bx+c=0\). This equation is already in that form. If it weren’t, you would rearrange it first.`},
+  {do:'Read off a, b and c, with their signs',line:T`a=2,\quad b=-7,\quad c=4`,think:T`What are \(a\), \(b\) and \(c\) here?`,why:T`\(a\) is the number with \(x^2\), \(b\) the number with \(x\), and \(c\) the number on its own. Each one takes the sign in front of it.`,warn:T`\(b\) is \(-7\), not \(7\). The minus belongs to it.`},
+  {do:'Work out b² − 4ac on its own first',line:T`b^2-4ac=(-7)^2-4(2)(4)=49-32=17`,think:T`Try it: what is \((-7)^2-4\times2\times4\)?`,why:T`Doing this part separately keeps the arithmetic tidy. The answer, 17, is positive, so there will be two solutions.`,warn:T`Square the negative inside brackets: \((-7)^2=+49\). On a calculator, type the brackets.`},
+  {do:'Substitute into the formula',line:T`x=\dfrac{-(-7)\pm\sqrt{17}}{2(2)}=\dfrac{7\pm\sqrt{17}}{4}`,think:'What goes on top before the ±, and what goes on the bottom?',why:T`\(-b\) means “the opposite of \(b\)”. Here \(b=-7\), so \(-b=+7\). The bottom is \(2a=2\times2=4\).`,warn:T`The two classic slips: writing \(-7\) on top, and dividing by 2 instead of \(2a\).`},
+  {do:'Split the ± into two answers',line:T`x=\dfrac{7+\sqrt{17}}{4}\approx2.78\quad\text{or}\quad x=\dfrac{7-\sqrt{17}}{4}\approx0.72`,think:T`\(\sqrt{17}\approx4.123\). What are \((7+4.123)\div4\) and \((7-4.123)\div4\)?`,why:'± means do it once with + and once with −. Divide the whole top by 4, then round.',warn:T`Round only at the very end. Keep all the digits of \(\sqrt{17}\) until the last step.`},
+  {do:'Sense-check an answer',line:T`2(2.78)^2-7(2.78)+4\approx0\ \checkmark`,why:'Put one answer back into the original equation. It should come out at roughly zero (not exactly, because you rounded).'}]},
+ faded:{q:T`Solve \(x^2+3x-5=0\), giving your answers to 2 decimal places.`,parts:[
+  {given:T`x^2+3x-5=0`,note:'Already equal to zero, so no rearranging needed.'},
+  {blanks:[{pre:'a =',ans:1},{pre:'b =',ans:3},{pre:'c =',ans:-5}],note:'Read off a, b and c, signs included.',hint:T`When there’s no number in front of \(x^2\), \(a=1\). And \(c\) keeps its minus sign.`},
+  {blanks:[{pre:'b² − 4ac =',ans:29}],note:'The discriminant first.',hint:T`\(3^2-4\times1\times(-5)=9+20\). Minus times minus is plus.`},
+  {given:T`x=\dfrac{-3\pm\sqrt{29}}{2}`,note:T`Substituted: \(-b=-3\) and \(2a=2\).`},
+  {blanks:[{pre:'x ≈',ans:1.19,tol:.006},{pre:'or x ≈',ans:-4.19,tol:.006}],any:true,note:'The two answers, to 2 decimal places.',hint:T`\(\sqrt{29}\approx5.385\). Work out \((-3+5.385)\div2\) and \((-3-5.385)\div2\).`}]},
+ own:{q:T`Solve \(3x^2=5x+1\), giving your answers to 2 decimal places.`,kind:'set',ans:[1.85,-0.18],tol:.006,fmt:'both answers, e.g. <code>2.41, -0.41</code>',tip:'Look at the equation carefully before you start: is one side zero?',
+  lines:[T`3x^2-5x-1=0`,T`a=3,\quad b=-5,\quad c=-1`,T`b^2-4ac=25+12=37`,T`x=\dfrac{5\pm\sqrt{37}}{6}`,T`x\approx1.85\quad\text{or}\quad x\approx-0.18`]},
+ flow:{start:T`Your equation, rearranged to \(ax^2+bx+c=0\)`,qs:[
+  {q:'Does it factorise?',sub:T`Quick test: is \(b^2-4ac\) a perfect square (0, 1, 4, 9, 16, …)?`,yes:'Factorise. It is the quickest.',link:'solveq'},
+  {q:'Do you want decimal answers?',sub:'The question says “to 2 d.p.”, “3 s.f.” or similar.',yes:'Use the quadratic formula.',hl:true},
+  {q:T`Is \(a=1\) and \(b\) even?`,sub:'Exact answers wanted, nice numbers.',yes:'Complete the square: it is often quicker.',link:'cts'}],
+  end:'Use the quadratic formula, leaving the square root in (surd form).',aside:T`Only need to know <b>how many</b> solutions there are? Work out \(b^2-4ac\) and stop there: that’s <a href="#t-disc">the discriminant</a>.`},
+ recap:{formula:T`x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}`,points:[T`Rearrange to \(ax^2+bx+c=0\) first.`,T`Write down \(a\), \(b\) and \(c\) with their signs.`,T`Work out \(b^2-4ac\) first: positive gives two answers, zero gives one, negative gives none.`,T`\(-b\) is the opposite of \(b\), and \(2a\) goes under the <b>whole</b> top.`,'Round only at the very end.']}}};
+/*LEARN-EXTRA*/
+Object.assign(LEARN,{
+order:{mins:3,
+ intro:T`<p>When a calculation has several operations, the order matters: \(2+3\times4\) is 14, not 20. The agreed order is <b>BIDMAS</b>:</p>
+<div class="bigf">\[\text{Brackets}\to\text{Indices}\to\text{Divide/Multiply}\to\text{Add/Subtract}\]</div>
+<p>Division and multiplication are on the <b>same</b> level: do them left to right. Same for addition and subtraction.</p>
+<p>A fraction bar works like brackets: work out the top and bottom first.</p>`,
+ walk:{q:T`Evaluate \(20-3\times(5-2)^2\div9\).`,steps:[
+  {do:'Brackets first',line:T`5-2=3`,why:'Anything inside brackets is done before anything else.'},
+  {do:'Then indices (powers)',line:T`3^2=9`,think:T`What is \(3^2\)?`,why:T`The bracket is squared, so square its answer. Now it reads \(20-3\times9\div9\).`},
+  {do:'Multiply and divide, left to right',line:T`3\times9=27,\quad27\div9=3`,think:T`Work out \(3\times9\div9\), left to right.`,why:'These are on the same level, so go left to right.'},
+  {do:'Finally subtract',line:T`20-3=17`,why:'Addition and subtraction come last.',warn:T`Doing \(20-3\) first (giving \(17\times9\div9\)) is the classic mistake.`}]},
+ faded:{q:T`Evaluate \(4+6\times2^2-10\div5\).`,parts:[
+  {blanks:[{pre:'2² =',ans:4}],note:'No brackets, so indices first.',hint:T`\(2\times2\).`},
+  {blanks:[{pre:'6 × 4 =',ans:24},{pre:'10 ÷ 5 =',ans:2}],note:'Then multiplication and division.',hint:'Do each one separately.'},
+  {blanks:[{pre:'4 + 24 − 2 =',ans:26}],note:'Finally add and subtract, left to right.',hint:T`\(28-2\).`}]},
+ own:{q:T`Evaluate \((7-2)^2-3\times(8\div4+1)\).`,kind:'num',ans:16,fmt:'a number',tip:'Two brackets to work out first. Inside the second one, divide before you add.',
+  lines:[T`(5)^2-3\times(2+1)`,T`25-3\times3`,T`25-9=16`]},
+ spot:{use:['Any calculation with more than one operation.','Substituting numbers into a formula (that’s what you do next).','Checking whether a calculator answer looks right.'],
+  not:['Nothing to choose here: BIDMAS always applies. Just remember that × and ÷ are equal, and so are + and −.']},
+ recap:{formula:T`\text{B}\ \to\ \text{I}\ \to\ \text{DM}\ \to\ \text{AS}`,points:['Brackets, then indices.','Multiply and divide, left to right.','Add and subtract, left to right.','A fraction bar acts like brackets.']}},
+
+neg:{mins:3,
+ intro:T`<p>Negative numbers follow a few simple rules:</p>
+<ul><li>Adding a negative is the same as subtracting: \(5+(-3)=5-3=2\).</li><li>Subtracting a negative is the same as adding: \(5-(-3)=5+3=8\).</li><li>Multiplying or dividing: <b>same signs give a positive</b>, <b>different signs give a negative</b>.</li></ul>
+<div class="bigf">\[(-)\times(-)=+\qquad(-)\times(+)=-\]</div>
+<p>On a number line, adding moves right and subtracting moves left. A negative flips the direction.</p>`,
+ walk:{q:T`Evaluate \(-3-(-8)+(-4)\times2\).`,steps:[
+  {do:'Multiplication first (BIDMAS)',line:T`(-4)\times2=-8`,think:T`What is \((-4)\times2\)?`,why:'Different signs: the answer is negative.'},
+  {do:'Rewrite',line:T`-3-(-8)+(-8)`,why:'Put the result back in.'},
+  {do:'Simplify the double signs',line:T`-3+8-8`,why:T`Minus a negative is plus: \(-(-8)=+8\). Plus a negative is minus: \(+(-8)=-8\).`,warn:'Two minus signs next to each other become a plus.'},
+  {do:'Work left to right',line:T`-3+8=5,\quad5-8=-3`,think:T`What is \(-3+8\), then minus 8?`,why:'Answer: −3.'}]},
+ faded:{q:T`Evaluate \((-6)\times(-3)\div(-2)+(-5)\).`,parts:[
+  {blanks:[{pre:'(−6) × (−3) =',ans:18}],note:'Same signs: positive.',hint:T`\(6\times3=18\).`},
+  {blanks:[{pre:'18 ÷ (−2) =',ans:-9}],note:'Different signs: negative.',hint:T`\(18\div2=9\), then the sign.`},
+  {blanks:[{pre:'−9 + (−5) =',ans:-14}],note:'Adding a negative is subtracting.',hint:T`\(-9-5\).`}]},
+ own:{q:T`Evaluate \((-2)^3-(-4)\times3\).`,kind:'num',ans:4,fmt:'a number (it can be negative)',tip:T`\((-2)^3=(-2)\times(-2)\times(-2)\). Then multiply before subtracting.`,
+  lines:[T`(-2)^3=-8`,T`(-4)\times3=-12`,T`-8-(-12)=-8+12=4`]},
+ spot:{use:['Temperatures, bank balances, heights below sea level.','Every algebra topic: substituting negatives, expanding brackets, solving equations.'],
+  not:[T`Careful with powers: \(-3^2=-9\) (square first, then the minus), but \((-3)^2=9\).`]},
+ recap:{formula:T`-(-a)=+a,\quad(-)(-)=+,\quad(-)(+)=-`,points:['Adding a negative: subtract.','Subtracting a negative: add.','Same signs multiply or divide to a positive.','Different signs give a negative.','A negative squared is positive (when it’s in brackets).']}},
+
+frac:{mins:4,
+ intro:T`<p>The four fraction operations:</p>
+<ul><li><b>Add or subtract:</b> make the bottoms (denominators) the same first, then add the tops.</li><li><b>Multiply:</b> tops times tops, bottoms times bottoms.</li><li><b>Divide:</b> flip the second fraction and multiply.</li><li><b>Mixed numbers</b> like \(2\tfrac13\): turn them into top-heavy fractions first, \(\tfrac73\).</li></ul>
+<div class="bigf">\[\frac ab\div\frac cd=\frac ab\times\frac dc\]</div>
+<p>Simplify at the end by dividing top and bottom by the same number.</p>`,
+ walk:{q:T`Evaluate \(2\tfrac13\div\tfrac79\).`,steps:[
+  {do:'Make the mixed number top-heavy',line:T`2\tfrac13=\tfrac73`,think:T`How many thirds are in \(2\tfrac13\)?`,why:T`\(2=\tfrac63\), plus \(\tfrac13\) makes \(\tfrac73\).`},
+  {do:'Flip the second fraction and multiply',line:T`\tfrac73\times\tfrac97`,why:'Dividing by a fraction is the same as multiplying by it upside down.',warn:'Flip only the second fraction, never the first.'},
+  {do:'Multiply tops and bottoms',line:T`\tfrac{63}{21}`,why:T`\(7\times9=63\), \(3\times7=21\).`},
+  {do:'Simplify',line:T`\tfrac{63}{21}=3`,think:'What is 63 ÷ 21?',why:'21 goes into 63 three times. (You could also cancel the 7s before multiplying.)'}]},
+ faded:{q:T`Evaluate \(\tfrac34+\tfrac56\).`,parts:[
+  {given:T`\text{common denominator: }12`,note:'The smallest number both 4 and 6 go into.'},
+  {blanks:[{pre:'3/4 = ?/12:',ans:9},{pre:'5/6 = ?/12:',ans:10}],note:'Rewrite each fraction over 12.',hint:T`\(4\times3=12\), so the top is \(3\times3\). \(6\times2=12\), so the top is \(5\times2\).`},
+  {blanks:[{pre:'sum = ?/12:',ans:19}],note:'Add the tops. The bottom stays 12.',hint:T`\(9+10\).`},
+  {given:T`\tfrac{19}{12}=1\tfrac{7}{12}`,note:'Top-heavy or mixed: either is fine.'}]},
+ own:{q:T`Evaluate \(\tfrac23-\tfrac14\times\tfrac25\).`,kind:'num',ans:17/30,typed:'17/30',fmt:'a fraction, e.g. <code>7/12</code>',tip:'BIDMAS still applies: multiply first, then subtract with a common denominator.',
+  lines:[T`\tfrac14\times\tfrac25=\tfrac2{20}=\tfrac1{10}`,T`\tfrac23-\tfrac1{10}=\tfrac{20}{30}-\tfrac3{30}`,T`=\tfrac{17}{30}`]},
+ spot:{use:['Any calculation with fractions or mixed numbers.','“Of” means multiply: ⅔ of 45 = ⅔ × 45.','Later: algebraic fractions use exactly these rules.'],
+  not:['Adding tops and bottoms separately: ½ + ⅓ is not 2/5.']},
+ recap:{formula:T`\frac ab+\frac cd=\frac{ad+bc}{bd}`,points:['Add/subtract: same denominator first.','Multiply: straight across.','Divide: flip the second, then multiply.','Mixed numbers: make them top-heavy first.','Simplify at the end.']}},
+
+like:{mins:3,
+ intro:T`<p><b>Like terms</b> have exactly the same letters raised to the same powers: \(3x\) and \(-5x\) are like terms; \(3x\) and \(3x^2\) are not.</p>
+<p>To simplify, add up the numbers in front (the coefficients) of each group of like terms:</p>
+<div class="bigf">\[5x+3y-2x+4-y+2=3x+2y+6\]</div>
+<p>Each term owns the sign <b>in front of it</b>. A letter on its own means 1 of it: \(y=1y\).</p>`,
+ walk:{q:T`Simplify \(5x+3y-2x+4-y+2\).`,steps:[
+  {do:'Sort the terms into groups',line:T`5x,\ -2x\ \ \big|\ \ 3y,\ -y\ \ \big|\ \ 4,\ 2`,think:'Which terms go together?',why:'x terms, y terms and plain numbers.',warn:T`The minus belongs to the term after it: it’s \(-2x\) and \(-y\).`},
+  {do:'Collect the x terms',line:T`5x-2x=3x`,why:'5 lots of x take away 2 lots.'},
+  {do:'Collect the y terms',line:T`3y-y=2y`,why:T`\(-y\) is \(-1y\).`},
+  {do:'Collect the numbers',line:T`4+2=6`,why:'Plain numbers are like terms with each other.'},
+  {do:'Write the answer',line:T`3x+2y+6`,why:'Usually letters first, in alphabetical order, then the number.'}]},
+ faded:{q:T`Simplify \(4a^2+3a-a^2+5a-2\).`,parts:[
+  {blanks:[{pre:'a² terms: 4a² − a² =',ans:'3a^2',kind:'expr',vars:['a'],show:T`3a^2`}],note:'The a² terms.',hint:T`\(4-1=3\).`},
+  {blanks:[{pre:'a terms: 3a + 5a =',ans:'8a',kind:'expr',vars:['a'],show:T`8a`}],note:'The a terms. These are different from a².',hint:T`\(3+5\).`},
+  {given:T`3a^2+8a-2`,note:'The number −2 has nothing to join.'}]},
+ own:{q:T`Simplify \(3xy+2x-xy+5x^2-4x\).`,kind:'expr',vars:['x','y'],ans:'5x^2+2xy-2x',fmt:'e.g. <code>3x^2 + 4xy - x</code>',tip:T`Three groups: \(x^2\), \(xy\) and \(x\). Watch the signs.`,
+  lines:[T`5x^2\ \big|\ 3xy-xy\ \big|\ 2x-4x`,T`5x^2+2xy-2x`]},
+ spot:{use:['“Simplify” an expression.','The last step after expanding brackets.','Tidying both sides when solving an equation.'],
+  not:[T`Different powers: \(x\) and \(x^2\) never combine.`,T`Multiplying is different: \(3x\times2x=6x^2\), not a like-terms job.`]},
+ recap:{formula:T`ax+bx=(a+b)x`,points:['Like terms: same letters, same powers.','Each term carries the sign in front of it.','A bare letter means 1 of it.','x, x², xy are all different.']}},
+
+subs:{mins:3,
+ intro:T`<p>Substitution means replacing letters with numbers, then working it out. The two habits that prevent most mistakes:</p>
+<ul><li>Put every number in <b>brackets</b> as you substitute, especially negatives.</li><li>Then follow <b>BIDMAS</b>.</li></ul>
+<div class="bigf">\[a=3,\ b=-2:\quad 2a^2-5b=2(3)^2-5(-2)\]</div>
+<p>Remember that letters next to each other are multiplied: \(5b\) means \(5\times b\).</p>`,
+ walk:{q:T`Find \(2a^2-5b\) when \(a=3\) and \(b=-2\).`,steps:[
+  {do:'Substitute, with brackets',line:T`2(3)^2-5(-2)`,why:'Brackets keep each number, and its sign, together.',warn:T`Without brackets, \(-5-2\) looks like subtraction. It’s really \(-5\times(-2)\).`},
+  {do:'Indices first',line:T`(3)^2=9\ \Rightarrow\ 2\times9-5(-2)`,why:T`\(2a^2\) means \(2\times a^2\): square the 3 only, not 2 × 3.`},
+  {do:'Multiply',line:T`18+10`,think:T`What are \(2\times9\) and \(-5\times(-2)\)?`,why:'Negative times negative is positive.'},
+  {do:'Add',line:T`28`,why:'Done.'}]},
+ faded:{q:T`Use \(v=u+at\) to find \(v\) when \(u=5\), \(a=-2\) and \(t=6\).`,parts:[
+  {given:T`v=5+(-2)(6)`,note:'Substitute with brackets.'},
+  {blanks:[{pre:'(−2)(6) =',ans:-12}],note:'Multiply first.',hint:'Different signs: negative.'},
+  {blanks:[{pre:'v =',ans:-7}],note:'Then add.',hint:T`\(5+(-12)=5-12\).`}]},
+ own:{q:T`Find \(x^2-4x+1\) when \(x=-3\).`,kind:'num',ans:22,fmt:'a number',tip:T`\((-3)^2\) is positive, and \(-4\times(-3)\) is positive too.`,
+  lines:[T`(-3)^2-4(-3)+1`,T`9+12+1`,T`22`]},
+ spot:{use:['“Find the value of … when …”.','Using any formula: area, speed, physics, money.','Checking an answer to an equation.'],
+  not:['Rearranging a formula to make a different letter the subject: that’s a separate skill (later).']},
+ recap:{formula:T`\text{letters}\to(\text{numbers})\to\text{BIDMAS}`,points:['Substitute each number in brackets.','Then BIDMAS.','2a² is 2 × a², not (2a)².','Negative squared is positive.']}},
+
+expand1:{mins:3,
+ intro:T`<p>Expanding a single bracket means multiplying <b>every</b> term inside by the term outside:</p>
+<div class="bigf">\[3(2x-5)=6x-15\]</div>
+<p>Signs matter: \(-2(x-4)=-2x+8\), because negative times negative is positive.</p>
+<p>After expanding, collect like terms. This is the first step in solving many equations.</p>`,
+ walk:{q:T`Expand and simplify \(3(2x-5)-2(x-4)\).`,steps:[
+  {do:'Expand the first bracket',line:T`3(2x-5)=6x-15`,think:T`What are \(3\times2x\) and \(3\times(-5)\)?`,why:'The 3 multiplies both terms.'},
+  {do:'Expand the second bracket, sign included',line:T`-2(x-4)=-2x+8`,think:T`What are \(-2\times x\) and \(-2\times(-4)\)?`,why:T`The term outside is \(-2\), not 2.`,warn:T`\(-2\times(-4)=+8\). Writing \(-8\) is the most common slip.`},
+  {do:'Put them together',line:T`6x-15-2x+8`,why:'All four terms.'},
+  {do:'Collect like terms',line:T`4x-7`,why:T`\(6x-2x=4x\) and \(-15+8=-7\).`}]},
+ faded:{q:T`Expand and simplify \(x(3x+2)-4x\).`,parts:[
+  {blanks:[{pre:'x(3x + 2) =',ans:'3x^2+2x',kind:'expr',form:'expanded',show:T`3x^2+2x`}],note:'Multiply each term by x.',hint:T`\(x\times3x=3x^2\).`},
+  {blanks:[{pre:'3x² + 2x − 4x =',ans:'3x^2-2x',kind:'expr',form:'expanded',show:T`3x^2-2x`}],note:'Collect the x terms.',hint:T`\(2x-4x=-2x\).`}]},
+ own:{q:T`Expand and simplify \(5(x+3)-3(2x-1)\).`,kind:'expr',ans:'18-x',form:'expanded',fmt:'e.g. <code>2x + 7</code>',tip:T`The second bracket is multiplied by \(-3\).`,
+  lines:[T`5x+15-6x+3`,T`-x+18`]},
+ spot:{use:['“Expand” or “multiply out”.','Solving an equation with brackets.','Simplifying before substituting.'],
+  not:['“Factorise”: the reverse direction.']},
+ recap:{formula:T`a(b+c)=ab+ac`,points:['Multiply every term inside.','The term outside includes its sign.','Minus times minus is plus.','Collect like terms at the end.']}},
+
+factor1:{mins:3,
+ intro:T`<p>Factorising is expanding in reverse: find the <b>highest common factor</b> (HCF) of all the terms and take it outside a bracket.</p>
+<div class="bigf">\[12x^2-18x=6x(2x-3)\]</div>
+<p>Find the HCF in two parts: the biggest number that divides all the coefficients, and the letters (to the lowest power) that every term has.</p>
+<p>“Fully factorise” means nothing more can come out of the bracket.</p>`,
+ walk:{q:T`Factorise fully \(12x^2-18x\).`,steps:[
+  {do:'HCF of the numbers',line:T`\text{HCF}(12,18)=6`,think:'What is the biggest number that divides both 12 and 18?',why:'6 goes into both.'},
+  {do:'Letters every term shares',line:T`x^2\ \text{and}\ x:\ \ x`,why:'Both terms have at least one x. Take the lowest power.'},
+  {do:'Full HCF',line:T`6x`,why:'Put the two together.'},
+  {do:'Divide each term by it',line:T`12x^2\div6x=2x,\quad-18x\div6x=-3`,why:'These go inside the bracket.'},
+  {do:'Write it out and check',line:T`6x(2x-3)`,why:T`Expand to check: \(12x^2-18x\ \checkmark\)`,warn:T`\(6(2x^2-3x)\) or \(3x(4x-6)\) are not fully factorised.`}]},
+ faded:{q:T`Factorise fully \(8a^2b+12ab^2\).`,parts:[
+  {blanks:[{pre:'HCF of 8 and 12 =',ans:4}],note:'The numbers first.',hint:'4 goes into both.'},
+  {blanks:[{pre:'full HCF =',ans:'4ab',kind:'expr',vars:['a','b'],show:T`4ab`}],note:'Both terms have at least one a and one b.',hint:T`Lowest powers: \(a^1\) and \(b^1\).`},
+  {blanks:[{pre:'8a²b + 12ab² =',ans:'4ab(2a+3b)',kind:'expr',vars:['a','b'],form:'brackets',show:T`4ab(2a+3b)`}],note:'Divide each term by 4ab.',hint:T`\(8a^2b\div4ab=2a\) and \(12ab^2\div4ab=3b\).`}]},
+ own:{q:T`Factorise fully \(15x^3+10x^2-5x\).`,kind:'expr',ans:'5x(3x^2+2x-1)',form:'common',fmt:'e.g. <code>3x(x - 4)</code>',tip:'All three terms share a number and an x. The last term leaves −1, not nothing.',
+  lines:[T`\text{HCF}=5x`,T`5x(3x^2+2x-1)`]},
+ spot:{use:['“Factorise” with a common factor in every term.','The first step of factorising anything: always check for a common factor first.','Solving equations like x² = 5x (later).'],
+  not:[T`No common factor, like \(x^2+5x+6\): that needs double brackets (Quadratics).`]},
+ recap:{formula:T`ab+ac=a(b+c)`,points:['HCF = biggest number × shared letters at lowest power.','Divide each term by the HCF.','A term equal to the HCF leaves 1 (or −1) inside.','Check by expanding.']}},
+
+lin2:{mins:3,
+ intro:T`<p>An equation is a balance: whatever you do to one side, you must do to the other. To solve it, <b>undo</b> what has been done to \(x\), in reverse order.</p>
+<div class="bigf">\[3x+7=22\ \Rightarrow\ 3x=15\ \Rightarrow\ x=5\]</div>
+<p>Here \(x\) was multiplied by 3 and then had 7 added. So undo the + 7 first (subtract 7), then the × 3 (divide by 3).</p>`,
+ walk:{q:T`Solve \(3x+7=22\).`,steps:[
+  {do:'Undo the + 7: subtract 7 from both sides',line:T`3x=15`,why:'The last thing done to x gets undone first.'},
+  {do:'Undo the × 3: divide both sides by 3',line:T`x=5`,think:T`What is \(15\div3\)?`,why:'Now x is on its own.'},
+  {do:'Check in the original',line:T`3(5)+7=22\ \checkmark`,why:'Substitute your answer back. Both sides match.'}]},
+ faded:{q:T`Solve \(\dfrac x4-3=2\).`,parts:[
+  {blanks:[{pre:'x/4 =',ans:5}],note:'Undo the − 3: add 3 to both sides.',hint:T`\(2+3\).`},
+  {blanks:[{pre:'x =',ans:20}],note:'Undo the ÷ 4: multiply both sides by 4.',hint:T`\(5\times4\).`}]},
+ own:{q:'I think of a number, multiply it by 5, then subtract 8. The answer is 27. What was my number?',kind:'num',ans:7,fmt:'a number',tip:T`Write it as an equation first: \(5n-8=27\).`,
+  lines:[T`5n-8=27`,T`5n=35`,T`n=7`]},
+ spot:{use:[T`An equation with \(x\) on one side only.`,'“I think of a number” puzzles, and word problems that lead to one equation.'],
+  not:['x on both sides: next topic.','Just guessing and checking: it works for easy ones but fails for harder ones.']},
+ recap:{formula:T`\text{do the same to both sides}`,points:['Undo operations in reverse order.','Usually: + or − first, then × or ÷.','Whatever you do to one side, do to the other.','Check by substituting back.']}},
+
+lin3:{mins:3,
+ intro:T`<p>When \(x\) appears on both sides, first gather all the \(x\) terms on one side and all the numbers on the other.</p>
+<div class="bigf">\[7x-4=3x+12\ \Rightarrow\ 4x=16\]</div>
+<p>Tip: take away the <b>smaller</b> \(x\) term from both sides. That keeps the \(x\) term positive.</p>`,
+ walk:{q:T`Solve \(7x-4=3x+12\).`,steps:[
+  {do:'Subtract the smaller x term (3x) from both sides',line:T`4x-4=12`,why:'Now x is on one side only.'},
+  {do:'Add 4 to both sides',line:T`4x=16`,why:'Numbers to the other side.'},
+  {do:'Divide by 4',line:T`x=4`,think:'What is 16 ÷ 4?',why:'x on its own.'},
+  {do:'Check both sides',line:T`7(4)-4=24,\quad3(4)+12=24\ \checkmark`,why:'Both sides give 24.'}]},
+ faded:{q:T`Solve \(2x+9=5x-6\).`,parts:[
+  {given:T`9=3x-6`,note:'Subtract 2x (the smaller x term) from both sides.'},
+  {blanks:[{pre:'3x =',ans:15}],note:'Add 6 to both sides.',hint:T`\(9+6\).`},
+  {blanks:[{pre:'x =',ans:5}],note:'Divide by 3.',hint:T`\(15\div3\).`}]},
+ own:{q:T`Solve \(4-3x=2x-11\).`,kind:'num',ans:3,fmt:'a number',tip:T`Add \(3x\) to both sides to get rid of the negative x term.`,
+  lines:[T`4=5x-11`,T`15=5x`,T`x=3`]},
+ spot:{use:['x terms on both sides of the equals sign.','Problems where two quantities are equal, like two phone plans costing the same.'],
+  not:['Brackets: expand them first (next topic).']},
+ recap:{formula:T`\text{x terms one side, numbers the other}`,points:['Subtract the smaller x term from both sides.','Then move the numbers.','Divide to finish.','x = 4 and 4 = x mean the same thing.']}},
+
+linbr:{mins:3,
+ intro:T`<p>If an equation has brackets, <b>expand them first</b>. Then it’s a normal equation: collect like terms, gather \(x\) on one side, numbers on the other.</p>
+<div class="bigf">\[3(2x-1)=2(x+5)+1\ \Rightarrow\ 6x-3=2x+11\]</div>
+<p>Answers don’t have to be whole numbers. Fractions and decimals are fine.</p>`,
+ walk:{q:T`Solve \(3(2x-1)=2(x+5)+1\).`,steps:[
+  {do:'Expand both sides',line:T`6x-3=2x+10+1`,think:T`What are \(3(2x-1)\) and \(2(x+5)\)?`,why:'Multiply every term in each bracket.'},
+  {do:'Tidy the right side',line:T`6x-3=2x+11`,why:T`\(10+1=11\).`},
+  {do:'Subtract 2x from both sides',line:T`4x-3=11`,why:'x on one side.'},
+  {do:'Add 3, then divide by 4',line:T`4x=14\ \Rightarrow\ x=3.5`,why:T`\(14\div4=3.5\) (or \(\tfrac72\)).`}]},
+ faded:{q:T`Solve \(5(x-2)-2(x+1)=9\).`,parts:[
+  {blanks:[{pre:'left side simplifies to',ans:'3x-12',kind:'expr',show:T`3x-12`}],note:'Expand both brackets and collect.',hint:T`\(5x-10-2x-2\). Careful: \(-2\times1=-2\).`},
+  {blanks:[{pre:'3x =',ans:21}],note:'Add 12 to both sides.',hint:T`\(9+12\).`},
+  {blanks:[{pre:'x =',ans:7}],note:'Divide by 3.',hint:T`\(21\div3\).`}]},
+ own:{q:T`Solve \(4(3-x)=2(x+9)\).`,kind:'num',ans:-1,fmt:'a number',tip:'Expand both sides, then gather the x terms.',
+  lines:[T`12-4x=2x+18`,T`-6=6x`,T`x=-1`]},
+ spot:{use:['An equation containing brackets.','Perimeter and area problems, which often produce brackets.'],
+  not:[T`Sometimes dividing first is quicker: \(4(x+3)=20\Rightarrow x+3=5\). Both ways work.`]},
+ recap:{formula:T`\text{expand}\to\text{collect}\to\text{solve}`,points:['Expand brackets first.','Watch the sign in front of each bracket.','Then solve as normal.','Answers can be fractions or negatives.']}},
+
+linfrac:{mins:4,
+ intro:T`<p>Fractions in an equation are awkward, so get rid of them first: <b>multiply every term</b> by a number that all the denominators go into (their lowest common multiple).</p>
+<div class="bigf">\[\frac{x+3}{4}=\frac{2x-1}{3}\ \xrightarrow{\times12}\ 3(x+3)=4(2x-1)\]</div>
+<p>After that, it’s an equation with brackets. Put the tops in brackets so the multiplication reaches every term.</p>`,
+ walk:{q:T`Solve \(\dfrac{x+3}{4}=\dfrac{2x-1}{3}\).`,steps:[
+  {do:'Find a number both denominators go into',line:T`\text{LCM}(4,3)=12`,why:'Multiplying by 12 clears both fractions.'},
+  {do:'Multiply both sides by 12',line:T`3(x+3)=4(2x-1)`,think:T`What is \(12\div4\)? And \(12\div3\)?`,why:T`\(12\times\tfrac{x+3}{4}=3(x+3)\) and \(12\times\tfrac{2x-1}{3}=4(2x-1)\).`,warn:'Keep the tops in brackets, so every term gets multiplied.'},
+  {do:'Expand',line:T`3x+9=8x-4`,why:'Multiply out both brackets.'},
+  {do:'Gather terms',line:T`13=5x`,why:T`Subtract \(3x\), add 4.`},
+  {do:'Divide',line:T`x=2.6`,why:T`\(13\div5=2.6\) (or \(\tfrac{13}5\)).`}]},
+ faded:{q:T`Solve \(\dfrac x2+\dfrac x3=10\).`,parts:[
+  {blanks:[{pre:'LCM of 2 and 3 =',ans:6}],note:'Find the multiplier.',hint:'The smallest number both go into.'},
+  {given:T`3x+2x=60`,note:'Multiply every term by 6, including the 10.'},
+  {blanks:[{pre:'x =',ans:12}],note:'Collect and divide.',hint:T`\(5x=60\).`}]},
+ own:{q:T`Solve \(\dfrac{x-1}{3}-\dfrac{x+2}{5}=1\).`,kind:'num',ans:13,fmt:'a number',tip:'Multiply every term by 15. Watch the minus in front of the second fraction.',
+  lines:[T`5(x-1)-3(x+2)=15`,T`5x-5-3x-6=15`,T`2x-11=15`,T`x=13`]},
+ spot:{use:['An equation with fractions, like x/3 or (x + 1)/4.','Word problems involving “a third of” or “half of”.'],
+  not:[T`One simple fraction like \(\tfrac x4=5\): just multiply by 4.`]},
+ recap:{formula:T`\text{multiply every term by the LCM}`,points:['Find the LCM of the denominators.','Multiply every term, both sides.','Put the tops in brackets.','Then expand and solve.']}},
+
+rearr:{mins:4,
+ intro:T`<p>Rearranging (changing the subject) means getting a different letter on its own. It’s exactly like solving an equation: undo operations in reverse order, doing the same to both sides. The difference is that the answer contains letters.</p>
+<div class="bigf">\[v=u+at\ \Rightarrow\ t=\frac{v-u}{a}\]</div>
+<p>Tip: pretend the letter you want is \(x\) and every other letter is a number.</p>`,
+ walk:{q:T`Make \(t\) the subject of \(v=u+at\).`,steps:[
+  {do:'Spot what’s been done to t',line:T`t\ \xrightarrow{\times a}\ at\ \xrightarrow{+u}\ u+at`,why:'Multiplied by a, then u was added. Undo in reverse.'},
+  {do:'Subtract u from both sides',line:T`v-u=at`,why:'Undo the + u first.'},
+  {do:'Divide both sides by a',line:T`t=\dfrac{v-u}{a}`,why:'Undo the × a.',warn:T`The whole of \(v-u\) is divided by \(a\), not just \(u\).`},
+  {do:'Check with numbers',line:T`u=2,\ a=3,\ t=4:\ v=14;\ \tfrac{14-2}{3}=4\ \checkmark`,why:'Pick easy numbers, work out v, then see if your formula gives t back.'}]},
+ faded:{q:T`Make \(r\) the subject of \(A=\pi r^2\).`,parts:[
+  {blanks:[{pre:'r² =',ans:'A/pi',kind:'expr',vars:['A'],dom:[1,9],show:T`\dfrac{A}{\pi}`}],note:'Undo the × π: divide by π.',hint:T`Type <code>A/pi</code>.`},
+  {blanks:[{pre:'r =',ans:'sqrt(A/pi)',kind:'expr',vars:['A'],dom:[1,9],show:T`\sqrt{\dfrac{A}{\pi}}`}],note:'Undo the square: square root.',hint:T`Type <code>sqrt(A/pi)</code>.`}]},
+ own:{q:T`Make \(x\) the subject of \(y=\dfrac{3x-2}{5}\).`,kind:'expr',vars:['y'],ans:'(5y+2)/3',fmt:'e.g. <code>x = (2y - 1)/4</code>',tip:'Undo the ÷ 5 first, then the − 2, then the × 3.',
+  lines:[T`5y=3x-2`,T`5y+2=3x`,T`x=\dfrac{5y+2}{3}`]},
+ spot:{use:['“Make … the subject”.','Using a formula backwards: you know v, u and a, and want t.','Later: finding inverse functions works the same way.'],
+  not:[T`The letter you want appears twice: you’ll need to collect those terms and factorise it out. That’s a harder version.`]},
+ recap:{formula:T`\text{same steps as solving}`,points:['Treat the target letter as x.','Undo operations in reverse order.','Do the same to both sides.','Check with easy numbers.']}},
+
+ineq:{mins:4,
+ intro:T`<p>An inequality uses \(<\), \(>\), \(\le\) or \(\ge\) instead of =. Its answer is a <b>range</b> of values, like \(x>-3\).</p>
+<p>Solve it exactly like an equation, with one extra rule:</p>
+<div class="bigf">\[\text{multiply or divide by a negative}\Rightarrow\text{flip the sign}\]</div>
+<p>Why? \(2<5\), but \(-2>-5\). Multiplying by −1 reverses the order.</p>`,
+ walk:{q:T`Solve \(5-2x<11\).`,steps:[
+  {do:'Subtract 5 from both sides',line:T`-2x<6`,why:'Same as an equation. Adding or subtracting never flips the sign.'},
+  {do:'Divide by −2 and flip the sign',line:T`x>-3`,think:T`What is \(6\div(-2)\)? Which way does the sign point now?`,why:T`Dividing by a negative reverses the inequality: \(<\) becomes \(>\).`,warn:'Forgetting to flip is the number-one mistake here.'},
+  {do:'Check with a number in the range',line:T`x=0:\ 5-0=5<11\ \checkmark`,why:'0 is bigger than −3, so it should work. It does.'}]},
+ faded:{q:T`Solve \(-4\le2x+2<8\), and list the integers that satisfy it.`,parts:[
+  {blanks:[{pre:'subtract 2: lower =',ans:-6},{pre:'upper =',ans:6}],note:'Do the same to all three parts.',hint:T`\(-4-2\) and \(8-2\).`},
+  {given:T`-3\le x<3`,note:'Divide all three parts by 2 (positive, so no flip).'},
+  {blanks:[{pre:'how many integers?',ans:6}],note:'−3 is included (≤); 3 is not (<).',hint:'−3, −2, −1, 0, 1, 2.'}]},
+ own:{q:T`Solve \(3x+4\ge5x-6\).`,kind:'ineq',ans:{op:'<=',k:5},fmt:'e.g. <code>x &lt;= 5</code> or <code>x &gt; 2</code>',tip:T`Subtract \(3x\) from both sides to keep the x term positive, and you won’t need to flip at all.`,
+  lines:[T`4\ge2x-6`,T`10\ge2x`,T`5\ge x,\ \text{so}\ x\le5`]},
+ spot:{use:['“Solve” with <, >, ≤ or ≥.','“Find the largest/smallest integer…”.','Word problems with “at least”, “at most”, “no more than”.'],
+  not:[T`Inequalities with \(x^2\): those need a sketch (Quadratic inequalities, later).`]},
+ recap:{formula:T`\times\ \text{or}\ \div\ \text{by a negative: flip}`,points:['Solve like an equation.','Flip the sign when multiplying or dividing by a negative.','≤ and ≥ include the end value; < and > don’t.','Double inequalities: do the same to all three parts.']}},
+
+sim:{mins:5,
+ intro:T`<p>Two equations, two unknowns. You need values of \(x\) and \(y\) that make <b>both</b> true at once.</p>
+<p><b>Elimination</b>: make the number in front of one letter match in both equations, then add or subtract the equations to make that letter disappear.</p>
+<div class="bigf">\[\begin{aligned}3x+2y&=16\\5x-2y&=8\end{aligned}\ \xrightarrow{\text{add}}\ 8x=24\]</div>
+<p>Same signs: subtract. Different signs: add. Then put your answer back in to find the other letter.</p>`,
+ walk:{q:T`Solve \(3x+2y=16\) and \(5x-2y=8\).`,steps:[
+  {do:'Look for matching coefficients',line:T`+2y\ \text{and}\ -2y`,why:'The y terms are the same size with opposite signs.'},
+  {do:'Add the equations',line:T`8x=24`,think:'What do you get when you add the left sides and the right sides?',why:T`\(+2y\) and \(-2y\) cancel out.`},
+  {do:'Solve for x',line:T`x=3`,why:T`\(24\div8\).`},
+  {do:'Substitute into either equation',line:T`3(3)+2y=16`,think:'What does y have to be?',why:'Use whichever equation looks easier.'},
+  {do:'Solve for y',line:T`2y=7\ \Rightarrow\ y=3.5`,why:T`\(16-9=7\).`},
+  {do:'Check in the other equation',line:T`5(3)-2(3.5)=8\ \checkmark`,why:'Both equations must work.'}]},
+ faded:{q:T`Solve \(2x+3y=13\) and \(4x+y=11\).`,parts:[
+  {given:T`12x+3y=33`,note:'Multiply the second equation by 3 so both have 3y.'},
+  {blanks:[{pre:'subtract: 10x =',ans:20}],note:'Same signs (+3y and +3y): subtract.',hint:T`\((12x+3y)-(2x+3y)\) and \(33-13\).`},
+  {blanks:[{pre:'x =',ans:2}],note:'Divide.',hint:T`\(20\div10\).`},
+  {blanks:[{pre:'y =',ans:3}],note:'Substitute into 4x + y = 11.',hint:T`\(8+y=11\).`}]},
+ own:{q:'3 coffees and 2 teas cost £9.80. 2 coffees and 3 teas cost £8.70. Find the price of a coffee (c) and a tea (t).',kind:'pair',ans:{c:2.4,t:1.3},fmt:'e.g. <code>c = 2.50, t = 1.20</code>',tip:T`Write two equations. Multiply the first by 3 and the second by 2 so the t terms match.`,
+  lines:[T`3c+2t=9.8,\quad2c+3t=8.7`,T`9c+6t=29.4,\quad4c+6t=17.4`,T`5c=12\ \Rightarrow\ c=2.4`,T`t=1.3`]},
+ spot:{use:['Two equations with the same two unknowns.','Word problems with two unknown prices, ages or amounts.','Where do two lines cross?'],
+  not:[T`One equation has \(x^2\) or \(y^2\): use substitution instead (Linear–quadratic simultaneous, in Quadratics).`],
+  aside:T`<b>Substitution</b> also works: if one equation is already \(y=\dots\), put it straight into the other.`},
+ recap:{formula:T`\text{match}\to\text{add/subtract}\to\text{solve}\to\text{substitute}`,points:['Make one letter’s coefficients match.','Same signs: subtract. Different signs: add.','Solve for the remaining letter.','Substitute back, then check in the other equation.']}}
+});
+Object.assign(LEARN,{
+ind:{mins:4,
+ intro:T`<p>An index (power) tells you how many times a number is multiplied by itself: \(x^3=x\times x\times x\). The laws below are just shortcuts for counting those multiplications.</p>
+<ul><li>Multiplying, same base: <b>add</b> the powers. \(x^2\times x^3=x^5\)</li><li>Dividing: <b>subtract</b> them. \(x^7\div x^3=x^4\)</li><li>A power of a power: <b>multiply</b> them. \((x^2)^3=x^6\)</li><li>\(x^0=1\), and a <b>negative</b> power means “one over”: \(x^{-2}=\tfrac1{x^2}\)</li><li>A <b>fractional</b> power is a root: \(x^{\frac12}=\sqrt x\), \(x^{\frac13}=\sqrt[3]x\)</li></ul>
+<div class="bigf">\[x^{\frac pq}=\left(\sqrt[q]{x}\right)^p\]</div><p>Read a fractional power as “bottom = root, top = power”. Do the root first: the numbers stay small.</p>`,
+ walk:{q:T`Evaluate \(8^{-\frac23}\).`,steps:[
+  {do:'Deal with the minus sign: reciprocal',line:T`8^{-\frac23}=\dfrac{1}{8^{\frac23}}`,why:'A negative power means “one over”. Now the power is positive.',warn:'A negative power does not make the answer negative.'},
+  {do:'Bottom of the fraction: take the root',line:T`8^{\frac13}=\sqrt[3]{8}=2`,think:'What number cubed gives 8?',why:T`The 3 on the bottom means the cube root. \(2^3=8\).`},
+  {do:'Top of the fraction: the power',line:T`8^{\frac23}=2^2=4`,why:'Now square the root you found.'},
+  {do:'Put it back together',line:T`8^{-\frac23}=\tfrac14`,why:'One over 4.'}]},
+ faded:{q:T`Simplify \((2x^3)^2\times x^{-4}\).`,parts:[
+  {blanks:[{pre:'(2x³)² =',ans:'4x^6',kind:'expr',show:T`4x^6`}],note:'Square everything in the bracket: the 2 and the x³.',hint:T`\(2^2=4\) and \((x^3)^2=x^{3\times2}=x^6\).`},
+  {blanks:[{pre:'4x⁶ × x⁻⁴ =',ans:'4x^2',kind:'expr',show:T`4x^2`}],note:'Multiplying: add the powers.',hint:T`\(6+(-4)=2\).`}]},
+ own:{q:T`Evaluate \(\left(\tfrac{16}{81}\right)^{-\frac34}\).`,kind:'num',ans:3.375,typed:'27/8',fmt:'a fraction or decimal, e.g. <code>5/4</code>',tip:'Flip the fraction to remove the minus, then fourth root, then cube.',
+  lines:[T`\left(\tfrac{81}{16}\right)^{\frac34}`,T`\sqrt[4]{\tfrac{81}{16}}=\tfrac32`,T`\left(\tfrac32\right)^3=\tfrac{27}{8}`]},
+ spot:{use:['Powers of the same letter or number being multiplied or divided.','Negative or fractional powers to evaluate without a calculator.',T`“Write in the form \(x^n\)”: turn roots and fractions into powers, e.g. \(\tfrac{1}{\sqrt x}=x^{-\frac12}\).`],
+  not:[T`Different bases: \(2^3\times3^2\) can’t be combined into one power.`,T`Adding terms: \(x^2+x^3\) is not \(x^5\). The laws are for multiplying and dividing.`]},
+ recap:{formula:T`x^ax^b=x^{a+b},\ \ (x^a)^b=x^{ab},\ \ x^{-n}=\tfrac1{x^n}`,points:['Multiply: add powers. Divide: subtract. Power of a power: multiply.','Anything to the power 0 is 1.','Negative power: one over.','Fractional power: bottom is the root, top is the power. Root first.','A number in front gets raised to the power too: (2x)³ = 8x³.']}},
+
+surd:{mins:4,
+ intro:T`<p>A <b>surd</b> is a square root that isn’t a whole number, like \(\sqrt2\) or \(\sqrt{12}\). Leaving it as a surd keeps the answer <b>exact</b>, which a rounded decimal is not.</p>
+<p>Two skills:</p><ul><li><b>Simplify</b> by taking out the largest square factor: \(\sqrt{12}=\sqrt{4\times3}=2\sqrt3\).</li><li><b>Rationalise</b> a denominator (get the root off the bottom) by multiplying top and bottom by the right thing.</li></ul>
+<div class="bigf">\[\sqrt{ab}=\sqrt a\,\sqrt b\]</div><p>Like surds collect like algebra: \(5\sqrt3-2\sqrt3=3\sqrt3\), just as \(5x-2x=3x\).</p>`,
+ walk:{q:T`Simplify \(\sqrt{75}-\sqrt{12}\).`,steps:[
+  {do:'Find the largest square factor of 75',line:T`\sqrt{75}=\sqrt{25\times3}`,think:'Which square number (4, 9, 16, 25, …) goes into 75?',why:'25 goes into 75, leaving 3.'},
+  {do:'Take its root outside',line:T`\sqrt{75}=5\sqrt3`,why:T`\(\sqrt{25}=5\).`},
+  {do:'Same for √12',line:T`\sqrt{12}=\sqrt{4\times3}=2\sqrt3`,think:'Largest square factor of 12?',why:'4 goes into 12, leaving 3 again.'},
+  {do:'Collect like surds',line:T`5\sqrt3-2\sqrt3=3\sqrt3`,why:T`Both are multiples of \(\sqrt3\), so they combine.`,warn:T`\(\sqrt{75}-\sqrt{12}\) is not \(\sqrt{63}\). You can’t subtract under the root.`}]},
+ faded:{q:T`Rationalise the denominator of \(\dfrac{6}{\sqrt3}\).`,parts:[
+  {given:T`\dfrac{6}{\sqrt3}\times\dfrac{\sqrt3}{\sqrt3}`,note:T`Multiply top and bottom by \(\sqrt3\). That’s multiplying by 1, so the value doesn’t change.`},
+  {blanks:[{pre:'bottom: √3 × √3 =',ans:3}],note:'A root times itself.',hint:T`\(\sqrt3\times\sqrt3=3\).`},
+  {blanks:[{pre:'6√3 ÷ 3 =',ans:'2sqrt(3)',kind:'expr',show:T`2\sqrt3`}],note:'Simplify the fraction.',hint:T`\(6\div3=2\), so \(2\sqrt3\). Type it as <code>2sqrt(3)</code>.`}]},
+ own:{q:T`Rationalise the denominator of \(\dfrac{4}{3-\sqrt5}\).`,kind:'expr',ans:'3+sqrt(5)',form:'rational',fmt:'exact, e.g. <code>2 + sqrt(3)</code>',tip:T`Multiply top and bottom by \(3+\sqrt5\) (same numbers, opposite sign). The bottom becomes \(9-5\).`,
+  lines:[T`\dfrac{4(3+\sqrt5)}{(3-\sqrt5)(3+\sqrt5)}`,T`=\dfrac{4(3+\sqrt5)}{9-5}`,T`=3+\sqrt5`]},
+ spot:{use:['“Exact answer” or “simplify fully” when a square root appears.','A root on the bottom of a fraction: rationalise it.','Answers from the quadratic formula or Pythagoras that aren’t whole numbers.'],
+  not:['The question asks for a decimal answer: just use the calculator.',T`Adding unlike surds: \(\sqrt2+\sqrt3\) doesn’t simplify.`]},
+ recap:{formula:T`\sqrt{ab}=\sqrt a\sqrt b,\qquad \frac a{\sqrt b}=\frac{a\sqrt b}{b}`,points:['Simplify by taking out the largest square factor.','Only like surds add or subtract.','a/√b: multiply top and bottom by √b.','a/(b + √c): multiply by b − √c, which turns the bottom into a whole number.']}},
+
+binom:{mins:5,
+ intro:T`<p>The binomial expansion lets you expand \((a+b)^n\) without multiplying out \(n\) brackets. There are \(n+1\) terms. In each one, the power of \(a\) goes <b>down</b> by one and the power of \(b\) goes <b>up</b> by one, and the powers always add to \(n\).</p>
+<div class="bigf">\[\text{term with }b^r:\quad \binom nr a^{n-r}b^r\]</div>
+<p>\(\binom nr\) (also written \(^nC_r\)) is the number in front. It comes from Pascal’s triangle or the \(\text{nCr}\) button on a calculator. For \(n=4\): 1, 4, 6, 4, 1.</p>`,
+ walk:{q:T`Find the coefficient of \(x^3\) in \((1+2x)^5\).`,steps:[
+  {do:'Identify a, b and n',line:T`a=1,\quad b=2x,\quad n=5`,why:T`\(b\) is the whole of \(2x\), number included.`},
+  {do:'Which r gives x³?',line:T`x^3\ \Rightarrow\ r=3`,why:T`The power of \(x\) comes from \(b^r=(2x)^r\), so \(r=3\).`},
+  {do:'The number in front',line:T`\binom53=10`,think:T`What is \(^5C_3\)? (Pascal row: 1, 5, 10, 10, 5, 1)`,why:'Use nCr on the calculator, or Pascal’s triangle.'},
+  {do:'Write the term',line:T`\binom53(1)^2(2x)^3`,why:T`\(a\) to the power \(5-3=2\), \(b\) to the power 3.`},
+  {do:'Raise the whole bracket to the power',line:T`(2x)^3=8x^3`,why:T`The 2 is cubed as well.`,warn:T`\((2x)^3\) is \(8x^3\), not \(2x^3\). This is the most common slip.`},
+  {do:'Multiply',line:T`10\times1\times8x^3=80x^3`,why:'So the coefficient (the number in front) is 80.'}]},
+ faded:{q:T`Find the first three terms of \((2+x)^4\), in ascending powers of \(x\).`,parts:[
+  {given:T`\binom40 2^4+\binom41 2^3x+\binom42 2^2x^2`,note:'Powers of 2 go down from 4, powers of x go up from 0.'},
+  {blanks:[{pre:'2⁴ =',ans:16},{pre:'4 × 2³ =',ans:32},{pre:'6 × 2² =',ans:24}],note:'Work out each coefficient. (Pascal row 4: 1, 4, 6, 4, 1)',hint:T`\(2^3=8\) and \(2^2=4\).`},
+  {given:T`16+32x+24x^2+\dots`,note:'The first three terms.'}]},
+ own:{q:T`Find the coefficient of \(x^2\) in \((3-2x)^5\).`,kind:'num',ans:1080,fmt:'a number',tip:T`\(b=-2x\), so square the \(-2\) as well. \(\binom52=10\).`,
+  lines:[T`\binom52(3)^3(-2x)^2`,T`=10\times27\times4x^2`,T`=1080x^2`]},
+ spot:{use:[T`\((a+b)^n\) with \(n\) of 3 or more: “expand”, “first three terms”, “coefficient of”.`,T`Estimating a power, like \(1.02^5=(1+0.02)^5\).`],
+  not:[T`\(n=2\): just expand the double brackets.`],
+  aside:'If b has a minus sign, keep it inside the bracket: the signs then alternate.'},
+ recap:{formula:T`(a+b)^n=\sum_{r=0}^{n}\binom nr a^{n-r}b^r`,points:['n + 1 terms; powers of a go down, powers of b go up.','The power of x tells you r.','Raise the whole of b to the power, number and sign included.','Coefficients come from nCr or Pascal’s triangle.']}},
+
+nth:{mins:4,
+ intro:T`<p>The <b>nth term</b> is a formula that gives any term of a sequence from its position \(n\).</p>
+<p>In an <b>arithmetic</b> sequence you add the same amount \(d\) each time, so the nth term looks like the \(d\) times table, shifted:</p>
+<div class="bigf">\[u_n=dn+(u_1-d)\]</div>
+<p>If the gaps change but the <b>gaps between the gaps</b> (second differences) are constant, the sequence is <b>quadratic</b>: the \(n^2\) coefficient is half the second difference.</p>`,
+ walk:{q:T`Find the nth term of \(5,\ 8,\ 11,\ 14,\ \dots\) Is 100 in the sequence?`,steps:[
+  {do:'Find the differences',line:T`+3,\ +3,\ +3`,why:'The same each time, so it’s arithmetic with d = 3.'},
+  {do:'Write out the 3 times table',line:T`3n:\quad 3,\ 6,\ 9,\ 12`,why:'The nth term starts with 3n.'},
+  {do:'Compare with the sequence',line:T`5-3=2`,think:'What do you add to each of 3, 6, 9, 12 to get 5, 8, 11, 14?',why:'Every term is 2 more than the times table.'},
+  {do:'Write the nth term',line:T`u_n=3n+2`,why:T`Check: \(n=4\) gives \(12+2=14\ \checkmark\)`},
+  {do:'Is 100 a term? Solve for n',line:T`3n+2=100\ \Rightarrow\ n=32.\overline{6}`,why:'n must be a whole number (a position), so 100 is not in the sequence.'}]},
+ faded:{q:T`Find the nth term of \(3,\ 6,\ 11,\ 18,\ 27,\ \dots\)`,parts:[
+  {given:T`\text{differences: }3,\ 5,\ 7,\ 9`,note:'Not constant, so look one level deeper.'},
+  {blanks:[{pre:'second difference =',ans:2}],note:'The gaps between the gaps.',hint:T`\(5-3\), \(7-5\), …`},
+  {blanks:[{pre:'coefficient of n² =',ans:1}],note:'Half the second difference.',hint:'Half of 2.'},
+  {given:T`\text{sequence}-n^2:\ 3-1,\ 6-4,\ 11-9,\ \dots=2,\ 2,\ 2`,note:'Take away n² from each term.'},
+  {blanks:[{pre:'nth term = n² +',ans:2}],note:'What’s left is constant.',hint:'Every leftover is 2.'}]},
+ own:{q:T`Find the nth term of \(20,\ 17,\ 14,\ 11,\ \dots\)`,kind:'expr',vars:['n'],ans:'23-3n',fmt:'e.g. <code>4n - 1</code>',tip:'The difference is negative.',
+  lines:[T`d=-3`,T`-3n:\ -3,\ -6,\ -9`,T`20-(-3)=23`,T`u_n=23-3n`]},
+ spot:{use:['“Find the nth term” or a rule for the pattern.','“Is X in the sequence?” or “which term is X?”: set the nth term equal to X and solve.'],
+  not:['Geometric sequences (multiply by the same number each time, like 2, 6, 18): the nth term is a different formula.']},
+ recap:{formula:T`u_n=dn+(u_1-d)`,points:['Constant first difference d: arithmetic, starts with dn.','Then adjust by comparing with the times table.','Constant second difference: quadratic, n² coefficient is half of it.','A term must have a whole-number position.']}},
+
+line:{mins:4,
+ intro:T`<p>Every straight line can be written as</p><div class="bigf">\[y=mx+c\]</div>
+<p>\(m\) is the <b>gradient</b> (steepness): how far up you go for each 1 across. \(c\) is the <b>y-intercept</b>, where the line crosses the y-axis.</p>
+<p>Gradient from two points: \(m=\dfrac{y_2-y_1}{x_2-x_1}\), “rise over run”.</p>
+<p>Parallel lines have the <b>same</b> gradient. Perpendicular lines have gradients that multiply to \(-1\): flip the fraction and change the sign.</p>`,
+ walk:{q:T`Find the equation of the line through \((1,\,3)\) and \((4,\,9)\).`,steps:[
+  {do:'Gradient: rise over run',line:T`m=\dfrac{9-3}{4-1}=\dfrac63=2`,think:'What is the change in y divided by the change in x?',why:'Subtract in the same order on top and bottom.'},
+  {do:'Write the equation with the gradient',line:T`y=2x+c`,why:T`Only \(c\) is still unknown.`},
+  {do:'Substitute one of the points',line:T`3=2(1)+c`,why:T`The point \((1,3)\) is on the line, so \(x=1\), \(y=3\) must fit.`},
+  {do:'Solve for c',line:T`c=1`,why:T`\(3-2=1\).`},
+  {do:'Write the answer and check the other point',line:T`y=2x+1;\quad 2(4)+1=9\ \checkmark`,why:'The second point fits too, so the line is right.'}]},
+ faded:{q:T`Find the line perpendicular to \(y=3x-2\) that passes through \((6,\,1)\).`,parts:[
+  {blanks:[{pre:'gradient of y = 3x − 2:',ans:3}],note:'Read m from the given line.',hint:'The number in front of x.'},
+  {blanks:[{pre:'perpendicular gradient =',ans:-1/3,show:T`-\tfrac13`}],note:'Flip it and change the sign.',hint:T`\(3\to-\tfrac13\). Type <code>-1/3</code>.`},
+  {given:T`1=-\tfrac13(6)+c`,note:'Substitute the point.'},
+  {blanks:[{pre:'c =',ans:3}],note:'Solve.',hint:T`\(1=-2+c\).`},
+  {given:T`y=-\tfrac13x+3`,note:'The answer.'}]},
+ own:{q:T`Find the equation of the line through \((-2,\,5)\) and \((2,\,-3)\).`,kind:'expr',ans:'-2x+1',fmt:'e.g. <code>y = 3x - 4</code>',tip:'Rise over run first. Watch the signs.',
+  lines:[T`m=\dfrac{-3-5}{2-(-2)}=\dfrac{-8}{4}=-2`,T`5=-2(-2)+c\ \Rightarrow\ c=1`,T`y=-2x+1`]},
+ spot:{use:['“Find the equation of the line”, given two points, or a point and a gradient.','Parallel or perpendicular to a given line.','Reading the gradient and intercept off an equation.'],
+  not:[T`The equation isn’t in the form \(y=mx+c\) yet, like \(2y+4x=6\): rearrange for \(y\) first (\(y=-2x+3\)), then read \(m\) and \(c\).`]},
+ recap:{formula:T`m=\frac{y_2-y_1}{x_2-x_1},\qquad y=mx+c`,points:['Gradient: rise over run.','Substitute a point to find c.','Parallel: same gradient.','Perpendicular: negative reciprocal (m₁m₂ = −1).','Rearrange to y = … before reading m and c.']}},
+
+gread:{mins:4,
+ intro:T`<p>Often you’re given a <b>graph</b> instead of an equation. Three readings cover most questions:</p>
+<ul><li><b>Roots</b>: where the curve crosses the x-axis. These solve \(f(x)=0\).</li><li><b>Solving \(f(x)=k\)</b>: draw the horizontal line \(y=k\) and read the \(x\) values where it crosses the curve.</li><li><b>Intercept and turning point</b>: where it crosses the y-axis, and its lowest or highest point.</li></ul>
+<p>Read carefully off the grid. Each answer is an \(x\) value unless the question asks for a point.</p>`,
+ walk:{q:T`Here is \(y=x^2-2x-3\). Use it to solve \(x^2-2x-3=0\) and \(x^2-2x-3=5\).`,fig:plotSVG({fns:[{e:'x^2-2x-3',l:'y = x² − 2x − 3'},{e:'5',l:'y = 5'}],pts:[[-1,0,false],[3,0,false],[-2,5,false],[4,5,false],[1,-4,true]],xr:[-3,5],yr:[-5,7],grid:[1,1]}),steps:[
+  {do:'Equals zero means the x-axis',line:T`x^2-2x-3=0\ \Rightarrow\ y=0`,why:T`The left side is \(y\), so you want the points where \(y=0\).`},
+  {do:'Read the crossings',line:T`x=-1,\quad x=3`,think:'Where does the curve cross the x-axis?',why:'Read the x values only.'},
+  {do:'For = 5, use the line y = 5',line:T`x^2-2x-3=5\ \Rightarrow\ y=5`,why:'Draw (or look for) the horizontal line at height 5.'},
+  {do:'Read where they cross',line:T`x=-2,\quad x=4`,think:'Where does the line y = 5 meet the curve?',why:T`Check: \(4^2-2(4)-3=5\ \checkmark\)`},
+  {do:'Bonus: the turning point',line:T`(1,\,-4)`,why:'The lowest point. The curve is symmetrical about x = 1, halfway between the roots.'}]},
+ faded:{q:T`Find the equation of this straight line.`,fig:plotSVG({fns:[{e:'2x-1',l:''}],pts:[[0,-1,true],[2,3,true]],xr:[-2,4],yr:[-4,6],grid:[1,1]}),parts:[
+  {blanks:[{pre:'y-intercept c =',ans:-1}],note:'Where does it cross the y-axis?',hint:T`Look at \(x=0\).`},
+  {blanks:[{pre:'gradient m =',ans:2}],note:'From (0, −1) to (2, 3): rise over run.',hint:'Up 4, across 2.'},
+  {given:T`y=2x-1`,note:'Put them into y = mx + c.'}]},
+ own:{q:T`Use the walkthrough graph of \(y=x^2-2x-3\) to solve \(x^2-2x-3=-3\).`,fig:plotSVG({fns:[{e:'x^2-2x-3',l:'y = x² − 2x − 3'}],pts:[],xr:[-3,5],yr:[-5,7],grid:[1,1]}),kind:'set',ans:[0,2],fmt:'both solutions, e.g. <code>-1, 3</code>',tip:'Draw the line y = −3 and read off where it crosses the curve.',
+  lines:[T`y=-3`,T`\text{crosses at }x=0\text{ and }x=2`]},
+ spot:{use:['“Use the graph to solve …” or “estimate the roots”.','“Find the equation of the line shown.”','Turning points and intercepts from a sketch.'],
+  not:['The question says “solve algebraically” or “exact answers”: use algebra, not the graph.']},
+ recap:{formula:T`f(x)=k:\ \text{read where } y=k \text{ crosses the curve}`,points:['Roots: x-axis crossings.','y-intercept: where x = 0.','f(x) = k: draw y = k, read the x values.','Straight line: c from the intercept, m from rise over run.']}},
+
+trans:{mins:4,
+ intro:T`<p>A transformation moves or stretches a graph. The rule to remember:</p>
+<ul><li>Changes <b>outside</b> the function act on \(y\) as you’d expect: \(f(x)+3\) moves up 3, \(2f(x)\) doubles every \(y\), \(-f(x)\) flips upside down.</li><li>Changes <b>inside</b> the bracket act on \(x\) the <b>opposite</b> way: \(f(x-2)\) moves <b>right</b> 2, \(f(2x)\) <b>halves</b> every \(x\), \(f(-x)\) flips left to right.</li></ul>
+<div class="bigf">\[y=(x-2)^2+1:\ \ x^2\ \text{moved right }2,\ \text{up }1\]</div>`,
+ fig:plotSVG({fns:[{e:'x^2',l:'y = x²'},{e:'(x-2)^2+1',l:'y = (x − 2)² + 1'}],pts:[[0,0,false],[2,1,true]],xr:[-3,5],yr:[-1,8],grid:[1,1]}),
+ walk:{q:T`The graph of \(y=f(x)\) has a turning point at \((3,\,4)\). Find the turning point of \(y=2f(x+1)\).`,steps:[
+  {do:'Inside the bracket first: x + 1',line:T`f(x+1):\ \text{left }1`,why:'Inside changes act on x the opposite way: + 1 moves left.',warn:T`\(f(x+1)\) is <b>not</b> right 1.`},
+  {do:'New x-coordinate',line:T`3-1=2`,think:'Where does x = 3 move to?',why:'Only x changes with an inside change.'},
+  {do:'Outside: the 2 in front',line:T`2f(\dots):\ y\times2`,why:'Outside changes act on y as they look: double every y value.'},
+  {do:'New y-coordinate',line:T`4\times2=8`,why:'Only y changes with an outside change.'},
+  {do:'The answer',line:T`(2,\,8)`,why:'Do each coordinate on its own.'}]},
+ faded:{q:T`Same \(f\), turning point \((3,\,4)\). Find the turning point of \(y=f(2x)-3\).`,parts:[
+  {blanks:[{pre:'x-coordinate: 3 ÷ 2 =',ans:1.5}],note:'Inside × 2 squashes: divide x by 2.',hint:'Opposite of what it looks like: × becomes ÷.'},
+  {blanks:[{pre:'y-coordinate: 4 − 3 =',ans:1}],note:'Outside − 3: down 3.',hint:'Outside acts as it looks.'},
+  {given:T`(1.5,\ 1)`,note:'The new turning point.'}]},
+ own:{q:T`The point \((2,\,6)\) is on \(y=f(x)\). Where does it move to on \(y=-f(x-3)\)?`,kind:'pts',ans:[[5,-6]],fmt:'a point, e.g. <code>(1, 2)</code>',tip:'Inside: x − 3 moves right 3. Outside: the minus flips y.',
+  lines:[T`x:\ 2+3=5`,T`y:\ -6`,T`(5,\,-6)`]},
+ spot:{use:[T`“Sketch \(y=f(x+2)\)” or “describe the transformation”.`,'Where does a point, a turning point or an asymptote move to?','Matching equations like y = (x − 2)² + 1 to their graphs.'],
+  not:[T`Two inside changes at once, like \(f(2x+4)\): factor first, \(f(2(x+2))\), then do them in order. It’s easy to get wrong.`]},
+ recap:{formula:T`f(x-a)+b:\ \ \text{right }a,\ \text{up }b`,points:['Outside: acts on y, as it looks.','Inside: acts on x, the opposite way.','af(x): stretch, y × a. f(ax): x ÷ a.','−f(x): reflect in the x-axis. f(−x): reflect in the y-axis.','Track one point at a time.']}},
+
+func:{mins:4,
+ intro:T`<p>A function is a rule that takes an input and gives an output: \(f(x)=2x+3\) means “double it, then add 3”.</p>
+<ul><li><b>Composite</b> \(fg(x)\) means do \(g\) first, then \(f\): \(fg(x)=f(g(x))\). Read it from the right.</li><li><b>Inverse</b> \(f^{-1}\) undoes \(f\). To find it: write \(y=f(x)\), rearrange for \(x\), then swap the letters back.</li></ul>
+<div class="bigf">\[f(x)=3x-2\ \Rightarrow\ f^{-1}(x)=\frac{x+2}{3}\]</div>`,
+ walk:{q:T`\(f(x)=2x+3\) and \(g(x)=x^2\). Find \(fg(3)\) and \(gf(x)\).`,steps:[
+  {do:'fg(3): g goes first',line:T`g(3)=3^2=9`,why:'The function nearest the input is applied first.',warn:T`\(fg\) is not \(f\) times \(g\), and the order matters: \(fg\ne gf\).`},
+  {do:'Then f',line:T`f(9)=2(9)+3=21`,think:'Put 9 into f.',why:T`So \(fg(3)=21\).`},
+  {do:'gf(x): put f inside g',line:T`gf(x)=g(2x+3)`,why:'Now f goes first, so its whole output goes into g.'},
+  {do:'Apply g: square it',line:T`gf(x)=(2x+3)^2`,why:T`g squares whatever it’s given, so the whole bracket is squared.`}]},
+ faded:{q:T`Find the inverse of \(f(x)=5x-2\).`,parts:[
+  {given:T`y=5x-2`,note:'Write y = f(x).'},
+  {blanks:[{pre:'x =',ans:'(y+2)/5',kind:'expr',vars:['y'],show:T`\dfrac{y+2}{5}`}],note:'Rearrange for x.',hint:T`Add 2, then divide by 5. Type <code>(y + 2)/5</code>.`},
+  {given:T`f^{-1}(x)=\dfrac{x+2}{5}`,note:'Swap y for x.'},
+  {blanks:[{pre:'check: f⁻¹(8) =',ans:2}],note:'f(2) = 8, so the inverse should take 8 back to 2.',hint:T`\((8+2)\div5\).`}]},
+ own:{q:T`\(f(x)=3x-1\). Find \(f^{-1}(x)\).`,kind:'expr',ans:'(x+1)/3',fmt:'e.g. <code>(x - 4)/2</code>',tip:'Write y = 3x − 1, rearrange for x, then rename.',
+  lines:[T`y=3x-1`,T`x=\dfrac{y+1}{3}`,T`f^{-1}(x)=\dfrac{x+1}{3}`]},
+ spot:{use:[T`Notation like \(fg(x)\), \(f(g(2))\) or \(f^{-1}(x)\).`,'“Solve fg(x) = 7”: build fg(x) first, then solve.'],
+  not:[T`\(f^{-1}(x)\) is not \(\tfrac{1}{f(x)}\). It means the undo function.`]},
+ recap:{formula:T`fg(x)=f(g(x))`,points:['fg: apply g first, then f.','Inverse: y = f(x), rearrange for x, rename.','f⁻¹ undoes f: f⁻¹(f(a)) = a. Use this to check.','The order of composite functions matters.']}},
+
+poly:{mins:5,
+ intro:T`<p>For a polynomial \(p(x)\), like a cubic:</p>
+<ul><li><b>Remainder theorem:</b> dividing \(p(x)\) by \((x-a)\) leaves remainder \(p(a)\). No division needed.</li><li><b>Factor theorem:</b> if \(p(a)=0\), then \((x-a)\) is a factor.</li></ul>
+<div class="bigf">\[p(a)=0\iff(x-a)\ \text{is a factor}\]</div>
+<p>To factorise a cubic: try small values (±1, ±2, ±3) until one gives zero. That gives one factor; divide it out to leave a quadratic, then factorise that.</p>`,
+ walk:{q:T`Factorise \(p(x)=x^3-2x^2-5x+6\) fully.`,steps:[
+  {do:'Try x = 1',line:T`p(1)=1-2-5+6=0`,think:T`What is \(p(1)\)?`,why:'Start with the easiest value.'},
+  {do:'So (x − 1) is a factor',line:T`(x-1)\ \text{is a factor}`,why:T`Factor theorem: \(p(1)=0\).`,warn:T`\(p(1)=0\) gives \((x-1)\), not \((x+1)\).`},
+  {do:'Divide it out',line:T`(x-1)(x^2-x-6)`,why:T`The \(x^2\) term matches \(x^3\). The \(-6\) is chosen because \(-1\times-6=6\). Then the middle term must make \(-2x^2\): it’s \(-x\).`},
+  {do:'Factorise the quadratic',line:T`(x-1)(x-3)(x+2)`,think:T`Factorise \(x^2-x-6\).`,why:T`\(-3\times2=-6\), \(-3+2=-1\).`},
+  {do:'Check by substituting another root',line:T`p(3)=27-18-15+6=0\ \checkmark`,why:'Each bracket gives a root of the cubic.'}]},
+ faded:{q:T`\((x+2)\) is a factor of \(x^3+kx^2-4\). Find \(k\).`,parts:[
+  {given:T`p(-2)=0`,note:'(x + 2) is a factor, so x = −2 makes p zero.'},
+  {blanks:[{pre:'p(−2) = −8 + 4k −',ans:4}],note:'Substitute x = −2.',hint:T`\((-2)^3=-8\) and \(k(-2)^2=4k\).`},
+  {blanks:[{pre:'k =',ans:3}],note:'Solve 4k − 12 = 0.',hint:T`\(4k=12\).`}]},
+ own:{q:T`Find the remainder when \(x^3+4x^2-3x+5\) is divided by \((x+3)\).`,kind:'num',ans:23,fmt:'a number',tip:'Remainder theorem: substitute the value that makes the divisor zero.',
+  lines:[T`p(-3)`,T`=-27+36+9+5`,T`=23`]},
+ spot:{use:['“Show that (x − a) is a factor”.','“Find the remainder when … is divided by …”.','Factorising or solving a cubic.','An unknown coefficient, given a factor or remainder.'],
+  not:[T`Quadratics: factorise them directly.`]},
+ recap:{formula:T`p(a)=r,\qquad p(a)=0\iff(x-a)\ \text{is a factor}`,points:['Divisor (x − a): substitute x = a.','Divisor (x + a): substitute x = −a.','Remainder 0 means it’s a factor.','Cubic: find one factor by trial, divide, factorise the quadratic.']}},
+
+log:{mins:5,
+ intro:T`<p>A logarithm answers the question “<b>what power?</b>”. \(\log_2 8=3\) because \(2^3=8\).</p>
+<div class="bigf">\[\log_b N=k\iff b^k=N\]</div>
+<p>The laws come from the laws of indices:</p><ul><li>\(\log M+\log N=\log MN\)</li><li>\(\log M-\log N=\log\tfrac MN\)</li><li>\(\log M^k=k\log M\): a power comes down in front.</li></ul>
+<p>That last one is the key tool: when the unknown is <b>in the power</b>, take logs of both sides to bring it down.</p>`,
+ walk:{q:T`Solve \(3^x=20\), giving \(x\) to 3 significant figures.`,steps:[
+  {do:'Take logs of both sides',line:T`\log 3^x=\log20`,why:'The unknown is in the power, so you need logs.'},
+  {do:'Bring the power down',line:T`x\log3=\log20`,why:T`Law: \(\log M^k=k\log M\).`},
+  {do:'Divide',line:T`x=\dfrac{\log20}{\log3}`,why:T`\(\log3\) is just a number.`,warn:T`This is not \(\log\tfrac{20}{3}\). Divide the two logs.`},
+  {do:'Calculate',line:T`x\approx2.73`,think:T`Work out \(\log20\div\log3\) on a calculator.`,why:T`Sense-check: \(3^2=9\) and \(3^3=27\), so \(x\) should be between 2 and 3 ✓.`}]},
+ faded:{q:T`Solve \(\log_2x+\log_2(x-2)=3\).`,parts:[
+  {given:T`\log_2\big(x(x-2)\big)=3`,note:'Adding logs: multiply inside.'},
+  {blanks:[{pre:'x(x − 2) = 2³ =',ans:8}],note:'Undo the log: log₂(A) = 3 means A = 2³.',hint:'2 cubed.'},
+  {given:T`x^2-2x-8=0\ \Rightarrow\ (x-4)(x+2)=0`,note:'A quadratic.'},
+  {blanks:[{pre:'x =',ans:4}],note:'Only one answer works.',hint:T`\(x=-2\) is rejected: you can’t take the log of a negative number.`}]},
+ own:{q:T`Solve \(5^{2x-1}=40\), giving \(x\) to 3 significant figures.`,kind:'num',ans:1.646,tol:.006,typed:'1.65',fmt:'a number to 3 s.f., e.g. <code>1.23</code>',tip:'Take logs, bring the whole power (2x − 1) down, then solve the linear equation.',
+  lines:[T`(2x-1)\log5=\log40`,T`2x-1=\dfrac{\log40}{\log5}\approx2.292`,T`x\approx1.65`]},
+ spot:{use:['The unknown is in the power: 3ˣ = 20.','Equations with log terms: combine them with the laws, then undo the log.','Converting between log form and power form.'],
+  not:[T`The unknown is the base, like \(x^3=20\): take a cube root instead.`]},
+ recap:{formula:T`\log_b N=k\iff b^k=N`,points:['A log is a power.','Add logs: multiply. Subtract: divide.','A power comes down in front.','Unknown in the power: take logs of both sides.','Check answers: you can’t log a negative or zero.']}},
+
+tri:{mins:4,
+ intro:T`<p>In a right-angled triangle, label the sides <b>from the angle you’re using</b>:</p>
+<ul><li><b>hypotenuse</b>: the longest side, opposite the right angle</li><li><b>opposite</b>: across from the angle</li><li><b>adjacent</b>: next to the angle (not the hypotenuse)</li></ul>
+<div class="bigf">\[\sin\theta=\frac{\text{opp}}{\text{hyp}}\quad\cos\theta=\frac{\text{adj}}{\text{hyp}}\quad\tan\theta=\frac{\text{opp}}{\text{adj}}\]</div>
+<p>SOH CAH TOA. Pick the ratio that uses the two sides you know or want. To find an angle, use the inverse (\(\sin^{-1}\) etc.). Keep your calculator in <b>degrees</b>.</p>`,
+ walk:{q:T`Find \(x\), to 3 significant figures.`,fig:triFig(12*Math.sin(35*Math.PI/180),12*Math.cos(35*Math.PI/180),12,{right:'C',angles:{A:'35°'},sides:{a:'x',c:'12 cm'}}),steps:[
+  {do:'Label the sides from the 35° angle',line:T`\text{hyp}=12,\quad\text{opp}=x`,why:'The hypotenuse is opposite the right angle. x is across from 35°.'},
+  {do:'Choose the ratio',line:T`\text{SOH: }\sin\theta=\dfrac{\text{opp}}{\text{hyp}}`,think:'Which ratio uses opposite and hypotenuse?',why:'Opposite and hypotenuse: S O H.'},
+  {do:'Substitute',line:T`\sin35°=\dfrac{x}{12}`,why:'Put in the angle and the side.'},
+  {do:'Rearrange',line:T`x=12\sin35°`,why:'Multiply both sides by 12.'},
+  {do:'Calculate',line:T`x\approx6.88\text{ cm}`,think:T`What is \(12\times\sin35°\)?`,why:'It’s shorter than the hypotenuse, as it must be.',warn:'If you get a strange answer, check your calculator is in degrees (D), not radians (R).'}]},
+ faded:{q:T`Find the angle \(\theta\), to 1 decimal place.`,fig:triFig(5,8,Math.sqrt(89),{right:'C',angles:{A:'θ'},sides:{a:'5 cm',b:'8 cm'}}),parts:[
+  {given:T`\text{opp}=5,\quad\text{adj}=8\ \Rightarrow\ \text{TOA}`,note:'Label from θ and pick the ratio.'},
+  {blanks:[{pre:'tan θ =',ans:0.625}],note:'Opposite over adjacent.',hint:T`\(5\div8\).`},
+  {blanks:[{pre:'θ ≈',ans:32.0,tol:.06}],note:'Use the inverse: θ = tan⁻¹(0.625).',hint:'Press shift, then tan.'}]},
+ own:{q:T`A 6 m ladder leans against a wall with its foot 1.5 m from the wall. Find the angle between the ladder and the ground, to 1 decimal place.`,kind:'num',ans:75.52,tol:.06,typed:'75.5',fmt:'degrees, e.g. <code>41.3</code>',tip:'Draw it. The ladder is the hypotenuse; the 1.5 m is next to the angle.',
+  lines:[T`\cos\theta=\dfrac{1.5}{6}=0.25`,T`\theta=\cos^{-1}(0.25)`,T`\theta\approx75.5°`]},
+ spot:{use:['A right-angled triangle with one side and one angle, or two sides.','Heights, ladders, slopes, angles of elevation.'],
+  not:['No right angle: use the sine or cosine rule.','Three sides and no angle wanted: Pythagoras.']},
+ recap:{formula:T`\text{SOH CAH TOA}`,points:['Label hyp, opp, adj from the angle you’re using.','Pick the ratio with the two sides involved.','Missing side on top: multiply. On the bottom: divide.','Finding an angle: inverse function.','Calculator in degrees.']}},
+
+exact:{mins:4,
+ intro:T`<p>Some angles have <b>exact</b> trig values you can work out without a calculator, from two triangles:</p>
+<ul><li>Half an equilateral triangle: sides \(1,\ \sqrt3,\ 2\), angles 30° and 60°.</li><li>Half a square: sides \(1,\ 1,\ \sqrt2\), angles 45°.</li></ul>
+<div class="bigf">\[\sin30°=\tfrac12\quad\sin45°=\tfrac{\sqrt2}{2}\quad\sin60°=\tfrac{\sqrt3}{2}\]</div>
+<p>Cos goes the other way (\(\cos30°=\tfrac{\sqrt3}2\), \(\cos60°=\tfrac12\)). For angles beyond 90°, use the reference angle and the sign from CAST.</p>`,
+ walk:{q:T`Find the exact values of \(\sin60°\), \(\cos60°\) and \(\tan45°\).`,steps:[
+  {do:'Halve an equilateral triangle of side 2',line:T`\text{sides } 1,\ \sqrt3,\ 2`,think:'The hypotenuse is 2 and the base is 1. What is the height?',why:T`Pythagoras: \(\sqrt{2^2-1^2}=\sqrt3\). The angles are 30°, 60° and 90°.`},
+  {do:'sin 60°: opposite over hypotenuse',line:T`\sin60°=\dfrac{\sqrt3}{2}`,why:T`From the 60° corner, the opposite side is \(\sqrt3\).`},
+  {do:'cos 60°: adjacent over hypotenuse',line:T`\cos60°=\tfrac12`,why:'The adjacent side is 1.'},
+  {do:'From the 30° corner the sides swap',line:T`\sin30°=\tfrac12,\quad\cos30°=\tfrac{\sqrt3}{2}`,why:'Opposite and adjacent swap roles.'},
+  {do:'Half a square for 45°',line:T`1,\ 1,\ \sqrt2:\quad\tan45°=\tfrac11=1`,why:T`Also \(\sin45°=\cos45°=\tfrac1{\sqrt2}=\tfrac{\sqrt2}2\).`}]},
+ faded:{q:T`Find the exact value of \(\sin60°\times\cos30°\).`,parts:[
+  {blanks:[{pre:'sin 60° =',ans:'sqrt(3)/2',kind:'expr',show:T`\tfrac{\sqrt3}{2}`}],note:'From the 1, √3, 2 triangle.',hint:T`Type <code>sqrt(3)/2</code>.`},
+  {blanks:[{pre:'cos 30° =',ans:'sqrt(3)/2',kind:'expr',show:T`\tfrac{\sqrt3}{2}`}],note:'Same triangle, other corner.',hint:'Adjacent to 30° is √3.'},
+  {blanks:[{pre:'product =',ans:0.75,show:T`\tfrac34`}],note:'Multiply.',hint:T`\(\sqrt3\times\sqrt3=3\), \(2\times2=4\).`}]},
+ own:{q:T`Find the exact value of \(\cos150°\).`,kind:'expr',ans:'-sqrt(3)/2',form:'exact',fmt:'exact, e.g. <code>sqrt(2)/2</code> or <code>-1/2</code>',tip:'150° is 30° short of 180°. In that quadrant, cos is negative.',
+  lines:[T`\text{reference angle }180°-150°=30°`,T`\cos30°=\tfrac{\sqrt3}2`,T`\text{2nd quadrant: cos negative}`,T`\cos150°=-\tfrac{\sqrt3}{2}`]},
+ spot:{use:['“Exact value” with 30°, 45°, 60° (or 120°, 135°, 150°, …).','Non-calculator trig questions.','Exact answers in sine/cosine rule or area questions.'],
+  not:['Any other angle, like 37°: use a calculator.']},
+ recap:{formula:T`\sin30°=\tfrac12,\ \ \sin45°=\tfrac{\sqrt2}{2},\ \ \sin60°=\tfrac{\sqrt3}{2}`,points:['30°/60°: triangle 1, √3, 2.','45°: triangle 1, 1, √2.','tan = opp ÷ adj: tan 45° = 1, tan 60° = √3, tan 30° = 1/√3.','Beyond 90°: reference angle, then the sign from CAST.']}},
+
+sinerule:{mins:4,
+ intro:T`<p>The sine rule works in <b>any</b> triangle. Each side divided by the sine of its <b>opposite</b> angle gives the same number:</p>
+<div class="bigf">\[\frac{a}{\sin A}=\frac{b}{\sin B}=\frac{c}{\sin C}\]</div>
+<p>Use it when you know a side <b>and the angle opposite it</b> (a full pair), plus one more side or angle.</p>
+<p>Put whatever you’re finding on top: sides on top to find a side, sines on top (\(\tfrac{\sin A}{a}=\tfrac{\sin B}{b}\)) to find an angle.</p>`,
+ walk:{q:T`Find side \(b\), to 3 significant figures.`,fig:triFig(8,8*Math.sin(65*Math.PI/180)/Math.sin(40*Math.PI/180),8*Math.sin(75*Math.PI/180)/Math.sin(40*Math.PI/180),{angles:{A:'40°',B:'65°'},sides:{a:'8 cm',b:'b'}}),steps:[
+  {do:'Spot the full pair',line:T`a=8\ \text{opposite}\ A=40°`,why:'A side and its opposite angle: that’s what the sine rule needs.'},
+  {do:'Write the sine rule with sides on top',line:T`\dfrac{b}{\sin65°}=\dfrac{8}{\sin40°}`,why:T`\(b\) is opposite \(B=65°\).`},
+  {do:'Rearrange',line:T`b=\dfrac{8\sin65°}{\sin40°}`,why:T`Multiply both sides by \(\sin65°\).`},
+  {do:'Calculate',line:T`b\approx11.3\text{ cm}`,think:T`Work out \(8\sin65°\div\sin40°\).`,why:'Sense-check: the bigger angle (65°) is opposite the bigger side ✓.'}]},
+ faded:{q:T`In triangle ABC, \(a=7\) cm, \(A=50°\), \(b=6\) cm. Find angle \(B\), to 1 decimal place.`,parts:[
+  {given:T`\dfrac{\sin B}{6}=\dfrac{\sin50°}{7}`,note:'Finding an angle: sines on top.'},
+  {blanks:[{pre:'sin B ≈',ans:0.6566,tol:.0006}],note:'Multiply both sides by 6.',hint:T`\(6\sin50°\div7\).`},
+  {blanks:[{pre:'B ≈',ans:41.0,tol:.06}],note:'Inverse sine.',hint:T`\(\sin^{-1}(0.6566)\).`},
+  {given:T`180°-41.0°=139°:\ 139°+50°>180°`,note:'The other possible angle (139°) won’t fit, so there’s only one answer here.'}]},
+ own:{q:T`In triangle PQR, \(P=72°\), \(Q=38°\) and \(q=9\) cm. Find \(p\), to 3 significant figures.`,kind:'num',ans:13.903,tol:.06,typed:'13.9',fmt:'a length, e.g. <code>12.4</code>',tip:'q is opposite Q: that’s your full pair. p is opposite P.',
+  lines:[T`\dfrac{p}{\sin72°}=\dfrac{9}{\sin38°}`,T`p=\dfrac{9\sin72°}{\sin38°}`,T`p\approx13.9\text{ cm}`]},
+ spot:{use:['A triangle with no right angle, where you know a side and its opposite angle.','Two angles and any side (find the third angle with 180° first).'],
+  not:['Two sides and the angle between them, or three sides: use the cosine rule.','A right-angled triangle: SOH CAH TOA is quicker.'],
+  aside:T`Finding an angle can have two answers, \(\theta\) and \(180°-\theta\) (the ambiguous case). Check whether the second one fits in the triangle.`},
+ recap:{formula:T`\frac{a}{\sin A}=\frac{b}{\sin B}=\frac{c}{\sin C}`,points:['Needs a full pair: a side and its opposite angle.','Finding a side: sides on top.','Finding an angle: sines on top, then inverse sine.','Watch for a second, obtuse answer.']}},
+
+cosrule:{mins:4,
+ intro:T`<p>The cosine rule also works in any triangle. Use it when you <b>don’t</b> have a full side–angle pair:</p>
+<ul><li>two sides and the angle <b>between</b> them → find the third side</li><li>all three sides → find an angle</li></ul>
+<div class="bigf">\[c^2=a^2+b^2-2ab\cos C\]</div>
+<p>It’s Pythagoras with a correction term. The side on the left is the one <b>opposite</b> the angle. Rearranged for the angle: \(\cos C=\dfrac{a^2+b^2-c^2}{2ab}\).</p>`,
+ walk:{q:T`Find \(c\), to 3 significant figures.`,fig:triFig(7,10,Math.sqrt(149-140*Math.cos(48*Math.PI/180)),{angles:{C:'48°'},sides:{a:'7 cm',b:'10 cm',c:'c'}}),steps:[
+  {do:'Check what you have',line:T`a=7,\ b=10,\ C=48°`,why:'Two sides and the angle between them: cosine rule.'},
+  {do:'Write the rule',line:T`c^2=7^2+10^2-2(7)(10)\cos48°`,why:T`\(c\) is opposite the 48° angle.`},
+  {do:'Work out each part',line:T`c^2=149-140\cos48°`,why:T`\(49+100=149\) and \(2\times7\times10=140\).`,warn:T`Don’t do \((149-140)\cos48°\). Multiply \(140\cos48°\) first, then subtract.`},
+  {do:'Calculate',line:T`c^2\approx55.32`,think:T`What is \(149-140\cos48°\)?`,why:T`\(140\cos48°\approx93.68\).`},
+  {do:'Square root',line:T`c\approx7.44\text{ cm}`,why:T`Don’t forget this last step. You found \(c^2\), not \(c\).`}]},
+ faded:{q:T`A triangle has sides 5 cm, 7 cm and 9 cm. Find its largest angle, to 1 decimal place.`,parts:[
+  {given:T`\cos C=\dfrac{5^2+7^2-9^2}{2(5)(7)}`,note:'The largest angle is opposite the longest side (9).'},
+  {blanks:[{pre:'cos C =',ans:-0.1}],note:'Work it out.',hint:T`\((25+49-81)\div70=-7\div70\).`},
+  {blanks:[{pre:'C ≈',ans:95.74,tol:.06}],note:'Inverse cos.',hint:'A negative cosine means the angle is obtuse (over 90°).'}]},
+ own:{q:T`Two sides of a triangle are 6 cm and 9 cm, with an angle of 110° between them. Find the third side, to 3 significant figures.`,kind:'num',ans:12.407,tol:.06,typed:'12.4',fmt:'a length, e.g. <code>8.25</code>',tip:T`\(\cos110°\) is negative, so you end up adding.`,
+  lines:[T`c^2=36+81-108\cos110°`,T`c^2\approx153.94`,T`c\approx12.4\text{ cm}`]},
+ spot:{use:['Two sides and the angle between them.','Three sides, finding an angle.'],
+  not:['You have a side and its opposite angle: the sine rule is simpler.','A right angle: Pythagoras or SOH CAH TOA.']},
+ recap:{formula:T`c^2=a^2+b^2-2ab\cos C`,points:['SAS → side; SSS → angle.','The side on the left is opposite the angle.','Multiply 2ab cos C before subtracting.','Square root at the end.','Negative cosine: obtuse angle.']}},
+
+area:{mins:3,
+ intro:T`<p>When you don’t know the height of a triangle, use two sides and the angle <b>between</b> them:</p>
+<div class="bigf">\[\text{Area}=\tfrac12ab\sin C\]</div>
+<p>It’s still “half base times height”: \(b\sin C\) is the height.</p>
+<p>You can rearrange it to find a missing side or angle when you know the area.</p>`,
+ walk:{q:T`Find the area of the triangle, to 3 significant figures.`,fig:triFig(8,11,Math.sqrt(185-176*Math.cos(40*Math.PI/180)),{angles:{C:'40°'},sides:{a:'8 cm',b:'11 cm'}}),steps:[
+  {do:'Check the angle is between the two sides',line:T`a=8,\ b=11,\ C=40°`,why:'The 40° angle is where the 8 cm and 11 cm sides meet.'},
+  {do:'Substitute',line:T`\tfrac12\times8\times11\times\sin40°`,why:'Straight into the formula.'},
+  {do:'Simplify',line:T`44\sin40°`,why:T`\(\tfrac12\times8\times11=44\).`},
+  {do:'Calculate',line:T`\approx28.3\text{ cm}^2`,think:T`What is \(44\sin40°\)?`,why:'Area is in square units.'}]},
+ faded:{q:T`A triangle has sides 8 cm and 10 cm and area 30 cm². Find the (acute) angle between those sides.`,parts:[
+  {given:T`\tfrac12(8)(10)\sin C=30`,note:'Substitute what you know.'},
+  {blanks:[{pre:'40 sin C = 30, so sin C =',ans:0.75}],note:'Divide by 40.',hint:T`\(30\div40\).`},
+  {blanks:[{pre:'C ≈',ans:48.59,tol:.06}],note:'Inverse sine, to 1 d.p.',hint:T`\(\sin^{-1}(0.75)\).`}]},
+ own:{q:T`Find the area of an equilateral triangle with sides of 6 cm, to 3 significant figures.`,kind:'num',ans:15.588,tol:.06,typed:'15.6',fmt:'an area, e.g. <code>12.5</code>',tip:'Every angle in an equilateral triangle is 60°.',
+  lines:[T`\tfrac12\times6\times6\times\sin60°`,T`=18\sin60°=9\sqrt3`,T`\approx15.6\text{ cm}^2`]},
+ spot:{use:['Area of a triangle with no right angle, given two sides and the angle between them.','Finding a side or angle when the area is given.'],
+  not:['You know the base and the perpendicular height: use ½ × base × height.','The angle isn’t between the two sides: find the right angle first (sine rule or angles sum).']},
+ recap:{formula:T`\text{Area}=\tfrac12ab\sin C`,points:['C is the angle between sides a and b.','Area in square units.','Rearrange to find a missing side or angle.']}},
+
+tgraph:{mins:4,
+ intro:T`<p>\(y=\sin x\) and \(y=\cos x\) are waves between −1 and 1 that repeat every 360°. \(y=\tan x\) repeats every 180° and has no maximum.</p>
+<p>For \(y=a\sin(bx)+c\) (or cos):</p>
+<ul><li>\(|a|\) is the <b>amplitude</b>: how far the wave goes above and below its centre.</li><li>\(\tfrac{360°}{b}\) is the <b>period</b>: how long one full wave takes.</li><li>\(c\) moves the centre line to \(y=c\).</li></ul>
+<div class="bigf">\[\max=c+|a|,\qquad\min=c-|a|\]</div>`,
+ walk:{q:T`Describe \(y=3\sin(2x)+1\): amplitude, period, maximum, minimum, and where the first maximum is.`,steps:[
+  {do:'Amplitude',line:T`|a|=3`,why:'The number in front of sin.'},
+  {do:'Period',line:T`\tfrac{360°}{2}=180°`,think:'360° divided by the number in front of x?',why:'The 2 squashes the wave: two full waves fit in 360°.'},
+  {do:'Centre line',line:T`y=1`,why:'The + 1 lifts the whole wave up 1.'},
+  {do:'Maximum and minimum',line:T`\max=1+3=4,\quad\min=1-3=-2`,think:'Centre plus amplitude, centre minus amplitude?',why:'The wave goes 3 above and 3 below the centre line.'},
+  {do:'First maximum',line:T`2x=90°\ \Rightarrow\ x=45°`,why:T`\(\sin\) is largest at 90°, so set the inside, \(2x\), equal to 90°.`}]},
+ faded:{q:T`For \(y=2\cos(3x)-1\), find the amplitude, period, maximum and minimum.`,parts:[
+  {blanks:[{pre:'amplitude =',ans:2}],note:'The number in front.',hint:'a = 2.'},
+  {blanks:[{pre:'period =',ans:120}],note:'360° ÷ b, in degrees.',hint:T`\(360\div3\).`},
+  {blanks:[{pre:'max =',ans:1},{pre:'min =',ans:-3}],note:'Centre line y = −1, plus and minus the amplitude.',hint:T`\(-1+2\) and \(-1-2\).`}]},
+ own:{q:T`What is the period of \(y=4\tan(3x)\), in degrees?`,kind:'num',ans:60,fmt:'degrees, e.g. <code>90</code>',tip:'Careful: tan repeats every 180°, not 360°.',
+  lines:[T`\tan\text{ period }=180°`,T`\tfrac{180°}{3}=60°`]},
+ spot:{use:['Sketching or describing trig graphs.','Reading amplitude, period, max and min from an equation, or the equation from a graph.','Modelling things that repeat: tides, Ferris wheels, daylight hours.'],
+  not:['Finding exact x values where y equals something: solve a trig equation instead.']},
+ recap:{formula:T`y=a\sin(bx)+c:\ \ \text{amplitude }|a|,\ \text{period }\tfrac{360°}{b}`,points:['Amplitude |a|; centre line y = c.','Period: 360° ÷ b for sin and cos, 180° ÷ b for tan.','Max = c + |a|, min = c − |a|.','sin peaks at 90°, cos at 0°.']}},
+
+teq:{mins:5,
+ intro:T`<p>Trig equations usually have <b>several</b> solutions, because the graphs repeat. The calculator only gives you one: the <b>principal value</b>. Symmetry gives the rest:</p>
+<div class="bigf">\[\sin:\ x,\ 180°-x\qquad\cos:\ x,\ 360°-x\qquad\tan:\ x,\ x+180°\]</div>
+<p>The plan: rearrange to \(\sin x=k\) (or cos, tan), use the inverse function for the principal value, then use the rule above and keep every answer inside the range you were given.</p>`,
+ walk:{q:T`Solve \(4\cos x+1=0\) for \(0°\le x\le360°\), to 1 decimal place.`,steps:[
+  {do:'Rearrange to cos x = …',line:T`\cos x=-0.25`,why:'Subtract 1, divide by 4.'},
+  {do:'Principal value',line:T`x=\cos^{-1}(-0.25)\approx104.5°`,think:T`What is \(\cos^{-1}(-0.25)\)?`,why:'The calculator gives one answer.'},
+  {do:'Use the cos symmetry',line:T`360°-104.5°=255.5°`,why:'The cos graph is symmetrical about 180°, so the second answer is 360° minus the first.'},
+  {do:'List the answers in range',line:T`x\approx104.5°,\ 255.5°`,why:'Both lie between 0° and 360°.'},
+  {do:'Sense-check',line:T`\cos\ \text{negative in quadrants 2 and 3}\ \checkmark`,why:'104.5° and 255.5° are in the 2nd and 3rd quadrants, where cos is negative.'}]},
+ faded:{q:T`Solve \(\tan x=2\) for \(0°\le x\le360°\), to 1 decimal place.`,parts:[
+  {blanks:[{pre:'principal value x ≈',ans:63.43,tol:.06}],note:'tan⁻¹(2).',hint:'Shift, tan, 2.'},
+  {blanks:[{pre:'add 180°: x ≈',ans:243.43,tol:.06}],note:'tan repeats every 180°.',hint:T`\(63.4+180\).`},
+  {given:T`x\approx63.4°,\ 243.4°`,note:'Adding another 180° would go past 360°.'}]},
+ own:{q:T`Solve \(2\sin x=1.2\) for \(0°\le x\le360°\), to 1 decimal place.`,kind:'set',ans:[36.87,143.13],tol:.06,typed:'36.9, 143.1',fmt:'all solutions, e.g. <code>30, 150</code>',tip:'Rearrange to sin x = 0.6 first. sin uses 180° − x.',
+  lines:[T`\sin x=0.6`,T`x=\sin^{-1}(0.6)\approx36.9°`,T`180°-36.9°=143.1°`]},
+ spot:{use:[T`“Solve … for \(0°\le x\le360°\)” with sin, cos or tan.`,'Questions asking for “all the solutions” in a range.'],
+  not:['A right-angled triangle problem: there’s only one angle there, so no symmetry needed.'],
+  aside:T`If the inside is \(2x\), widen the range first (\(0°\le2x\le720°\)), find all values of \(2x\), then halve them.`},
+ recap:{formula:T`\sin:\ x,\ 180°-x\quad\cos:\ x,\ 360°-x\quad\tan:\ x+180°`,points:['Rearrange to sin/cos/tan x = k.','Principal value from the calculator.','Use the symmetry rule for the second answer.','Add or subtract 360° (180° for tan) to find any others.','Keep only the answers in the range.']}},
+
+tident:{mins:5,
+ intro:T`<p>Two identities do most of the work. They are true for <b>every</b> angle:</p>
+<div class="bigf">\[\tan\theta=\frac{\sin\theta}{\cos\theta},\qquad\sin^2\theta+\cos^2\theta=1\]</div>
+<p>Use them to:</p><ul><li>find cos or tan when you know sin (or the other way round)</li><li>simplify expressions</li><li>turn an equation with both sin and cos into one with <b>only one</b> function, which you can then solve like a quadratic.</li></ul>`,
+ walk:{q:T`Solve \(2\cos^2x+\sin x=1\) for \(0°\le x<360°\).`,steps:[
+  {do:'Replace cos² with 1 − sin²',line:T`2(1-\sin^2x)+\sin x=1`,why:T`Now everything is in terms of \(\sin x\). From \(\sin^2x+\cos^2x=1\).`},
+  {do:'Rearrange into a quadratic',line:T`2\sin^2x-\sin x-1=0`,why:T`Expand, then move everything to one side. Think of \(\sin x\) as a letter, like \(s\): \(2s^2-s-1=0\).`},
+  {do:'Factorise',line:T`(2\sin x+1)(\sin x-1)=0`,think:T`Factorise \(2s^2-s-1\).`,why:T`\((2s+1)(s-1)=2s^2-s-1\ \checkmark\)`},
+  {do:'Two simple equations',line:T`\sin x=-\tfrac12\quad\text{or}\quad\sin x=1`,why:'Each bracket equals zero.'},
+  {do:'Solve each in the range',line:T`x=210°,\ 330°,\ 90°`,why:T`\(\sin x=-\tfrac12\): principal value \(-30°\) is outside the range, so use 180° + 30° and 360° − 30°. \(\sin x=1\): 90°.`}]},
+ faded:{q:T`\(\theta\) is acute and \(\sin\theta=\tfrac35\). Find \(\cos\theta\) and \(\tan\theta\) exactly.`,parts:[
+  {given:T`\cos^2\theta=1-\sin^2\theta`,note:'Rearrange the identity.'},
+  {blanks:[{pre:'cos²θ =',ans:0.64,show:T`\tfrac{16}{25}`}],note:T`\(1-\tfrac{9}{25}\).`,hint:T`Type <code>16/25</code>.`},
+  {blanks:[{pre:'cos θ =',ans:0.8,show:T`\tfrac45`}],note:'Square root (positive, because θ is acute).',hint:T`\(\sqrt{16}=4\), \(\sqrt{25}=5\).`},
+  {blanks:[{pre:'tan θ =',ans:0.75,show:T`\tfrac34`}],note:'sin ÷ cos.',hint:T`\(\tfrac35\div\tfrac45\).`}]},
+ own:{q:T`Solve \(2\sin^2x+3\cos x-3=0\) for \(0°\le x<360°\).`,kind:'set',ans:[0,60,300],fmt:'all solutions, e.g. <code>30, 150</code>',tip:T`Replace \(\sin^2x\) with \(1-\cos^2x\) to get a quadratic in \(\cos x\).`,
+  lines:[T`2(1-\cos^2x)+3\cos x-3=0`,T`2\cos^2x-3\cos x+1=0`,T`(2\cos x-1)(\cos x-1)=0`,T`\cos x=\tfrac12:\ 60°,\ 300°`,T`\cos x=1:\ 0°`]},
+ spot:{use:['An equation mixing sin² and cos, or cos² and sin.','sin and cos in the same equation with no squares: divide to get tan.','“Show that” or “prove” questions, and finding one ratio from another.'],
+  not:['Only one trig function already: solve it directly.']},
+ recap:{formula:T`\tan\theta=\frac{\sin\theta}{\cos\theta},\qquad\sin^2\theta+\cos^2\theta=1`,points:['sin² ↔ 1 − cos² and cos² ↔ 1 − sin².','Aim for one function only.','Treat sin x or cos x like a letter and factorise.','Some brackets give no solutions (e.g. sin x = 2): say so.']}},
+
+radians:{mins:4,
+ intro:T`<p>Radians are another way to measure angles. A full turn is \(2\pi\) radians, so</p>
+<div class="bigf">\[\pi\ \text{radians}=180°\]</div>
+<p>To convert degrees to radians multiply by \(\tfrac{\pi}{180}\); to go back, multiply by \(\tfrac{180}{\pi}\).</p>
+<p>The reason to use them: arc length and sector area become very simple, with no fractions of 360 to carry around.</p>
+<ul><li>arc length \(s=r\theta\)</li><li>sector area \(A=\tfrac12r^2\theta\)</li></ul><p>These only work with \(\theta\) in radians.</p>`,
+ walk:{q:T`A sector has radius 6 cm and angle \(\tfrac{2\pi}{3}\). Find its arc length and area, exactly and to 2 decimal places.`,steps:[
+  {do:'Check the angle is in radians',line:T`\theta=\tfrac{2\pi}{3}`,why:'It has π in it, so it’s already in radians.'},
+  {do:'Arc length',line:T`s=r\theta=6\times\tfrac{2\pi}{3}=4\pi`,think:T`What is \(6\times\tfrac{2\pi}{3}\)?`,why:T`\(6\times2=12\), \(12\div3=4\).`},
+  {do:'Sector area',line:T`A=\tfrac12(6)^2\tfrac{2\pi}{3}=12\pi`,think:'Half of 36, times 2π/3?',why:T`\(\tfrac12\times36=18\), \(18\times\tfrac23=12\).`,warn:'Square the radius, not the angle.'},
+  {do:'Decimals if asked',line:T`4\pi\approx12.57\text{ cm},\quad12\pi\approx37.70\text{ cm}^2`,why:'Keep π exact until the very end.'}]},
+ faded:{q:T`A sector has radius 10 cm and angle 72°. Find its arc length and area to 2 decimal places.`,parts:[
+  {blanks:[{pre:'72° in radians =',ans:1.2566,tol:.001,show:T`\tfrac{2\pi}{5}`}],note:'Multiply by π/180.',hint:T`\(72\times\tfrac{\pi}{180}=\tfrac{2\pi}{5}\). Type <code>2pi/5</code>.`},
+  {blanks:[{pre:'arc length ≈',ans:12.566,tol:.006}],note:'s = rθ.',hint:T`\(10\times\tfrac{2\pi}{5}=4\pi\).`},
+  {blanks:[{pre:'area ≈',ans:62.832,tol:.006}],note:'A = ½r²θ.',hint:T`\(\tfrac12\times100\times\tfrac{2\pi}{5}=20\pi\).`}]},
+ own:{q:T`A sector of radius 6 cm has an arc length of 15 cm. Find the angle in radians.`,kind:'num',ans:2.5,fmt:'a number, e.g. <code>1.2</code>',tip:T`Rearrange \(s=r\theta\).`,
+  lines:[T`15=6\theta`,T`\theta=\tfrac{15}{6}=2.5`]},
+ spot:{use:['Angles given with π, or the word “radians”.','Arc lengths, sector areas, segment areas.','Later: calculus with trig functions only works in radians.'],
+  not:['Triangle questions in degrees: keep using degrees there.'],
+  aside:'Set your calculator to radians (R) when the angle is in radians, and back to degrees after.'},
+ recap:{formula:T`\pi=180°,\qquad s=r\theta,\qquad A=\tfrac12r^2\theta`,points:['Degrees → radians: × π/180.','Radians → degrees: × 180/π.','Arc and sector formulas need θ in radians.','Leave π in for exact answers.']}}
+});
+Object.assign(LEARN,{
+exp2:{mins:4,
+ intro:T`<p>Expanding means multiplying out brackets so there are none left. With two brackets, <b>every term in the first bracket multiplies every term in the second</b>:</p><div class="bigf">\[(x+3)(x+5)=x^2+5x+3x+15=x^2+8x+15\]</div>
+<p>Two terms times two terms makes four products. Usually the two middle ones are both \(x\) terms, so they collect into one, and you end up with the form \(ax^2+bx+c\).</p>
+<p>Why bother? Almost everything else in Quadratics starts from \(ax^2+bx+c\): factorising, the formula, completing the square. Expanding is how you get there.</p>`,
+ walk:{q:T`Expand \((2x-3)(x+4)\).`,steps:[
+  {do:'Split the first bracket',line:T`2x(x+4)-3(x+4)`,why:T`Each term of the first bracket takes a turn multiplying the whole second bracket: first \(2x\), then \(-3\).`,warn:T`The \(-3\) keeps its minus sign. It is the term “minus 3”, not 3.`},
+  {do:'Multiply out the first part',line:T`2x^2+8x`,think:T`What are \(2x\times x\) and \(2x\times4\)?`,why:T`\(2x\times x=2x^2\) and \(2x\times4=8x\).`},
+  {do:'Multiply out the second part',line:T`-3x-12`,think:T`What are \(-3\times x\) and \(-3\times4\)?`,why:'A negative times a positive is negative, so both terms are negative.',warn:T`The classic slip is \(-3\times4=+12\). It is \(-12\).`},
+  {do:'Put the four terms together',line:T`2x^2+8x-3x-12`,why:'That is all four products: first×first, first×last, last×first, last×last.'},
+  {do:'Collect the x terms',line:T`2x^2+5x-12`,think:T`What is \(8x-3x\)?`,why:T`The two middle terms are both \(x\) terms, so they combine: \(8x-3x=5x\).`},
+  {do:'Sense-check with a number',line:T`x=1:\ (-1)(5)=-5,\ \ 2+5-12=-5\ \checkmark`,why:T`Put any easy number, like \(x=1\), into the question and into your answer. They must give the same value.`}]},
+ faded:{q:T`Expand \((x-5)(x+2)\).`,parts:[
+  {given:T`x(x+2)-5(x+2)`,note:'Split the first bracket.'},
+  {blanks:[{pre:'x(x + 2) =',ans:'x^2+2x',kind:'expr',show:T`x^2+2x`}],note:'Multiply out the first part.',hint:T`\(x\times x=x^2\) and \(x\times2=2x\).`},
+  {blanks:[{pre:'−5(x + 2) =',ans:'-5x-10',kind:'expr',show:T`-5x-10`}],note:'Now the second part.',hint:T`\(-5\times x=-5x\) and \(-5\times2=-10\).`},
+  {blanks:[{pre:'Answer:',ans:'x^2-3x-10',kind:'expr',form:'expanded',show:T`x^2-3x-10`}],note:'Collect the x terms.',hint:T`\(2x-5x=-3x\).`}]},
+ own:{q:T`Expand \((3x+1)(2x-5)\).`,kind:'expr',ans:'6x^2-13x-5',form:'expanded',fmt:'e.g. <code>2x^2 + 3x - 4</code>',tip:'Four products, then collect the two x terms. Watch the signs.',
+  lines:[T`3x(2x-5)+1(2x-5)`,T`6x^2-15x+2x-5`,T`6x^2-13x-5`]},
+ spot:{use:[T`Two brackets multiplied together, like \((x+4)(x-1)\).`,T`A squared bracket, like \((x+3)^2\). Write it as \((x+3)(x+3)\) first.`,T`You need an equation in the form \(ax^2+bx+c=0\) before you can solve it.`],
+  not:['The question says “factorise”. That’s the reverse: going back into brackets.',T`An equation like \((x-2)(x+5)=0\). Don’t expand it: it’s already ready to solve.`],
+  aside:T`\((x+3)^2\) is <b>not</b> \(x^2+9\). There are four products, so it is \(x^2+6x+9\).`},
+ recap:{formula:T`(a+b)(c+d)=ac+ad+bc+bd`,points:['Every term in the first bracket multiplies every term in the second.','Each term keeps its sign.','Collect like terms at the end, usually the two x terms.',T`Square brackets are double brackets: \((x+k)^2=(x+k)(x+k)\).`,'Check by putting in an easy number.']}},
+
+fac2:{mins:5,
+ intro:T`<p>Factorising is expanding in reverse: you start with \(ax^2+bx+c\) and write it as two brackets multiplied together.</p><div class="bigf">\[x^2+7x+12=(x+3)(x+4)\]</div>
+<p>When \(a=1\), you need two numbers that <b>multiply to \(c\)</b> and <b>add to \(b\)</b>. Here 3 and 4: \(3\times4=12\) and \(3+4=7\).</p>
+<p>When \(a\) isn’t 1, use the same idea with \(a\times c\) instead of \(c\), then split the middle term. The walkthrough shows how.</p>
+<p>Why it matters: the factorised form shows straight away where the graph crosses the x-axis, and it lets you solve equations and cancel algebraic fractions.</p>`,
+ walk:{q:T`Factorise \(2x^2+7x+3\).`,steps:[
+  {do:'Read off a, b and c',line:T`a=2,\quad b=7,\quad c=3`,why:T`Because \(a\) isn’t 1, the quick “multiply to \(c\)” trick won’t work directly. You use \(a\times c\) instead.`},
+  {do:'Multiply a by c',line:T`ac=2\times3=6`,why:'This is the target product.'},
+  {do:'Find two numbers: multiply to ac, add to b',line:T`6\times1=6,\quad 6+1=7`,think:'Which two numbers multiply to 6 and add to 7?',why:'List the factor pairs of 6 (1 and 6, 2 and 3) and pick the pair that adds to 7.'},
+  {do:'Split the middle term using them',line:T`2x^2+6x+x+3`,why:T`\(7x\) is rewritten as \(6x+x\). Nothing has changed in value, but now it splits into two pairs.`},
+  {do:'Factorise each pair',line:T`2x(x+3)+1(x+3)`,think:'What is the common factor of the first two terms? And of the last two?',why:T`\(2x^2+6x=2x(x+3)\) and \(x+3=1(x+3)\). Both brackets match, which tells you it is working.`,warn:T`If the brackets don’t match, recheck your numbers or signs. Write the 1 in \(1(x+3)\) so you don’t lose it.`},
+  {do:'Take out the common bracket',line:T`(x+3)(2x+1)`,why:T`\((x+3)\) is in both parts, so it comes out, leaving \((2x+1)\). Check by expanding: \(2x^2+x+6x+3\ \checkmark\)`}]},
+ faded:{q:T`Factorise \(x^2-x-12\).`,parts:[
+  {given:T`a=1,\quad b=-1,\quad c=-12`,note:'Here a = 1, so you only need two numbers that multiply to c and add to b.'},
+  {blanks:[{pre:'first number:',ans:-4},{pre:'second number:',ans:3}],any:true,note:'Multiply to −12 and add to −1.',hint:'One of them must be negative (the product is negative). Try −4 and 3.'},
+  {blanks:[{pre:'x² − x − 12 =',ans:'(x-4)(x+3)',kind:'expr',form:'brackets',show:T`(x-4)(x+3)`}],note:'Put each number into a bracket with x.',hint:T`The numbers go straight in: \((x-4)(x+3)\).`}]},
+ own:{q:T`Factorise \(3x^2-10x+8\).`,kind:'expr',ans:'(x-2)(3x-4)',form:'full',fmt:'e.g. <code>(2x - 1)(x + 3)</code>',tip:T`\(a\ne1\), so find two numbers that multiply to \(ac=24\) and add to \(-10\).`,
+  lines:[T`ac=24:\quad -6\times-4=24,\ \ -6-4=-10`,T`3x^2-6x-4x+8`,T`3x(x-2)-4(x-2)`,T`(x-2)(3x-4)`]},
+ spot:{use:['The question says “factorise” or “fully factorise”.',T`You’re solving \(ax^2+bx+c=0\) and the numbers look friendly.`,'You need to simplify an algebraic fraction (factorise top and bottom, then cancel).'],
+  not:[T`\(b^2-4ac\) isn’t a perfect square: it won’t factorise with whole numbers. Use the formula or completing the square.`,T`There’s no number term, like \(x^2+5x\). Just take out the common factor: \(x(x+5)\).`],
+  aside:T`Special case: \(x^2-9\) is a <b>difference of two squares</b>, \((x-3)(x+3)\).`},
+ recap:{formula:T`x^2+bx+c=(x+p)(x+q),\ \ pq=c,\ \ p+q=b`,points:['a = 1: find two numbers that multiply to c and add to b.','a ≠ 1: multiply to ac, add to b, split the middle term, factorise in pairs.','The brackets must match when you factorise in pairs.','A negative c means one number is negative.','Always check by expanding.']}},
+
+solveq:{mins:4,
+ intro:T`<p>If two numbers multiply to make zero, one of them must be zero. That one fact solves a lot of quadratics:</p><div class="bigf">\[(x-5)(x+2)=0\ \Rightarrow\ x=5\ \text{or}\ x=-2\]</div>
+<p>So the plan is: get everything on one side so the other side is <b>zero</b>, factorise, then set each bracket equal to zero.</p>
+<p>It’s the fastest method when the quadratic factorises nicely. A quadratic usually has two solutions: they’re where its graph crosses the x-axis.</p>`,
+ walk:{q:T`Solve \(x^2=3x+10\).`,steps:[
+  {do:'Make one side zero',line:T`x^2-3x-10=0`,why:T`Subtract \(3x\) and 10 from both sides.`,warn:'The zero trick only works with zero on one side. (x − 5)(x + 2) = 6 tells you nothing about each bracket.'},
+  {do:'Factorise',line:T`(x-5)(x+2)=0`,think:T`Which two numbers multiply to \(-10\) and add to \(-3\)?`,why:T`\(-5\times2=-10\) and \(-5+2=-3\).`},
+  {do:'Set each bracket equal to zero',line:T`x-5=0\quad\text{or}\quad x+2=0`,why:'The product is zero, so at least one bracket is zero.'},
+  {do:'Solve each one',line:T`x=5\quad\text{or}\quad x=-2`,think:'What value of x makes each bracket zero?',why:'Each bracket is a one-step equation.',warn:T`The sign flips: \(x+2=0\) gives \(x=-2\), not 2.`},
+  {do:'Check in the original equation',line:T`x=5:\ 25=15+10\ \checkmark`,why:'Put one answer back into the question. Both sides should match.'}]},
+ faded:{q:T`Solve \(x^2+2x-15=0\).`,parts:[
+  {given:T`x^2+2x-15=0`,note:'Already equal to zero.'},
+  {blanks:[{pre:'x² + 2x − 15 =',ans:'(x+5)(x-3)',kind:'expr',form:'brackets',show:T`(x+5)(x-3)`}],note:'Factorise.',hint:T`You need two numbers that multiply to \(-15\) and add to 2: that’s 5 and \(-3\).`},
+  {given:T`x+5=0\quad\text{or}\quad x-3=0`,note:'Each bracket equals zero.'},
+  {blanks:[{pre:'x =',ans:-5},{pre:'or x =',ans:3}],any:true,note:'Solve each one.',hint:T`\(x+5=0\) means \(x=-5\).`}]},
+ own:{q:T`Solve \(2x^2+5x=3\).`,kind:'set',ans:[0.5,-3],fmt:'both solutions, e.g. <code>2, -3</code>',tip:'Is one side zero yet?',
+  lines:[T`2x^2+5x-3=0`,T`(2x-1)(x+3)=0`,T`x=\tfrac12\quad\text{or}\quad x=-3`]},
+ spot:{use:[T`An equation with \(x^2\) where the numbers look friendly.`,T`An equation already in factorised form, like \(x(x-4)=0\).`],
+  not:['It won’t factorise: use the quadratic formula or completing the square.',T`You’re tempted to divide both sides by \(x\) in \(x^2=4x\). Don’t: you lose the solution \(x=0\). Write \(x^2-4x=0\), so \(x(x-4)=0\).`]},
+ recap:{formula:T`AB=0\ \Rightarrow\ A=0\ \text{or}\ B=0`,points:['Rearrange so one side is zero.','Factorise.','Set each bracket to zero and solve.','Never divide by x: you lose a solution.','Check by substituting back.']}},
+
+cts:{mins:5,
+ intro:T`<p>Completing the square rewrites \(x^2+bx+c\) with a squared bracket:</p><div class="bigf">\[x^2+6x+2=(x+3)^2-7\]</div>
+<p>The number in the bracket is <b>half of \(b\)</b>. Squaring that bracket gives you an extra number you didn’t want, so you take it away again.</p>
+<p>Why do it? The completed form tells you the <b>turning point</b> of the graph straight away (here \((-3,-7)\)), the minimum value (−7), and it solves equations exactly, even ones that won’t factorise.</p>`,
+ walk:{q:T`Write \(x^2+6x+2\) in the form \((x+p)^2+q\), then solve \(x^2+6x+2=0\).`,steps:[
+  {do:'Halve b',line:T`\tfrac{6}{2}=3`,think:'What is half of the number in front of x?',why:T`That number goes in the bracket: \((x+3)^2\).`},
+  {do:'Write the bracket, then take away its square',line:T`(x+3)^2-9+2`,why:T`\((x+3)^2=x^2+6x+9\). That adds a 9 that wasn’t there, so subtract 9 to keep the value the same.`,warn:'Subtract the square of the half (9), not the half itself (3).'},
+  {do:'Tidy the numbers',line:T`(x+3)^2-7`,why:T`\(-9+2=-7\). This is the completed form. The turning point is \((-3,-7)\): note the sign change on the \(x\) value.`},
+  {do:'To solve, set it equal to zero',line:T`(x+3)^2=7`,why:'Move the −7 across.'},
+  {do:'Square root both sides',line:T`x+3=\pm\sqrt7`,why:'A square root has a positive and a negative answer.',warn:'Forgetting the ± loses one of the two solutions.'},
+  {do:'Finish',line:T`x=-3\pm\sqrt7`,why:T`Subtract 3. That’s two exact answers: \(-3+\sqrt7\) and \(-3-\sqrt7\).`}]},
+ faded:{q:T`Write \(x^2-8x+5\) in the form \((x+p)^2+q\) and state its minimum value.`,parts:[
+  {blanks:[{pre:'half of b =',ans:-4}],note:'Halve the number in front of x, with its sign.',hint:T`\(b=-8\), so half of it is \(-4\).`},
+  {given:T`(x-4)^2-16+5`,note:'Bracket, then take away its square: (−4)² = 16.'},
+  {blanks:[{pre:'(x − 4)² +',ans:-11}],note:'Tidy the numbers.',hint:T`\(-16+5\).`},
+  {blanks:[{pre:'minimum value =',ans:-11},{pre:'when x =',ans:4}],note:'The squared bracket is never negative, so the smallest it can be is 0.',hint:T`\((x-4)^2=0\) when \(x=4\), leaving \(-11\).`}]},
+ own:{q:T`Write \(x^2+10x+30\) in the form \((x+p)^2+q\).`,kind:'cts',ans:'(x+5)^2+5',form:'square',fmt:'e.g. <code>(x - 2)^2 + 5</code>',tip:T`Halve 10, then take away its square.`,
+  lines:[T`\tfrac{10}{2}=5`,T`(x+5)^2-25+30`,T`(x+5)^2+5`]},
+ spot:{use:[T`The question asks for the form \((x+p)^2+q\).`,'You need the turning point, or the minimum or maximum value.',T`You want exact solutions and \(a=1\) with an even \(b\).`],
+  not:['The question wants decimal answers: the formula is quicker.',T`\(a\ne1\): it still works, but you have to take \(a\) out as a factor first, which is fiddly.`]},
+ recap:{formula:T`x^2+bx+c=\left(x+\tfrac b2\right)^2-\left(\tfrac b2\right)^2+c`,points:['The bracket number is half of b, with its sign.','Take away the square of that number.',T`\((x+p)^2+q\) has turning point \((-p,\ q)\).`,'When solving, remember the ±.']}},
+
+disc:{mins:3,
+ intro:T`<p>The <b>discriminant</b> is the part of the quadratic formula under the square root:</p><div class="bigf">\[b^2-4ac\]</div>
+<p>It tells you <b>how many</b> solutions \(ax^2+bx+c=0\) has without solving it:</p>
+<ul><li>positive: two solutions (the graph crosses the x-axis twice)</li><li>zero: one repeated solution (the graph just touches the axis)</li><li>negative: no real solutions (the graph misses the axis)</li></ul>
+<p>Why? You can’t square-root a negative number, and \(\pm\sqrt0\) gives the same answer twice.</p>`,
+ walk:{q:T`How many real solutions does \(3x^2-4x+2=0\) have?`,steps:[
+  {do:'Read off a, b and c',line:T`a=3,\quad b=-4,\quad c=2`,why:'Signs included, as always.'},
+  {do:'Work out b² − 4ac',line:T`(-4)^2-4(3)(2)=16-24=-8`,think:T`What is \((-4)^2-4\times3\times2\)?`,why:'Substitute carefully. The square of a negative is positive.',warn:T`\((-4)^2=16\), not \(-16\).`},
+  {do:'Read the sign',line:T`-8<0\ \Rightarrow\ \text{no real solutions}`,why:'A negative discriminant means the formula would need the square root of a negative number.'},
+  {do:'Picture the graph',line:T`\text{U-shape sitting above the x-axis}`,why:T`\(a=3\) is positive, so it’s U-shaped. No solutions means it never reaches the axis.`}]},
+ faded:{q:T`\(x^2+kx+9=0\) has one repeated solution. Find the positive value of \(k\).`,parts:[
+  {given:T`b^2-4ac=0`,note:'One repeated solution means the discriminant is zero.'},
+  {blanks:[{pre:'b² − 4ac = k² −',ans:36}],note:'Substitute a = 1, b = k, c = 9.',hint:T`\(4\times1\times9=36\).`},
+  {blanks:[{pre:'k =',ans:6}],note:'Solve k² − 36 = 0 and take the positive answer.',hint:T`\(k^2=36\), so \(k=\pm6\).`}]},
+ own:{q:T`How many real solutions does \(2x^2+3x-4=0\) have?`,kind:'num',ans:2,fmt:'a number: <code>0</code>, <code>1</code> or <code>2</code>',tip:'Work out b² − 4ac and look at its sign.',
+  lines:[T`a=2,\ b=3,\ c=-4`,T`9-4(2)(-4)=9+32=41`,T`41>0\ \Rightarrow\ 2\ \text{solutions}`]},
+ spot:{use:['“How many solutions / roots” or “how many times does the graph cross the axis”.','“Equal roots”, “repeated root”, “real roots”, “no real roots”, often with an unknown k.','Checking quickly whether a quadratic will factorise (perfect square → yes).'],
+  not:['You need the actual solutions: solve it instead.']},
+ recap:{formula:T`b^2-4ac`,points:['Positive: two real solutions.','Zero: one repeated solution.','Negative: no real solutions.','Equal or repeated roots means set it equal to 0.','Real roots means ≥ 0.']}},
+
+qineq:{mins:5,
+ intro:T`<p>A quadratic inequality, like \(x^2-x-6>0\), asks: <b>for which \(x\) is the graph above (or below) the x-axis?</b></p>
+<p>Solve the matching equation to find where the graph crosses the axis (the <b>critical values</b>), sketch the U-shape through them, then read off the part you want:</p>
+<div class="bigf">\[{>}0:\ \text{outside the roots}\qquad{<}0:\ \text{between them}\]</div>
+<p>That rule is for a U-shaped graph (positive \(x^2\)). The sketch is what makes it reliable, so always draw it.</p>`,
+ walk:{q:T`Solve \(x^2-x-6>0\).`,steps:[
+  {do:'Write the matching equation',line:T`x^2-x-6=0`,why:'First find where the graph crosses the x-axis.'},
+  {do:'Factorise',line:T`(x-3)(x+2)=0`,think:T`Two numbers that multiply to \(-6\) and add to \(-1\)?`,why:T`\(-3\times2=-6\), \(-3+2=-1\).`},
+  {do:'Critical values',line:T`x=-2,\quad x=3`,why:'These are the crossing points.'},
+  {do:'Sketch',line:T`\text{U-shape crossing at }-2\text{ and }3`,why:'Above the axis on the outside, below it between the crossing points.'},
+  {do:'Read off the part you want',line:T`x<-2\quad\text{or}\quad x>3`,why:'> 0 means above the axis: the two outer pieces.',warn:T`Two separate pieces need “or”. Never write \(3<x<-2\).`}]},
+ faded:{q:T`Solve \(x^2-5x+4\le0\).`,parts:[
+  {given:T`(x-1)(x-4)=0`,note:'Matching equation, factorised.'},
+  {blanks:[{pre:'x =',ans:1},{pre:'and x =',ans:4}],any:true,note:'The critical values.',hint:'Each bracket equal to zero.'},
+  {given:T`\le0\ \Rightarrow\ \text{below the axis}\ \Rightarrow\ \text{between}`,note:'Read the sketch.'},
+  {blanks:[{pre:'lower end:',ans:1},{pre:'upper end:',ans:4}],note:'≤ includes the end points.',hint:T`So the answer is \(1\le x\le4\).`}]},
+ own:{q:T`Solve \(x^2+2x-8<0\).`,kind:'range',ans:{in:true,a:-4,b:2,ia:false,ib:false},fmt:'e.g. <code>-1 &lt; x &lt; 5</code> or <code>x &lt; 1 or x &gt; 4</code> (type <code>&lt;=</code> for ≤)',tip:'Factorise, find the critical values, then sketch: < 0 means below the axis.',
+  lines:[T`(x+4)(x-2)=0`,T`x=-4,\ \ x=2`,T`{<}0:\ \text{between}`,T`-4<x<2`]},
+ spot:{use:[T`An inequality containing \(x^2\).`,'“For which values of x is … positive / negative?”','Discriminant questions with “real roots”, which become b² − 4ac ≥ 0.'],
+  not:['A linear inequality (no x²): solve it like an equation.',T`Never just “solve” \(x^2>9\) as \(x>3\). Use the sketch: \(x<-3\) or \(x>3\).`]},
+ recap:{formula:T`{>}0:\ \text{outside}\qquad{<}0:\ \text{between}`,points:['Solve the matching equation for the critical values.','Sketch the U-shape through them.','Above the axis (> 0): two outer pieces joined by “or”.','Below the axis (< 0): one piece between the values.','≤ and ≥ include the critical values.']}},
+
+simq:{mins:5,
+ intro:T`<p>Here one equation is a straight line and the other is a curve, and you want the points where they meet.</p>
+<p>The method: <b>substitute</b> the line into the curve. That gives a quadratic in one letter. Solve it, then put each answer back into the line to get the matching value of the other letter.</p>
+<p>A line usually meets a curve at <b>two</b> points, so you get two pairs of answers. Keep each \(x\) with its own \(y\).</p>`,
+ walk:{q:T`Solve \(y=x^2-2x\) and \(y=x+4\) simultaneously.`,steps:[
+  {do:'Set the two expressions for y equal',line:T`x^2-2x=x+4`,why:T`Both equal \(y\), so they equal each other. Now there’s only \(x\).`},
+  {do:'Make one side zero',line:T`x^2-3x-4=0`,why:T`Subtract \(x\) and 4 from both sides.`},
+  {do:'Factorise',line:T`(x-4)(x+1)=0`,think:T`Two numbers that multiply to \(-4\) and add to \(-3\)?`,why:T`\(-4\times1=-4\), \(-4+1=-3\).`},
+  {do:'Solve',line:T`x=4\quad\text{or}\quad x=-1`,why:'Two x values, so two meeting points.'},
+  {do:'Find each y using the line',line:T`y=8\quad\text{or}\quad y=3`,think:T`Put \(x=4\) and \(x=-1\) into \(y=x+4\).`,why:'The linear equation is the easiest one to substitute into.',warn:'Keep the pairs together: x = 4 goes with y = 8.'},
+  {do:'Write the answer as pairs',line:T`(4,\,8)\ \text{and}\ (-1,\,3)`,why:'These are the two points where the line crosses the curve.'}]},
+ faded:{q:T`Solve \(y=x+2\) and \(x^2+y^2=20\) simultaneously.`,parts:[
+  {given:T`x^2+(x+2)^2=20`,note:'Substitute the line into the curve.'},
+  {blanks:[{pre:'(x + 2)² =',ans:'x^2+4x+4',kind:'expr',form:'expanded',show:T`x^2+4x+4`}],note:'Expand the squared bracket.',hint:T`\((x+2)(x+2)\): four products.`},
+  {given:T`2x^2+4x-16=0\ \Rightarrow\ x^2+2x-8=0`,note:'Collect, make one side zero, divide by 2.'},
+  {blanks:[{pre:'x =',ans:2},{pre:'or x =',ans:-4}],any:true,note:'Solve the quadratic.',hint:T`\((x+4)(x-2)=0\).`},
+  {blanks:[{pre:'when x = 2, y =',ans:4},{pre:'when x = −4, y =',ans:-2}],note:'Back into the line y = x + 2.',hint:'Add 2 to each x.'}]},
+ own:{q:T`Find the points where \(y=x^2+1\) meets \(y=3x-1\).`,kind:'pts',ans:[[1,2],[2,5]],fmt:'points, e.g. <code>(1, 2), (3, 4)</code>',tip:'Set them equal, make one side zero, solve, then use the line to find each y.',
+  lines:[T`x^2+1=3x-1`,T`x^2-3x+2=0`,T`(x-1)(x-2)=0`,T`(1,\,2)\ \text{and}\ (2,\,5)`]},
+ spot:{use:[T`One equation is linear and the other has \(x^2\), \(y^2\) or \(xy\).`,'“Where does the line meet the curve?” or “find the points of intersection”.'],
+  not:['Both equations are linear: use elimination or substitution as normal.'],
+  aside:'If the quadratic you get has no solutions (discriminant negative), the line misses the curve. If it has one, the line just touches it.'},
+ recap:{formula:T`\text{line}\ \to\ \text{curve}\ \to\ \text{quadratic}\ \to\ \text{back into line}`,points:['Rearrange the linear equation for one letter.','Substitute it into the curve.','Solve the quadratic.','Use the line to find the partner of each answer.','Give the answers as pairs.']}},
+
+afrac:{mins:5,
+ intro:T`<p>Algebraic fractions follow exactly the same rules as number fractions. Two skills cover most questions:</p>
+<ul><li><b>Simplifying:</b> factorise the top and the bottom, then cancel any bracket that appears in both.</li><li><b>Adding or subtracting:</b> use a common denominator, just like \(\tfrac12+\tfrac13=\tfrac{3+2}{6}\).</li></ul>
+<div class="bigf">\[\frac{x^2-9}{x^2+5x+6}=\frac{(x-3)(x+3)}{(x+2)(x+3)}=\frac{x-3}{x+2}\]</div>
+<p>The golden rule: you can only cancel <b>factors</b> (things multiplied), never single terms in a sum.</p>`,
+ walk:{q:T`Simplify \(\dfrac{x^2-9}{x^2+5x+6}\).`,steps:[
+  {do:'Factorise the top',line:T`x^2-9=(x-3)(x+3)`,think:'This is a difference of two squares. What are the brackets?',why:T`\(a^2-b^2=(a-b)(a+b)\), with \(b=3\).`},
+  {do:'Factorise the bottom',line:T`x^2+5x+6=(x+2)(x+3)`,think:'Two numbers that multiply to 6 and add to 5?',why:'2 and 3.'},
+  {do:'Rewrite the fraction',line:T`\dfrac{(x-3)(x+3)}{(x+2)(x+3)}`,why:'Now you can see the common factor.'},
+  {do:'Cancel the common bracket',line:T`\dfrac{x-3}{x+2}`,why:T`\((x+3)\) is multiplied on the top and on the bottom, so it cancels.`,warn:T`You can’t cancel the \(x\)s in \(\tfrac{x-3}{x+2}\): they are terms in a sum, not factors.`}]},
+ faded:{q:T`Write \(\dfrac{2}{x+1}+\dfrac{3}{x-2}\) as a single fraction.`,parts:[
+  {given:T`\text{common denominator: }(x+1)(x-2)`,note:'Multiply the two denominators.'},
+  {given:T`\dfrac{2(x-2)+3(x+1)}{(x+1)(x-2)}`,note:'Each top is multiplied by the other fraction’s denominator.'},
+  {blanks:[{pre:'top: 2(x − 2) + 3(x + 1) =',ans:'5x-1',kind:'expr',show:T`5x-1`}],note:'Expand and simplify the top.',hint:T`\(2x-4+3x+3\).`},
+  {given:T`\dfrac{5x-1}{(x+1)(x-2)}`,note:'Done. Leave the bottom factorised.'}]},
+ own:{q:T`Simplify \(\dfrac{2x^2+6x}{x^2-9}\).`,kind:'expr',ans:'2x/(x-3)',form:'cancel',fmt:'e.g. <code>3x/(x + 2)</code>',tip:'Factorise the top (common factor) and the bottom (difference of two squares), then cancel.',
+  lines:[T`\dfrac{2x(x+3)}{(x-3)(x+3)}`,T`\dfrac{2x}{x-3}`]},
+ spot:{use:[T`An \(x\) in a denominator.`,'“Simplify fully”: factorise everything, then cancel.','“Write as a single fraction”: common denominator.','An equation with fractions: multiply every term by the common denominator to clear them.'],
+  not:[T`Cancelling terms: \(\tfrac{x+6}{x+2}\) is not \(\tfrac{6}{2}\), and it doesn’t simplify.`]},
+ recap:{formula:T`\frac ab+\frac cd=\frac{ad+bc}{bd}`,points:['Factorise top and bottom before cancelling.','Only cancel whole factors (brackets), never terms.','Adding or subtracting: common denominator, then simplify the top.','Watch the signs when subtracting: put the second top in brackets.']}}
+});
+</script>
+<script>
 if(typeof document!=='undefined'){
 const $=(s,r=document)=>r.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1581,7 +2679,7 @@ function bindRemind(){const f=$('#impFile'),m=$('#impMsg');if(!f)return;$('#icsB
 const LOCK='<svg class="lk" viewBox="0 0 12 14" aria-hidden="true"><rect x="1.5" y="6" width="9" height="7" rx="1.5"/><path d="M3.5 6V4.2a2.5 2.5 0 0 1 5 0V6"/></svg>';
 function renderRail(){const cur=location.hash.slice(1)||'home';const due=dueTopics().length;
   $('#railnav').innerHTML=`<a href="#home" class="${cur==='home'?'on':''}">Overview</a><a href="#lab" class="${cur==='lab'?'on':''}">Graph lab</a><a href="#review" class="${cur==='review'?'on':''}"><span>${due?'Reviews due':'Mixed review'}</span>${due?`<span class="badge">${due}</span>`:''}</a>`;
-  let h='';UNITS.forEach((u,i)=>{h+=`<div class="unit"><h4><i>${String(i+1).padStart(2,'0')}</i>${esc(u)}</h4>`;
+  let h='';UNITS.forEach((u,i)=>{h+=`<div class="unit"><h4><i>${String(i+1).padStart(2,'0')}</i>${esc(u)}</h4>${UNIT_GUIDES[i]?`<a class="tlink cp ${cur==='guide-'+i?'on':''}" href="#guide-${i}"><span class="gico">?</span>Unit guide</a>`:''}`;
     unitTopics(i).forEach(t=>{const s=S(t.id),lk=isLocked(t);h+=`<a class="tlink ${cur==='t-'+t.id?'on':''}${lk?' locked':''}" href="#t-${t.id}">${lk?LOCK:`<span class="dot ${status(s)}"></span>`}${esc(t.t)}${s&&s.a?`<span class="lvl">L${lvOf(t.id)}</span>`:''}</a>`});
     h+=`<a class="tlink cp ${cur==='cp-'+i?'on':''}${cpReady(i)||cpPassed(i)?'':' locked'}" href="#cp-${i}">${cpReady(i)||cpPassed(i)?`<span class="dot flag ${cpPassed(i)?'pass':''}"></span>`:LOCK}Unit checkpoint${store.cp[i]?`<span class="lvl">${store.cp[i].best}/${CP_N}</span>`:''}</a></div>`});
   $('#units').innerHTML=h}
@@ -1605,7 +2703,7 @@ function home(){const v=$('#view');const all=TOPICS.map(t=>[t,S(t.id)]);const so
   <div class="stats"><div class="stat"><b>${mastered}<small> / ${TOPICS.length}</small></b><span>topics mastered</span></div><div class="stat"><b>${solved}</b><span>problems solved</span></div><div class="stat"><b>${att?Math.round(solved/att*100)+'%':'—'}</b><span>first-try accuracy</span></div><div class="stat"><b>${UNITS.filter((_,i)=>cpPassed(i)).length}<small> / ${UNITS.length}</small></b><span>checkpoints passed</span></div></div>
   <div class="cols"><div class="path">`;let n=0;
   UNITS.forEach((u,i)=>{const ts=unitTopics(i);const m=ts.filter(t=>['mastered','due'].includes(status(S(t.id)))).length;
-    h+=`<section class="punit"><header><h3>${String(i+1).padStart(2,'0')} · ${esc(u)}</h3><span>${m}/${ts.length} mastered</span></header>`;
+    h+=`<section class="punit"><header><h3>${String(i+1).padStart(2,'0')} · ${esc(u)}</h3><span>${m}/${ts.length} mastered</span></header>${UNIT_GUIDES[i]?`<a class="prow cpr" href="#guide-${i}"><span class="pn"></span><span class="gico">?</span><span class="pt">Unit guide: which method when</span><span class="pmeta"></span></a>`:''}`;
     ts.forEach(t=>{n++;const s=S(t.id),st=status(s),lk=isLocked(t);h+=`<a class="prow${lk?' locked':''}" href="#t-${t.id}"><span class="pn">${n}</span>${lk?LOCK:`<span class="dot ${st}"></span>`}<span class="pt">${esc(t.t)}</span><span class="pmeta">${s&&s.a?`L${lvOf(t.id)} · ${Math.round(s.c/s.a*100)}%${s.sr&&!isDue(s)?' · review '+daysTxt(s.sr.due):''}`:lk?'locked':'—'}</span></a>`});
     const cp=store.cp[i],clk=!cpReady(i)&&!cpPassed(i);h+=`<a class="prow cpr${clk?' locked':''}" href="#cp-${i}"><span class="pn"></span>${clk?LOCK:`<span class="dot flag ${cpPassed(i)?'pass':''}"></span>`}<span class="pt">Unit checkpoint</span><span class="pmeta">${cp?`best ${cp.best}/${CP_N}${cpPassed(i)?' · passed':''}`:clk?'locked':'ready'}</span></a></section>`});
   const nextRv=all.filter(([,s])=>s&&s.sr).sort((a,b)=>a[1].sr.due-b[1].sr.due)[0];
@@ -1633,9 +2731,91 @@ const stepsHtml=st=>`<ol class="steps">${st.map(s=>`<li><div>${s}</div></li>`).j
 let RECENT={};try{RECENT=JSON.parse(localStorage.getItem('algebra-path-recent')||'{}')||{}}catch(e){}
 const recentQ=id=>RECENT[id]||(RECENT[id]=[]);
 function rememberQ(id,q){const a=recentQ(id);if(!a.includes(q))a.push(q);if(a.length>40)a.splice(0,a.length-40);try{localStorage.setItem('algebra-path-recent',JSON.stringify(RECENT))}catch(e){}}
+/* ---------- lessons & unit guides ---------- */
+const QC=[];
+function lessonHtml(t,L){const words=(L.what+L.when+L.steps.join(' ')+L.examples.map(e=>e.q+e.rows.map(r=>r[1]).join(' ')+(e.a||'')).join(' ')+L.mistakes.join(' ')).replace(/<[^>]+>|\\[()\[\]]|\\[a-z]+/g,' ').split(/\s+/).filter(Boolean).length,mins=Math.max(2,Math.round(words/170));
+  return`<section class="lesson" aria-label="Lesson"><div class="lhead"><h2>Lesson</h2><span class="note">about ${mins} min read</span></div>
+  <div class="lsec"><h3>What it is and why it’s useful</h3>${L.what}</div>
+  <div class="lsec"><h3>When to use it</h3>${L.when}</div>
+  <details class="fold" open><summary>How to do it</summary><div><ol class="steps">${L.steps.map(s=>`<li><div>${s}</div></li>`).join('')}</ol>
+    ${L.examples.map((e,i)=>`<div class="wex"><p class="wq"><b>Example ${i+1}.</b> ${e.q}</p>${e.rows.map(r=>`<div class="wrow"><span class="wm">\\(${r[0]}\\)</span><span class="wn">${r[1]}</span></div>`).join('')}${e.a?`<p class="wa">${e.a}</p>`:''}</div>`).join('')}</div></details>
+  <details class="fold"><summary>Common mistakes</summary><div><ul class="mlist">${L.mistakes.map(m=>`<li>${m}</li>`).join('')}</ul></div></details>
+  <details class="fold" open><summary>Quick check</summary><div><p class="note">Try these before you practise. They don’t count towards your progress.</p>${L.checks.map(c=>{QC.push(c);const i=QC.length-1;return`<div class="qc" data-qc="${i}"><p class="qcq">${c.q}</p><div class="arow"><input class="qcin" id="qc${i}" autocomplete="off" spellcheck="false" placeholder="Your answer" aria-label="Your answer"><button type="button" class="btn" data-qcc>Check</button><button type="button" class="btn ghost" data-qcs>Show answer</button></div><p class="fmt">Format: ${c.fmt}</p><div class="qcfb"></div></div>`}).join('')}</div></details></section>`}
+const QCFORM={brackets:formBrackets,square:formSquare,surd:formSurd,cancel:formCancel};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-qcc],[data-qcs]');if(!b)return;const box=b.closest('.qc'),c=QC[+box.dataset.qc],fbx=box.querySelector('.qcfb');
+  if(b.hasAttribute('data-qcs')){fbx.innerHTML=`<div class="fb good"><b>Answer</b>\\(${c.show}\\)</div>`;typeset(fbx);return}
+  const r=check({...c,form:c.form?QCFORM[c.form]:undefined},box.querySelector('.qcin').value);
+  fbx.innerHTML=r.empty?'<div class="fb warn"><b>Type an answer first.</b></div>':r.parseErr?`<div class="fb warn"><b>I couldn’t read that.</b>Format: ${c.fmt}</div>`:r.ok?'<div class="fb good"><b>Correct.</b>You’re ready for the practice problems.</div>':r.form?`<div class="fb warn"><b>Nearly.</b>${r.form}</div>`:'<div class="fb bad"><b>Not quite.</b>Look back at the steps and examples above, or show the answer.</div>';typeset(fbx)});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList&&e.target.classList.contains('qcin')){e.preventDefault();e.target.closest('.qc').querySelector('[data-qcc]').click()}});
+function guidePage(u){const G=UNIT_GUIDES[u],v=$('#view');
+  v.innerHTML=`<header class="thead"><div><div class="eyebrow">${String(u+1).padStart(2,'0')} · ${esc(UNITS[u])} · unit guide</div><h1>${esc(G.title)}</h1></div></header>
+  <div class="guide">
+   <section class="lsec">${G.intro}</section>
+   <section class="lsec"><h3>Three forms, three things they show</h3><div class="tablewrap"><table class="gtable"><thead><tr><th>Form</th><th>What it shows</th><th>How you get it</th></tr></thead><tbody>${G.forms.map(f=>`<tr><td><b>${f[1]}</b><br>\\(${f[0]}\\)</td><td>${f[2]}</td><td>${f[3]}</td></tr>`).join('')}</tbody></table></div>${plotSVG(JSON.parse(JSON.stringify(G.graph)))}</section>
+   <section class="lsec"><h3>Solving \\(ax^2+bx+c=0\\): which method when</h3><ol class="steps">${G.decide.map(d=>`<li><div>${d[0]} <b>${d[1]}</b></div></li>`).join('')}</ol></section>
+   <section class="lsec"><h3>One equation, three methods</h3>${G.compare}</section>
+   <section class="lsec"><h3>How the topics fit together</h3>${G.map}</section>
+  </div>`;typeset(v)}
+/* ---------- step-by-step lesson pages ---------- */
+const LSTAGES=['Intro','Walkthrough','Your turn','When to use it','Recap'];
+const blankDone=x=>x.show?`\\(${x.show}\\)`:typeof x.ans==='number'?fmtN(x.ans):esc(String(x.ans));
+const QF2=n=>n?({...QCFORM,full:formFull,rational:formRational,exact:formExact,pi:formPi,onefrac:formOneFrac,nofrac:formNoFrac,common:u=>{const r=formFactorCommon(u);if(r)return r;const inner=firstBracket(u);if(inner){try{if(Math.abs(compile(inner)({x:0}))<1e-9)return 'Equivalent, but not fully factorised: every term in the bracket still contains x, so x can come outside too.'}catch(e){}}return null},expanded:u=>/\(/.test(u)?'That’s equivalent, but expand it fully: no brackets in the answer.':null})[n]:undefined;
+let LS=null;
+function learnPage(id){const t=byId[id],L=LEARN[id];if(!LS||LS.id!==id)LS={id,stage:0,step:0,shown:{},fp:0,done:{}};
+  $('#view').innerHTML=`<header class="thead"><div><div class="eyebrow">${String(t.u+1).padStart(2,'0')} · ${esc(UNITS[t.u])} · lesson · about ${L.mins} min</div><h1>${esc(t.t)}</h1></div><a class="btn ghost" href="#t-${id}">Skip to practice →</a></header>
+  <div class="lp"><nav class="stages" aria-label="Lesson parts">${LSTAGES.map((s,i)=>`<button type="button" class="stg${i===LS.stage?' on':''}${i<LS.stage?' past':''}" data-stg="${i}"><span>${i+1}</span>${s}</button>`).join('')}</nav><div id="lpbody"></div></div>`;lpRender()}
+function lpNav(){const L=LEARN[LS.id],last=LS.stage===LSTAGES.length-1;
+  return`<div class="lpnav">${LS.stage?`<button type="button" class="btn" data-lgo="${LS.stage-1}">← ${LSTAGES[LS.stage-1]}</button>`:'<span></span>'}${last?`<a class="btn primary" href="#t-${LS.id}">Start practising →</a>`:`<button type="button" class="btn primary" data-lgo="${LS.stage+1}">${LSTAGES[LS.stage+1]} →</button>`}</div>`}
+function lpRender(){const L=LEARN[LS.id],b=$('#lpbody');if(!b)return;document.querySelectorAll('.stg').forEach((x,i)=>{x.classList.toggle('on',i===LS.stage);x.classList.toggle('past',i<LS.stage)});
+  let h='';
+  if(LS.stage===0)h=`<section class="panel lpcard lsec">${L.intro}${L.fig?`<div class="lfig">${L.fig}</div>`:''}</section>`;
+  else if(LS.stage===1){const W=L.walk,s=W.steps[LS.step],hid=s.think&&!LS.shown[LS.step];
+    h=`<div class="wgrid"><section class="panel nb" aria-label="Your notebook"><p class="nbq"><span class="eyebrow">Question</span>${W.q}</p>${W.fig?`<div class="lfig">${W.fig}</div>`:''}${W.steps.slice(0,LS.step+1).map((x,i)=>`<div class="nbl${i===LS.step?' cur':''}"><span class="nbn">${i+1}</span><span class="nbm">${i===LS.step&&hid?'<span class="nbhide">?</span>':`\\(${x.line}\\)`}</span></div>`).join('')}</section>
+    <section class="panel stepcard" aria-live="polite"><div class="eyebrow">Step ${LS.step+1} of ${W.steps.length}</div><h3>${s.do}</h3>
+    ${hid?`<div class="think"><b>Think first.</b> ${s.think}<p class="note">Work it out in your notebook, then check.</p></div><button type="button" class="btn primary" data-lshow>Show the step</button>`:
+      `<p>${s.why}</p>${s.warn?`<div class="warnbox"><b>Watch out.</b> ${s.warn}</div>`:''}
+      <div class="actions">${LS.step?'<button type="button" class="btn" data-lstep="-1">← Previous step</button>':''}${LS.step<W.steps.length-1?'<button type="button" class="btn primary" data-lstep="1">Next step →</button>':'<span class="toast">That’s the whole method. Now you try one.</span>'}</div>`}
+    <div class="dots">${W.steps.map((_,i)=>`<i class="${i<LS.step?'d':i===LS.step?'c':''}"></i>`).join('')}</div></section></div>`}
+  else if(LS.stage===2){const F=L.faded,O=L.own;
+    h=`<section class="panel lpcard"><div class="eyebrow">Fill in the gaps</div><p class="nbq">${F.q}</p>${F.fig?`<div class="lfig">${F.fig}</div>`:''}${F.parts.slice(0,LS.fp+1).map((p,i)=>{const cur=i===LS.fp&&p.blanks&&!LS.done[i];
+      return`<div class="fp${cur?' cur':''}"><p class="note">${p.note}</p>${p.given?`<div class="nbm">\\(${p.given}\\)</div>`:`<div class="blanks" data-fp="${i}">${p.blanks.map((x,j)=>`<label class="blank"><span>${x.pre}</span>${LS.done[i]?`<b>${blankDone(x)}</b>`:`<input${x.kind&&x.kind!=='num'?' class="wide"':' inputmode="decimal"'} autocomplete="off" spellcheck="false" data-bl="${j}" aria-label="${esc(x.pre)}">`}</label>`).join('')}${cur?`<button type="button" class="btn primary" data-fchk="${i}">Check</button><button type="button" class="btn ghost" data-fshow="${i}">Show me</button>`:''}</div><div class="ffb"></div>`}</div>`}).join('')}
+      ${LS.fp<F.parts.length-1&&(!F.parts[LS.fp].blanks||LS.done[LS.fp])?'<button type="button" class="btn" data-fnext>Next line →</button>':''}</section>
+    ${LS.fp===F.parts.length-1&&(LS.done[LS.fp]||!F.parts[LS.fp].blanks)?`<section class="panel lpcard"><div class="eyebrow">Now on your own</div><p class="nbq">${O.q}</p>${O.fig?`<div class="lfig">${O.fig}</div>`:''}<div class="think"><b>Tip.</b> ${O.tip}</div>
+      <div class="arow"><input class="ownin" autocomplete="off" spellcheck="false" placeholder="Your answer" aria-label="Your answer"><button type="button" class="btn primary" data-ochk>Check</button><button type="button" class="btn ghost" data-oshow>Show worked solution</button></div><p class="fmt">Format: ${O.fmt}</p><div class="ofb"></div></section>`:''}`}
+  else if(LS.stage===3&&!L.flow){const S=L.spot;h=`<section class="panel lpcard"><div class="eyebrow">When to use it</div><div class="spot"><div class="spy"><h3>Reach for it when you see</h3><ul>${S.use.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="spn"><h3>Not the right tool when</h3><ul>${S.not.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>${S.aside?`<p class="note faside">${S.aside}</p>`:''}</section>`}
+  else if(LS.stage===3){const Fl=L.flow;
+    h=`<section class="panel lpcard"><div class="eyebrow">${Fl.title||'Which method should I use?'}</div><div class="flow"><div class="fbox start">${Fl.start}</div>${Fl.qs.map(q=>`<div class="farrow">↓</div><div class="frow"><div class="fbox fq"><b>${q.q}</b><span class="note">${q.sub}</span></div><div class="fyes"><span class="fy">Yes →</span><div class="fbox fa${q.hl?' hl':''}">${q.yes}${q.link?` <a href="#t-${q.link}">Go to topic</a>`:''}</div></div></div><div class="fno">No</div>`).join('')}<div class="farrow">↓</div><div class="fbox fa hl">${Fl.end}</div></div><p class="note faside">${Fl.aside}</p></section>`}
+  else{const R=L.recap;h=`<section class="panel lpcard"><div class="eyebrow">Remember</div><div class="bigf">\\[${R.formula}\\]</div><ol class="steps">${R.points.map(p=>`<li><div>${p}</div></li>`).join('')}</ol></section>`}
+  b.innerHTML=h+lpNav();typeset(b)}
+function lpCheckPart(i,reveal){const F=LEARN[LS.id].faded,p=F.parts[i],box=document.querySelector(`.blanks[data-fp="${i}"]`),fb=box.nextElementSibling;
+  if(reveal){LS.done[i]=1;lpAdvance();return}
+  const vals=[...box.querySelectorAll('input')].map(x=>x.value.trim());if(vals.some(v=>!v)){fb.innerHTML='<div class="fb warn"><b>Fill in every gap first.</b></div>';return}
+  let ok;if(p.any)ok=check({kind:'set',ans:p.blanks.map(x=>x.ans),tol:p.blanks[0].tol},vals.join(', ')).ok;
+  else ok=p.blanks.every((x,j)=>check({kind:x.kind||'num',ans:x.ans,tol:x.tol,vars:x.vars,dom:x.dom,deg:x.deg,form:QF2(x.form)},vals[j]).ok);
+  if(ok){LS.done[i]=1;lpAdvance()}else{fb.innerHTML=`<div class="fb bad"><b>Not quite.</b>${p.hint}</div>`;typeset(fb)}}
+function lpAdvance(){const F=LEARN[LS.id].faded;while(LS.fp<F.parts.length-1&&(!F.parts[LS.fp].blanks||LS.done[LS.fp])){LS.fp++;if(F.parts[LS.fp].blanks)break}lpRender();const n=document.querySelector('.fp.cur input');if(n)n.focus();else{const o=document.querySelector('.ownin');if(o)o.focus()}}
+document.addEventListener('click',e=>{if(!LS||!document.querySelector('.lp'))return;const g=e.target.closest('[data-stg],[data-lgo]');
+  if(g){LS.stage=+(g.dataset.stg??g.dataset.lgo);lpRender();try{window.scrollTo(0,0)}catch(_){}return}
+  const W=LEARN[LS.id].walk;
+  if(e.target.closest('[data-lshow]')){LS.shown[LS.step]=1;lpRender();return}
+  const st=e.target.closest('[data-lstep]');if(st){LS.step=Math.max(0,Math.min(W.steps.length-1,LS.step+ +st.dataset.lstep));lpRender();return}
+  const fc=e.target.closest('[data-fchk],[data-fshow]');if(fc){lpCheckPart(+(fc.dataset.fchk??fc.dataset.fshow),fc.hasAttribute('data-fshow'));return}
+  if(e.target.closest('[data-fnext]')){const F=LEARN[LS.id].faded;if(LS.fp<F.parts.length-1){LS.fp++;lpRender()}return}
+  const O=LEARN[LS.id].own,ob=e.target.closest('[data-ochk],[data-oshow]');if(ob){const fb=document.querySelector('.ofb');
+    const sol=`<div class="wex"><p class="wq"><b>Worked solution</b></p>${O.lines.map(l=>`<div class="nbm">\\(${l}\\)</div>`).join('')}</div>`;
+    if(ob.hasAttribute('data-oshow'))fb.innerHTML=sol;
+    else{const r=check({...O,form:QF2(O.form)},document.querySelector('.ownin').value);fb.innerHTML=r.empty?'<div class="fb warn"><b>Type an answer first.</b></div>':r.parseErr?`<div class="fb warn"><b>I couldn’t read that.</b>Format: ${O.fmt}</div>`:r.ok?`<div class="fb good"><b>Correct, well done.</b>Next, see when to use the formula rather than another method.</div>${sol}`:r.form?`<div class="fb warn"><b>Nearly.</b>${r.form}</div>`:`<div class="fb bad"><b>Not quite.</b>${O.tip} Try again, or show the worked solution.</div>`}
+    typeset(fb)}});
+document.addEventListener('keydown',e=>{if(!LS||!document.querySelector('.lp'))return;const tg=e.target;
+  if(e.key==='Enter'&&tg.matches&&tg.matches('.blanks input')){e.preventDefault();const b=tg.closest('.blanks').querySelector('[data-fchk]');b&&b.click();return}
+  if(e.key==='Enter'&&tg.classList&&tg.classList.contains('ownin')){e.preventDefault();document.querySelector('[data-ochk]').click();return}
+  if(LS.stage!==1||/INPUT|TEXTAREA/.test(tg.tagName||''))return;
+  if(e.key==='ArrowRight'){const s=document.querySelector('[data-lshow],[data-lstep="1"]');if(s){e.preventDefault();s.click()}}
+  else if(e.key==='ArrowLeft'){const s=document.querySelector('[data-lstep="-1"]');if(s){e.preventDefault();s.click()}}});
+function lessonCard(t){const L=LEARN[t.id];return`<a class="lessoncard" href="#lesson-${t.id}"><span class="eyebrow">Lesson · about ${L.mins} min</span><b>Learn ${esc(t.t.charAt(0).toLowerCase()+t.t.slice(1))} step by step</b><span class="note">${LSTAGES.join(' · ')}</span><span class="lcgo">Start →</span></a>`}
 function learnHtml(t){const ex=gen(t,2,false,TOPICS.indexOf(t)*97+13);if(!recentQ(t.id).includes(ex.q))recentQ(t.id).push(ex.q);
-  return`<div class="learn" id="learn"><p class="sum">${t.s}</p><div class="key"><span class="eyebrow">Core rule</span>\\[${t.k}\\]</div>
-  <details class="fold" open><summary>Worked example</summary><div><p class="exq">${ex.q}</p>${stepsHtml(ex.steps)}<div class="final">Answer: \\(${showAns(ex)}\\)</div>${ex.method?`<p class="method"><b>Efficient route.</b> ${ex.method}</p>`:''}${graphBlock(ex.gr)}</div></details>
+  const L=LESSONS[t.id];return`<div class="learn" id="learn">${UNIT_GUIDES[t.u]?`<a class="chip guidechip" href="#guide-${t.u}"><span class="gico">?</span>${esc(UNIT_GUIDES[t.u].title)}</a>`:''}<p class="sum">${t.s}</p><div class="key"><span class="eyebrow">Core rule</span>\\[${t.k}\\]</div>${LEARN[t.id]?lessonCard(t):L?lessonHtml(t,L):''}
+  <details class="fold"${L?'':' open'}><summary>${L?'One more worked example':'Worked example'}</summary><div><p class="exq">${ex.q}</p>${stepsHtml(ex.steps)}<div class="final">Answer: \\(${showAns(ex)}\\)</div>${ex.method?`<p class="method"><b>Efficient route.</b> ${ex.method}</p>`:''}${graphBlock(ex.gr)}</div></details>
   <details class="fold" id="whyFold"><summary>Why it works</summary><div><p style="margin:0">${t.w}</p></div></details></div>`}
 function lockedPage(head,title,body,btn){$('#view').innerHTML=`<header class="thead"><div><div class="eyebrow">${head}</div><h1>${esc(title)}</h1></div></header><div class="panel lockpanel"><h3>${LOCK}Locked</h3>${body}${btn}</div>`}
 function topicPage(t){const v=$('#view');const L=lockInfo(t);if(L){const head=`${String(t.u+1).padStart(2,'0')} · ${esc(UNITS[t.u])} · topic ${TOPICS.indexOf(t)+1} of ${TOPICS.length}`;
@@ -1850,7 +3030,7 @@ function drawLab(){if(!$('#labsvg'))return;const P=labParams(),env={};for(const 
   lab.yr=sp._yr||lab.yr||[-6,6];$('#keylist').innerHTML=rows.join('');saveLab()}
 
 function route(){const h=location.hash.slice(1);boardActive=false;renderRail();$('#rail').classList.remove('open');$('#railToggle').setAttribute('aria-expanded','false');
-  if(h.startsWith('t-')&&byId[h.slice(2)])topicPage(byId[h.slice(2)]);else if(h==='review')reviewPage();else if(/^cp-\d+$/.test(h)&&UNITS[+h.slice(3)])cpPage(+h.slice(3));else if(h==='learn')return;else if(h==='lab')labPage();else home();addBack();try{window.scrollTo(0,0)}catch(e){}}
+  if(h.startsWith('t-')&&byId[h.slice(2)])topicPage(byId[h.slice(2)]);else if(h==='review')reviewPage();else if(/^cp-\d+$/.test(h)&&UNITS[+h.slice(3)])cpPage(+h.slice(3));else if(h==='learn')return;else if(/^guide-\d+$/.test(h)&&UNIT_GUIDES[+h.slice(6)])guidePage(+h.slice(6));else if(/^lesson-[a-z0-9]+$/.test(h)&&LEARN[h.slice(7)]&&byId[h.slice(7)])learnPage(h.slice(7));else if(h==='lab')labPage();else home();addBack();try{window.scrollTo(0,0)}catch(e){}}
 function addBack(){const v=$('#view');if(v.querySelector('.hero')||v.querySelector('.back'))return;v.insertAdjacentHTML('afterbegin','<a class="back" href="#home"><span aria-hidden="true">←</span> Back to overview</a>')}
 $('#railToggle').onclick=()=>{const o=$('#rail').classList.toggle('open');$('#railToggle').setAttribute('aria-expanded',o)};
 window.addEventListener('hashchange',()=>{if(location.hash!=='#learn')route()});
