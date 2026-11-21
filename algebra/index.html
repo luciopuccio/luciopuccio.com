@@ -1681,25 +1681,7 @@ afrac:{
  mistakes:[T`Cancelling terms instead of factors: \(\dfrac{x+3}{x+5}\) does <b>not</b> simplify to \(\dfrac35\).`,T`Adding tops and bottoms separately.`,T`Forgetting brackets when subtracting a fraction: \(-(x-2)\) is \(-x+2\).`],
  checks:[{q:T`Simplify \(\dfrac{x^2-9}{x^2+x-6}\)`,kind:'expr',ans:'(x-3)/(x-2)',show:T`\dfrac{x-3}{x-2}`,fmt:'e.g. <code>(x + 1)/(x - 4)</code>',form:'cancel'},{q:T`Solve \(\dfrac{5}{x+1}=\dfrac{2}{x-2}\)`,kind:'num',ans:4,show:'x = 4',fmt:'e.g. <code>3</code>'}]},
 };
-const UNIT_GUIDES={
-5:{title:'Quadratics: which method when',
- intro:T`<p>A quadratic is anything of the form \(ax^2+bx+c\). Its graph is a parabola: U-shaped when \(a>0\), upside-down when \(a<0\). Almost every question in this unit asks one of three things about it: <b>where does it cross the \(x\)-axis</b> (the roots), <b>where is its turning point</b>, or <b>how many times does it cross</b>?</p>
-<p>The reason there are so many methods is that the same quadratic can be written in three forms, and <b>each form makes a different feature obvious</b>.</p>`,
- forms:[[T`y=x^2+6x+8`,'Expanded','The y-intercept (8). The form you get after rearranging an equation.','Expanding gets you here.'],[T`y=(x+2)(x+4)`,'Factorised','The roots: x = −2 and x = −4.','Factorising gets you here (when the numbers allow).'],[T`y=(x+3)^2-1`,'Completed square','The turning point (−3, −1), and the minimum value −1.','Completing the square gets you here (always).']],
- decide:[
-  [T`Rearrange to \(ax^2+bx+c=0\).`,'Every method starts here.'],
-  [T`No constant term? Take out \(x\). No \(x\) term? Square-root both sides, with \(\pm\).`,'The two shortcuts.'],
-  [T`Does it factorise? Try for half a minute, or check whether \(b^2-4ac\) is a perfect square.`,'If yes, factorise: it is the quickest.'],
-  [T`Asked for decimals (“to 2 d.p.”, “3 s.f.”) or the numbers are messy?`,'Use the quadratic formula.'],
-  [T`Asked for exact answers with surds?`,T`Use the formula, or complete the square when \(a=1\) and \(b\) is even.`],
-  [T`Asked for a turning point, minimum or maximum?`,'Complete the square.'],
-  [T`Asked how many solutions, or for values of \(k\)?`,'Use the discriminant: no need to solve.'],
-  [T`An inequality, or a line meeting a curve?`,'Solve the related equation first with the steps above, then interpret it.']],
- compare:T`<p>Take \(x^2+6x+8=0\). All three methods give the same answer:</p>
-<ul><li><b>Factorising:</b> \((x+2)(x+4)=0\), so \(x=-2\) or \(x=-4\). Quickest here.</li><li><b>Completing the square:</b> \((x+3)^2-1=0\), so \(x+3=\pm1\), giving the same two answers.</li><li><b>Formula:</b> \(b^2-4ac=36-32=4\), so \(x=\dfrac{-6\pm2}{2}\), again \(-2\) and \(-4\).</li></ul>
-<p>Now change one number: \(x^2+6x+7=0\). Here \(b^2-4ac=8\), not a perfect square, so it won’t factorise. Completing the square gives \((x+3)^2=2\), so \(x=-3\pm\sqrt2\) exactly; the formula gives the same, or \(-1.59\) and \(-4.41\) as decimals.</p>`,
- graph:{fns:[{e:'x^2+6x+8',l:'y = x² + 6x + 8 = (x + 2)(x + 4) = (x + 3)² − 1'}],pts:[[-4,0,false],[-2,0,false],[-3,-1,'turning point'],[0,8,'y-intercept']],xr:[-7,2],yr:[-3,10],grid:[1,1]},
- map:T`<ul><li><a href="#t-exp2">Expanding</a> and <a href="#t-fac2">factorising</a> move between the expanded and factorised forms.</li><li><a href="#t-solveq">Solving by factorising</a>, <a href="#t-cts">completing the square</a> and <a href="#t-qf">the formula</a> are three routes to the roots.</li><li><a href="#t-disc">The discriminant</a> counts the roots without finding them.</li><li><a href="#t-qineq">Inequalities</a>, <a href="#t-simq">line–curve problems</a> and <a href="#t-afrac">algebraic fractions</a> are where you use these skills.</li></ul>`}};
+const UNIT_GUIDES={};
 const LEARN={
 qf:{
  mins:5,
