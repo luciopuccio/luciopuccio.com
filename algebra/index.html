@@ -1711,6 +1711,20 @@ qf:{
   end:'Use the quadratic formula, leaving the square root in (surd form).',aside:T`Only need to know <b>how many</b> solutions there are? Work out \(b^2-4ac\) and stop there: that’s <a href="#t-disc">the discriminant</a>.`},
  recap:{formula:T`x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}`,points:[T`Rearrange to \(ax^2+bx+c=0\) first.`,T`Write down \(a\), \(b\) and \(c\) with their signs.`,T`Work out \(b^2-4ac\) first: positive gives two answers, zero gives one, negative gives none.`,T`\(-b\) is the opposite of \(b\), and \(2a\) goes under the <b>whole</b> top.`,'Round only at the very end.']}}};
 /*LEARN-EXTRA*/
+let QSK=0;
+function qSketch(r1,r2,o={}){const W=560,x0=r1-2.2,x1=r2+2.2,f=x=>(x-r1)*(x-r2),yb=f((r1+r2)/2)*1.2,yt=f(x1)*1.05,id='qsk'+(QSK++);
+ const X=x=>30+(x-x0)/(x1-x0)*(W-60),Y=y=>16+(yt-y)/(yt-yb)*190,ay=Y(0).toFixed(1);let d='';for(let x=x0;x<=x1+1e-9;x+=(x1-x0)/80)d+=(d?'L':'M')+X(x).toFixed(1)+' '+Y(f(x)).toFixed(1);
+ const fx=v=>String(v).replace('-','−'),le=o.incl?'≤':'<',ge=o.incl?'≥':'>',a=X(r1),b=X(r2),ny=244,hl=o.want;
+ const seg=(x,w,c,on)=>`<rect x="${x.toFixed(1)}" y="${ny}" width="${w.toFixed(1)}" height="10" rx="2" fill="var(--${c})" opacity="${on?1:.25}"/>`;
+ const T=(x,y,s,an='middle',c='ink',w=400)=>`<text x="${x.toFixed(1)}" y="${y}" text-anchor="${an}" fill="var(--${c})" font-size="17" font-weight="${w}" font-family="var(--mono)">${s}</text>`;
+ return`<svg viewBox="0 0 ${W} ${o.labels===false?262:296}" role="img" aria-label="Sketch of a U-shaped curve crossing the x-axis at ${r1} and ${r2}"><defs><clipPath id="${id}"><rect x="0" y="0" width="${W}" height="${ay}"/></clipPath></defs>
+ <line x1="20" y1="${ay}" x2="${W-14}" y2="${ay}" stroke="var(--muted)" stroke-width="1.2"/>${T(W-10,+ay+4,'x','start','muted')}
+ <path d="${d}" fill="none" stroke="var(--bad)" stroke-width="3"/><path d="${d}" fill="none" stroke="var(--good)" stroke-width="3" clip-path="url(#${id})"/>
+ <circle cx="${a.toFixed(1)}" cy="${ay}" r="5" fill="var(--ink)"/><circle cx="${b.toFixed(1)}" cy="${ay}" r="5" fill="var(--ink)"/>
+ ${T(a-8,+ay+22,fx(r1),'end','ink',700)}${T(b+8,+ay+22,fx(r2),'start','ink',700)}
+ ${T(W/2,16,'above the axis: &gt; 0','middle','good',700)}${T((a+b)/2,(Y(yb/1.2)+24).toFixed(0),'below the axis: &lt; 0','middle','bad',700)}
+ ${seg(30,a-31,'good',!hl||hl==='out')}${seg(a+1,b-a-2,'bad',!hl||hl==='in')}${seg(b+1,W-31-b,'good',!hl||hl==='out')}
+ ${o.labels===false?'':T((30+a)/2,282,`x ${le} ${fx(r1)}`)+T((a+b)/2,282,`${fx(r1)} ${le} x ${le} ${fx(r2)}`)+T((b+W-30)/2,282,`x ${ge} ${fx(r2)}`)}</svg>`}
 Object.assign(LEARN,{
 order:{mins:3,
  intro:T`<p>When a calculation has several operations, the order matters: \(2+3\times4\) is 14, not 20. The agreed order is <b>BIDMAS</b>:</p>
@@ -2503,17 +2517,18 @@ qineq:{mins:5,
  intro:T`<p>A quadratic inequality, like \(x^2-x-6>0\), asks: <b>for which \(x\) is the graph above (or below) the x-axis?</b></p>
 <p>Solve the matching equation to find where the graph crosses the axis (the <b>critical values</b>), sketch the U-shape through them, then read off the part you want:</p>
 <div class="bigf">\[{>}0:\ \text{outside the roots}\qquad{<}0:\ \text{between them}\]</div>
-<p>That rule is for a U-shaped graph (positive \(x^2\)). The sketch is what makes it reliable, so always draw it.</p>`,
- walk:{q:T`Solve \(x^2-x-6>0\).`,steps:[
+<p>That rule is for a U-shaped graph (positive \(x^2\)). A quick <b>sketch</b> makes it reliable: you only need the U and the two points where it crosses the axis.</p>`,
+ fig:qSketch(-2,3),
+ walk:{q:T`Solve \(x^2-x-6>0\).`,fig:qSketch(-2,3,{want:'out'}),steps:[
   {do:'Write the matching equation',line:T`x^2-x-6=0`,why:'First find where the graph crosses the x-axis.'},
   {do:'Factorise',line:T`(x-3)(x+2)=0`,think:T`Two numbers that multiply to \(-6\) and add to \(-1\)?`,why:T`\(-3\times2=-6\), \(-3+2=-1\).`},
   {do:'Critical values',line:T`x=-2,\quad x=3`,why:'These are the crossing points.'},
-  {do:'Sketch',line:T`\text{U-shape crossing at }-2\text{ and }3`,why:'Above the axis on the outside, below it between the crossing points.'},
-  {do:'Read off the part you want',line:T`x<-2\quad\text{or}\quad x>3`,why:'> 0 means above the axis: the two outer pieces.',warn:T`Two separate pieces need “or”. Never write \(3<x<-2\).`}]},
- faded:{q:T`Solve \(x^2-5x+4\le0\).`,parts:[
+  {do:'Sketch the U through the crossing points',line:T`\text{U-shape through }-2\text{ and }3`,why:'Look at the sketch: the curve is above the axis (teal) on the two outer sides, and below it (coral) between −2 and 3.'},
+  {do:'Read off the part you want',line:T`x<-2\quad\text{or}\quad x>3`,why:'> 0 asks where the curve is above the axis: the two teal pieces in the sketch.',warn:T`Two separate pieces need “or”. Never write \(3<x<-2\).`}]},
+ faded:{q:T`Solve \(x^2-5x+4\le0\).`,fig:qSketch(1,4,{labels:false}),parts:[
   {given:T`(x-1)(x-4)=0`,note:'Matching equation, factorised.'},
   {blanks:[{pre:'x =',ans:1},{pre:'and x =',ans:4}],any:true,note:'The critical values.',hint:'Each bracket equal to zero.'},
-  {given:T`\le0\ \Rightarrow\ \text{below the axis}\ \Rightarrow\ \text{between}`,note:'Read the sketch.'},
+  {given:T`\le0\ \Rightarrow\ \text{below the axis}\ \Rightarrow\ \text{between}`,note:'≤ 0 asks where the curve is on or below the axis: the coral piece in the sketch.'},
   {blanks:[{pre:'lower end:',ans:1},{pre:'upper end:',ans:4}],note:'≤ includes the end points.',hint:T`So the answer is \(1\le x\le4\).`}]},
  own:{q:T`Solve \(x^2+2x-8<0\).`,kind:'range',ans:{in:true,a:-4,b:2,ia:false,ib:false},fmt:'e.g. <code>-1 &lt; x &lt; 5</code> or <code>x &lt; 1 or x &gt; 4</code> (type <code>&lt;=</code> for ≤)',tip:'Factorise, find the critical values, then sketch: < 0 means below the axis.',
   lines:[T`(x+4)(x-2)=0`,T`x=-4,\ \ x=2`,T`{<}0:\ \text{between}`,T`-4<x<2`]},
