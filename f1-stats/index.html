@@ -281,7 +281,7 @@ footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
   <div class="wrap">
     <div>
       <div class="eyebrow"><b id="round"></b><span id="circuit"></span></div>
-      <h1 id="headline">What falls<br>in <em>Vegas?</em></h1>
+      <h1 id="headline">What falls<br>in <em>Qatar?</em></h1>
       <p class="lede" id="lede"></p>
     </div>
     <div class="clock" aria-live="off">
@@ -408,7 +408,7 @@ footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
 <footer>
   <div class="wrap">
     <div class="legal">
-      <p style="margin:0"><strong id="footnote">Figures correct after the 2026 São Paulo Grand Prix (8 November 2026).</strong> Career tallies count World Championship Grands Prix only, not Sprints.</p>
+      <p style="margin:0"><strong id="footnote">Figures correct after the 2026 Las Vegas Grand Prix (21 November 2026).</strong> Career tallies count World Championship Grands Prix only, not Sprints.</p>
       <p style="margin:0"><strong>Disclaimer.</strong> F1 Record Watch is an unofficial fan site and is not associated in any way with the Formula 1 companies or the FIA. F1, FORMULA ONE, FORMULA 1, FIA FORMULA ONE WORLD CHAMPIONSHIP, GRAND PRIX and related marks are trade marks of Formula One Licensing B.V. Team names and colours belong to their respective owners and are used here only to identify them. Figures are compiled from public race results and may contain errors. The likelihood ratings are opinion, not predictions or betting advice. <span id="refreshed"></span> For official information, visit <a href="https://www.formula1.com/" target="_blank" rel="noopener">formula1.com</a>.</p>
       <p style="margin:0"><strong>Data.</strong> Race results, standings and calendar data courtesy of <a href="https://github.com/jolpica/jolpica-f1" target="_blank" rel="noopener">Jolpica-F1</a>, the free and open F1 data API.</p>
     </div>
@@ -422,24 +422,24 @@ footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
    from these four blocks: META, RECORDS, LADDER, RACES.
    ============================================================ */
 const META = {
-  asOf: "Updated after Round 20 · São Paulo · 8 Nov 2026",
-  refreshedUTC: "2026-11-20T15:35:00Z",   // when results and standings were last checked against the data source
-  round: "Round 21 of 23",
-  circuit: "Las Vegas Strip Circuit · 50 laps",
-  raceName: "Las Vegas Grand Prix",
-  lightsOutUTC: "2026-11-22T04:00:00Z",   // Sat 21 Nov, 20:00 Las Vegas time
-  localLabel: "Sat 21 Nov, 20:00 Las Vegas time",
-  circuitId: "vegas",                  // Jolpica circuitId of the next race (see CIRCUITS)
-  racesLeft: 3,
-  pointsLeft: 75,
-  headline: "What falls in |Vegas?",          // text after | is shown in red
-  lede: "The 2026 titles are settled: Antonelli is the youngest champion in history and Mercedes have their ninth constructors' crown. With three rounds left, the record book is still open. Here is every all-time mark, milestone and venue record that could go this weekend and before the season ends.",
-  ladderNote: "The biggest single-season points hauls in F1 history, all scored under today's 25-point system. Antonelli sits on 390 with 75 points left. Every win moves him up the ladder; 65 more points would make 2026 the second-highest scoring season ever.",
-  ladderNextRung: "Next rung: 8 points passes Vettel's 397",
+  asOf: "Updated after Round 21 · Las Vegas · 21 Nov 2026",
+  refreshedUTC: "2026-11-23T13:20:00Z",   // when results and standings were last checked against the data source
+  round: "Round 22 of 23",
+  circuit: "Lusail International Circuit · 57 laps",
+  raceName: "Qatar Grand Prix",
+  lightsOutUTC: "2026-11-29T16:00:00Z",   // Sun 29 Nov, 19:00 Qatar time
+  localLabel: "Sun 29 Nov, 19:00 Qatar time",
+  circuitId: "losail",                  // Jolpica circuitId of the next race (see CIRCUITS)
+  racesLeft: 2,
+  pointsLeft: 50,
+  headline: "What falls in |Qatar?",          // text after | is shown in red
+  lede: "The 2026 titles are settled: Antonelli is the youngest champion in history and Mercedes have their ninth constructors' crown. Verstappen won in Las Vegas, his third win on the Strip. With two rounds left, the record book is still open. Here is every all-time mark, milestone and venue record that could go this weekend and before the season ends.",
+  ladderNote: "The biggest single-season points hauls in F1 history, all scored under today's 25-point system. Antonelli sits on 402 with 50 points left, already past Vettel's 397. Second place on the list is now out of reach, but 36 more points would make 2026 the third-highest scoring season ever.",
+  ladderNextRung: "Next rung: 7 points passes Hamilton's 408",
   fallenTitle: "Fallen in the last fortnight",
-  fallenNote: "Records and milestones already ticked off in Mexico City and São Paulo.",
-  standingsNote: "After the São Paulo Grand Prix, round 20 of 23.",
-  footnote: "Figures correct after the 2026 São Paulo Grand Prix (8 November 2026).",
+  fallenNote: "Records and milestones already ticked off in São Paulo and Las Vegas.",
+  standingsNote: "After the Las Vegas Grand Prix, round 21 of 23.",
+  footnote: "Figures correct after the 2026 Las Vegas Grand Prix (21 November 2026).",
 
   /* ---- END OF SEASON ----
      Set seasonOver to true after the final race. The page then switches to
@@ -479,23 +479,17 @@ const TEAMS = {
 /* scope: weekend | season | future     odds: certain | likely | inplay | long */
 const RECORDS = [
   {scope:"weekend",code:"ANT",who:"Kimi Antonelli",teams:["mercedes"],title:"Youngest to ten wins",now:9,tgt:10,unit:"wins",odds:"likely",
-   need:"Win any of the last three races",
+   need:"Win in Qatar or Abu Dhabi",
    why:"At 20 he would be by far the youngest driver ever to reach ten Grand Prix wins; Vettel and Verstappen were both 23. It would also equal Valtteri Bottas for third on Mercedes' all-time win list."},
   {scope:"weekend",code:"FER",who:"Ferrari",teams:["ferrari"],title:"300 third places",now:299,tgt:300,unit:"P3s",odds:"likely",
    need:"Hamilton or Leclerc finishes third",
    why:"Ferrari would become the first constructor in history to record 300 third-place finishes."},
-  {scope:"weekend",code:"NOR",who:"Lando Norris",teams:["mclaren"],title:"Clear of Button on podiums",now:50,tgt:51,unit:"podiums",odds:"likely",
-   need:"Top-three finish",
-   why:"His 50th in Brazil tied Jenson Button. Number 51 takes Norris outright 18th all-time and fourth among British drivers."},
   {scope:"weekend",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Fifth on fastest laps",now:38,tgt:39,unit:"fastest laps",odds:"inplay",
    need:"Set the race's fastest lap",
    why:"He is level with Sebastian Vettel on 38. One more moves him clear into fifth place on the all-time list."},
-  {scope:"weekend",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Vegas hat-trick",now:2,tgt:3,unit:"wins",odds:"inplay",
-   need:"Win the Las Vegas GP",
-   why:"Already the only repeat winner on the Strip (2023, 2025), and he holds the race lap record of 1:33.365."},
-  {scope:"weekend",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Pole-to-win: catch Schumacher",now:39,tgt:40,unit:"wins from pole",odds:"inplay",
+  {scope:"weekend",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Pole-to-win: clear of Schumacher",now:40,tgt:41,unit:"wins from pole",odds:"inplay",
    need:"Win from pole position",
-   why:"Schumacher converted 40 poles into wins. Only Lewis Hamilton, on 61, has more."},
+   why:"His win from pole in Las Vegas drew him level with Schumacher on 40. Only Lewis Hamilton, on 61, has more."},
   {scope:"weekend",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Lights to flag, second all-time",now:19,tgt:20,unit:"races led throughout",odds:"inplay",
    need:"Lead every lap of a race",
    why:"Tied with Ayrton Senna on 19. Hamilton's 23 is the record."},
@@ -507,13 +501,10 @@ const RECORDS = [
    why:"Would equal Nigel Mansell's 28 with Williams, eighth on the list of most poles with a single team."},
   {scope:"weekend",code:"HAM",who:"Lewis Hamilton",teams:["ferrari"],title:"Podium number 210",now:209,tgt:210,unit:"podiums",odds:"inplay",
    need:"Top-three finish",
-   why:"Extends his own all-time record. Michael Schumacher is next best with 155. Vegas is also Hamilton's 401st start."},
-  {scope:"weekend",code:"FER",who:"Ferrari",teams:["ferrari"],title:"First Ferrari win on the Strip",now:0,tgt:1,unit:"wins",odds:"inplay",
-   need:"Hamilton or Leclerc wins",
-   why:"Ferrari have taken pole (Leclerc, 2023) and podiums here but never won the modern Las Vegas race."},
-  {scope:"weekend",code:"ALO",who:"Fernando Alonso",teams:["aston"],title:"Most starts, ever",now:445,tgt:446,unit:"starts",odds:"certain",
+   why:"Extends his own all-time record. Michael Schumacher is next best with 155. Qatar will be Hamilton's 402nd start."},
+  {scope:"weekend",code:"ALO",who:"Fernando Alonso",teams:["aston"],title:"Most starts, ever",now:446,tgt:447,unit:"starts",odds:"certain",
    need:"Take the start",
-   why:"Every race extends his all-time record. He has signed for 2027, so it will keep growing; Hamilton is second on 400."},
+   why:"Every race extends his all-time record. He has signed for 2027, so it will keep growing; Hamilton is second on 401."},
   {scope:"weekend",code:"10+",who:"Leclerc or Piastri",teams:["ferrari","mclaren"],title:"Ten wins, no crown",now:9,tgt:10,unit:"wins",odds:"long",
    need:"Either driver wins",
    why:"Both sit on nine. A tenth would add them to the eight drivers who have won ten or more Grands Prix without a title."},
@@ -534,16 +525,16 @@ const RECORDS = [
    why:"The next race would then field 14 previous winners, the most since the 1980 British Grand Prix."},
   {scope:"weekend",code:"CAD",who:"Cadillac",teams:["cadillac"],title:"First championship points",now:0,tgt:1,unit:"points",odds:"long",
    need:"Bottas or Pérez in the top ten",
-   why:"The new team is still scoreless after 20 rounds. A milestone rather than a record, but the one the paddock is waiting for."},
+   why:"The new team is still scoreless after 21 rounds. A milestone rather than a record, but the one the paddock is waiting for."},
 
-  {scope:"season",code:"ANT",who:"Kimi Antonelli",teams:["mercedes"],title:"Second-best season ever",now:390,tgt:455,unit:"points",odds:"inplay",
-   need:"65 of the last 75 points",
-   why:"Would beat Verstappen's 454 from 2022. Only Verstappen's 575 in 2023 would be higher. See the ladder below."},
+  {scope:"season",code:"ANT",who:"Kimi Antonelli",teams:["mercedes"],title:"Third-best season ever",now:402,tgt:438,unit:"points",odds:"inplay",
+   need:"36 of the last 50 points",
+   why:"Would pass Verstappen's 437 from 2024. His 454 from 2022 is now out of reach. See the ladder below."},
   {scope:"season",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Abu Dhabi outright king",now:5,tgt:6,unit:"wins",odds:"inplay",
    need:"Win the finale on 6 December",
    why:"He and Hamilton share the Yas Marina record on five wins each. A sixth breaks the tie."},
-  {scope:"season",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Lusail: four in a row",now:3,tgt:4,unit:"wins",odds:"inplay",
-   need:"Win in Qatar on 29 November",
+  {scope:"weekend",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Lusail: four in a row",now:3,tgt:4,unit:"wins",odds:"inplay",
+   need:"Win the Qatar GP",
    why:"Extends his own circuit record. He has won every Qatar Grand Prix since 2023."},
   {scope:"season",code:"HAM",who:"Lewis Hamilton",teams:["ferrari"],title:"Abu Dhabi record, his way",now:5,tgt:6,unit:"wins",odds:"long",
    need:"Win at Yas Marina",
@@ -551,14 +542,14 @@ const RECORDS = [
 
   {scope:"future",code:"ANT",who:"Kimi Antonelli",teams:["mercedes"],title:"Most wins by an Italian",now:9,tgt:14,unit:"wins",odds:"long",
    need:"Five more wins (2027)",
-   why:"Alberto Ascari's 13 is the Italian record. Antonelli can reach at most 12 this year, so this one is a 2027 story."},
+   why:"Alberto Ascari's 13 is the Italian record. Antonelli can reach at most 11 this year, so this one is a 2027 story."},
   {scope:"future",code:"MER",who:"Mercedes",teams:["mercedes"],title:"Tenth constructors' title",now:9,tgt:10,unit:"titles",odds:"inplay",
    need:"Defend the crown in 2027",
    why:"Nine titles tie Williams. A tenth would match McLaren for second; Ferrari lead with 16."},
-  {scope:"future",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Most wins with one team",now:74,tgt:85,unit:"wins",odds:"long",
-   need:"Eleven more Red Bull wins",
+  {scope:"future",code:"VER",who:"Max Verstappen",teams:["redbull"],title:"Most wins with one team",now:75,tgt:85,unit:"wins",odds:"long",
+   need:"Ten more Red Bull wins",
    why:"Hamilton won 84 times with Mercedes. Verstappen already passed Schumacher's 72 with Ferrari for second."},
-  {scope:"future",code:"ALO",who:"Fernando Alonso",teams:["aston"],title:"450 starts",now:445,tgt:450,unit:"starts",odds:"likely",
+  {scope:"future",code:"ALO",who:"Fernando Alonso",teams:["aston"],title:"450 starts",now:446,tgt:450,unit:"starts",odds:"likely",
    need:"Race into 2027",
    why:"He will end 2026 on 448 and has signed for a 24th season, so 450 should come early next year."}
 ];
@@ -610,16 +601,10 @@ const LADDER = [
   {lab:"Lewis Hamilton",yr:2018,pts:408,team:"mercedes"},
   {lab:"Sebastian Vettel",yr:2013,pts:397,team:"redbull"}
 ];
-const KIMI = {lab:"Kimi Antonelli",yr:2026,pts:390,max:465,wins:9};
+const KIMI = {lab:"Kimi Antonelli",yr:2026,pts:402,max:452,wins:9};
 
 const RACES = [
-  {name:"Las Vegas",round:"R21",date:"Sat 21 Nov",laps:50,km:"6.201 km",next:true,items:[
-    {c:"var(--redbull)",t:"Verstappen has two of the three modern Las Vegas wins; a third extends his record."},
-    {c:"var(--ferrari)",t:"Ferrari are still chasing a first modern Las Vegas victory."},
-    {c:"var(--redbull)",t:"Race lap record: 1:33.365, Verstappen, 2025."},
-    {c:"var(--mercedes)",t:"Fastest qualifying lap: 1:32.312, Russell, 2024. Russell is the only other winner here."}
-  ]},
-  {name:"Qatar",round:"R22",date:"Sun 29 Nov",laps:57,km:"5.380 km",items:[
+  {name:"Qatar",round:"R22",date:"Sun 29 Nov",laps:57,km:"5.380 km",next:true,items:[
     {c:"var(--redbull)",t:"Verstappen has won every Qatar GP since 2023; a fourth Lusail win extends his record."},
     {c:"var(--ferrari)",t:"Hamilton won the first Qatar GP in 2021 and is the only other winner at the track."},
     {c:"var(--field)",t:"Confirmed to go ahead as scheduled despite the regional conflict."}
@@ -632,12 +617,12 @@ const RACES = [
 ];
 
 const FALLEN = [
-  {when:"Mexico City",t:"Youngest champion ever",d:"Antonelli clinched the title at 20 years and 68 days, nearly three years younger than Vettel in 2010. Italy's first champion since Ascari in 1953."},
-  {when:"São Paulo",t:"Mercedes title number nine",d:"Level with Williams for third on the all-time constructors' list. Toto Wolff joins Frank Williams as the only principals with nine."},
-  {when:"São Paulo",t:"Hamilton's 400th start",d:"Only the second driver to reach 400 Grands Prix, after Alonso."},
   {when:"São Paulo",t:"Verstappen, 21st to 2nd",d:"Fourth driver ever to reach the podium from 21st on the grid, and his biggest climb: 19 places."},
   {when:"São Paulo",t:"Norris hits 50 podiums",d:"Fourteenth win and 50th podium in one afternoon, from pole."},
-  {when:"São Paulo",t:"McLaren's tenth at Interlagos",d:"First team to win ten times at the São Paulo circuit."}
+  {when:"São Paulo",t:"McLaren's tenth at Interlagos",d:"First team to win ten times at the São Paulo circuit."},
+  {when:"Las Vegas",t:"Verstappen's Vegas hat-trick",d:"His third win on the Strip, after 2023 and 2025. No one else has won here more than once."},
+  {when:"Las Vegas",t:"Verstappen equals Schumacher",d:"His 40th win from pole matches Schumacher for second all-time, behind Hamilton's 61."},
+  {when:"Las Vegas",t:"Norris clear of Button",d:"Second place gave Norris his 51st podium, one more than Jenson Button."}
 ];
 
 /* ============================================================
@@ -740,7 +725,10 @@ const HISTORY = {
       ["mile","Hamilton's 400th start, the second driver to get there"],
       ["track","McLaren: first team to ten Interlagos wins"],
       ["equal","Norris' 50th podium equals Button"]]},
-    {r:21,d:"2026-11-21",gp:"Las Vegas GP",recs:null},
+    {r:21,d:"2026-11-21",gp:"Las Vegas GP",w:"Max Verstappen",team:"redbull",recs:[
+      ["track","Verstappen: record third Las Vegas Strip win"],
+      ["equal","Verstappen equals Schumacher: 40 wins from pole"],
+      ["mile","Norris: 51st podium, passing Button"]]},
     {r:22,d:"2026-11-29",gp:"Qatar GP",recs:null},
     {r:23,d:"2026-12-06",gp:"Abu Dhabi GP",recs:null}
   ],
@@ -1141,8 +1129,8 @@ const HISTORY = {
   ]
 };
 
-const DRIVERS = [["Kimi Antonelli","mercedes",390],["Max Verstappen","redbull",279],["George Russell","mercedes",262],["Lewis Hamilton","ferrari",261],["Charles Leclerc","ferrari",249],["Lando Norris","mclaren",246],["Oscar Piastri","mclaren",152],["Isack Hadjar","redbull",122]];
-const CONSTRUCTORS = [["Mercedes","mercedes",652],["Ferrari","ferrari",510],["Red Bull","redbull",415],["McLaren","mclaren",398],["Racing Bulls","rb",114]];
+const DRIVERS = [["Kimi Antonelli","mercedes",402],["Max Verstappen","redbull",304],["Lewis Hamilton","ferrari",267],["George Russell","mercedes",264],["Lando Norris","mclaren",264],["Charles Leclerc","ferrari",250],["Oscar Piastri","mclaren",167],["Isack Hadjar","redbull",122]];
+const CONSTRUCTORS = [["Mercedes","mercedes",666],["Ferrari","ferrari",517],["Red Bull","redbull",440],["McLaren","mclaren",431],["Racing Bulls","rb",114]];
 
 /* ============================ RENDER ============================ */
 const $ = s => document.querySelector(s);
@@ -1391,6 +1379,5 @@ function tick(){
 }
 tick(); setInterval(tick, 1000);
 </script>
-
 
 </body></html>
