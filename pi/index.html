@@ -2,9 +2,12 @@
 <script src="/nav.js" data-theme="dark"></script>
 <title>Pi Arcade</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap">
+<link rel="preload" href="/pi/fonts/press-start-2p.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/pi/fonts/vt323.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* Arcade fonts are hosted on this site (SIL Open Font License, see /pi/fonts/OFL.txt): no outside requests */
+@font-face { font-family: "Press Start 2P"; font-style: normal; font-weight: 400; font-display: swap; src: url("/pi/fonts/press-start-2p.woff2") format("woff2"); }
+@font-face { font-family: "VT323"; font-style: normal; font-weight: 400; font-display: swap; src: url("/pi/fonts/vt323.woff2") format("woff2"); }
 /* Layout: one-screen arcade cabinet. Home = marquee hero + card dashboard (Play wide, Hi-score + Rules side by side). Game = HUD / digit tape / phone keypad. */
 :root {
   --bg: #130b2c;
