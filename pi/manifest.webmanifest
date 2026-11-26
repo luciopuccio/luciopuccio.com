@@ -1,0 +1,17 @@
+{
+  "name": "Pi Arcade",
+  "short_name": "Pi Arcade",
+  "description": "How many digits of π can you hold in your head?",
+  "id": "/pi/",
+  "start_url": "/pi/",
+  "scope": "/pi/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#130b2c",
+  "theme_color": "#130b2c",
+  "icons": [
+    { "src": "/pi/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/pi/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/pi/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

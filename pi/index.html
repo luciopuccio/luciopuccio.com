@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="manifest" href="/pi/manifest.webmanifest"><meta name="theme-color" content="#130b2c"><link rel="apple-touch-icon" href="/pi/icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Pi Arcade"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"></head><body>
 <script src="/nav.js" data-theme="dark"></script>
 <title>Pi Arcade</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -24,6 +24,8 @@
 }
 * { box-sizing: border-box; }
 html, body { height: 100%; }
+/* Installed app (home-screen icon): full screen, no site bar */
+@media (display-mode: standalone), (display-mode: fullscreen) { .lp-bar { display: none !important; } }
 /* Site bar (from /nav.js) sits on top; the cabinet fills the rest */
 body { display: flex; flex-direction: column; }
 body > .app { flex: 1; min-height: 0; height: auto; width: 100%; }
@@ -744,6 +746,13 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 
   renderSound();
   renderHome();
+
+  // Offline support on luciopuccio.com: save the game on the phone so it opens with no signal
+  try {
+    if ("serviceWorker" in navigator && /(^|\.)luciopuccio\.com$|^localhost$|^127\.0\.0\.1$/.test(location.hostname)) {
+      window.addEventListener("load", () => { navigator.serviceWorker.register("/pi/sw.js", { scope: "/pi/" }).catch(() => {}); });
+    }
+  } catch (e) {}
 })();
 </script>
 
