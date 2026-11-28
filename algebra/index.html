@@ -346,6 +346,35 @@ details.fold>div{padding:0 14px 14px;font-size:15px}
 }
 @media (prefers-reduced-motion:no-preference){.fb,.toast{animation:pop .18s ease-out}@keyframes pop{from{transform:translateY(4px);opacity:.4}to{transform:none;opacity:1}}}
 mjx-container[display="true"]{margin:.4em 0!important}
+.wkbtn{margin-top:10px}
+.wklist{position:sticky;top:20px}.wklist h3{font-size:16px;margin:0 0 8px}.wkul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.wkul li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}
+.wkul li .note{grid-column:1/-1;font-size:12.5px}.wkul li .pmeta{font-family:var(--mono);font-weight:600;color:var(--warn)}
+.wkul li.cur{background:var(--mark-soft);box-shadow:inset 3px 0 0 var(--mark);padding-left:10px;margin-inline:-6px;padding-right:6px;border-radius:0}
+.wkpick{background:none;border:0;padding:0;font:inherit;color:var(--accent);text-decoration:underline;cursor:pointer;text-align:left}.wkpick:hover{color:var(--ink)}.wkhint{margin:10px 0 0}
+.wkul li.ok .pmeta,.wkul li.ok .note{color:var(--good)}
+.cheatbtn{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:40;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:99px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.cheatbtn span{font-family:var(--display);font-size:18px;line-height:1}
+.cheatback{position:fixed;inset:0;z-index:41;background:rgba(10,16,13,.35)}
+.cheat{position:fixed;left:0;right:0;bottom:0;z-index:42;height:min(78vh,820px);background:var(--sheet);border-top:1px solid var(--line);border-radius:16px 16px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.2);display:flex;flex-direction:column;transform:translateY(105%);visibility:hidden;transition:transform .25s ease,visibility 0s linear .25s}
+.cheat.open{transform:none;visibility:visible;transition:transform .25s ease}
+.chead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px max(20px,env(safe-area-inset-left,0px)) 12px;border-bottom:1px solid var(--line)}
+.chead b{font-family:var(--display);font-size:20px;margin-right:12px}
+.cbody{overflow-y:auto;padding:12px max(20px,env(safe-area-inset-left,0px)) 40px;display:flex;flex-direction:column;gap:18px}
+.cunit h3{font-size:16px;margin:0 0 8px;display:flex;gap:8px;align-items:baseline}.cunit h3 i{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:10px}
+.ccard{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper);display:flex;flex-direction:column;gap:4px;font-size:14.5px}
+.ccard h4{margin:0 0 2px;font-family:var(--display);font-size:15px}
+.ccard.locked{opacity:.5}.clk{font-size:12px;margin-right:4px}
+.ccard.here{border:2px solid var(--mark);background:var(--mark-soft);opacity:1}
+.cf{overflow-x:auto;overflow-y:hidden}.cex{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:5px;margin-top:2px;overflow-x:auto;overflow-y:hidden}.cex span{font-weight:700;color:var(--accent)}
+.cstab{border-collapse:collapse;font-size:14px}.cstab th,.cstab td{border:1px solid var(--line);padding:3px 8px;text-align:center}.cstab th{font-family:var(--mono);font-size:12px;color:var(--muted)}
+@media (max-width:600px){.cgrid{grid-template-columns:minmax(0,1fr)}.cheatbtn{padding:9px 13px;font-size:14px}}
+@media print{body.printcheat .app,body.printcheat .cheatbtn,body.printcheat .cheatback,body.printcheat .chead .actions,body.printcheat .chead .note{display:none!important}
+ body.printcheat{background:#fff}body.printcheat .cheat{position:static;transform:none;visibility:visible;height:auto;box-shadow:none;border:0;background:#fff;color:#000}
+ body.printcheat .cbody{overflow:visible;padding:0}body.printcheat .cgrid{grid-template-columns:1fr 1fr}
+ body.printcheat .ccard{break-inside:avoid;opacity:1!important;background:#fff;border-color:#bbb}body.printcheat .ccard.here{border-width:1px}body.printcheat .clk{display:none}
+ body.printcheat .cunit{break-inside:auto}body.printcheat .cunit h3{break-after:avoid}}
 </style>
 
 <div class="app">
@@ -541,6 +570,10 @@ function check(ex,u){u=String(u||'').trim();if(!u)return{empty:1};
   if(ex.kind==='ineq'){const p=parseIneq(u);if(p&&near(p.k,ex.ans.k,ex)&&p.op.replace('=','')===ex.ans.op.replace('=','')&&p.op!==ex.ans.op)return{ok:false,form:'Right boundary value, but check whether it should be strict (< or >) or include the value (≤ or ≥).'}}
   if(ex.kind==='range'){const p=parseRange(u);if(p&&p.in===ex.ans.in&&near(p.a,ex.ans.a,ex)&&near(p.b,ex.ans.b,ex))return{ok:false,form:'Right critical values and the right region, but check which ends are included (< or ≤).'}}
   for(const m of ex.mistakes||[]){try{if(compare(ex,u,m.a))return{ok:false,mistake:m}}catch(e){}}
+  if(!['num','set','pair','pts','ineq','range'].includes(ex.kind)&&typeof ex.ans==='string'){try{const uf=compile(rhs(u),{deg:!!ex.deg}),tf=compile(ex.ans,{deg:!!ex.deg}),vars=ex.vars||['x'],[lo,hi]=ex.dom||[-3,3];let k=null,n=0,bad=false;
+    for(let i=0;i<60&&n<6;i++){const env={};for(const v of vars){const[l2,h2]=(ex.doms&&ex.doms[v])||[lo,hi];env[v]=l2+Math.random()*(h2-l2)}const tv=tf(env),uv=uf(env);if(!isFinite(tv)||!isFinite(uv)||Math.abs(tv)<1e-6)continue;const r=uv/tv;if(k===null)k=r;else if(Math.abs(r-k)>1e-6*(1+Math.abs(k))){bad=true;break}n++}
+    if(!bad&&n>=4&&k!==null&&Math.abs(k-1)>1e-6&&Math.abs(k)>1e-9){if(Math.abs(k+1)<1e-6)return{ok:false,form:'Every sign in your answer is flipped. Check the signs: it should be the negative of what you wrote.'};const f=Math.abs(k)>=1?k:1/k,fs=Number.isInteger(+f.toFixed(6))?String(Math.round(Math.abs(f))):'a number';
+      return{ok:false,form:`Your answer is ${Math.abs(k)<1?`the right answer divided by ${fs}`:`${fs} times the right answer`}${k<0?', with every sign flipped':''}. An expression can’t be divided (or multiplied) through like that: only an equation can, because you do it to both sides. Keep the original numbers.`}}}catch(e){}}
   return{ok:false}}
 const ITX={'<':'\\lt','>':'\\gt','<=':'\\le','>=':'\\ge'};
 function typedAns(ex){if(ex.typed)return ex.typed;const a=ex.ans;switch(ex.kind){case 'set':return a.join(', ');case 'pair':return Object.entries(a).map(([k,v])=>k+'='+v).join(', ');
@@ -1652,7 +1685,7 @@ qineq:{
 <li>Never square-root both sides of something like \(x^2>25\): you would lose half the answer. Sketch instead.</li></ul>`,
  steps:[T`Rearrange so one side is zero.`,T`Solve the equation \(=0\). These <b>critical values</b> are where the graph crosses the axis.`,T`Sketch the parabola through them. With a positive \(x^2\) it is U-shaped.`,T`For \(<0\) take the part <b>below</b> the axis: <b>between</b> the critical values. For \(>0\) take the parts <b>above</b>: <b>outside</b> them, giving two separate pieces.`,T`Use \(\le\)/\(\ge\) only if the question includes “or equal to”.`],
  examples:[
-  {q:T`Solve \(x^2-x-12<0\)`,rows:[[T`(x-4)(x+3)=0`,'critical values −3 and 4'],[T`-3<x<4`,'U-shape is below the axis between the roots']]},
+  {q:T`Solve \(x^2-x-12<0\)`,rows:[[T`(x-4)(x+3)=0`,'critical values −3 and 4'],[T`-3\lt x<4`,'U-shape is below the axis between the roots']]},
   {q:T`Solve \(x^2+2x-8\ge0\)`,rows:[[T`(x+4)(x-2)=0`,'critical values −4 and 2'],[T`x\le-4\ \text{or}\ x\ge2`,'above the axis: outside the roots']]},
   {q:T`Solve \(x^2>25\)`,rows:[[T`x^2-25>0`,''],[T`(x-5)(x+5)>0`,'critical values ±5'],[T`x<-5\ \text{or}\ x>5`,'not just x > 5: (−6)² = 36 is bigger than 25 too']]}],
  mistakes:[T`Square-rooting both sides and losing the negative side.`,T`Writing two separate regions as one, like \(-3>x>4\): it isn’t possible. Use “or”.`,T`Picking between vs outside the wrong way round. Test a value: \(x=0\) in \(x^2-x-12<0\) gives \(-12<0\), true, so 0 is in the answer.`],
@@ -1711,6 +1744,50 @@ qf:{
   end:'Use the quadratic formula, leaving the square root in (surd form).',aside:T`Only need to know <b>how many</b> solutions there are? Work out \(b^2-4ac\) and stop there: that’s <a href="#t-disc">the discriminant</a>.`},
  recap:{formula:T`x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}`,points:[T`Rearrange to \(ax^2+bx+c=0\) first.`,T`Write down \(a\), \(b\) and \(c\) with their signs.`,T`Work out \(b^2-4ac\) first: positive gives two answers, zero gives one, negative gives none.`,T`\(-b\) is the opposite of \(b\), and \(2a\) goes under the <b>whole</b> top.`,'Round only at the very end.']}}};
 /*LEARN-EXTRA*/
+const CHEAT={
+order:{f:[T`Brackets \(\to\) Indices \(\to\) \(\div\ \times\) (left to right) \(\to\) \(+\ -\) (left to right)`,'A fraction bar acts as brackets.'],ex:T`\(3+4\times2^2=3+16=19\)`},
+neg:{f:[T`\(a+(-b)=a-b\qquad a-(-b)=a+b\)`,T`\((-)(-)=+\qquad(-)(+)=-\)`,T`\((-a)^2=a^2\qquad -a^2=-(a^2)\)`],ex:T`\(-5-(-7)=-5+7=2\)`},
+frac:{f:[T`\(\frac ab+\frac cd=\frac{ad+bc}{bd}\qquad\frac ab\times\frac cd=\frac{ac}{bd}\)`,T`\(\frac ab\div\frac cd=\frac ab\times\frac dc\)`,T`Mixed \(\to\) improper: \(n\tfrac ab=\frac{nb+a}{b}\)`],ex:T`\(\tfrac23\div\tfrac45=\tfrac23\times\tfrac54=\tfrac{10}{12}=\tfrac56\)`},
+like:{f:[T`\(ax+bx=(a+b)x\)`,'Only the same letters with the same powers combine.'],ex:T`\(4x+2y-x+3y=3x+5y\)`},
+subs:{f:['Replace each letter with (its value), then BIDMAS.',T`\(ab=a\times b\qquad 2a^2=2\times a^2\)`],ex:T`\(x=-2:\ 3x^2-x=3(4)-(-2)=14\)`},
+expand1:{f:[T`\(a(b+c)=ab+ac\)`,T`\(-a(b-c)=-ab+ac\)`],ex:T`\(-4(2x-3)=-8x+12\)`},
+factor1:{f:[T`\(ab+ac=a(b+c)\)`,T`\(a\) = HCF: biggest number \(\times\) shared letters at their lowest power.`],ex:T`\(9x^2+6x=3x(3x+2)\)`},
+lin2:{f:[T`\(ax+b=c\ \Rightarrow\ x=\frac{c-b}{a}\)`,'Undo operations in reverse order, same to both sides.'],ex:T`\(2x-5=9\to2x=14\to x=7\)`},
+lin3:{f:[T`\(ax+b=cx+d\ \Rightarrow\ (a-c)x=d-b\)`],ex:T`\(5x+2=2x+11\to3x=9\to x=3\)`},
+linbr:{f:[T`Expand \(\to\) collect \(\to\) solve.`],ex:T`\(2(x+4)=18\to2x+8=18\to x=5\)`},
+linfrac:{f:['Multiply every term by the LCM of the denominators.',T`\(\frac ab=\frac cd\ \Rightarrow\ ad=bc\)`],ex:T`\(\frac{x+1}2=\frac{x+4}3\to3(x+1)=2(x+4)\to x=5\)`},
+rearr:{f:['Same steps as solving; treat the target letter as x.',T`\(y=mx+c\ \Rightarrow\ x=\frac{y-c}{m}\qquad A=\pi r^2\ \Rightarrow\ r=\sqrt{\tfrac A\pi}\)`],ex:T`\(P=2l+2w\ \Rightarrow\ l=\frac{P-2w}{2}\)`},
+ineq:{f:['Solve like an equation.',T`\(\times\) or \(\div\) by a negative: flip the sign.`,T`\(<,\ >\) exclude the end value; \(\le,\ \ge\) include it.`],ex:T`\(7-3x\ge1\to-3x\ge-6\to x\le2\)`},
+sim:{f:['Match the coefficients of one letter.','Same signs: subtract. Different signs: add.','Substitute back to find the other letter.'],ex:T`\(x+y=10,\ x-y=4\to2x=14\to x=7,\ y=3\)`},
+exp2:{f:[T`\((a+b)(c+d)=ac+ad+bc+bd\)`,T`\((x+a)^2=x^2+2ax+a^2\)`,T`\((x+a)(x-a)=x^2-a^2\)`],ex:T`\((x+2)(x-6)=x^2-4x-12\)`},
+fac2:{f:[T`\(x^2+bx+c=(x+p)(x+q),\ \ pq=c,\ p+q=b\)`,T`\(ax^2+bx+c\): \(pq=ac,\ p+q=b\), split the middle term`,T`\(x^2-a^2=(x-a)(x+a)\)`],ex:T`\(x^2+5x+6=(x+2)(x+3)\)`},
+solveq:{f:[T`\(AB=0\ \Rightarrow\ A=0\ \text{or}\ B=0\)`,T`Rearrange to \(\dots=0\) first.`],ex:T`\(x^2-7x+10=0\to(x-2)(x-5)=0\to x=2,\ 5\)`},
+cts:{f:[T`\(x^2+bx+c=\left(x+\tfrac b2\right)^2-\left(\tfrac b2\right)^2+c\)`,T`\((x+p)^2+q\): turning point \((-p,\ q)\)`],ex:T`\(x^2+4x+1=(x+2)^2-3\)`},
+qf:{f:[T`\(x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}\)`],ex:T`\(x^2+4x+1=0\to x=\frac{-4\pm\sqrt{12}}2=-2\pm\sqrt3\)`},
+disc:{f:[T`\(b^2-4ac\)`,T`\(>0\): two real roots; \(=0\): one repeated; \(<0\): none`],ex:T`\(x^2+2x+5:\ 4-20=-16<0\to\) no real roots`},
+qineq:{f:['Find the critical values (solve = 0), sketch the U.',T`\(>0\): outside, \(x\lt r_1\) or \(x>r_2\)`,T`\(<0\): between, \(r_1\lt x\lt r_2\)`],ex:T`\(x^2-9<0\to-3\lt x<3\)`},
+simq:{f:['Line into curve \u2192 solve the quadratic \u2192 back into the line.','Answers come in pairs.'],ex:T`\(y=x^2,\ y=x+2\to x^2-x-2=0\to(2,4),\ (-1,1)\)`},
+afrac:{f:['Factorise, then cancel common factors (not terms).',T`\(\frac ab\pm\frac cd=\frac{ad\pm bc}{bd}\)`],ex:T`\(\frac{x^2-4}{x+2}=\frac{(x-2)(x+2)}{x+2}=x-2\)`},
+ind:{f:[T`\(x^ax^b=x^{a+b}\quad x^a\div x^b=x^{a-b}\quad(x^a)^b=x^{ab}\)`,T`\(x^0=1\quad x^{-n}=\frac1{x^n}\quad(xy)^n=x^ny^n\)`,T`\(x^{\frac1n}=\sqrt[n]x\quad x^{\frac pq}=\left(\sqrt[q]x\right)^p\)`],ex:T`\(x^5\times x^{-2}=x^3\quad 27^{\frac13}=3\quad4^{-\frac12}=\tfrac12\)`},
+surd:{f:[T`\(\sqrt{ab}=\sqrt a\sqrt b\quad\sqrt{\tfrac ab}=\frac{\sqrt a}{\sqrt b}\quad\sqrt a\sqrt a=a\)`,T`\(\frac a{\sqrt b}=\frac{a\sqrt b}{b}\)`,T`\(\frac1{a+\sqrt b}\): multiply top and bottom by \(a-\sqrt b\)`,T`\((a+\sqrt b)(a-\sqrt b)=a^2-b\)`],ex:T`\(\sqrt{50}=5\sqrt2\quad\frac1{\sqrt2}=\frac{\sqrt2}2\)`},
+binom:{f:[T`\((a+b)^n=\sum_{r=0}^{n}\binom nr a^{n-r}b^r\)`,T`Term in \(b^r\): \(\binom nr a^{n-r}b^r\)`,T`\(\binom nr=\frac{n!}{r!\,(n-r)!}\)`],ex:T`\((1+x)^3=1+3x+3x^2+x^3\)`},
+nth:{f:[T`Arithmetic: \(u_n=dn+(u_1-d)=a+(n-1)d\)`,T`Quadratic: \(n^2\) coefficient = \(\tfrac12\) second difference`],ex:T`\(4,\ 7,\ 10,\dots\to u_n=3n+1\)`},
+line:{f:[T`\(m=\frac{y_2-y_1}{x_2-x_1}\qquad y=mx+c\)`,T`\(y-y_1=m(x-x_1)\)`,T`Parallel: \(m_1=m_2\). Perpendicular: \(m_1m_2=-1\)`],ex:T`\((0,2),(2,8):\ m=\tfrac62=3,\ y=3x+2\)`},
+gread:{f:[T`Roots: \(y=0\). y-intercept: \(x=0\)`,T`\(f(x)=k\): crossings with the line \(y=k\)`,T`Gradient = rise \(\div\) run`],ex:T`\(x^2-4=0\to\) where \(y=x^2-4\) meets the x-axis: \(x=-2,\ 2\)`},
+trans:{f:[T`\(f(x)+a\): up \(a\qquad f(x-a)\): right \(a\)`,T`\(af(x)\): \(y\times a\qquad f(ax)\): \(x\div a\)`,T`\(-f(x)\): reflect in x-axis\(\qquad f(-x)\): reflect in y-axis`],ex:T`\(y=(x+1)^2-3\): \(x^2\) left 1, down 3; turning point \((-1,-3)\)`},
+func:{f:[T`\(fg(x)=f(g(x))\) (g first)`,T`Inverse: \(y=f(x)\), rearrange for \(x\), swap letters`,T`\(f^{-1}(f(x))=x\)`],ex:T`\(f(x)=x+1,\ g(x)=2x:\ fg(3)=f(6)=7;\ f^{-1}(x)=x-1\)`},
+poly:{f:[T`Remainder of \(p(x)\div(x-a)\) is \(p(a)\)`,T`\(p(a)=0\iff(x-a)\) is a factor`,T`For \((x+a)\) use \(p(-a)\)`],ex:T`\(p(x)=x^3-1:\ p(1)=0\to(x-1)\) is a factor`},
+log:{f:[T`\(\log_bN=k\iff b^k=N\)`,T`\(\log M+\log N=\log MN\qquad\log M-\log N=\log\frac MN\)`,T`\(\log M^k=k\log M\qquad\log_bb=1\qquad\log_b1=0\)`,T`\(a^x=N\ \Rightarrow\ x=\frac{\log N}{\log a}\)`],ex:T`\(\log_232=5\qquad2^x=10\to x=\frac{\log10}{\log2}\approx3.32\)`},
+tri:{f:[T`\(\sin\theta=\frac{\text{opp}}{\text{hyp}}\quad\cos\theta=\frac{\text{adj}}{\text{hyp}}\quad\tan\theta=\frac{\text{opp}}{\text{adj}}\)`,T`\(a^2+b^2=c^2\)`],ex:T`hyp 10, angle 30°: opp \(=10\sin30°=5\)`},
+exact:{f:[T`<table class="cstab"><tr><th></th><th>30°</th><th>45°</th><th>60°</th></tr><tr><th>sin</th><td>\(\tfrac12\)</td><td>\(\tfrac{\sqrt2}2\)</td><td>\(\tfrac{\sqrt3}2\)</td></tr><tr><th>cos</th><td>\(\tfrac{\sqrt3}2\)</td><td>\(\tfrac{\sqrt2}2\)</td><td>\(\tfrac12\)</td></tr><tr><th>tan</th><td>\(\tfrac1{\sqrt3}\)</td><td>\(1\)</td><td>\(\sqrt3\)</td></tr></table>`,'Beyond 90°: reference angle and CAST.'],ex:T`\(\cos150°=-\tfrac{\sqrt3}2\)`},
+sinerule:{f:[T`\(\frac a{\sin A}=\frac b{\sin B}=\frac c{\sin C}\)`,T`Angle: \(\frac{\sin A}a=\frac{\sin B}b\)`,T`Ambiguous case: \(\theta\) or \(180°-\theta\)`],ex:T`\(a=5,\ A=30°,\ B=90°\to b=\frac{5\sin90°}{\sin30°}=10\)`},
+cosrule:{f:[T`\(c^2=a^2+b^2-2ab\cos C\)`,T`\(\cos C=\frac{a^2+b^2-c^2}{2ab}\)`],ex:T`\(a=3,\ b=4,\ C=90°:\ c^2=9+16-24\cos90°=25\to c=5\)`},
+area:{f:[T`Area \(=\tfrac12ab\sin C\) (C between a and b)`],ex:T`\(\tfrac12\times6\times5\times\sin30°=7.5\)`},
+tgraph:{f:[T`\(y=a\sin(bx)+c\): amplitude \(|a|\), period \(\frac{360°}b\) (tan: \(\frac{180°}b\))`,T`Centre line \(y=c\); max \(c+|a|\), min \(c-|a|\)`],ex:T`\(y=2\sin(3x)\): amplitude 2, period 120°`},
+teq:{f:[T`\(\sin x=k\): \(x,\ 180°-x\)`,T`\(\cos x=k\): \(x,\ 360°-x\)`,T`\(\tan x=k\): \(x,\ x+180°\)`,T`Then \(\pm360°\) (\(\pm180°\) for tan) to stay in range`],ex:T`\(\sin x=\tfrac12\ (0°\text{–}360°)\to x=30°,\ 150°\)`},
+tident:{f:[T`\(\tan\theta=\frac{\sin\theta}{\cos\theta}\)`,T`\(\sin^2\theta+\cos^2\theta=1\)`,T`\(\sin^2\theta=1-\cos^2\theta\qquad\cos^2\theta=1-\sin^2\theta\)`],ex:T`\(\sin\theta=0.6\) (acute) \(\to\cos\theta=\sqrt{1-0.36}=0.8\)`},
+radians:{f:[T`\(\pi\ \text{rad}=180°\)`,T`Degrees \(\to\) radians: \(\times\frac\pi{180}\); radians \(\to\) degrees: \(\times\frac{180}\pi\)`,T`Arc \(s=r\theta\qquad\) Sector \(A=\tfrac12r^2\theta\) (\(\theta\) in radians)`],ex:T`\(r=4,\ \theta=\tfrac\pi2\): arc \(2\pi\), area \(4\pi\)`}
+};
 let QSK=0;
 function qSketch(r1,r2,o={}){const W=560,x0=r1-2.2,x1=r2+2.2,f=x=>(x-r1)*(x-r2),yb=f((r1+r2)/2)*1.2,yt=f(x1)*1.05,id='qsk'+(QSK++);
  const X=x=>30+(x-x0)/(x1-x0)*(W-60),Y=y=>16+(yt-y)/(yt-yb)*190,ay=Y(0).toFixed(1);let d='';for(let x=x0;x<=x1+1e-9;x+=(x1-x0)/80)d+=(d?'L':'M')+X(x).toFixed(1)+' '+Y(f(x)).toFixed(1);
@@ -2524,14 +2601,14 @@ qineq:{mins:5,
   {do:'Factorise',line:T`(x-3)(x+2)=0`,think:T`Two numbers that multiply to \(-6\) and add to \(-1\)?`,why:T`\(-3\times2=-6\), \(-3+2=-1\).`},
   {do:'Critical values',line:T`x=-2,\quad x=3`,why:'These are the crossing points.'},
   {do:'Sketch the U through the crossing points',line:T`\text{U-shape through }-2\text{ and }3`,why:'Look at the sketch: the curve is above the axis (teal) on the two outer sides, and below it (coral) between −2 and 3.'},
-  {do:'Read off the part you want',line:T`x<-2\quad\text{or}\quad x>3`,why:'> 0 asks where the curve is above the axis: the two teal pieces in the sketch.',warn:T`Two separate pieces need “or”. Never write \(3<x<-2\).`}]},
+  {do:'Read off the part you want',line:T`x<-2\quad\text{or}\quad x>3`,why:'> 0 asks where the curve is above the axis: the two teal pieces in the sketch.',warn:T`Two separate pieces need “or”. Never write \(3\lt x<-2\).`}]},
  faded:{q:T`Solve \(x^2-5x+4\le0\).`,fig:qSketch(1,4,{labels:false}),parts:[
   {given:T`(x-1)(x-4)=0`,note:'Matching equation, factorised.'},
   {blanks:[{pre:'x =',ans:1},{pre:'and x =',ans:4}],any:true,note:'The critical values.',hint:'Each bracket equal to zero.'},
   {given:T`\le0\ \Rightarrow\ \text{below the axis}\ \Rightarrow\ \text{between}`,note:'≤ 0 asks where the curve is on or below the axis: the coral piece in the sketch.'},
   {blanks:[{pre:'lower end:',ans:1},{pre:'upper end:',ans:4}],note:'≤ includes the end points.',hint:T`So the answer is \(1\le x\le4\).`}]},
  own:{q:T`Solve \(x^2+2x-8<0\).`,kind:'range',ans:{in:true,a:-4,b:2,ia:false,ib:false},fmt:'e.g. <code>-1 &lt; x &lt; 5</code> or <code>x &lt; 1 or x &gt; 4</code> (type <code>&lt;=</code> for ≤)',tip:'Factorise, find the critical values, then sketch: < 0 means below the axis.',
-  lines:[T`(x+4)(x-2)=0`,T`x=-4,\ \ x=2`,T`{<}0:\ \text{between}`,T`-4<x<2`]},
+  lines:[T`(x+4)(x-2)=0`,T`x=-4,\ \ x=2`,T`{<}0:\ \text{between}`,T`-4\lt x<2`]},
  spot:{use:[T`An inequality containing \(x^2\).`,'“For which values of x is … positive / negative?”','Discriminant questions with “real roots”, which become b² − 4ac ≥ 0.'],
   not:['A linear inequality (no x²): solve it like an equation.',T`Never just “solve” \(x^2>9\) as \(x>3\). Use the sketch: \(x<-3\) or \(x>3\).`]},
  recap:{formula:T`{>}0:\ \text{outside}\qquad{<}0:\ \text{between}`,points:['Solve the matching equation for the critical values.','Sketch the U-shape through them.','Above the axis (> 0): two outer pieces joined by “or”.','Below the axis (< 0): one piece between the values.','≤ and ≥ include the critical values.']}},
@@ -2616,7 +2693,7 @@ const S=id=>store.topics[id];
 const lvOf=id=>(S(id)&&S(id).lv)||1;
 const isDue=s=>!!(s&&s.sr&&s.sr.due<=Date.now());
 function status(s){if(!s||!s.a)return'new';if(isDue(s))return'due';const l5=(s.r||[]).slice(-5),acc=l5.reduce((x,y)=>x+y,0)/(l5.length||1);
-  if((s.top||0)>=3&&s.c>=8&&l5.length>=5&&acc>=.8)return'mastered';if(s.sr&&s.sr.lvl>0&&acc>=.6)return'mastered';if(s.a>=4&&s.c/s.a<.6)return'shaky';return'learning'}
+  if((s.top||0)>=3&&s.c>=8&&l5.length>=5&&acc>=.8)return'mastered';if(s.sr&&s.sr.lvl>0&&acc>=.6)return'mastered';if(s.a>=4&&s.c/s.a<.9)return'shaky';return'learning'}
 const LABEL={new:'Not started',learning:'Learning',shaky:'Needs work',mastered:'Mastered',due:'Review due'};
 const dueTopics=()=>TOPICS.filter(t=>isDue(S(t.id)));
 function record(id,ok,lv,auto){const s=store.topics[id]||(store.topics[id]={a:0,c:0,r:[],lv:1,str:0,mis:0,top:0});const wasDue=isDue(s);let msg=null;
@@ -2688,13 +2765,13 @@ function forecastHtml(){const t0=dayStart(Date.now()),days=[...Array(7)].map((_,
   return`<div class="panel"><h3>Reviews this week</h3><div class="fc">${days.map((d,i)=>`<div class="fcr${i===0?' now':''}"><span>${lab(d,i)}</span><i class="${n[i]?'':'z'}" style="width:${n[i]?Math.max(6,n[i]/mx*100):100}%"></i><b>${n[i]}</b></div>`).join('')}</div><p>Due dates shift by a day or so to keep busy days light. Each review is one problem per topic.</p></div>`}
 function home(){const v=$('#view');const all=TOPICS.map(t=>[t,S(t.id)]);const solved=all.reduce((a,[,s])=>a+(s?s.c:0),0),att=all.reduce((a,[,s])=>a+(s?s.a:0),0);
   const mastered=all.filter(([,s])=>['mastered','due'].includes(status(s))).length;const due=dueTopics();const next=nextTopic();
-  const weak=all.filter(([,s])=>status(s)==='shaky').sort((a,b)=>a[1].c/a[1].a-b[1].c/b[1].a);
+  const weak=all.filter(([,s])=>s&&s.a>=4&&s.c/s.a<.9).sort((a,b)=>a[1].c/a[1].a-b[1].c/b[1].a);
   const cpU=UNITS.map((_,i)=>i).find(i=>cpReady(i)&&!cpPassed(i));
   const upcoming=all.filter(([,s])=>s&&s.sr&&!isDue(s)).sort((a,b)=>a[1].sr.due-b[1].sr.due).slice(0,4);
-  let h=`<section class="hero"><div><div class="eyebrow">Your plan for today</div><h1>${att?'Pick up where you left off':'Start from the ground up'}</h1><p>Work each problem in your notebook, type the final answer, and get it checked. Reviews come first, then new learning, then a checkpoint when a unit is ready.</p></div></section>
+  let h=`<section class="hero"><div><div class="eyebrow">Your plan for today</div><h1>${att?'Pick up where you left off':'Start from the ground up'}</h1><p>Work each problem in your notebook, type the final answer, and get it checked. Reviews come first, then your weak spots and new topics, then a checkpoint when a unit is ready.</p></div></section>
   <div class="today">
    ${due.length?`<a class="tcard hot" href="#review"><span class="eyebrow">1 · Reviews due</span><b>${due.length} topic${due.length>1?'s':''} to review</b><span>${esc(due.slice(0,3).map(t=>t.t).join(', '))}${due.length>3?'…':''}. One problem each, mixed together.</span></a>`:`<div class="tcard"><span class="eyebrow">1 · Reviews</span><b>Nothing due</b><span>${upcoming.length?`Next: ${esc(upcoming[0][0].t)} ${daysTxt(upcoming[0][1].sr.due)}.`:'Mastered topics come back for review after 1, 3, 7, 21 and 60 days.'}</span></div>`}
-   ${next?`<a class="tcard" href="#t-${next.id}"><span class="eyebrow">2 · ${S(next.id)&&S(next.id).a?'Continue':'Next topic'}</span><b>${esc(next.t)}</b><span>${S(next.id)&&S(next.id).a?`Level ${lvOf(next.id)} of 3 · ${LABEL[status(S(next.id))]}`:esc(UNITS[next.u])}</span></a>`:cpU!==undefined?`<div class="tcard"><span class="eyebrow">2 · Topics</span><b>Unit complete</b><span>Pass the checkpoint to unlock the next unit.</span></div>`:`<div class="tcard"><span class="eyebrow">2 · Topics</span><b>Everything mastered</b><span>Keep up with the scheduled reviews.</span></div>`}
+   ${(()=>{const W=weakList().sort((a,b)=>S(a.id).c/S(a.id).a-S(b.id).c/S(b.id).a);return W.length?`<a class="tcard" href="#weak"><span class="eyebrow">2 · Weak spots</span><b>${W.length} topic${W.length>1?'s':''} below 90%</b><span>${esc(W.slice(0,3).map(t=>t.t).join(', '))}${W.length>3?'…':''}. Mixed practice until each reaches 90% first-try.</span></a>`:`<div class="tcard"><span class="eyebrow">2 · Weak spots</span><b>All at 90% or above</b><span>Topics you’ve tried four or more times with under 90% first-try accuracy show up here.</span></div>`})()}
    ${cpU!==undefined?`<a class="tcard" href="#cp-${cpU}"><span class="eyebrow">3 · Checkpoint ready</span><b>${esc(UNITS[cpU])}</b><span>${CP_N} mixed problems; pass with ${CP_PASS}.</span></a>`:`<div class="tcard"><span class="eyebrow">3 · Checkpoint</span><b>Not ready yet</b><span>A unit’s checkpoint opens once you’ve mastered every topic in it. Passing it unlocks the next unit.</span></div>`}
   </div>
   <div class="stats"><div class="stat"><b>${mastered}<small> / ${TOPICS.length}</small></b><span>topics mastered</span></div><div class="stat"><b>${solved}</b><span>problems solved</span></div><div class="stat"><b>${att?Math.round(solved/att*100)+'%':'—'}</b><span>first-try accuracy</span></div><div class="stat"><b>${UNITS.filter((_,i)=>cpPassed(i)).length}<small> / ${UNITS.length}</small></b><span>checkpoints passed</span></div></div>
@@ -2710,7 +2787,6 @@ function home(){const v=$('#view');const all=TOPICS.map(t=>[t,S(t.id)]);const so
    <p class="note">Google Calendar adds your next review day, at 9am; add the following one after each review. Apple / Outlook downloads every scheduled review day at once, with a 9am reminder.</p>
    <p class="note">Progress is saved in this browser only. Export a backup now and then to keep it safe or move it to another device. On iPhone, Safari can clear a site’s data after about a week without a visit, unless you add this page to your Home Screen.</p>
    <div class="actions"><button class="btn ghost" id="expBtn">Export progress</button><label class="btn ghost" for="impFile">Import backup</label><input type="file" id="impFile" accept=".json,application/json" hidden></div><div id="impMsg"></div></div>
-  <div class="panel weak"><h3>Needs work</h3>${weak.length?weak.slice(0,6).map(([t,s])=>`<a href="#t-${t.id}"><span>${esc(t.t)}</span><span class="pmeta">${Math.round(s.c/s.a*100)}%</span></a>`).join(''):'<p>Topics where your first-try accuracy drops below 60% (after four attempts) show up here.</p>'}</div>
   <div class="panel"><h3>Graph lab</h3><p>Plot up to five equations, drag sliders for any letters, and see roots, turning points and crossings marked.</p><a class="btn" href="#lab">Open Graph lab</a></div>
   <div class="panel"><h3>How the path works</h3><ul>
    <li><b>Order.</b> Topics unlock one at a time: master a topic to open the next. Each unit unlocks when you pass the previous unit’s checkpoint.</li>
@@ -2827,6 +2903,15 @@ function renderMeta(t){const el=$('#tmeta');if(!el)return;const s=S(t.id),st=sta
   el.innerHTML=`<span class="pill ${st}">${LABEL[st]}</span><span>Level ${lvOf(t.id)} of 3</span>${s&&s.a?`<span>${s.c}/${s.a} first-try</span><span class="spark" title="Last 10 attempts">${Array.from({length:10},(_,i)=>{const x=r[r.length-10+i];return`<i class="${x===1?'y':x===0?'n':''}"></i>`}).join('')}</span>${s.sr&&!isDue(s)?`<span>Review ${daysTxt(s.sr.due)}</span>`:''}`:'<span>No attempts yet</span>'}`}
 
 /* ---------- review & checkpoint pages ---------- */
+const weakList=()=>TOPICS.filter(t=>{const s=S(t.id);return s&&s.a>=4&&s.c/s.a<.9});
+function weakPage(){const v=$('#view'),orig=weakList();let last=null,forced=null;
+  if(!orig.length){v.innerHTML=`<header class="thead"><div><div class="eyebrow">Weak spots</div><h1>Nothing below 90%</h1></div></header><div class="panel empty"><p>Every topic you’ve tried at least four times is at 90% first-try or better.</p><a class="btn" href="#home">Back to overview</a></div>`;return}
+  v.innerHTML=`<header class="thead"><div><div class="eyebrow">Weak spots</div><h1>Get to 90% first-try</h1></div><div class="tmeta">Mixed problems from your topics below 90%. A topic drops out as soon as it reaches 90%.</div></header><div class="tgrid"><div class="panel wklist" id="wkList"></div><div id="boardSlot"></div></div>`;
+  const list=()=>{const L=weakList();$('#wkList').innerHTML=`<h3>${L.length?`${L.length} topic${L.length>1?'s':''} to go`:'All topics now at 90% or above'}</h3><ul class="wkul">${orig.map(t=>{const s=S(t.id),p=s.c/s.a,ok=p>=.9,k=Math.max(0,Math.ceil(9*s.a-10*s.c-1e-9));
+    return`<li class="${ok?'ok':''}${t.id===last?' cur':''}"><button type="button" class="wkpick" data-wk="${t.id}" title="Next problem from this topic">${esc(t.t)}</button><span class="pmeta">${Math.floor(p*100)}%</span><span class="note">${ok?'✓ reached 90%':`${k} more first-try correct in a row to reach 90%`}</span></li>`}).join('')}</ul>${L.length?'<p class="note wkhint">Click a topic to get a problem from it next.</p>':'<a class="btn primary" href="#home">Back to overview</a>'}`};
+  list();
+  $('#wkList').onclick=e=>{const b=e.target.closest('[data-wk]');if(!b)return;forced=b.dataset.wk;const nb=$('#nextBtn');if(nb)nb.click();const bs=$('#boardSlot');if(bs&&bs.getBoundingClientRect().top<0)bs.scrollIntoView({behavior:'smooth'})};
+  mountBoard($('#boardSlot'),{mode:'weak',pick:()=>{if(forced&&byId[forced]){const t=byId[forced];forced=null;last=t.id;setTimeout(list);return t}let L=weakList();if(!L.length)L=orig;if(L.length>1&&last)L=L.filter(t=>t.id!==last);const t=L[Math.floor(Math.random()*L.length)];last=t.id;setTimeout(list);return t},onCount:()=>list()})}
 function reviewPage(){const v=$('#view');const due=dueTopics();const pool=TOPICS.filter(t=>S(t.id)&&S(t.id).a);
   if(!due.length&&!pool.length){v.innerHTML=`<header class="thead"><div><div class="eyebrow">Review</div><h1>Nothing to review yet</h1></div></header><div class="panel empty"><p>Reviews draw on topics you’ve started. Try a few problems in any topic first.</p><a class="btn primary" href="#t-${(nextTopic()||TOPICS[0]).id}">Start with ${esc((nextTopic()||TOPICS[0]).t)} →</a></div>`;return}
   const weighted=pool.flatMap(t=>status(S(t.id))==='shaky'?[t,t,t]:status(S(t.id))==='mastered'?[t]:[t,t]);
@@ -2864,7 +2949,7 @@ function prefixFor(ex){if(ex.pre!==undefined)return ex.pre;if(!['num','set','exp
   const f=String(ex.fmt||'').match(/<code>\s*([A-Za-z])\s*=/);return f?f[1]:''}
 const stripPre=f=>String(f).replace(/<code>(.*?)<\/code>/g,(m,c)=>'<code>'+c.replace(/(^|,\s*)(?:[A-Za-z]|f⁻¹\(x\))\s*=\s*/g,'$1')+'</code>');
 function mountBoard(slot,opt){const mode=opt.mode;let n=0,ex=null,topic=null,lv=1,auto=true,done=false,counted=false;const res=[];boardActive=true;
-  slot.innerHTML=`<section class="board" aria-label="Practice"><div class="btop"><div class="eyebrow">${mode==='cp'?'Checkpoint':mode==='review'?'Review':'Practice'}</div>
+  slot.innerHTML=`<section class="board" aria-label="Practice"><div class="btop"><div class="eyebrow">${mode==='cp'?'Checkpoint':mode==='review'?'Review':mode==='weak'?'Weak spots':'Practice'}</div>
    ${mode==='cp'||opt.sess?`<div class="progress" aria-hidden="true"><i id="prog" style="width:0"></i></div>`:`<div class="ctrls">${mode==='topic'?`<div class="seg" role="group" aria-label="Level" id="lvSeg"><button data-l="auto">Auto</button><button data-l="1">L1</button><button data-l="2">L2</button><button data-l="3">L3</button></div>`:''}<div class="seg" role="group" aria-label="Problem style" id="wSeg"><button data-m="mix">Mixed</button><button data-m="sym">Symbols</button><button data-m="words">Words</button></div></div>`}</div>
    <div class="sheet"><div class="qlabel" id="qlabel"></div><div class="q" id="q"></div></div>
    <div class="answer"><label class="fmt" for="ans" id="fmt"></label><div class="arow"><label class="apre" id="apre" for="ans" hidden></label><div class="multi" id="multi" role="group" aria-label="Answer fields" hidden></div><input id="ans" autocomplete="off" spellcheck="false" placeholder="Type your final answer"><button class="btn primary" id="checkBtn">Check</button></div>
@@ -2884,8 +2969,8 @@ function mountBoard(slot,opt){const mode=opt.mode;let n=0,ex=null,topic=null,lv=
   symBar.onclick=e=>{const b=e.target.closest('.sym');if(!b)return;const f=curIn||input,i=f.selectionStart??f.value.length,j=f.selectionEnd??i;f.setRangeText(b.dataset.s,i,j,'end');f.focus()};
   function next(same){if(mode==='cp'&&n>=opt.total){opt.onDone(res);return}
     if(opt.sess&&!dueTopics().some(t=>opt.sess.ids.includes(t.id))){opt.onDone();return}
-    if(!same||!topic)topic=opt.pick();
-    if(mode==='cp'){lv=Math.random()<.5?2:3;auto=false}else if(mode==='review'){lv=isDue(S(topic.id))?Math.max(2,lvOf(topic.id)):lvOf(topic.id);auto=!isDue(S(topic.id))}else{auto=lvMode==='auto';lv=auto?lvOf(topic.id):+lvMode}
+    if(!same||!topic)topic=opt.pick();CUR_T=topic&&topic.id;
+    if(mode==='cp'){lv=Math.random()<.5?2:3;auto=false}else if(mode==='review'||mode==='weak'){lv=isDue(S(topic.id))?Math.max(2,lvOf(topic.id)):lvOf(topic.id);auto=!isDue(S(topic.id))}else{auto=lvMode==='auto';lv=auto?lvOf(topic.id):+lvMode}
     const W=mode==='cp'?false:wordMode==='mix'?undefined:wordMode==='words';{const R0=recentQ(topic.id);for(let k=0;k<30;k++){ex=gen(topic,lv,W);if(!R0.includes(ex.q))break}rememberQ(topic.id,ex.q)}if(!same||n===0)n++;done=false;counted=false;
     $('#qlabel',slot).innerHTML=`<span class="tag">${opt.sess?`Review ${Math.min(Object.keys(opt.sess.done).length+1,opt.sess.ids.length)} of ${opt.sess.ids.length}`:`Problem ${n}${mode==='cp'?' of '+opt.total:''}`}</span><span class="lv">Level ${ex.lv}</span>${mode!=='topic'?`<a href="#t-${topic.id}">${esc(topic.t)}</a>`:''}${mode==='review'&&isDue(S(topic.id))?`<span>· ${S(topic.id).rv&&S(topic.id).rv.n>=1?'second try':'scheduled review'}</span>`:''}${ex.word?'<span>· word problem</span>':''}`;
     const q=$('#q',slot);q.innerHTML=ex.q;q.classList.toggle('word',!!ex.word);const pf=prefixFor(ex),ap=$('#apre',slot);ap.textContent=pf?pf+' =':'';ap.hidden=!pf;input.placeholder=pf?(ex.kind==='set'?'All values, separated by commas':'Type just the value or expression'):'Type your final answer';$('#fmt',slot).innerHTML='Answer format: '+(pf?stripPre(ex.fmt):ex.fmt);
@@ -2901,7 +2986,7 @@ function mountBoard(slot,opt){const mode=opt.mode;let n=0,ex=null,topic=null,lv=
     typeset(slot.querySelector('.sheet'));if(n>1)curIn.focus({preventScroll:true})}
   function showSol(){sol.innerHTML=`<h4>Worked solution</h4>${stepsHtml(ex.steps)}<div class="final">Answer: \\(${showAns(ex)}\\)</div>${ex.method?`<p class="method"><b>Efficient route.</b> ${ex.method}</p>`:''}${graphBlock(ex.gr)}`;sol.hidden=false;$('#solBtn',slot).textContent='Hide worked solution';typeset(sol)}
   function revLink(id){const t=byId[id]||topic;return t.id===topic.id&&mode==='topic'?`<a href="#learn" data-rev>Revise the core rule for ${esc(t.t)}</a>`:`<a href="#t-${t.id}">Revise ${esc(t.t)}</a>`}
-  function count(ok){if(counted)return;counted=true;const msg=record(topic.id,ok,ex.lv,auto);if(mode==='topic')renderMeta(topic);if(mode==='cp'){res.push({t:topic,ok});nextBtn.textContent=n>=opt.total?'See results →':'Next problem →'}
+  function count(ok){if(counted)return;counted=true;const msg=record(topic.id,ok,ex.lv,auto);if(opt.onCount)opt.onCount(topic,ok);if(mode==='topic')renderMeta(topic);if(mode==='cp'){res.push({t:topic,ok});nextBtn.textContent=n>=opt.total?'See results →':'Next problem →'}
     const fin=msg&&/^Review (passed|missed)/.test(msg);let extra='';
     if(fin&&opt.sess&&opt.sess.ids.includes(topic.id)){opt.sess.done[topic.id]=/^Review passed/.test(msg);const left=opt.sess.ids.filter(id=>isDue(S(id))).length;const p=$('#prog',slot);if(p)p.style.width=(Object.keys(opt.sess.done).length/opt.sess.ids.length*100)+'%';
       const h=$('h1');if(h)h.textContent=left?`${left} review${left>1?'s':''} left`:'All reviews done';if(!left){nextBtn.textContent='See summary →';extra=' That was the last one.'}else extra=` ${left} to go: press Enter for the next.`}
@@ -3026,10 +3111,30 @@ function drawLab(){if(!$('#labsvg'))return;const P=labParams(),env={};for(const 
   $('#labsvg').innerHTML=fns.length?plotSVG(sp,{W:600,H:400,noLegend:true,r:5}):plotSVG({fns:[],xr:lab.xr,yr:lab.yr||[-6,6],deg:lab.deg},{W:600,H:400});
   lab.yr=sp._yr||lab.yr||[-6,6];$('#keylist').innerHTML=rows.join('');saveLab()}
 
-function route(){const h=location.hash.slice(1);boardActive=false;renderRail();$('#rail').classList.remove('open');$('#railToggle').setAttribute('aria-expanded','false');
-  if(h.startsWith('t-')&&byId[h.slice(2)])topicPage(byId[h.slice(2)]);else if(h==='review')reviewPage();else if(/^cp-\d+$/.test(h)&&UNITS[+h.slice(3)])cpPage(+h.slice(3));else if(h==='learn')return;else if(/^guide-\d+$/.test(h)&&UNIT_GUIDES[+h.slice(6)])guidePage(+h.slice(6));else if(/^lesson-[a-z0-9]+$/.test(h)&&LEARN[h.slice(7)]&&byId[h.slice(7)])learnPage(h.slice(7));else if(h==='lab')labPage();else home();addBack();try{window.scrollTo(0,0)}catch(e){}}
+function route(){const h=location.hash.slice(1);CUR_T=null;boardActive=false;renderRail();$('#rail').classList.remove('open');$('#railToggle').setAttribute('aria-expanded','false');
+  if(h.startsWith('t-')&&byId[h.slice(2)])topicPage(byId[h.slice(2)]);else if(h==='review')reviewPage();else if(/^cp-\d+$/.test(h)&&UNITS[+h.slice(3)])cpPage(+h.slice(3));else if(h==='learn')return;else if(/^guide-\d+$/.test(h)&&UNIT_GUIDES[+h.slice(6)])guidePage(+h.slice(6));else if(/^lesson-[a-z0-9]+$/.test(h)&&LEARN[h.slice(7)]&&byId[h.slice(7)])learnPage(h.slice(7));else if(h==='weak')weakPage();else if(h==='lab')labPage();else home();addBack();try{window.scrollTo(0,0)}catch(e){}}
 function addBack(){const v=$('#view');if(v.querySelector('.hero')||v.querySelector('.back'))return;v.insertAdjacentHTML('afterbegin','<a class="back" href="#home"><span aria-hidden="true">←</span> Back to overview</a>')}
 $('#railToggle').onclick=()=>{const o=$('#rail').classList.toggle('open');$('#railToggle').setAttribute('aria-expanded',o)};
+/* ---------- cheat sheet (bottom sheet) ---------- */
+let CUR_T=null,cheatBuilt=false;
+document.body.insertAdjacentHTML('beforeend',`<button type="button" class="cheatbtn" id="cheatBtn" aria-expanded="false" aria-controls="cheat"><span aria-hidden="true">∑</span> Cheat sheet</button>
+<div class="cheatback" id="cheatBack" hidden></div>
+<section class="cheat" id="cheat" aria-label="Cheat sheet" aria-hidden="true"><header class="chead"><div><b>Cheat sheet</b><span class="note">Formulae for every topic. Greyed topics aren’t unlocked yet.</span></div><div class="actions"><button type="button" class="btn" id="cheatPrint">Print</button><button type="button" class="btn ghost" id="cheatClose" aria-label="Close cheat sheet">Close ✕</button></div></header><div class="cbody" id="cheatBody"></div></section>`);
+function cheatHtml(){return UNITS.map((u,i)=>`<section class="cunit"><h3><i>${String(i+1).padStart(2,'0')}</i>${esc(u)}</h3><div class="cgrid">${unitTopics(i).map(t=>{const C=CHEAT[t.id];if(!C)return'';const lk=!!lockInfo(t);
+  return`<article class="ccard${lk?' locked':''}" data-ct="${t.id}"><h4>${lk?'<span class="clk" aria-label="locked">🔒</span>':''}${esc(t.t)}</h4>${C.f.map(f=>`<div class="cf">${f}</div>`).join('')}<div class="cex"><span>e.g.</span> ${C.ex}</div></article>`}).join('')}</div></section>`).join('')}
+function cheatCurrent(){const h=location.hash.slice(1);if(/^(t|lesson)-/.test(h)){const id=h.replace(/^(t|lesson)-/,'');if(byId[id])return id}
+  if(/^cp-\d+$/.test(h)){if(CUR_T)return CUR_T;const ts=unitTopics(+h.slice(3));return ts[0]&&ts[0].id}
+  if((h==='review'||h==='weak')&&CUR_T)return CUR_T;return null}
+function cheatOpen(){const c=$('#cheat'),b=$('#cheatBody');b.innerHTML=cheatHtml();if(!cheatBuilt){cheatBuilt=true}typeset(b);
+  c.classList.add('open');c.setAttribute('aria-hidden','false');$('#cheatBack').hidden=false;$('#cheatBtn').setAttribute('aria-expanded','true');
+  const id=cheatCurrent(),el=id&&b.querySelector(`[data-ct="${id}"]`);if(el){el.classList.add('here');setTimeout(()=>{try{b.scrollTop=el.offsetTop-b.offsetTop-12}catch(e){}},30)}else b.scrollTop=0;
+  $('#cheatClose').focus()}
+function cheatClose(){const c=$('#cheat');c.classList.remove('open');c.setAttribute('aria-hidden','true');$('#cheatBack').hidden=true;$('#cheatBtn').setAttribute('aria-expanded','false')}
+$('#cheatBtn').onclick=()=>$('#cheat').classList.contains('open')?cheatClose():cheatOpen();
+$('#cheatClose').onclick=cheatClose;$('#cheatBack').onclick=cheatClose;
+$('#cheatPrint').onclick=()=>{document.body.classList.add('printcheat');const done=()=>{document.body.classList.remove('printcheat');window.removeEventListener('afterprint',done)};window.addEventListener('afterprint',done);try{window.print()}catch(e){done()}};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#cheat').classList.contains('open'))cheatClose()});
+window.addEventListener('hashchange',()=>{if($('#cheat').classList.contains('open'))cheatClose()});
 window.addEventListener('hashchange',()=>{if(location.hash!=='#learn')route()});
 loadLocal();setSync('local');route();initDb();
 if(window.claude&&window.claude.use)claude.use('sample').then(s=>{if(s){sampleFn=s;document.querySelectorAll('#ai').forEach(a=>{if(!a.closest('.board')||!/Checkpoint/.test(a.closest('.board').querySelector('.eyebrow').textContent))a.hidden=false})}}).catch(()=>{});
